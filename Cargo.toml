@@ -1,5 +1,5 @@
 [package]
-name = "rust-end-to-end-application"
+name = "docker-dns-rs"
 # don't change this, it's updated before an actual build by update-version.sh
 version = "0.0.0-development"
 edition = "2021"
@@ -9,7 +9,7 @@ description = "Rust end-to-end application"
 license-file = "LICENSE"
 categories = ["starter", "end-to-end"]
 keywords = ["integrity", "end-to-end", "starter", "docker", "release"]
-repository = "https://github.com/kristof-mattei/rust-end-to-end-application"
+repository = "https://github.com/kristof-mattei/docker-dns-rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -20,16 +20,55 @@ opt-level = 3
 coverage = []
 
 [dependencies]
+bytes = { version = "1.5.0", features = ["serde"] }
 color-eyre = "0.6.2"
-# reqwest = { version = "0.11.5", features = ["json"] }
-# serde_json = "1.0.68"
-# serde = { version = "1.0.130", features = ["derive"] }
-# futures = "0.3.17"
-# tokio = { version = "1.12.0", features = ["full"] }
-# log = "0.4.14"
-# env_logger = "0.9.0"
-# serde_yaml = "0.8.21"
-# clap = { version = "3.0.14", features = ["derive"] }
+
+hyper = { version = "1.0.0-rc.4", default-features = false }
+
+hyper-util = { git = "https://github.com/hyperium/hyper-util", default-features = false, features = [
+    "client",
+    "http1",
+], rev = "11776bd742196691d03203caa0f4acd29df696bd" }
+
+hyper-tls = { git = "https://github.com/hyperium/hyper-tls", rev = "9adf50b46e313a41987990a677cb487ebb3be393" }
+hyper-unix-socket = { git = "https://github.com/kristof-mattei/hyper-unix-socket", rev = "8fb35a1b72674cd24be944fba769f44de94ca971" }
+
+http-body-util = "0.1.0-rc.3"
+percent-encoding = "2.3.0"
+
+clap = { version = "4.4.0", features = ["derive"] }
+
+tokio = { version = "1.33.0", features = [
+    "rt-multi-thread",
+    "macros",
+    "time",
+    "signal",
+    "net",
+] }
+
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.17", features = [
+    "env-filter",
+    "time",
+    "tracing-log",
+] }
+
+serde_json = "1.0.107"
+serde = { version = "1.0.190", features = ["derive"] }
+tracing-error = "0.2.0"
+tokio-util = "0.7.10"
+http = "0.2.9"
+url = "2.4.1"
+pin-project-lite = "0.2.13"
+futures-util = { version = "0.3", default-features = false }
+tower-service = "0.3.2"
+socket2 = "0.5.5"
+async-stream = "0.3.5"
+tokio-stream = "0.1.14"
+once_cell = "1.18.0"
+regex = "1.10.2"
+ipnet = "2.9.0"
+hickory-server = "0.24.0"
 
 # We compile the Docker container with musl to get a static library. Smaller, faster.
 # BUT that means that we need to include openssl
