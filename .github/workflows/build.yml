@@ -294,7 +294,7 @@ jobs:
       - name: Build with instrumentation support
         shell: bash
         env:
-          RUSTFLAGS: "-C instrument-coverage"
+          RUSTFLAGS: "${{ env.RUSTFLAGS }} -C instrument-coverage"
         run: |
           cargo build --all-targets --workspace --verbose
 
@@ -302,7 +302,7 @@ jobs:
         shell: bash
         id: tests
         env:
-          RUSTFLAGS: "-C instrument-coverage"
+          RUSTFLAGS: "${{ env.RUSTFLAGS }} -C instrument-coverage"
           LLVM_PROFILE_FILE: "profiling/profile-%p-%m.profraw"
         run: |
           cargo nextest run --profile ci --no-fail-fast --all-targets --workspace
@@ -374,7 +374,7 @@ jobs:
           cargo --version
 
       - name: Run Clippy for GitHub Actions report
-        uses: actions-rs-plus/clippy-check@58bb2527088f0a574f000fad0244d021aeebc55a # v2.1.1
+        uses: actions-rs-plus/clippy-check@30fef0f891edb491831cd248156cfb18d7d12fda # v2.2.0
         with:
           args: --workspace --all-targets --all-features
 
@@ -434,7 +434,7 @@ jobs:
           echo "APPLICATION_NAME=${APPLICATION_NAME##*/}" >> ${GITHUB_ENV}
 
       - name: Build Docker image
-        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
         with:
           build-args: |
             APPLICATION_NAME=${{ env.APPLICATION_NAME }}
