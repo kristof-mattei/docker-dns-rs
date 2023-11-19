@@ -15,7 +15,7 @@ repository = "https://github.com/kristof-mattei/docker-dns-rs"
 all = "warn"
 pedantic = "warn"
 cargo = "warn"
-uninlined_format_args = "allow"
+uninlined_format_args = { level = "allow", priority = 100 }
 
 [lints.rust]
 warnings = "warn"
