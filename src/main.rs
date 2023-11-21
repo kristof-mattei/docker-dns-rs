@@ -1,24 +1,26 @@
-use std::{net::IpAddr, sync::Arc, time::Duration};
+use std::net::IpAddr;
+use std::sync::Arc;
+use std::time::Duration;
 
-use crate::{
-    dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server},
-    docker::docker::Docker,
-    docker::docker_config::DockerConfig,
-    docker::docker_monitor::DockerMonitor,
-    table::AuthorityWrapper,
-};
 use ipnet::IpNet;
-use tokio::{
-    net::{TcpListener, UdpSocket},
-    signal,
-    task::JoinSet,
-    time::timeout,
-};
+use tokio::net::{TcpListener, UdpSocket};
+use tokio::signal;
+use tokio::task::JoinSet;
+use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
-use tracing::{event, metadata::LevelFilter, Level};
+use tracing::metadata::LevelFilter;
+use tracing::{event, Level};
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
+
+use crate::docker::docker::Docker;
+use crate::docker::docker_monitor::DockerMonitor;
+use crate::table::AuthorityWrapper;
+use crate::{
+    dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server},
+    docker::config::Config,
+};
 
 mod dns_listener;
 mod docker;
@@ -74,7 +76,7 @@ fn main() -> Result<(), color_eyre::Report> {
 async fn start_tasks() -> Result<(), color_eyre::Report> {
     let args = parse_args();
 
-    let docker_config = DockerConfig::build()?;
+    let docker_config = Config::build()?;
 
     let docker = Arc::new(Docker::new(docker_config));
 

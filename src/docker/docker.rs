@@ -1,30 +1,27 @@
-use crate::{
-    http_client::{build_request, execute_request},
-    models::container_inspect::ContainerInspect,
-};
-use async_stream::stream;
+use std::time::Duration;
+
 use http::Uri;
 use http_body_util::BodyExt;
 use hyper::body::Incoming;
 use hyper::{Method, Response};
 use hyper_tls::HttpsConnector;
 use hyper_unix_socket::UnixSocketConnector;
-use std::{io, str::from_utf8, time::Duration};
 use tokio::time::timeout;
-use tokio_util::{bytes::Buf, sync::CancellationToken};
+use tokio_util::bytes::Buf;
+use tokio_util::sync::CancellationToken;
 use tracing::{event, Level};
 
-use super::{
-    docker_config::{DockerConfig, Endpoint},
-    DockerEvent,
-};
+use super::config::{Config, Endpoint};
+use super::DockerEvent;
+use crate::http_client::{build_request, execute_request};
+use crate::models::container_inspect::ContainerInspect;
 
 pub struct Docker {
-    config: DockerConfig,
+    config: Config,
 }
 
 impl Docker {
-    pub fn new(config: DockerConfig) -> Self {
+    pub fn new(config: Config) -> Self {
         Self { config }
     }
 
