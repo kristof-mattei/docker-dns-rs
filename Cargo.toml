@@ -37,7 +37,7 @@ hyper-tls = { git = "https://github.com/kristof-mattei/hyper-tls", rev = "b29b0e
 hyper-unix-socket = { git = "https://github.com/kristof-mattei/hyper-unix-socket", rev = "ee69fc40116235c754d2f8d3bd1ceaf4a2890fd9" }
 
 http-body-util = "0.1.0"
-percent-encoding = "2.3.0"
+percent-encoding = "2.3.1"
 
 clap = { version = "4.4.8", features = ["derive"] }
 
