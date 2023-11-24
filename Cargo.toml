@@ -11,7 +11,19 @@ categories = ["starter", "end-to-end"]
 keywords = ["integrity", "end-to-end", "starter", "docker", "release"]
 repository = "https://github.com/kristof-mattei/docker-dns-rs"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lints.clippy]
+# don't stop from compiling / running
+all = "warn"
+pedantic = "warn"
+cargo = "warn"
+# this one causes confusion when combining variables (`foo`) and
+# dereferenced variables (`foo.bar`). The latter cannot be inlined
+# so we don't inline anything
+uninlined-format-args = { level = "allow", priority = 127 }
+
+[lints.rust]
+let_underscore_drop = { level = "deny", priority = 127 }
+non_ascii_idents = { level = "deny", priority = 127 }
 
 [profile.dev.package.backtrace]
 opt-level = 3
@@ -34,7 +46,7 @@ hyper-util = { version = "0.1.1", default-features = false, features = [
 hyper-tls = { git = "https://github.com/kristof-mattei/hyper-tls", rev = "b29b0e99511d9745ff07e5922a0a66e3cb087567", features = [
     "vendored",
 ] }
-hyper-unix-socket = { git = "https://github.com/kristof-mattei/hyper-unix-socket", rev = "ee69fc40116235c754d2f8d3bd1ceaf4a2890fd9" }
+hyper-unix-socket = "0.0.0-development"
 
 http-body-util = "0.1.0"
 percent-encoding = "2.3.1"
