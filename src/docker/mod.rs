@@ -1,10 +1,11 @@
 use std::collections::HashMap;
 
+pub mod config;
 pub mod docker;
-pub mod docker_config;
 pub mod docker_monitor;
 
 #[derive(serde::Deserialize, Debug)]
+#[allow(dead_code)]
 pub struct DockerEvent {
     #[serde(rename(deserialize = "Type"))]
     r#type: EventType,

@@ -2,7 +2,7 @@ use std::ffi::OsString;
 
 use crate::env::try_parse_env_variable_with_default;
 
-pub struct DockerConfig {
+pub struct Config {
     pub endpoint: Endpoint,
     pub options: Vec<String>,
 }
@@ -15,8 +15,8 @@ pub enum Endpoint {
     Socket(String),
 }
 
-impl DockerConfig {
-    pub fn build() -> Result<DockerConfig, color_eyre::Report> {
+impl Config {
+    pub fn build() -> Result<Config, color_eyre::Report> {
         const TCP_START: &str = "tcp://";
         let mut docker_socket_or_uri = std::env::var_os("DOCKER_SOCK")
             .map_or_else(
@@ -43,7 +43,7 @@ impl DockerConfig {
 
         // TODO check if docker socket exists
 
-        Ok(DockerConfig {
+        Ok(Config {
             endpoint,
             options: vec![],
         })
