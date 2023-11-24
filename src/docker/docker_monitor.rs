@@ -6,9 +6,9 @@ use tokio::sync::mpsc::Receiver;
 use tokio_util::sync::CancellationToken;
 use tracing::{event, Level};
 
-use crate::{docker::docker::Docker, table::AuthorityWrapper};
-
 use super::DockerEvent;
+use crate::docker::docker::Docker;
+use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: Lazy<Regex> = Lazy::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
@@ -25,7 +25,7 @@ fn get_all_names(docker_event: &DockerEvent) -> Vec<String> {
         .actor
         .attributes
         .get("name")
-        .map(|name| RE_VALIDNAME.replace_all(&name, "").to_string())
+        .map(|name| RE_VALIDNAME.replace_all(name.as_str(), "").to_string())
     {
         names.push(sanitized_name);
     }
@@ -65,7 +65,7 @@ impl DockerMonitor {
         }
     }
 
-    fn rename(&self, event: &DockerEvent) {
+    async fn rename(&self, event: &DockerEvent) {
         // for some reason the old name needs to be sanitized (starts with `/`).
         // the new one doesn't
         let old_name = event
@@ -86,7 +86,7 @@ impl DockerMonitor {
             (None, Some(n)) => event!(Level::WARN, "Rename event without oldName (? -> {})", n),
             (Some(o), None) => event!(Level::WARN, "Rename event without name ({} -> ?)", o),
             (Some(o), Some(n)) => {
-                if let Err(e) = self.authority_wrapper.rename(&o, &n) {
+                if let Err(e) = self.authority_wrapper.rename(&o, &n).await {
                     event!(
                         Level::WARN,
                         ?e,
@@ -101,13 +101,14 @@ impl DockerMonitor {
         }
     }
 
-    fn die(&self, event: &DockerEvent) {
-        let all_names = get_all_names(&event);
+    async fn die(&self, event: &DockerEvent) {
+        let all_names = get_all_names(event);
 
         for name in &all_names {
             if let Err(e) = self
                 .authority_wrapper
                 .remove(&format!("{}.{}", name, self.domain))
+                .await
             {
                 event!(
                     Level::ERROR,
@@ -122,7 +123,7 @@ impl DockerMonitor {
     }
 
     async fn start(&self, event: &DockerEvent) {
-        let all_names = get_all_names(&event);
+        let all_names = get_all_names(event);
 
         match self.docker.inspect_container(event.actor.id.as_str()).await {
             Ok(container) => {
@@ -193,8 +194,8 @@ impl DockerMonitor {
 
                 match status {
                     "start" => self.start(&event).await,
-                    "rename" => self.rename(&event),
-                    "die" => self.die(&event),
+                    "rename" => self.rename(&event).await,
+                    "die" => self.die(&event).await,
                     _ => {},
                 }
             }

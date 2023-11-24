@@ -565,7 +565,8 @@ dependencies = [
 [[package]]
 name = "hyper-unix-socket"
 version = "0.0.0-development"
-source = "git+https://github.com/kristof-mattei/hyper-unix-socket?rev=ee69fc40116235c754d2f8d3bd1ceaf4a2890fd9#ee69fc40116235c754d2f8d3bd1ceaf4a2890fd9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7afaeb322f1074f2bf491047738d3655f3331157ff127dd3250193ef79a0e2eb"
 dependencies = [
  "bytes",
  "hyper",
