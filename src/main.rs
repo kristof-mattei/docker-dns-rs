@@ -1,102 +1,165 @@
-// use std::path::PathBuf;
+use std::net::IpAddr;
+use std::sync::Arc;
+use std::time::Duration;
 
-// use env_logger::Env;
-// use futures::{stream::FuturesUnordered, StreamExt};
-// use log::info;
+use ipnet::IpNet;
+use tokio::net::{TcpListener, UdpSocket};
+use tokio::signal;
+use tokio::task::JoinSet;
+use tokio::time::timeout;
+use tokio_util::sync::CancellationToken;
+use tracing::metadata::LevelFilter;
+use tracing::{event, Level};
+use tracing_subscriber::filter::EnvFilter;
+use tracing_subscriber::layer::SubscriberExt;
+use tracing_subscriber::util::SubscriberInitExt;
 
-// use structopt::StructOpt;
+use crate::dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server};
+use crate::docker::config::Config;
+use crate::docker::daemon::Daemon;
+use crate::docker::monitor::Monitor;
+use crate::table::AuthorityWrapper;
 
-// #[derive(Debug, StructOpt)]
-// #[structopt(
-//     // name, // from Cargo.toml,
-//     about, // needed otherwise it doesn't show description from Cargo.toml,
-//     author // needed otherwise it doesn't show author from Cargo.toml
-// )]
-// struct Opt {
-//     #[structopt(
-//         // verbatim_doc_comment,
-//         help = "Some help",
-//         parse(from_os_str)
-//     )]
-//     some_value: PathBuf,
-// }
+mod dns_listener;
+mod docker;
+mod encoding;
+mod env;
+mod filters;
+mod http_client;
+mod models;
+mod table;
+mod utils;
 
-fn foo() -> &'static str {
-    "Foo"
+struct DDArgs {
+    domain: String,
+    records: Vec<(String, IpAddr)>,
+    network_blacklist: Vec<IpNet>,
 }
 
-fn bar() -> &'static str {
-    "Bar"
+fn parse_args() -> DDArgs {
+    DDArgs {
+        domain: String::from("docker.extension"),
+        records: Vec::new(),
+        network_blacklist: Vec::new(),
+    }
 }
-
-fn quz() -> &'static str {
-    "Quz"
-}
-
-// async fn something_to_await(_: PathBuf) {
-//     println!("{}", foo());
-//     println!("{}", bar());
-//     todo!("TODO");
-// }
-
-// async fn run_app() {
-//     env_logger::Builder::from_env(Env::default().default_filter_or("INFO")).init();
-
-//     let Opt { some_value } = Opt::from_args();
-
-//     let mut tasks = FuturesUnordered::new();
-
-//     tasks.push(Box::pin(something_to_await(some_value)));
-
-//     loop {
-//         match tasks.next().await {
-//             None => {
-//                 info!("Done!");
-//                 return;
-//             }
-//             _ => {
-//                 info!("Waiting...")
-//             }
-//         }
-//     }
-// }
-
-// #[tokio::main]
-// async fn main() {
-//     run_app().await;
-// }
 
 fn main() -> Result<(), color_eyre::Report> {
-    color_eyre::install()?;
+    // set up .env
+    // zenv::zenv!();
 
-    println!("{}", foo());
-    println!("{}", bar());
-    println!("{}", quz());
+    color_eyre::config::HookBuilder::default()
+        .capture_span_trace_by_default(false)
+        .install()?;
 
-    todo!("TODO");
+    // set up logger
+    // from_env defaults to RUST_LOG
+    tracing_subscriber::registry()
+        .with(
+            EnvFilter::builder()
+                .with_default_directive(LevelFilter::DEBUG.into())
+                .from_env_lossy(),
+        )
+        .with(tracing_subscriber::fmt::layer())
+        .with(tracing_error::ErrorLayer::default())
+        .init();
+
+    // initialize the runtime
+    let rt = tokio::runtime::Runtime::new().unwrap();
+
+    // start service
+    rt.block_on(start_tasks())
 }
 
-#[cfg(test)]
-mod tests {
-    use super::{bar, foo, quz};
+async fn start_tasks() -> Result<(), color_eyre::Report> {
+    let args = parse_args();
 
-    #[test]
-    fn assert_foo() {
-        assert_eq!(foo(), "Foo");
+    let docker_config = Config::build()?;
+
+    let docker = Arc::new(Daemon::new(docker_config));
+
+    let token = CancellationToken::new();
+
+    let authority = Arc::new(set_up_authority(&args.domain).await?);
+
+    let catalog = set_up_catalog(&args.domain, authority.clone())?;
+
+    let authority_wrapper =
+        AuthorityWrapper::new(authority, args.records, args.network_blacklist).await?;
+
+    let docker_monitor = Monitor::new(docker.clone(), authority_wrapper, args.domain);
+
+    let (sender, receiver) = tokio::sync::mpsc::channel(50);
+
+    let mut tasks = JoinSet::new();
+
+    {
+        let token = token.clone();
+        tasks.spawn(async move {
+            let _guard = token.clone().drop_guard();
+
+            docker_monitor.listener(receiver, &token).await;
+
+            token.cancel();
+        });
     }
 
-    #[test]
-    fn assert_bar() {
-        assert_eq!(bar(), "Bar");
+    {
+        let token = token.clone();
+        tasks.spawn(async move {
+            let _guard = token.clone().drop_guard();
+
+            if let Err(e) = docker.get_events(token, sender).await {
+                event!(Level::ERROR, ?e, "Docker Event Handler failed");
+            } else {
+                event!(Level::INFO, "Docker Event Handler stopped");
+            }
+        });
     }
 
-    #[test]
-    fn assert_quz() {
-        assert_eq!(quz(), "Quz");
+    {
+        let token = token.clone();
+        let socket = UdpSocket::bind("0.0.0.0:54000").await?;
+        let listener = TcpListener::bind("0.0.0.0:54000").await?;
+
+        tasks.spawn(async move {
+            let _guard = token.clone().drop_guard();
+
+            set_up_dns_server(listener, socket, catalog, token).await;
+
+            event!(Level::INFO, "DNS Server stopped");
+        });
     }
 
-    #[test]
-    fn assert_combined() {
-        assert_eq!(format!("{}-{}-{}", foo(), bar(), quz()), "Foo-Bar-Quz");
+    tokio::select! {
+        // TODO ensure tasks are registered
+        _ = utils::wait_for_sigterm() => {
+            event!(Level::WARN, message = "Sigterm detected, stopping all tasks");
+        },
+        _ = signal::ctrl_c() => {
+            event!(Level::WARN, message = "CTRL+C detected, stopping all tasks");
+        },
+        () = token.cancelled() => {
+            event!(Level::ERROR, message = "Underlying task stopped, stopping all others tasks");
+        },
+    };
+
+    // catch all cancel in case we got here via something else than a cancel token
+    token.cancel();
+
+    // wait for the tasks that holds the server to exit gracefully
+    // this is easier to write than x separate timeoouts
+    // while we don't know if any of them gets killed
+    // this will do for now, and we can always trace back the logs
+    if timeout(Duration::from_millis(10000), tasks.shutdown())
+        .await
+        .is_err()
+    {
+        event!(
+            Level::ERROR,
+            message = "Task didn't stop within allotted time!"
+        );
     }
+
+    Ok(())
 }

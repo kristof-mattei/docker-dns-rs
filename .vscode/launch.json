@@ -7,39 +7,39 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'rust-end-to-end-application'",
+            "name": "Debug executable 'docker-dns-rs'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=rust-end-to-end-application",
-                    "--package=rust-end-to-end-application"
+                    "--bin=docker-dns-rs",
+                    "--package=docker-dns-rs"
                 ],
                 "filter": {
-                    "name": "rust-end-to-end-application",
+                    "name": "docker-dns-rs",
                     "kind": "bin"
                 }
             },
-            "args": [],
+            "args": ["--record", "foo:1.1.1.1", "--record", "bar:2.2.2.2"],
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "debug,rust_end_to_end_application=trace"
+                "RUST_LOG": "WARN,docker_dns_rs=trace"
             },
             "terminal": "console"
         },
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'rust-end-to-end-application'",
+            "name": "Debug unit tests in executable 'docker-dns-rs'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=rust-end-to-end-application",
-                    "--package=rust-end-to-end-application"
+                    "--bin=docker-dns-rs",
+                    "--package=docker-dns-rs"
                 ],
                 "filter": {
-                    "name": "rust-end-to-end-application",
+                    "name": "docker-dns-rs",
                     "kind": "bin"
                 }
             },
@@ -47,7 +47,7 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "debug,rust_end_to_end_application=trace"
+                "RUST_LOG": "WARN,docker_dns_rs=trace"
             },
             "terminal": "console"
         },
@@ -60,7 +60,7 @@
                     "test",
                     "--no-run",
                     "--test=integration_tests",
-                    "--package=rust-end-to-end-application"
+                    "--package=docker-dns-rs"
                 ],
                 "filter": {
                     "name": "integration_tests",
@@ -71,7 +71,7 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "debug,rust_end_to_end_application=trace"
+                "RUST_LOG": "WARN,docker_dns_rs=trace"
             },
             "terminal": "console"
         }
