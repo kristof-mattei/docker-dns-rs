@@ -75,28 +75,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "async-stream"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd56dd203fef61ac097dd65721a419ddccb106b2d2b70ba60a6b529f03961a51"
-dependencies = [
- "async-stream-impl",
- "futures-core",
- "pin-project-lite",
-]
-
-[[package]]
-name = "async-stream-impl"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16e62a023e7c117e27523144c5d2459f4397fcc3cab0085af8e2224f643a0193"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
 name = "async-trait"
 version = "0.1.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -272,11 +250,9 @@ dependencies = [
 name = "docker-dns-rs"
 version = "0.0.0-development"
 dependencies = [
- "async-stream",
  "bytes",
  "clap",
  "color-eyre",
- "futures-util",
  "hickory-server",
  "http",
  "http-body-util",
@@ -287,15 +263,11 @@ dependencies = [
  "ipnet",
  "once_cell",
  "percent-encoding",
- "pin-project-lite",
  "regex",
  "serde",
  "serde_json",
- "socket2",
  "tokio",
- "tokio-stream",
  "tokio-util",
- "tower-service",
  "tracing",
  "tracing-error",
  "tracing-subscriber",
@@ -550,7 +522,7 @@ dependencies = [
 [[package]]
 name = "hyper-tls"
 version = "0.5.0"
-source = "git+https://github.com/kristof-mattei/hyper-tls?rev=b29b0e99511d9745ff07e5922a0a66e3cb087567#b29b0e99511d9745ff07e5922a0a66e3cb087567"
+source = "git+https://github.com/hyperium/hyper-tls?rev=95ebd8d3ac8785e552fc9fee0ffac141bb361423#95ebd8d3ac8785e552fc9fee0ffac141bb361423"
 dependencies = [
  "bytes",
  "http-body-util",
@@ -1240,17 +1212,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bbae76ab933c85776efabc971569dd6119c580d8f5d448769dec1764bf796ef2"
 dependencies = [
  "native-tls",
- "tokio",
-]
-
-[[package]]
-name = "tokio-stream"
-version = "0.1.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "397c988d37662c7dda6d2208364a706264bf3d6138b11d436cbac0ad38832842"
-dependencies = [
- "futures-core",
- "pin-project-lite",
  "tokio",
 ]
 
