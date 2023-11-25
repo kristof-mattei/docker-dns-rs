@@ -1,5 +1,6 @@
 use std::sync::Arc;
 
+use hickory_server::proto::rr::Name;
 use once_cell::sync::Lazy;
 use regex::Regex;
 use tokio::sync::mpsc::Receiver;
@@ -15,7 +16,7 @@ static RE_VALIDNAME: Lazy<Regex> = Lazy::new(|| Regex::new(r"[^\w\d.-]").unwrap(
 pub struct Monitor {
     authority_wrapper: AuthorityWrapper,
     docker: Arc<Daemon>,
-    domain: String,
+    domain: Name,
 }
 
 fn get_all_names(docker_event: &Event) -> Vec<String> {
@@ -57,7 +58,7 @@ fn get_all_names(docker_event: &Event) -> Vec<String> {
 }
 
 impl Monitor {
-    pub fn new(docker: Arc<Daemon>, authority_wrapper: AuthorityWrapper, domain: String) -> Self {
+    pub fn new(docker: Arc<Daemon>, authority_wrapper: AuthorityWrapper, domain: Name) -> Self {
         Self {
             authority_wrapper,
             docker,

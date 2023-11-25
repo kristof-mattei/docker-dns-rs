@@ -1,10 +1,11 @@
+use std::collections::BTreeMap;
 use std::sync::Arc;
 use std::time::Duration;
 
 use hickory_server::authority::Catalog;
 use hickory_server::proto::error::ProtoError;
 use hickory_server::proto::rr::rdata::SOA;
-use hickory_server::proto::rr::{RData, Record};
+use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
 use hickory_server::ServerFuture;
 use tokio::net::{TcpListener, UdpSocket};
@@ -37,43 +38,38 @@ pub async fn set_up_dns_server(
     };
 }
 
-pub async fn set_up_authority(domain: &str) -> Result<InMemoryAuthority, color_eyre::Report> {
-    let imo = InMemoryAuthority::empty(
-        domain.parse()?,
-        hickory_server::authority::ZoneType::Primary,
-        false,
+pub async fn set_up_authority(domain: Name) -> Result<InMemoryAuthority, color_eyre::Report> {
+    let record = Record::from_rdata(
+        domain.clone(),
+        0,
+        RData::SOA(SOA::new(domain.clone(), domain.clone(), 0, 0, 0, 0, 0)),
     );
 
-    imo.upsert(
-        Record::from_rdata(
-            domain.parse()?,
-            0,
-            RData::SOA(SOA::new(
-                domain.parse()?,
-                "root.docker".parse()?,
-                0,
-                0,
-                0,
-                0,
-                0,
-            )),
-        ),
-        0,
+    let tree = BTreeMap::<RrKey, RecordSet>::from([(
+        RrKey {
+            name: domain.clone().into(),
+            record_type: hickory_server::proto::rr::RecordType::SOA,
+        },
+        record.into(),
+    )]);
+
+    let imo = InMemoryAuthority::new(
+        domain,
+        tree,
+        hickory_server::authority::ZoneType::Primary,
+        false,
     )
-    .await;
+    .map_err(color_eyre::Report::msg)?;
 
     Ok(imo)
 }
 
-pub fn set_up_catalog(
-    domain: &str,
-    authority: Arc<InMemoryAuthority>,
-) -> Result<Catalog, color_eyre::Report> {
+pub fn set_up_catalog(domain: impl Into<LowerName>, authority: Arc<InMemoryAuthority>) -> Catalog {
     let mut catalog = Catalog::new();
 
-    catalog.upsert(domain.parse()?, Box::new(authority));
+    catalog.upsert(domain.into(), Box::new(authority));
 
-    Ok(catalog)
+    catalog
 }
 
 fn handle_server_shutdown(server_shutdown_result: Result<(), ProtoError>) {
