@@ -127,7 +127,7 @@ impl Daemon {
                 continue;
             };
 
-            // https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
+            // TODO: https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
             buffer.extend_from_slice(&data);
 
             // sometimes we get multiple frames per event (?)
