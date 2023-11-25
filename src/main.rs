@@ -2,6 +2,8 @@ use std::net::IpAddr;
 use std::sync::Arc;
 use std::time::Duration;
 
+use color_eyre::eyre::Report;
+use hickory_server::proto::rr::Name;
 use ipnet::IpNet;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio::signal;
@@ -31,17 +33,17 @@ mod table;
 mod utils;
 
 struct DDArgs {
-    domain: String,
+    domain: Name,
     records: Vec<(String, IpAddr)>,
     network_blacklist: Vec<IpNet>,
 }
 
-fn parse_args() -> DDArgs {
-    DDArgs {
-        domain: String::from("docker.extension"),
+fn parse_args() -> Result<DDArgs, Report> {
+    Ok(DDArgs {
+        domain: String::from("docker.extension").parse()?,
         records: Vec::new(),
         network_blacklist: Vec::new(),
-    }
+    })
 }
 
 fn main() -> Result<(), color_eyre::Report> {
@@ -72,22 +74,20 @@ fn main() -> Result<(), color_eyre::Report> {
 }
 
 async fn start_tasks() -> Result<(), color_eyre::Report> {
-    let args = parse_args();
+    let args = parse_args()?;
 
-    let docker_config = Config::build()?;
-
-    let docker = Arc::new(Daemon::new(docker_config));
-
-    let token = CancellationToken::new();
-
-    let authority = Arc::new(set_up_authority(&args.domain).await?);
-
-    let catalog = set_up_catalog(&args.domain, authority.clone())?;
-
+    // DNS
+    let authority = Arc::new(set_up_authority(args.domain.clone()).await?);
+    let catalog = set_up_catalog(args.domain.clone(), authority.clone());
     let authority_wrapper =
         AuthorityWrapper::new(authority, args.records, args.network_blacklist).await?;
 
+    // docker
+    let docker_config = Config::build()?;
+    let docker = Arc::new(Daemon::new(docker_config));
     let docker_monitor = Monitor::new(docker.clone(), authority_wrapper, args.domain);
+
+    let token = CancellationToken::new();
 
     let (sender, receiver) = tokio::sync::mpsc::channel(50);
 
@@ -104,6 +104,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         });
     }
 
+    // pump messages from Docker to the DockerMonitor
     {
         let token = token.clone();
         tasks.spawn(async move {
