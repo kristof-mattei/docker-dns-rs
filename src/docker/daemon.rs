@@ -88,10 +88,10 @@ impl Daemon {
         Ok(result)
     }
 
-    pub async fn get_events(
+    pub async fn produce_events(
         &self,
-        token: CancellationToken,
         sender: tokio::sync::mpsc::Sender<Event>,
+        token: &CancellationToken,
     ) -> Result<(), color_eyre::Report> {
         let path_and_query = format!("/events{}", "");
 
