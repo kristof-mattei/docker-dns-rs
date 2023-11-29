@@ -66,7 +66,7 @@ impl Monitor {
         }
     }
 
-    async fn rename(&self, event: &Event) {
+    async fn handle_rename(&self, event: &Event) {
         // for some reason the old name needs to be sanitized (starts with `/`).
         // the new one doesn't
         let old_name = event
@@ -102,7 +102,7 @@ impl Monitor {
         }
     }
 
-    async fn die(&self, event: &Event) {
+    async fn handle_die(&self, event: &Event) {
         let all_names = get_all_names(event);
 
         for name in &all_names {
@@ -123,44 +123,50 @@ impl Monitor {
         }
     }
 
-    async fn start(&self, event: &Event) {
+    async fn handle_start(&self, event: &Event) {
         let all_names = get_all_names(event);
 
         match self.docker.inspect_container(event.actor.id.as_str()).await {
-            Ok(container) => {
-                if container.state.running {
-                    for address in container
-                        .network_settings
-                        .networks
-                        .values()
-                        .map(|cn| &cn.ip_address)
-                    {
-                        let parsed_address = match address.parse() {
-                            Ok(o) => o,
-                            Err(e) => {
-                                event!(Level::ERROR, "Failed to parse address {} to an IP address for container {}: {:?}", address, event.actor.id, e);
-                                continue;
-                            },
-                        };
+            Ok(container) if container.state.running => {
+                for address in container
+                    .network_settings
+                    .networks
+                    .values()
+                    .map(|cn| &cn.ip_address)
+                {
+                    let parsed_address = match address.parse() {
+                        Ok(o) => o,
+                        Err(e) => {
+                            event!(Level::ERROR, "Failed to parse address {} to an IP address for container {}: {:?}", address, event.actor.id, e);
+                            continue;
+                        },
+                    };
 
-                        for name in &all_names {
-                            if let Err(e) = self
-                                .authority_wrapper
-                                .add(format!("{}.{}", name, self.domain), parsed_address)
-                                .await
-                            {
-                                event!(
-                                    Level::ERROR,
-                                    ?e,
-                                    "Something went wrong adding {}.{} -> {}",
-                                    name,
-                                    self.domain,
-                                    parsed_address
-                                );
-                            }
+                    for name in &all_names {
+                        if let Err(e) = self
+                            .authority_wrapper
+                            .add(format!("{}.{}", name, self.domain), parsed_address)
+                            .await
+                        {
+                            event!(
+                                Level::ERROR,
+                                ?e,
+                                "Something went wrong adding {}.{} -> {}",
+                                name,
+                                self.domain,
+                                parsed_address
+                            );
                         }
                     }
                 }
+            },
+            Ok(container) => {
+                event!(
+                    Level::WARN,
+                    ?container,
+                    "Got start event with container id {} but the container is not running",
+                    event.actor.id,
+                );
             },
             Err(e) => {
                 event!(
@@ -173,7 +179,7 @@ impl Monitor {
         };
     }
 
-    pub async fn listener(&self, mut receiver: Receiver<Event>, token: &CancellationToken) {
+    pub async fn consume_events(&self, mut receiver: Receiver<Event>, token: &CancellationToken) {
         loop {
             let event = tokio::select! {
                 () = token.cancelled() => {
@@ -191,12 +197,10 @@ impl Monitor {
             };
 
             if let crate::docker::EventType::Container = event.r#type {
-                let status = event.action.as_str();
-
-                match status {
-                    "start" => self.start(&event).await,
-                    "rename" => self.rename(&event).await,
-                    "die" => self.die(&event).await,
+                match event.action.as_str() {
+                    "start" => self.handle_start(&event).await,
+                    "rename" => self.handle_rename(&event).await,
+                    "die" => self.handle_die(&event).await,
                     _ => {},
                 }
             }
