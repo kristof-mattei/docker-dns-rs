@@ -33,12 +33,19 @@ COPY src ./src
 RUN --mount=type=cache,id=full-build,target=/build/${APPLICATION_NAME}/target \
     cargo install --path . --target ${TARGET} --root /output
 
-FROM alpine:3.18.4@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
+# Create a separate file because we don't want to copy over the
+# whole one to our scratch container
+RUN echo "root:x:0:0:root:/dev/null:/sbin/nologin" > /tmp/passwd
+
+FROM scratch
 
 ARG APPLICATION_NAME
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+# We're explicitely wanting to be root, because most consumers will just
+# run the container expecting it to work. Since Docker runs as root, we match
+# We fetch the passwrd file from the builder as we don't have sh here to create the file
+COPY --from=builder /tmp/passwd /etc/passwd
+USER root
 
 WORKDIR /app
 COPY --from=builder /output/bin/${APPLICATION_NAME} /app/entrypoint
