@@ -9,7 +9,7 @@
   },
   "engines": {
     "node": ">=20.10.0",
-    "npm": ">=10.2.4"
+    "npm": ">=10.2.5"
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,11 @@
     "@actions/tool-cache": "2.0.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",
-    "@semantic-release/github": "9.2.3",
+    "@semantic-release/github": "9.2.5",
     "@semantic-release/release-notes-generator": "12.1.0",
     "conventional-changelog-conventionalcommits": "7.0.2",
-    "prettier": "3.1.0",
-    "semantic-release": "22.0.8",
+    "prettier": "3.1.1",
+    "semantic-release": "22.0.12",
     "semver": "7.5.4",
     "serialize-error": "11.0.3"
   },

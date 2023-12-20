@@ -3,7 +3,7 @@ name = "docker-dns-rs"
 # don't change this, it's updated before an actual build by update-version.sh
 version = "0.0.0-development"
 edition = "2021"
-rust-version = "1.74.0"
+rust-version = "1.74.1"
 authors = ["Kristof Mattei"]
 description = "Rust end-to-end application"
 license-file = "LICENSE"
@@ -33,12 +33,12 @@ coverage = []
 
 [dependencies]
 bytes = { version = "1.5.0", features = ["serde"] }
-clap = { version = "4.4.10", features = ["derive"] }
+clap = { version = "4.4.11", features = ["derive"] }
 color-eyre = "0.6.2"
 hickory-server = "0.24.0"
 http = "1.0.0"
 http-body-util = "0.1.0"
-hyper = { version = "1.0.1", default-features = false }
+hyper = { version = "1.1.0", default-features = false }
 hyper-tls = { git = "https://github.com/hyperium/hyper-tls", rev = "95ebd8d3ac8785e552fc9fee0ffac141bb361423", features = [
     "vendored",
 ] }
@@ -49,7 +49,7 @@ hyper-util = { version = "0.1.1", default-features = false, features = [
     "tokio",
 ] }
 ipnet = "2.9.0"
-once_cell = "1.18.0"
+once_cell = "1.19.0"
 percent-encoding = "2.3.1"
 regex = "1.10.2"
 serde = { version = "1.0.193", features = ["derive"] }
@@ -61,7 +61,7 @@ tracing-subscriber = { version = "0.3.18", features = [
     "time",
     "tracing-log",
 ] }
-tokio = { version = "1.34.0", features = [
+tokio = { version = "1.35.1", features = [
     "rt-multi-thread",
     "macros",
     "time",
