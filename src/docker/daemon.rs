@@ -1,5 +1,6 @@
 use std::time::Duration;
 
+use color_eyre::eyre::Report;
 use http::Uri;
 use http_body_util::BodyExt;
 use hyper::body::Incoming;
@@ -117,7 +118,7 @@ impl Daemon {
             let frame = match frame {
                 Ok(o) => o,
                 Err(e) => {
-                    event!(Level::ERROR, message = "Failed to read frame", ?e);
+                    event!(Level::ERROR, error = ?e, "Failed to read frame");
                     continue;
                 },
             };
@@ -128,32 +129,54 @@ impl Daemon {
             };
 
             // TODO: https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
+            // TODO maybe use BytesMut for buffer
             buffer.extend_from_slice(&data);
 
-            // sometimes we get multiple frames per event (?)
+            // let f = String::from_utf8_lossy(&buffer);
 
-            let decoded = match serde_json::from_slice(&data) {
-                Ok(o) => o,
-                Err(e) => {
-                    let f = String::from_utf8_lossy(&data);
-                    event!(
-                        Level::ERROR,
-                        message = "Failed to parse json to struct",
-                        ?e,
-                        ?f
-                    );
-                    continue;
-                },
-            };
+            // event!(Level::TRACE, buffer = ?f, "BUFFER");
 
-            match sender.send(decoded).await {
-                Ok(()) => {
-                    event!(Level::TRACE, message = "Sent Docker Event to Channel!");
-                },
-                Err(_) => {
-                    return Err::<(), _>(color_eyre::Report::msg("Channel closed"));
-                },
+            'outer: loop {
+                if let Some((i, _)) = buffer.iter().enumerate().find(|(_, b)| b == &&b'\n') {
+                    let mut data = buffer.split_off(i + 1);
+
+                    std::mem::swap(&mut data, &mut buffer);
+                    Daemon::decode_send(&data, &sender).await?;
+
+                    continue 'outer;
+                }
+
+                let f = String::from_utf8_lossy(&buffer);
+
+                event!(Level::TRACE, buffer = ?f, "BUFFER LEFTOVER");
+
+                break;
             }
+
+            // sometimes we get multiple frames per event (?)
+        }
+    }
+
+    async fn decode_send(
+        data: &[u8],
+        sender: &tokio::sync::mpsc::Sender<Event>,
+    ) -> Result<(), Report> {
+        let decoded = match serde_json::from_slice(data) {
+            Ok(o) => o,
+            Err(e) => {
+                let decoded_data = String::from_utf8_lossy(data);
+                event!(Level::ERROR, err= ?e, ?decoded_data, "Failed to parse json to struct");
+
+                return Ok(());
+            },
+        };
+
+        match sender.send(decoded).await {
+            Ok(()) => {
+                event!(Level::TRACE, "Sent Docker Event to Channel!");
+                Ok(())
+            },
+            Err(_) => Err::<(), _>(color_eyre::Report::msg("Channel closed")),
         }
     }
 }

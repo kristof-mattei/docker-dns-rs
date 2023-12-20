@@ -201,7 +201,9 @@ impl Monitor {
                     "start" => self.handle_start(&event).await,
                     "rename" => self.handle_rename(&event).await,
                     "die" => self.handle_die(&event).await,
-                    _ => {},
+                    rest => {
+                        event!(Level::INFO, event = rest, "ignoring event");
+                    },
                 }
             }
         }
