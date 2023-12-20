@@ -136,13 +136,13 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     tokio::select! {
         // TODO ensure tasks are registered
         _ = utils::wait_for_sigterm() => {
-            event!(Level::WARN, message = "Sigterm detected, stopping all tasks");
+            event!(Level::WARN, "Sigterm detected, stopping all tasks");
         },
         _ = signal::ctrl_c() => {
-            event!(Level::WARN, message = "CTRL+C detected, stopping all tasks");
+            event!(Level::WARN, "CTRL+C detected, stopping all tasks");
         },
         () = token.cancelled() => {
-            event!(Level::ERROR, message = "Underlying task stopped, stopping all others tasks");
+            event!(Level::ERROR, "Underlying task stopped, stopping all others tasks");
         },
     };
 
@@ -157,10 +157,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         .await
         .is_err()
     {
-        event!(
-            Level::ERROR,
-            message = "Task didn't stop within allotted time!"
-        );
+        event!(Level::ERROR, "Task didn't stop within allotted time!");
     }
 
     Ok(())
