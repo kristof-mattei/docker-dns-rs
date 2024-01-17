@@ -1,0 +1,5 @@
+{
+    "rust-analyzer.runnables.extraEnv": {
+        "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
+    }
+}
