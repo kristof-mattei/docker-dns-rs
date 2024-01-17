@@ -23,9 +23,9 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "WARN,docker_dns_rs=trace"
+                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
             },
-            "terminal": "console"
+            "terminal": "integrated"
         },
         {
             "type": "lldb",
@@ -47,9 +47,9 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "WARN,docker_dns_rs=trace"
+                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
             },
-            "terminal": "console"
+            "terminal": "integrated"
         },
         {
             "type": "lldb",
@@ -71,9 +71,9 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "WARN,docker_dns_rs=trace"
+                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
             },
-            "terminal": "console"
+            "terminal": "integrated"
         }
     ]
 }
