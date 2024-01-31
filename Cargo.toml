@@ -43,7 +43,7 @@ hyper-tls = { git = "https://github.com/hyperium/hyper-tls", rev = "95ebd8d3ac87
     "vendored",
 ] }
 hyper-unix-socket = "0.0.0-development"
-hyper-util = { version = "0.1.2", default-features = false, features = [
+hyper-util = { version = "0.1.3", default-features = false, features = [
     "client-legacy",
     "http1",
     "tokio",
