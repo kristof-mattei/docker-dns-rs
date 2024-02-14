@@ -1,5 +1,13 @@
 {
     "rust-analyzer.runnables.extraEnv": {
         "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
-    }
+    },
+    "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.debug.engineSettings": {
+        "lldb": {
+            "internalConsoleOptions": "openOnSessionStart",
+            "terminal": "console"
+        }
+    },
+    "debug.internalConsoleOptions": "openOnSessionStart"
 }
