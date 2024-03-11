@@ -37,7 +37,7 @@ clap = { version = "4.5.2", features = ["derive"] }
 color-eyre = "0.6.2"
 hickory-server = "0.24.0"
 http = "1.1.0"
-http-body-util = "0.1.0"
+http-body-util = "0.1.1"
 hyper = { version = "1.2.0", default-features = false }
 hyper-tls = { git = "https://github.com/hyperium/hyper-tls", rev = "95ebd8d3ac8785e552fc9fee0ffac141bb361423", features = [
     "vendored",
