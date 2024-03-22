@@ -525,8 +525,9 @@ dependencies = [
 
 [[package]]
 name = "hyper-tls"
-version = "0.5.0"
-source = "git+https://github.com/hyperium/hyper-tls?rev=95ebd8d3ac8785e552fc9fee0ffac141bb361423#95ebd8d3ac8785e552fc9fee0ffac141bb361423"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "70206fc6890eaca9fde8a0bf71caa2ddfc9fe045ac9e5c70df101a7dbde866e0"
 dependencies = [
  "bytes",
  "http-body-util",

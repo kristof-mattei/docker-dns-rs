@@ -3,7 +3,7 @@ name = "docker-dns-rs"
 # don't change this, it's updated before an actual build by update-version.sh
 version = "0.0.0-development"
 edition = "2021"
-rust-version = "1.76.0"
+rust-version = "1.77.0"
 authors = ["Kristof Mattei"]
 description = "Rust end-to-end application"
 license-file = "LICENSE"
@@ -39,7 +39,7 @@ hickory-server = "0.24.0"
 http = "1.1.0"
 http-body-util = "0.1.1"
 hyper = { version = "1.2.0", default-features = false }
-hyper-tls = { git = "https://github.com/hyperium/hyper-tls", rev = "95ebd8d3ac8785e552fc9fee0ffac141bb361423", features = [
+hyper-tls = { version = "0.6.0", default-features = false, features = [
     "vendored",
 ] }
 hyper-unix-socket = "0.0.0-development"
