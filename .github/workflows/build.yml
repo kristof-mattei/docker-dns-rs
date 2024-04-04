@@ -417,8 +417,9 @@ jobs:
         platform:
           - docker: linux/amd64
             rust: x86_64-unknown-linux-musl
-          - docker: linux/arm64
-            rust: aarch64-unknown-linux-musl
+          # musl on arm64 is blocked until https://github.com/rust-lang/rust/issues/89626 is in stable
+          # - docker: linux/arm64
+          #   rust: aarch64-unknown-linux-musl
     steps:
       - name: Checkout
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
