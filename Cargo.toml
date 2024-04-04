@@ -75,5 +75,5 @@ url = "2.5.0"
 # BUT that means that we need to include openssl
 # Documentation on the syntax:
 # https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#platform-specific-dependencies
-[target.'cfg(all(target_arch = "x86_64", target_os="linux", target_env="musl"))'.dependencies]
-# openssl = { version = "0.10.36", features = ["vendored"] }
+[target.'cfg(all(target_env="musl"))'.dependencies]
+openssl = { version = "0.10.64", features = ["vendored"] }

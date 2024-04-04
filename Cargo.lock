@@ -259,6 +259,7 @@ dependencies = [
  "hyper-util",
  "ipnet",
  "once_cell",
+ "openssl",
  "percent-encoding",
  "regex",
  "serde",
