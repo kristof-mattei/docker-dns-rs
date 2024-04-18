@@ -35,7 +35,7 @@ coverage = []
 bytes = { version = "1.6.0", features = ["serde"] }
 clap = { version = "4.5.4", features = ["derive"] }
 color-eyre = "0.6.3"
-hickory-server = "0.24.0"
+hickory-server = "0.24.1"
 http = "1.1.0"
 http-body-util = "0.1.1"
 hyper = { version = "1.3.1", default-features = false }
