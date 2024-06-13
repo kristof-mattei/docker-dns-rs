@@ -4,6 +4,7 @@ use crate::env::try_parse_env_variable_with_default;
 
 pub struct Config {
     pub endpoint: Endpoint,
+    #[allow(dead_code)]
     pub options: Vec<String>,
 }
 
