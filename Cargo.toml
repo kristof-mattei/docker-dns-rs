@@ -68,7 +68,7 @@ tokio = { version = "1.40.0", features = [
     "signal",
     "net",
 ] }
-tokio-util = "0.7.11"
+tokio-util = "0.7.12"
 url = "2.5.2"
 
 # We compile the Docker container with musl to get a static library. Smaller, faster.
