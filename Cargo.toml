@@ -33,7 +33,7 @@ coverage = []
 
 [dependencies]
 bytes = { version = "1.7.2", features = ["serde"] }
-clap = { version = "4.5.18", features = ["derive"] }
+clap = { version = "4.5.19", features = ["derive"] }
 color-eyre = "0.6.3"
 hickory-server = "0.24.1"
 http = "1.1.0"
