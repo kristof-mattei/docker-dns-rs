@@ -32,7 +32,7 @@ opt-level = 3
 coverage = []
 
 [dependencies]
-bytes = { version = "1.7.2", features = ["serde"] }
+bytes = { version = "1.8.0", features = ["serde"] }
 clap = { version = "4.5.20", features = ["derive"] }
 color-eyre = "0.6.3"
 hickory-server = "0.24.1"
