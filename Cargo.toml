@@ -69,7 +69,7 @@ tokio = { version = "1.41.0", features = [
     "net",
 ] }
 tokio-util = "0.7.12"
-url = "2.5.2"
+url = "2.5.3"
 
 # We compile the Docker container with musl to get a static library. Smaller, faster.
 # BUT that means that we need to include openssl
