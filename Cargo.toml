@@ -42,7 +42,7 @@ hyper = { version = "1.5.2", default-features = false }
 hyper-tls = { version = "0.6.0", default-features = false, features = [
     "vendored",
 ] }
-hyper-unix-socket = "0.0.0-development"
+hyper-unix-socket = "0.3.0"
 hyper-util = { version = "0.1.10", default-features = false, features = [
     "client-legacy",
     "http1",
