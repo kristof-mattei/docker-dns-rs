@@ -1,7 +1,6 @@
-use std::sync::Arc;
+use std::sync::{Arc, LazyLock};
 
 use hickory_server::proto::rr::Name;
-use once_cell::sync::Lazy;
 use regex::Regex;
 use tokio::sync::mpsc::Receiver;
 use tokio_util::sync::CancellationToken;
@@ -11,7 +10,7 @@ use crate::docker::daemon::Daemon;
 use crate::docker::Event;
 use crate::table::AuthorityWrapper;
 
-static RE_VALIDNAME: Lazy<Regex> = Lazy::new(|| Regex::new(r"[^\w\d.-]").unwrap());
+static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
 pub struct Monitor {
     authority_wrapper: AuthorityWrapper,

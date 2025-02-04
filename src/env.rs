@@ -1,6 +1,7 @@
 use color_eyre::eyre::Context;
 use color_eyre::Report;
-use url::Url;
+use http::Uri;
+
 fn try_parse_env_variable<T>(env_variable_name: &str) -> Result<Option<T>, color_eyre::Report>
 where
     T: std::str::FromStr,
@@ -78,8 +79,10 @@ where
 }
 
 #[allow(dead_code)]
-pub fn get_env_as_url(key: &str) -> Result<Url, Report> {
+pub fn get_env_as_url(key: &str) -> Result<Uri, Report> {
     let value = std::env::var(key)?;
 
-    Url::parse(&value).wrap_err_with(|| format!("Couldn't convert {:?} to URL", value))
+    value
+        .parse()
+        .wrap_err_with(|| format!("Couldn't convert {:?} to URL", value))
 }
