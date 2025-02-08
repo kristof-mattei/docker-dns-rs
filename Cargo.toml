@@ -32,9 +32,6 @@ uninlined-format-args = { level = "allow", priority = 127 }
 let_underscore_drop = { level = "deny", priority = 127 }
 non_ascii_idents = { level = "deny", priority = 127 }
 
-[profile.dev.package.backtrace]
-opt-level = 3
-
 [features]
 coverage = []
 
@@ -75,9 +72,6 @@ tokio = { version = "1.43.0", features = [
 ] }
 tokio-util = "0.7.13"
 
-# We compile the Docker container with musl to get a static library. Smaller, faster.
-# BUT that means that we need to include openssl
-# Documentation on the syntax:
-# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#platform-specific-dependencies
+# OpenSSL for musl
 [target.'cfg(all(any(target_arch="x86_64", target_arch="aarch64"), target_os="linux", target_env="musl"))'.dependencies]
 openssl = { version = "0.10.70", features = ["vendored"] }
