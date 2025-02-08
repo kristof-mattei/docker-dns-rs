@@ -53,9 +53,7 @@ impl Daemon {
                 let request =
                     build_request(Uri::from_static("http://localhost"), path_and_query, method)?;
 
-                execute_request(connector, request)
-                    .await
-                    .map_err(Into::into)
+                execute_request(connector, request).await
             },
         }
     }
