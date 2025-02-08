@@ -38,7 +38,7 @@ coverage = []
 [dependencies]
 clap = { version = "4.5.28", features = ["derive"] }
 color-eyre = "0.6.3"
-hickory-server = "0.24.2"
+hickory-server = "0.24.3"
 http = "1.2.0"
 http-body-util = "0.1.2"
 hyper = { version = "1.6.0", default-features = false }
