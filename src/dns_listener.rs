@@ -2,15 +2,15 @@ use std::collections::BTreeMap;
 use std::sync::Arc;
 use std::time::Duration;
 
+use hickory_server::ServerFuture;
 use hickory_server::authority::Catalog;
 use hickory_server::proto::error::ProtoError;
 use hickory_server::proto::rr::rdata::SOA;
 use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
-use hickory_server::ServerFuture;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio_util::sync::CancellationToken;
-use tracing::{event, Level};
+use tracing::{Level, event};
 
 pub async fn set_up_dns_server(
     tcp_listener: TcpListener,

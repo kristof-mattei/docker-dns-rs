@@ -30,7 +30,10 @@ mod tests {
 
         let autoheal_and_unhealthy_encoded = url_encode(&autoheal_and_unhealthy);
 
-        assert_eq!(autoheal_and_unhealthy_encoded, "%7B%22health%22%3A%5B%22unhealthy%22%5D%2C%22label%22%3A%5B%22autoheal%3Dtrue%22%5D%7D");
+        assert_eq!(
+            autoheal_and_unhealthy_encoded,
+            "%7B%22health%22%3A%5B%22unhealthy%22%5D%2C%22label%22%3A%5B%22autoheal%3Dtrue%22%5D%7D"
+        );
     }
 
     #[test]
