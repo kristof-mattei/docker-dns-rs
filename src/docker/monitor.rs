@@ -4,10 +4,10 @@ use hickory_server::proto::rr::Name;
 use regex::Regex;
 use tokio::sync::mpsc::Receiver;
 use tokio_util::sync::CancellationToken;
-use tracing::{event, Level};
+use tracing::{Level, event};
 
-use crate::docker::daemon::Daemon;
 use crate::docker::Event;
+use crate::docker::daemon::Daemon;
 use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
@@ -136,7 +136,13 @@ impl Monitor {
                     let parsed_address = match address.parse() {
                         Ok(o) => o,
                         Err(e) => {
-                            event!(Level::ERROR, "Failed to parse address {} to an IP address for container {}: {:?}", address, event.actor.id, e);
+                            event!(
+                                Level::ERROR,
+                                "Failed to parse address {} to an IP address for container {}: {:?}",
+                                address,
+                                event.actor.id,
+                                e
+                            );
                             continue;
                         },
                     };

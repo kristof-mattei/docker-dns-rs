@@ -1,5 +1,5 @@
-use color_eyre::eyre::Context;
 use color_eyre::Report;
+use color_eyre::eyre::Context;
 use http::Uri;
 
 fn try_parse_env_variable<T>(env_variable_name: &str) -> Result<Option<T>, color_eyre::Report>
