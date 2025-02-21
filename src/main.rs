@@ -11,7 +11,7 @@ use tokio::task::JoinSet;
 use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
 use tracing::metadata::LevelFilter;
-use tracing::{event, Level};
+use tracing::{Level, event};
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;

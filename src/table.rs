@@ -5,7 +5,7 @@ use color_eyre::eyre::Report;
 use hickory_server::proto::rr::{Name, RData, Record, RecordType, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
 use ipnet::IpNet;
-use tracing::{event, Level};
+use tracing::{Level, event};
 
 pub struct AuthorityWrapper {
     authority: Arc<InMemoryAuthority>,

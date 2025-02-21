@@ -10,10 +10,10 @@ use hyper_unix_socket::UnixSocketConnector;
 use tokio::time::timeout;
 use tokio_util::bytes::Buf;
 use tokio_util::sync::CancellationToken;
-use tracing::{event, Level};
+use tracing::{Level, event};
 
-use crate::docker::config::{Config, Endpoint};
 use crate::docker::Event;
+use crate::docker::config::{Config, Endpoint};
 use crate::http_client::{build_request, execute_request};
 use crate::models::container_inspect::ContainerInspect;
 
