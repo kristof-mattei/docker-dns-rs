@@ -72,6 +72,9 @@ FROM scratch
 
 ARG APPLICATION_NAME
 
+COPY --from=passwd-build /tmp/group_root /etc/group
+COPY --from=passwd-build /tmp/passwd_root /etc/passwd
+
 # the default user is root, but we're being explicit here
 USER root
 

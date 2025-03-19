@@ -184,7 +184,7 @@ impl AuthorityWrapper {
         if let Some(record_set) = records.remove(&rrkey) {
             let names = record_set
                 .records_without_rrsigs()
-                .filter_map(|record| record.data().map(ToString::to_string))
+                .filter_map(|record| record.data().as_a())
                 .collect::<Vec<_>>();
 
             event!(
