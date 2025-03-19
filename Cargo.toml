@@ -70,7 +70,7 @@ tokio = { version = "1.44.1", features = [
     "signal",
     "net",
 ] }
-tokio-util = "0.7.14"
+tokio-util = { version = "0.7.14", features = ["rt"] }
 
 # OpenSSL for musl
 [target.'cfg(all(any(target_arch="x86_64", target_arch="aarch64"), target_os="linux", target_env="musl"))'.dependencies]

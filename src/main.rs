@@ -7,9 +7,9 @@ use hickory_server::proto::rr::Name;
 use ipnet::IpNet;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio::signal;
-use tokio::task::JoinSet;
 use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
+use tokio_util::task::TaskTracker;
 use tracing::metadata::LevelFilter;
 use tracing::{Level, event};
 use tracing_subscriber::filter::EnvFilter;
@@ -90,7 +90,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
 
     let (sender, receiver) = tokio::sync::mpsc::channel(50);
 
-    let mut tasks = JoinSet::new();
+    let tasks = TaskTracker::new();
 
     // event handler
     {
@@ -149,11 +149,13 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     // catch all cancel in case we got here via something else than a cancel token
     token.cancel();
 
+    tasks.close();
+
     // wait for the tasks that holds the server to exit gracefully
     // this is easier to write than x separate timeoouts
     // while we don't know if any of them gets killed
     // this will do for now, and we can always trace back the logs
-    if timeout(Duration::from_millis(10000), tasks.shutdown())
+    if timeout(Duration::from_millis(10000), tasks.wait())
         .await
         .is_err()
     {

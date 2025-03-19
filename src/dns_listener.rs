@@ -4,7 +4,7 @@ use std::time::Duration;
 
 use hickory_server::ServerFuture;
 use hickory_server::authority::Catalog;
-use hickory_server::proto::error::ProtoError;
+use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::rdata::SOA;
 use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
@@ -67,7 +67,7 @@ pub async fn set_up_authority(domain: Name) -> Result<InMemoryAuthority, color_e
 pub fn set_up_catalog(domain: impl Into<LowerName>, authority: Arc<InMemoryAuthority>) -> Catalog {
     let mut catalog = Catalog::new();
 
-    catalog.upsert(domain.into(), Box::new(authority));
+    catalog.upsert(domain.into(), vec![authority]);
 
     catalog
 }

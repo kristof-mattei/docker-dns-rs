@@ -1,4 +1,4 @@
-FROM --platform=${BUILDPLATFORM} rust:1.85.1@sha256:98970a718bb979f65dc22a8e84ca9f9f7105098e42f305c407a34d16d7ca27b0 AS rust-base
+FROM --platform=${BUILDPLATFORM} rust:1.85.0@sha256:0ff31c9ffa641a62e48d543fb00b4960955ea375f40776f40f585b89e654cc5e AS rust-base
 
 ARG APPLICATION_NAME
 
@@ -72,7 +72,9 @@ FROM scratch
 
 ARG APPLICATION_NAME
 
-# the default user is root, but we're being explicit here
+COPY --from=passwd-build /tmp/group_root /etc/group
+COPY --from=passwd-build /tmp/passwd_root /etc/passwd
+
 USER root
 
 WORKDIR /app
