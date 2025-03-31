@@ -46,7 +46,7 @@ hyper-tls = { version = "0.6.0", default-features = false, features = [
     "vendored",
 ] }
 hyper-unix-socket = "0.3.0"
-hyper-util = { version = "0.1.10", default-features = false, features = [
+hyper-util = { version = "0.1.11", default-features = false, features = [
     "client-legacy",
     "http1",
     "tokio",
