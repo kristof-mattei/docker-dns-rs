@@ -181,7 +181,7 @@ impl Monitor {
                     event.actor.id,
                 );
             },
-        };
+        }
     }
 
     pub async fn consume_events(&self, mut receiver: Receiver<Event>, token: &CancellationToken) {
