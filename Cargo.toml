@@ -39,7 +39,7 @@ non_ascii_idents = { level = "deny", priority = 127 }
 coverage = []
 
 [dependencies]
-clap = { version = "4.5.36", features = ["derive"] }
+clap = { version = "4.5.37", features = ["derive"] }
 color-eyre = "0.6.3"
 hickory-server = "0.25.1"
 http = "1.3.1"
