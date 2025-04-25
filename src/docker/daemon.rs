@@ -1,6 +1,7 @@
 use std::time::Duration;
 
-use color_eyre::{Section, eyre::Report};
+use color_eyre::Section;
+use color_eyre::eyre::Report;
 use http::Uri;
 use http_body_util::BodyExt;
 use hyper::body::Incoming;
