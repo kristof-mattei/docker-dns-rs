@@ -39,8 +39,11 @@ struct DDArgs {
 }
 
 fn parse_args() -> Result<DDArgs, Report> {
+    let mut domain: Name = String::from("docker.extension.").parse()?;
+    domain.set_fqdn(true);
+
     Ok(DDArgs {
-        domain: String::from("docker.extension").parse()?,
+        domain,
         records: Vec::new(),
         network_blacklist: Vec::new(),
     })
