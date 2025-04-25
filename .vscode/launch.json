@@ -23,7 +23,7 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
+                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
             },
             "internalConsoleOptions": "openOnSessionStart",
             "terminal": "console"
@@ -48,7 +48,7 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
+                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
             },
             "internalConsoleOptions": "openOnSessionStart",
             "terminal": "console"
@@ -73,7 +73,7 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
-                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE"
+                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
             },
             "internalConsoleOptions": "openOnSessionStart",
             "terminal": "console"

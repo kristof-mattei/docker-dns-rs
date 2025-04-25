@@ -39,18 +39,17 @@ pub async fn set_up_dns_server(
 }
 
 pub async fn set_up_authority(domain: Name) -> Result<InMemoryAuthority, color_eyre::Report> {
-    let record = Record::from_rdata(
-        domain.clone(),
-        0,
-        RData::SOA(SOA::new(domain.clone(), domain.clone(), 0, 0, 0, 0, 0)),
-    );
-
     let tree = BTreeMap::<RrKey, RecordSet>::from([(
-        RrKey {
-            name: domain.clone().into(),
-            record_type: hickory_server::proto::rr::RecordType::SOA,
-        },
-        record.into(),
+        RrKey::new(
+            domain.clone().into(),
+            hickory_server::proto::rr::RecordType::SOA,
+        ),
+        Record::from_rdata(
+            domain.clone(),
+            3600,
+            RData::SOA(SOA::new(domain.clone(), domain.clone(), 0, 0, 0, 0, 0)),
+        )
+        .into(),
     )]);
 
     let imo = InMemoryAuthority::new(

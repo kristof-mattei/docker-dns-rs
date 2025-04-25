@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use color_eyre::eyre::Report;
+use color_eyre::{Section, eyre::Report};
 use http::Uri;
 use http_body_util::BodyExt;
 use hyper::body::Incoming;
@@ -96,28 +96,27 @@ impl Daemon {
 
         let mut response = self.send_request(&path_and_query, Method::GET).await?;
 
-        let mut buffer = Vec::new();
+        let mut buffer = Vec::<u8>::new();
 
+        // Inspired by https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
         loop {
             let frame = tokio::select! {
-                maybe_frame = response.frame() => {
-                    if let Some(frame) = maybe_frame {
-                        frame
-                    } else {
-                        return Err(color_eyre::Report::msg("No more next frame, other side gone"));
-                    }
-                },
+                frame = response.frame() => frame,
                 () = token.cancelled() => {
                     return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
-
                 },
             };
 
             let frame = match frame {
-                Ok(o) => o,
-                Err(e) => {
-                    event!(Level::ERROR, error = ?e, "Failed to read frame");
+                Some(Ok(frame)) => frame,
+                Some(Err(err)) => {
+                    event!(Level::ERROR, ?err, "Failed to read frame");
                     continue;
+                },
+                None => {
+                    return Err(color_eyre::Report::msg(
+                        "No more next frame, other side gone",
+                    ));
                 },
             };
 
@@ -126,32 +125,22 @@ impl Daemon {
                 continue;
             };
 
-            // TODO: https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
-            // TODO maybe use BytesMut for buffer
             buffer.extend_from_slice(&data);
 
-            // let f = String::from_utf8_lossy(&buffer);
+            while let Some(i) = buffer.iter().position(|b| b == &b'\n') {
+                Daemon::decode_send(&buffer[0..=i], &sender).await?;
 
-            // event!(Level::TRACE, buffer = ?f, "BUFFER");
-
-            'outer: loop {
-                if let Some((i, _)) = buffer.iter().enumerate().find(|(_, b)| b == &&b'\n') {
-                    let mut data = buffer.split_off(i + 1);
-
-                    std::mem::swap(&mut data, &mut buffer);
-                    Daemon::decode_send(&data, &sender).await?;
-
-                    continue 'outer;
-                }
-
-                let f = String::from_utf8_lossy(&buffer);
-
-                event!(Level::TRACE, buffer = ?f, "BUFFER LEFTOVER");
-
-                break;
+                buffer.drain(0..=i);
             }
 
-            // sometimes we get multiple frames per event (?)
+            if !buffer.is_empty() {
+                // sometimes we get multiple frames per event
+                event!(
+                    Level::TRACE,
+                    leftover = ?String::from_utf8_lossy(&buffer),
+                    "Buffer leftover"
+                );
+            }
         }
     }
 
@@ -169,12 +158,9 @@ impl Daemon {
             },
         };
 
-        match sender.send(decoded).await {
-            Ok(()) => {
-                event!(Level::TRACE, "Sent Docker Event to Channel!");
-                Ok(())
-            },
-            Err(_) => Err::<(), _>(color_eyre::Report::msg("Channel closed")),
-        }
+        sender
+            .send(decoded)
+            .await
+            .map_err(|err| color_eyre::Report::msg("Channel closed").error(err))
     }
 }
