@@ -1,6 +1,8 @@
 use tokio::signal::unix::{SignalKind, signal};
 use tokio::task::JoinHandle;
 
+pub mod env;
+
 #[allow(dead_code)]
 /// Use this when you have a `JoinHandle<Result<T, E>>`
 /// and you want to use it with `tokio::try_join!`
