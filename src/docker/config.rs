@@ -1,6 +1,6 @@
 use std::ffi::OsString;
 
-use crate::env::try_parse_env_variable_with_default;
+use crate::utils::env::try_parse_env_variable_with_default;
 
 pub struct Config {
     pub endpoint: Endpoint,

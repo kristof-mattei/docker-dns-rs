@@ -2,7 +2,8 @@ use std::net::IpAddr;
 use std::sync::Arc;
 
 use color_eyre::eyre::Report;
-use hickory_server::proto::rr::{Name, RData, Record, RecordType, RrKey};
+use hickory_server::proto::rr::rdata::PTR;
+use hickory_server::proto::rr::{Name, RData, RecordSet, RecordType, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
 use ipnet::IpNet;
 use tracing::{Level, event};
@@ -53,31 +54,41 @@ impl AuthorityWrapper {
         Ok(table)
     }
 
-    async fn upsert(
-        // storage: &mut impl DerefMut<Target = BTreeMap<RrKey, Arc<RecordSet>>>,
-        &self,
-        name: Name,
-        value: String,
-    ) -> Result<(), Report> {
-        let record = Record::from_rdata(name, 0, RData::A(value.parse()?));
+    async fn upsert(&self, name: Name, address: IpAddr) {
+        // reverse map for PTR records
+        let reverse: Name = address.into();
 
-        if self.authority.upsert(record, 0).await {
-            Ok(())
-        } else {
-            Err(Report::msg("Record not updated / inserted, check logs"))
-        }
+        let reverse_set = {
+            let rdata = RData::PTR(PTR(name.clone()));
+
+            let mut set = RecordSet::with_ttl(reverse.clone(), rdata.record_type(), 5);
+            // false means identical data was found, which is fine for us
+            set.add_rdata(rdata);
+
+            set
+        };
+
+        let a_or_aaaa_set = {
+            let rdata: RData = address.into();
+
+            let mut set = RecordSet::with_ttl(name.clone(), rdata.record_type(), 5);
+            // false means identical data was found, which is fine for us
+            set.add_rdata(rdata);
+
+            set
+        };
+
+        let mut lock = self.authority.records_mut().await;
+
+        lock.insert(
+            RrKey::new(name.into(), a_or_aaaa_set.record_type()),
+            a_or_aaaa_set.into(),
+        );
+        lock.insert(
+            RrKey::new(reverse.into(), reverse_set.record_type()),
+            reverse_set.into(),
+        );
     }
-
-    // fn build_reversed(address: &IpAddr) -> String {
-    //     let reversed = address
-    //         .to_string()
-    //         .split('.')
-    //         .rev()
-    //         .collect::<Vec<&str>>()
-    //         .join(".");
-
-    //     format!("{}.in-addr.arpa", reversed)
-    // }
 
     pub async fn add(&self, mut name: String, address: IpAddr) -> Result<(), Report> {
         // check blacklist...
@@ -107,17 +118,10 @@ impl AuthorityWrapper {
             },
         };
 
-        // reverse map for PTR records
-        // let ptr_address = AuthorityWrapper::build_reversed(&address);
-        // let ptr_key = self.key(&ptr_address);
+        self.upsert(parsed_name.clone(), address).await;
 
-        if let Err(e) = self.upsert(parsed_name.clone(), address.to_string()).await {
-            event!(Level::ERROR, ?e, "table.add {} -> {}", name, address);
-            Err(e)
-        } else {
-            event!(Level::INFO, "table.add {} -> {}", name, address);
-            Ok(())
-        }
+        event!(Level::INFO, "table.add {} -> {}", name, address);
+        Ok(())
 
         // // TODO using `name` as value here seems weird
         // // AuthorityWrapper::upsert(&mut l, ptr_key, name.clone());
@@ -155,20 +159,42 @@ impl AuthorityWrapper {
     // }
 
     pub async fn rename(&self, old_name: &str, new_name: &str) -> Result<(), Report> {
-        let old_key = old_name.strip_prefix('/').unwrap_or(old_name).parse()?;
-        let new_key = new_name.parse()?;
+        let old_key = RrKey::new(
+            old_name.strip_prefix('/').unwrap_or(old_name).parse()?,
+            RecordType::A,
+        );
+        let new_name_parsed: Name = new_name.parse()?;
 
-        let mut records = self.authority.records_mut().await;
+        let mut records = self.authority.records().await;
 
-        if let Some(v) = records.remove(&RrKey::new(old_key, RecordType::A)) {
-            records.insert(RrKey::new(new_key, RecordType::A), v);
-            event!(Level::INFO, "table.rename {} -> {}", old_name, new_name);
+        let mut ips: Vec<IpAddr> = vec![];
+
+        if let Some(v) = records.remove(&old_key) {
+            for record in v.records_without_rrsigs() {
+                if let Some(a) = record.data().as_a() {
+                    ips.push(a.0.into());
+                } else if let Some(aaaa) = record.data().as_aaaa() {
+                    ips.push(aaaa.0.into());
+                }
+            }
         } else {
             event!(
                 Level::ERROR,
                 "table.rename {} -> {}, entry not found",
                 old_name,
                 new_name
+            );
+        }
+
+        for ip in ips {
+            self.upsert(new_name_parsed.clone(), ip).await;
+
+            event!(
+                Level::INFO,
+                "table.rename {} -> {} ({})",
+                old_name,
+                new_name,
+                ip
             );
         }
 
