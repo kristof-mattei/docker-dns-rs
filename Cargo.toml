@@ -35,9 +35,6 @@ uninlined-format-args = { level = "allow", priority = 127 }
 let_underscore_drop = { level = "deny", priority = 127 }
 non_ascii_idents = { level = "deny", priority = 127 }
 
-[features]
-coverage = []
-
 [dependencies]
 clap = { version = "4.5.37", features = ["derive"] }
 color-eyre = "0.6.3"
