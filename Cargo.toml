@@ -43,7 +43,7 @@ tokio-console = ["dep:console-subscriber", "dep:tokio-console"]
 clap = { version = "4.5.37", features = ["derive"] }
 color-eyre = "0.6.4"
 console-subscriber = { version = "0.4.1", optional = true }
-hickory-server = "0.25.1"
+hickory-server = "0.25.2"
 http = "1.3.1"
 http-body-util = "0.1.3"
 hyper = { version = "1.6.0", default-features = false }
