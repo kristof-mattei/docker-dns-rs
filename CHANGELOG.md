@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.0](https://github.com/kristof-mattei/docker-dns-rs/compare/1738f54d893c7234d07f6cb4447b1106ecc4baa7..v0.2.0) - 2025-05-04
+#### Features
+- remove support for records and network blacklists - ([1738f54](https://github.com/kristof-mattei/docker-dns-rs/commit/1738f54d893c7234d07f6cb4447b1106ecc4baa7)) - [@kristof-mattei](https://github.com/kristof-mattei)
+
+- - -
+
 ## [v0.1.0](https://github.com/kristof-mattei/docker-dns-rs/compare/7af0684c86b197699123cc67d0d87ec66fbd1e2e..v0.1.0) - 2025-05-03
 #### Bug Fixes
 - **(deps)** update rust crate hickory-server to 0.25.2 - ([21db345](https://github.com/kristof-mattei/docker-dns-rs/commit/21db345ee62f40cda79d980b5d20bc9aaccfaf8e)) - renovate[bot]
