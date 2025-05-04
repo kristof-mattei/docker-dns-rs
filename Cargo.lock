@@ -524,7 +524,6 @@ dependencies = [
  "hyper-tls",
  "hyper-unix-socket",
  "hyper-util",
- "ipnet",
  "openssl",
  "percent-encoding",
  "regex",

@@ -1,11 +1,9 @@
 use std::env;
-use std::net::IpAddr;
 use std::sync::Arc;
 use std::time::Duration;
 
-use color_eyre::eyre::{self, Report};
-use hickory_server::proto::rr::Name;
-use ipnet::IpNet;
+use clap::Parser;
+use color_eyre::eyre;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio::signal;
 use tokio::time::timeout;
@@ -23,6 +21,7 @@ use crate::docker::daemon::Daemon;
 use crate::docker::monitor::Monitor;
 use crate::table::AuthorityWrapper;
 
+mod args;
 mod dns_listener;
 mod docker;
 mod encoding;
@@ -31,23 +30,6 @@ mod http_client;
 mod models;
 mod table;
 mod utils;
-
-struct DDArgs {
-    domain: Name,
-    records: Vec<(String, IpAddr)>,
-    network_blacklist: Vec<IpNet>,
-}
-
-fn parse_args() -> Result<DDArgs, Report> {
-    let mut domain: Name = String::from("docker.extension.").parse()?;
-    domain.set_fqdn(true);
-
-    Ok(DDArgs {
-        domain,
-        records: Vec::new(),
-        network_blacklist: Vec::new(),
-    })
-}
 
 fn init_tracing() -> Result<(), eyre::Report> {
     let main_filter = EnvFilter::builder()
@@ -89,12 +71,11 @@ fn main() -> Result<(), color_eyre::Report> {
 }
 
 async fn start_tasks() -> Result<(), color_eyre::Report> {
-    let args = parse_args()?;
+    let args = args::Args::parse();
 
     // DNS
     let authority = Arc::new(set_up_authority(args.domain.clone()).await?);
-    let authority_wrapper =
-        AuthorityWrapper::new(authority.clone(), args.records, args.network_blacklist).await?;
+    let authority_wrapper = AuthorityWrapper::new(authority.clone());
 
     // docker
     let docker_config = Config::build()?;

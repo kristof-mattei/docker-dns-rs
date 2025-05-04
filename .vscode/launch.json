@@ -19,7 +19,7 @@
                     "kind": "bin"
                 }
             },
-            "args": ["--record", "foo:1.1.1.1", "--record", "bar:2.2.2.2"],
+            "args": [],
             "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
