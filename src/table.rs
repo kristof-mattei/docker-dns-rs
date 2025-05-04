@@ -5,12 +5,10 @@ use color_eyre::eyre::Report;
 use hickory_server::proto::rr::rdata::PTR;
 use hickory_server::proto::rr::{Name, RData, RecordSet, RecordType, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
-use ipnet::IpNet;
 use tracing::{Level, event};
 
 pub struct AuthorityWrapper {
     authority: Arc<InMemoryAuthority>,
-    network_blacklist: Vec<IpNet>,
 }
 
 fn pretty_print_vec<T: std::fmt::Display>(iterable: impl Iterator<Item = T>) -> String {
@@ -24,34 +22,8 @@ fn pretty_print_vec<T: std::fmt::Display>(iterable: impl Iterator<Item = T>) -> 
 }
 
 impl AuthorityWrapper {
-    pub async fn new(
-        authority: Arc<InMemoryAuthority>,
-        records: Vec<(String, IpAddr)>,
-        network_blacklist: Vec<IpNet>,
-    ) -> Result<Self, Report> {
-        let table = Self {
-            authority,
-            network_blacklist,
-        };
-
-        // for (name, address) in records {
-        //     let (record_type, data) = match address {
-        //         IpAddr::V4(v4) => (RecordType::A, RData::A(v4.into())),
-        //         IpAddr::V6(v6) => (RecordType::AAAA, RData::AAAA(v6.into())),
-        //     };
-
-        //     let record = Record::with(name.parse()?, record_type, 0)
-        //         .set_data(Some(data))
-        //         .clone();
-
-        //     imo.upsert(record, 0).await;
-        // }
-
-        for record in records {
-            table.add(record.0, record.1).await?;
-        }
-
-        Ok(table)
+    pub fn new(authority: Arc<InMemoryAuthority>) -> Self {
+        Self { authority }
     }
 
     async fn upsert(&self, name: Name, address: IpAddr) {
@@ -90,35 +62,8 @@ impl AuthorityWrapper {
         );
     }
 
-    pub async fn add(&self, mut name: String, address: IpAddr) -> Result<(), Report> {
-        // check blacklist...
-        for network in &self.network_blacklist {
-            if network.contains(&address) {
-                event!(
-                    Level::INFO,
-                    "skipping table.add {} -> {} (blacklisted network)",
-                    name,
-                    address,
-                );
-
-                return Err(Report::msg("Blacklisted"));
-            }
-        }
-
-        if name.starts_with('.') {
-            name = format!("*{}", name);
-        }
-
-        let parsed_name: Name = match name.parse() {
-            Ok(parsed) => parsed,
-            Err(e) => {
-                event!(Level::ERROR, ?e, "table.add {} -> {}", name, address);
-
-                return Err(e.into());
-            },
-        };
-
-        self.upsert(parsed_name.clone(), address).await;
+    pub async fn add(&self, name: Name, address: IpAddr) -> Result<(), (Name, Report)> {
+        self.upsert(name.clone(), address).await;
 
         event!(Level::INFO, "table.add {} -> {}", name, address);
         Ok(())

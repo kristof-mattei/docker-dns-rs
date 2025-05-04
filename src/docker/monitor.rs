@@ -1,3 +1,4 @@
+use std::net::IpAddr;
 use std::sync::{Arc, LazyLock};
 
 use hickory_server::proto::rr::Name;
@@ -133,7 +134,7 @@ impl Monitor {
                     .values()
                     .map(|cn| &cn.ip_address)
                 {
-                    let parsed_address = match address.parse() {
+                    let parsed_address: IpAddr = match address.parse() {
                         Ok(o) => o,
                         Err(e) => {
                             event!(
@@ -148,17 +149,17 @@ impl Monitor {
                     };
 
                     for name in &all_names {
-                        if let Err(e) = self
-                            .authority_wrapper
-                            .add(format!("{}.{}", name, self.domain), parsed_address)
-                            .await
+                        let name: Name = name.parse().unwrap();
+                        let name = name.append_domain(&self.domain).unwrap();
+
+                        if let Err((name, err)) =
+                            self.authority_wrapper.add(name, parsed_address).await
                         {
                             event!(
                                 Level::ERROR,
-                                ?e,
-                                "Something went wrong adding {}.{} -> {}",
+                                ?err,
+                                "Something went wrong adding {} -> {}",
                                 name,
-                                self.domain,
                                 parsed_address
                             );
                         }
