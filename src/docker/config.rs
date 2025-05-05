@@ -2,8 +2,6 @@ use crate::utils::env::try_parse_env_variable_with_default;
 
 pub struct Config {
     pub endpoint: Endpoint,
-    #[allow(dead_code)]
-    pub options: Vec<String>,
 }
 
 pub enum Endpoint {
@@ -44,10 +42,7 @@ impl Config {
             Endpoint::Socket(docker_socket_or_uri)
         };
 
-        Ok(Config {
-            endpoint,
-            options: vec![],
-        })
+        Ok(Config { endpoint })
     }
 
     // fn curl_options(&self) -> String {
