@@ -22,6 +22,7 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "env": {
+                // "DOCKER_SOCK": "tcp://0.0.0.0:2375",
                 "RUST_BACKTRACE": "1",
                 "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
             },
