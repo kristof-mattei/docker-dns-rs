@@ -129,9 +129,15 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         });
     }
 
+    #[cfg(not(target_os = "windows"))]
+    let sigterm = utils::wait_for_sigterm();
+
+    #[cfg(target_os = "windows")]
+    let sigterm = std::future::pending::<()>();
+
     tokio::select! {
         // TODO ensure tasks are registered
-        _ = utils::wait_for_sigterm() => {
+        _ = sigterm => {
             event!(Level::WARN, "Sigterm detected, stopping all tasks");
         },
         _ = signal::ctrl_c() => {

@@ -2,11 +2,13 @@ use std::time::Duration;
 
 use color_eyre::Section;
 use color_eyre::eyre::Report;
+#[cfg(not(target_os = "windows"))]
 use http::Uri;
 use http_body_util::BodyExt;
 use hyper::body::Incoming;
 use hyper::{Method, Response};
 use hyper_tls::HttpsConnector;
+#[cfg(not(target_os = "windows"))]
 use hyper_unix_socket::UnixSocketConnector;
 use tokio::time::timeout;
 use tokio_util::bytes::Buf;
@@ -48,6 +50,7 @@ impl Daemon {
                     Err(e) => Err(e.into()),
                 }
             },
+            #[cfg(not(target_os = "windows"))]
             Endpoint::Socket(socket) => {
                 let connector = UnixSocketConnector::new(socket.clone());
 

@@ -50,7 +50,6 @@ hyper = { version = "1.6.0", default-features = false }
 hyper-tls = { version = "0.6.0", default-features = false, features = [
     "vendored",
 ] }
-hyper-unix-socket = "0.3.0"
 hyper-util = { version = "0.1.11", default-features = false, features = [
     "client-legacy",
     "http1",
@@ -76,6 +75,9 @@ tracing-subscriber = { version = "0.3.19", features = [
     "time",
     "tracing-log",
 ] }
+
+[target.'cfg(not(target_os = "windows"))'.dependencies]
+hyper-unix-socket = "0.3.0"
 
 # OpenSSL for musl
 [target.'cfg(all(any(target_arch="x86_64", target_arch="aarch64"), target_os="linux", target_env="musl"))'.dependencies]
