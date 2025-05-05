@@ -133,7 +133,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     let sigterm = utils::wait_for_sigterm();
 
     #[cfg(target_os = "windows")]
-    let sigterm = std::future::pending::<()>();
+    let sigterm = std::future::pending::<Result<(), std::io::Error>>();
 
     tokio::select! {
         // TODO ensure tasks are registered
