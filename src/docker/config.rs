@@ -1,3 +1,7 @@
+use std::ffi::OsString;
+
+use color_eyre::eyre;
+
 use crate::utils::env::try_parse_env_variable_with_default;
 
 pub struct Config {
@@ -14,15 +18,20 @@ pub enum Endpoint {
 }
 
 impl Config {
-    pub fn build() -> Result<Config, color_eyre::Report> {
+    pub fn build() -> Result<Config, eyre::Report> {
         const TCP_START: &str = "tcp://";
-        let mut docker_socket_or_uri = std::env::var("DOCKER_SOCK").or_else(|err| match err {
-            std::env::VarError::NotPresent => Ok(String::from("/var/run/docker.sock")),
-            std::env::VarError::NotUnicode(os_string) => Err(color_eyre::Report::msg(format!(
-                "Could not convert {:?} to String",
-                os_string
-            ))),
-        })?;
+
+        let mut docker_socket_or_uri = std::env::var_os("DOCKER_SOCK")
+            .map_or_else(
+                || Ok(String::from("/var/run/docker.sock")),
+                OsString::into_string,
+            )
+            .map_err(|docker_sock_value| {
+                eyre::Report::msg(format!(
+                    "Could not convert \"{}\" to String",
+                    docker_sock_value.display()
+                ))
+            })?;
 
         let timeout_milliseconds = try_parse_env_variable_with_default("CURL_TIMEOUT", 30)?;
 
