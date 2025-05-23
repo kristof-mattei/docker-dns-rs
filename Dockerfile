@@ -1,4 +1,5 @@
-FROM --platform=${BUILDPLATFORM} rust:1.87.0@sha256:5e33ae75f40bf25854fa86e33487f47075016d16726355a72171f67362ad6bf7 AS rust-base
+# Rust toolchain setup
+FROM --platform=${BUILDPLATFORM} rust:1.87.0@sha256:cfd9d336b2a0ba841008093e06b603e0bc46cdc33b2ec639d5a139226ddfff43 AS rust-base
 
 ARG APPLICATION_NAME
 
@@ -22,11 +23,6 @@ FROM rust-base AS rust-linux-arm64
 ARG TARGET=aarch64-unknown-linux-musl
 
 FROM rust-${TARGETPLATFORM//\//-} AS rust-cargo-build
-
-# expose (used in ./build.sh)
-ARG BUILDPLATFORM
-ARG TARGETPLATFORM
-ARG TARGETARCH
 
 COPY ./setup-env.sh .
 RUN --mount=type=cache,id=apt-cache,from=rust-base,target=/var/cache/apt,sharing=locked \
@@ -54,12 +50,8 @@ RUN --mount=type=cache,target=/build/${APPLICATION_NAME}/target \
     --mount=type=cache,id=cargo-registery,target=/usr/local/cargo/registry/,sharing=locked \
     ./build.sh build --release --target ${TARGET}
 
+# Rust full build
 FROM rust-cargo-build AS rust-build
-
-# expose (used in ./build.sh)
-ARG BUILDPLATFORM
-ARG TARGETPLATFORM
-ARG TARGETARCH
 
 WORKDIR /build/${APPLICATION_NAME}
 
@@ -75,11 +67,13 @@ RUN --mount=type=cache,target=/build/${APPLICATION_NAME}/target \
     --mount=type=cache,id=cargo-registery,target=/usr/local/cargo/registry/,sharing=locked \
     ./build.sh install --path . --target ${TARGET} --root /output
 
+# Container user setup
 FROM --platform=${BUILDPLATFORM} alpine:3.21.3@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c AS passwd-build
 
 RUN cat /etc/group | grep root > /tmp/group_root
 RUN cat /etc/passwd | grep root > /tmp/passwd_root
 
+# Final stage, no `BUILDPLATFORM`, this one is run where it is deployed
 FROM scratch
 
 ARG APPLICATION_NAME
@@ -95,4 +89,5 @@ WORKDIR /app
 COPY --from=rust-build /output/bin/${APPLICATION_NAME} /app/entrypoint
 
 ENV RUST_BACKTRACE=full
+
 ENTRYPOINT ["/app/entrypoint"]
