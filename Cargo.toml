@@ -54,7 +54,7 @@ hyper = { version = "1.6.0", default-features = false }
 hyper-tls = { version = "0.6.0", default-features = false, features = [
     "vendored",
 ] }
-hyper-util = { version = "0.1.12", default-features = false, features = [
+hyper-util = { version = "0.1.13", default-features = false, features = [
     "client-legacy",
     "http1",
     "tokio",
