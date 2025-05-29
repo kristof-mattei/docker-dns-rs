@@ -32,10 +32,10 @@ mod table;
 mod utils;
 
 fn init_tracing() -> Result<(), eyre::Report> {
-    let main_filter = EnvFilter::builder()
-        .parse(env::var(EnvFilter::DEFAULT_ENV).unwrap_or_else(|_| {
-            format!("INFO,{}=TRACE", env!("CARGO_PKG_NAME").replace('-', "_"))
-        }))?;
+    let main_filter = EnvFilter::builder().parse(
+        env::var(EnvFilter::DEFAULT_ENV)
+            .unwrap_or_else(|_| format!("INFO,{}=TRACE", env!("CARGO_CRATE_NAME"))),
+    )?;
 
     let layers = vec![
         #[cfg(feature = "tokio-console")]
