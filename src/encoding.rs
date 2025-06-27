@@ -1,4 +1,4 @@
-#[allow(dead_code)]
+#[cfg_attr(not(test), expect(dead_code))]
 pub(crate) fn url_encode(filter: &serde_json::Value) -> String {
     percent_encoding::percent_encode(
         (filter).to_string().as_bytes(),

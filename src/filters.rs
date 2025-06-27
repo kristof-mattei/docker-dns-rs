@@ -1,4 +1,4 @@
-#[allow(dead_code)]
+#[cfg_attr(not(test), expect(dead_code))]
 pub(crate) fn build(autoheal_container_label: &str) -> serde_json::Value {
     let mut json = serde_json::Map::<String, serde_json::Value>::from_iter([(
         "health".into(),

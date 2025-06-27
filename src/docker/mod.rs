@@ -5,7 +5,7 @@ pub mod daemon;
 pub mod monitor;
 
 #[derive(serde::Deserialize, Debug)]
-#[allow(dead_code)]
+#[expect(dead_code)]
 pub struct Event {
     #[serde(rename(deserialize = "Type"))]
     r#type: EventType,
