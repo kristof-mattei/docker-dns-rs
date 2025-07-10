@@ -75,12 +75,12 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
 
     // DNS
     let authority = Arc::new(set_up_authority(args.domain.clone()).await?);
-    let authority_wrapper = AuthorityWrapper::new(authority.clone());
+    let authority_wrapper = AuthorityWrapper::new(Arc::clone(&authority));
 
     // docker
     let docker_config = Config::build()?;
     let docker = Arc::new(Daemon::new(docker_config));
-    let docker_monitor = Monitor::new(docker.clone(), authority_wrapper, args.domain.clone());
+    let docker_monitor = Monitor::new(Arc::clone(&docker), authority_wrapper, args.domain.clone());
 
     let token = CancellationToken::new();
 
