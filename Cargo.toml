@@ -1,15 +1,15 @@
 [package]
 name = "docker-dns-rs"
-# don't change this, it's updated before an actual build by update-version.sh
 version = "0.0.0-development"
 edition = "2024"
 rust-version = "1.88.0"
 authors = ["Kristof Mattei"]
-description = "Rust end-to-end application"
-license-file = "LICENSE"
-categories = ["starter", "end-to-end"]
-keywords = ["integrity", "end-to-end", "starter", "docker", "release"]
+description = "Rust seed application"
+license = "MIT"
+categories = ["command-line-utilities", "virtualization"]
+keywords = ["cli", "docker", "dns"]
 repository = "https://github.com/kristof-mattei/docker-dns-rs"
+include = ["src/**", "/LICENSE", "/LICENSE-*"]
 
 [lints.clippy]
 # don't stop from compiling / running
