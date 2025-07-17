@@ -11,6 +11,10 @@ keywords = ["cli", "docker", "dns"]
 repository = "https://github.com/kristof-mattei/docker-dns-rs"
 include = ["src/**", "/LICENSE", "/LICENSE-*"]
 
+[features]
+default = ["tokio-console"]
+tokio-console = ["dep:console-subscriber", "dep:tokio-console"]
+
 [lints.clippy]
 # don't stop from compiling / running
 all = "warn"
@@ -24,14 +28,19 @@ suspicious = "warn"
 
 # restriction
 
-# Maybe
-absolute_paths = { level = "deny", priority = 127 }
-# NO
+# Lib only
 # alloc_instead_of_core = { level = "deny", priority = 127 }
+# std_instead_of_alloc = { level = "deny", priority = 127 }
+# std_instead_of_core = { level = "deny", priority = 127 }
+# exhaustive_enums = { level = "deny", priority = 127 }
+# exhaustive_structs = { level = "deny", priority = 127 }
+# empty_enum_variants_with_brackets = { level = "deny", priority = 127 }
+# empty_structs_with_brackets = { level = "deny", priority = 127 }
+# missing_inline_in_public_items = { level = "deny", priority = 127 }
+
+absolute_paths = { level = "deny", priority = 127 }
 allow_attributes = { level = "deny", priority = 127 }
 allow_attributes_without_reason = { level = "deny", priority = 127 }
-# No
-# arbitrary_source_item_ordering = { level = "deny", priority = 127 }
 # Debatable
 # arithmetic_side_effects = { level = "deny", priority = 127 }
 as_conversions = { level = "deny", priority = 127 }
@@ -49,21 +58,11 @@ decimal_literal_representation = { level = "deny", priority = 127 }
 # default_numeric_fallback = { level = "deny", priority = 127 }
 default_union_representation = { level = "deny", priority = 127 }
 deref_by_slicing = { level = "deny", priority = 127 }
-disallowed_script_idents = { level = "deny", priority = 127 }
 doc_include_without_cfg = { level = "deny", priority = 127 }
 else_if_without_else = { level = "deny", priority = 127 }
 empty_drop = { level = "deny", priority = 127 }
-empty_enum_variants_with_brackets = { level = "deny", priority = 127 }
-# Debatable
-# empty_structs_with_brackets = { level = "deny", priority = 127 }
 error_impl_error = { level = "deny", priority = 127 }
-# Debatable, no for our code, yes for library
-# exhaustive_enums = { level = "deny", priority = 127 }
-# Debatable, no for our code, yes for library
-# exhaustive_structs = { level = "deny", priority = 127 }
 exit = { level = "deny", priority = 127 }
-# No
-# expect_used = { level = "deny", priority = 127 }
 field_scoped_visibility_modifiers = { level = "deny", priority = 127 }
 filetype_is_file = { level = "deny", priority = 127 }
 # Debatable
@@ -72,18 +71,14 @@ float_cmp_const = { level = "deny", priority = 127 }
 fn_to_numeric_cast_any = { level = "deny", priority = 127 }
 # Debatable
 # get_unwrap = { level = "deny", priority = 127 }
+host_endian_bytes = { level = "deny", priority = 127 }
 # Debatable
-# host_endian_bytes = { level = "deny", priority = 127 }
-# Debatable, but yes
 # if_then_some_else_none = { level = "deny", priority = 127 }
 impl_trait_in_params = { level = "deny", priority = 127 }
-# No
-# implicit_return = { level = "deny", priority = 127 }
 # Debatable
 # indexing_slicing = { level = "deny", priority = 127 }
 infinite_loop = { level = "deny", priority = 127 }
 inline_asm_x86_att_syntax = { level = "deny", priority = 127 }
-inline_asm_x86_intel_syntax = { level = "deny", priority = 127 }
 # Debatable
 # integer_division = { level = "deny", priority = 127 }
 # Debatable
@@ -92,24 +87,12 @@ iter_over_hash_type = { level = "deny", priority = 127 }
 large_include_file = { level = "deny", priority = 127 }
 let_underscore_must_use = { level = "deny", priority = 127 }
 let_underscore_untyped = { level = "deny", priority = 127 }
-# Debatable
-# little_endian_bytes = { level = "deny", priority = 127 }
+little_endian_bytes = { level = "deny", priority = 127 }
 lossy_float_literal = { level = "deny", priority = 127 }
 # Debatable
 # map_err_ignore = { level = "deny", priority = 127 }
 map_with_unused_argument_over_ranges = { level = "deny", priority = 127 }
-mem_forget = { level = "deny", priority = 127 }
-# No
-# min_ident_chars = { level = "deny", priority = 127 }
 missing_assert_message = { level = "deny", priority = 127 }
-# No
-# missing_asserts_for_indexing = { level = "deny", priority = 127 }
-# No
-# missing_docs_in_private_items = { level = "deny", priority = 127 }
-# Debatable, no for our code, yes for library
-# missing_inline_in_public_items = { level = "deny", priority = 127 }
-# On a per trait basis
-# missing_trait_methods = { level = "deny", priority = 127 }
 mixed_read_write_in_expression = { level = "deny", priority = 127 }
 mod_module_files = { level = "deny", priority = 127 }
 # Debatable
@@ -122,57 +105,32 @@ mutex_integer = { level = "deny", priority = 127 }
 needless_raw_strings = { level = "deny", priority = 127 }
 non_ascii_literal = { level = "deny", priority = 127 }
 non_zero_suggestions = { level = "deny", priority = 127 }
-# No
-# panic = { level = "deny", priority = 127 }
 panic_in_result_fn = { level = "deny", priority = 127 }
-partial_pub_fields = { level = "deny", priority = 127 }
-pathbuf_init_then_push = { level = "deny", priority = 127 }
+# Debatable
+# partial_pub_fields = { level = "deny", priority = 127 }
 pattern_type_mismatch = { level = "deny", priority = 127 }
-pointer_format = { level = "deny", priority = 127 }
 precedence_bits = { level = "deny", priority = 127 }
 # Debatable
 # print_stderr = { level = "deny", priority = 127 }
 # Debatable
 # print_stdout = { level = "deny", priority = 127 }
 pub_use = { level = "deny", priority = 127 }
-# No, conflicts with `pub_without_shorthand`
-# pub_with_shorthand = { level = "deny", priority = 127 }
 pub_without_shorthand = { level = "deny", priority = 127 }
-# No
-# question_mark_used = { level = "deny", priority = 127 }
 rc_buffer = { level = "deny", priority = 127 }
 rc_mutex = { level = "deny", priority = 127 }
 redundant_test_prefix = { level = "deny", priority = 127 }
-# No, conflicts with `let_underscore_untyped`
-# redundant_type_annotations = { level = "deny", priority = 127 }
-# No, conflicts with `pattern_type_mismatch`
-# ref_patterns = { level = "deny", priority = 127 }
 renamed_function_params = { level = "deny", priority = 127 }
 rest_pat_in_fully_bound_structs = { level = "deny", priority = 127 }
 return_and_then = { level = "deny", priority = 127 }
 # Debatable, need to think about it
 # same_name_method = { level = "deny", priority = 127 }
-# No, Conflicts with `mod_module_files`
-# self_named_module_files = { level = "deny", priority = 127 }
 semicolon_inside_block = { level = "deny", priority = 127 }
-# No
-# semicolon_outside_block = { level = "deny", priority = 127 }
-# No
-# separated_literal_suffix = { level = "deny", priority = 127 }
 # Debatable
 # shadow_reuse = { level = "deny", priority = 127 }
 # Debatable
 # shadow_same = { level = "deny", priority = 127 }
 # Debatable
 # shadow_unrelated = { level = "deny", priority = 127 }
-# No
-# single_call_fn = { level = "deny", priority = 127 }
-# No
-# single_char_lifetime_names = { level = "deny", priority = 127 }
-# Not here
-# std_instead_of_alloc = { level = "deny", priority = 127 }
-# Not here
-# std_instead_of_core = { level = "deny", priority = 127 }
 str_to_string = { level = "deny", priority = 127 }
 string_add = { level = "deny", priority = 127 }
 string_lit_chars_any = { level = "deny", priority = 127 }
@@ -191,16 +149,11 @@ unnecessary_self_imports = { level = "deny", priority = 127 }
 unneeded_field_pattern = { level = "deny", priority = 127 }
 # No, to signify invariants
 # unreachable = { level = "deny", priority = 127 }
-# Yes, conflicts with `separated_literal_suffix`
 unseparated_literal_suffix = { level = "deny", priority = 127 }
 unused_result_ok = { level = "deny", priority = 127 }
 unused_trait_names = { level = "deny", priority = 127 }
 # No, we separate fatal from recoverable
 # unwrap_in_result = { level = "deny", priority = 127 }
-# Debatable
-# unwrap_used = { level = "deny", priority = 127 }
-# Debatable, but no
-# use_debug = { level = "deny", priority = 127 }
 verbose_file_reads = { level = "deny", priority = 127 }
 wildcard_enum_match_arm = { level = "deny", priority = 127 }
 
@@ -232,10 +185,6 @@ uninlined-format-args = { level = "allow", priority = 127 }
 [lints.rust]
 let_underscore_drop = { level = "deny", priority = 127 }
 non_ascii_idents = { level = "deny", priority = 127 }
-
-[features]
-default = ["tokio-console"]
-tokio-console = ["dep:console-subscriber", "dep:tokio-console"]
 
 [dependencies]
 clap = { version = "4.5.41", features = ["derive"] }

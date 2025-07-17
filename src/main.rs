@@ -2,7 +2,7 @@ use std::env;
 use std::sync::Arc;
 use std::time::Duration;
 
-use clap::Parser;
+use clap::Parser as _;
 use color_eyre::eyre;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio::signal;
@@ -10,10 +10,10 @@ use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
 use tokio_util::task::TaskTracker;
 use tracing::{Level, event};
-use tracing_subscriber::Layer;
+use tracing_subscriber::Layer as _;
 use tracing_subscriber::filter::EnvFilter;
-use tracing_subscriber::layer::SubscriberExt;
-use tracing_subscriber::util::SubscriberInitExt;
+use tracing_subscriber::layer::SubscriberExt as _;
+use tracing_subscriber::util::SubscriberInitExt as _;
 
 use crate::dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::config::Config;
@@ -52,7 +52,6 @@ fn init_tracing() -> Result<(), eyre::Report> {
     Ok(tracing_subscriber::registry().with(layers).try_init()?)
 }
 
-#[expect(clippy::todo, reason = "Seed code")]
 fn main() -> Result<(), color_eyre::Report> {
     // set up .env
     // zenv::zenv!();
@@ -136,18 +135,24 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     #[cfg(target_os = "windows")]
     let sigterm = std::future::pending::<Result<(), std::io::Error>>();
 
-    tokio::select! {
-        // TODO ensure tasks are registered
-        _ = sigterm => {
-            event!(Level::WARN, "Sigterm detected, stopping all tasks");
-        },
-        _ = signal::ctrl_c() => {
-            event!(Level::WARN, "CTRL+C detected, stopping all tasks");
-        },
-        () = token.cancelled() => {
-            event!(Level::ERROR, "Underlying task stopped, stopping all others tasks");
-        },
-    };
+    #[expect(
+        clippy::pattern_type_mismatch,
+        reason = "Can't seem to fix this with tokio macro matching"
+    )]
+    {
+        tokio::select! {
+            // TODO ensure tasks are registered
+            _ = sigterm => {
+                event!(Level::WARN, "Sigterm detected, stopping all tasks");
+            },
+            _ = signal::ctrl_c() => {
+                event!(Level::WARN, "CTRL+C detected, stopping all tasks");
+            },
+            () = token.cancelled() => {
+                event!(Level::ERROR, "Underlying task stopped, stopping all others tasks");
+            },
+        };
+    }
 
     // catch all cancel in case we got here via something else than a cancel token
     token.cancel();

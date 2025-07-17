@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use std::convert::Into;
-use std::str::FromStr;
+use std::str::FromStr as _;
 
 use http_body_util::Empty;
 use hyper::body::{Body, Bytes};
@@ -26,7 +26,7 @@ pub fn build_request(
     )
 }
 
-#[expect(unused)]
+#[expect(unused, reason = "Library code")]
 pub fn build_request_with_body<B>(
     base: Uri,
     path_and_query: &str,
@@ -47,7 +47,7 @@ where
     )
 }
 
-#[expect(unused)]
+#[expect(unused, reason = "Library code")]
 pub fn build_request_with_headers<K>(
     base: Uri,
     path_and_query: &str,
@@ -88,6 +88,10 @@ where
 
     let request_headers = request.headers_mut();
 
+    #[expect(
+        clippy::iter_over_hash_type,
+        reason = "We're moving, don't care about sort order"
+    )]
     for (k, v) in headers {
         request_headers.insert(k, v);
     }

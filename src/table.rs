@@ -116,10 +116,14 @@ impl AuthorityWrapper {
 
         if let Some(v) = records.remove(&old_key) {
             for record in v.records_without_rrsigs() {
-                if let Some(a) = record.data().as_a() {
+                let data = record.data();
+
+                if let Some(a) = data.as_a() {
                     ips.push(a.0.into());
-                } else if let Some(aaaa) = record.data().as_aaaa() {
+                } else if let Some(aaaa) = data.as_aaaa() {
                     ips.push(aaaa.0.into());
+                } else {
+                    // we only care about A & AAAA
                 }
             }
         } else {

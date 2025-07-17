@@ -1,4 +1,4 @@
-#[cfg_attr(not(test), expect(dead_code))]
+#[cfg_attr(not(test), expect(dead_code, reason = "Only used in test"))]
 pub(crate) fn build(autoheal_container_label: &str) -> serde_json::Value {
     let mut json = serde_json::Map::<String, serde_json::Value>::from_iter([(
         "health".into(),
@@ -20,14 +20,14 @@ mod tests {
     use crate::filters::build;
 
     #[test]
-    fn test_build_filters_all() {
+    fn build_filters_all() {
         let all_unhealthy = build("all");
 
         assert_eq!(all_unhealthy, json!({ "health": ["unhealthy"] }));
     }
 
     #[test]
-    fn test_build_filters_autoheal() {
+    fn build_filters_autoheal() {
         let autoheal_and_unhealthy = build("autoheal");
 
         assert_eq!(
@@ -37,7 +37,7 @@ mod tests {
     }
 
     #[test]
-    fn test_build_filters_custom() {
+    fn build_filters_custom() {
         let custom_and_unhealthy = build("custom");
 
         assert_eq!(
