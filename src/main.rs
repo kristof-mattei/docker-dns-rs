@@ -52,6 +52,7 @@ fn init_tracing() -> Result<(), eyre::Report> {
     Ok(tracing_subscriber::registry().with(layers).try_init()?)
 }
 
+#[expect(clippy::todo, reason = "Seed code")]
 fn main() -> Result<(), color_eyre::Report> {
     // set up .env
     // zenv::zenv!();
