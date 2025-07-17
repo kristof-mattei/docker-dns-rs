@@ -1,17 +1,17 @@
 use std::time::Duration;
 
-use color_eyre::Section;
+use color_eyre::Section as _;
 use color_eyre::eyre::Report;
 #[cfg(not(target_os = "windows"))]
 use http::Uri;
-use http_body_util::BodyExt;
+use http_body_util::BodyExt as _;
 use hyper::body::Incoming;
 use hyper::{Method, Response};
 use hyper_tls::HttpsConnector;
 #[cfg(not(target_os = "windows"))]
 use hyper_unix_socket::UnixSocketConnector;
 use tokio::time::timeout;
-use tokio_util::bytes::Buf;
+use tokio_util::bytes::Buf as _;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
@@ -34,9 +34,9 @@ impl Daemon {
         path_and_query: &str,
         method: Method,
     ) -> Result<Response<Incoming>, color_eyre::Report> {
-        match &self.config.endpoint {
+        match self.config.endpoint {
             Endpoint::Direct {
-                url,
+                ref url,
                 timeout_milliseconds,
             } => {
                 let connector = HttpsConnector::new();
@@ -44,14 +44,14 @@ impl Daemon {
 
                 let response = execute_request(connector, request);
 
-                match timeout(Duration::from_millis(*timeout_milliseconds), response).await {
+                match timeout(Duration::from_millis(timeout_milliseconds), response).await {
                     Ok(Ok(o)) => Ok(o),
                     Ok(Err(e)) => Err(e),
                     Err(e) => Err(e.into()),
                 }
             },
             #[cfg(not(target_os = "windows"))]
-            Endpoint::Socket(socket) => {
+            Endpoint::Socket(ref socket) => {
                 let connector = UnixSocketConnector::new(socket.clone());
 
                 let request =
@@ -104,11 +104,17 @@ impl Daemon {
 
         // Inspired by https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
         loop {
-            let frame = tokio::select! {
-                frame = response.frame() => frame,
-                () = token.cancelled() => {
-                    return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
-                },
+            #[expect(
+                clippy::pattern_type_mismatch,
+                reason = "Can't seem to fix this with tokio macro matching"
+            )]
+            let frame = {
+                tokio::select! {
+                    frame = response.frame() => frame,
+                    () = token.cancelled() => {
+                        return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
+                    },
+                }
             };
 
             let frame = match frame {

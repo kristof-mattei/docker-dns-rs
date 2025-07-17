@@ -1,0 +1,8 @@
+absolute-paths-allowed-crates = [
+    "color_eyre",
+    "hyper",
+    "hickory_server",
+    "std",
+    "tracing_subscriber",
+    "tokio",
+]

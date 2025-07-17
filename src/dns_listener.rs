@@ -23,19 +23,25 @@ pub async fn set_up_dns_server(
     dns_listener.register_socket(udp_socket);
     dns_listener.register_listener(tcp_listener, Duration::from_secs(1));
 
-    tokio::select! {
-        r = dns_listener.block_until_done() => {
-            event!(Level::INFO, "DNS Server ended");
+    #[expect(
+        clippy::pattern_type_mismatch,
+        reason = "Can't seem to fix this with tokio macro matching"
+    )]
+    {
+        tokio::select! {
+               r = dns_listener.block_until_done() => {
+                   event!(Level::INFO, "DNS Server ended");
 
-            handle_server_shutdown(r);
-        },
-        () = token.cancelled() => {
-            event!(Level::INFO, "DNS Server cancelled externally");
+                   handle_server_shutdown(r);
+               },
+               () = token.cancelled() => {
+                   event!(Level::INFO, "DNS Server cancelled externally");
 
-            handle_server_shutdown(dns_listener.shutdown_gracefully().await);
+                   handle_server_shutdown(dns_listener.shutdown_gracefully().await);
 
-        }
-    };
+               }
+        };
+    }
 }
 
 pub async fn set_up_authority(domain: Name) -> Result<InMemoryAuthority, color_eyre::Report> {
@@ -63,7 +69,7 @@ pub async fn set_up_authority(domain: Name) -> Result<InMemoryAuthority, color_e
     Ok(imo)
 }
 
-pub fn set_up_catalog(domain: impl Into<LowerName>, authority: Arc<InMemoryAuthority>) -> Catalog {
+pub fn set_up_catalog<I: Into<LowerName>>(domain: I, authority: Arc<InMemoryAuthority>) -> Catalog {
     let mut catalog = Catalog::new();
 
     catalog.upsert(domain.into(), vec![authority]);

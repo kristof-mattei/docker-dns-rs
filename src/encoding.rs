@@ -1,4 +1,4 @@
-#[cfg_attr(not(test), expect(dead_code))]
+#[cfg_attr(not(test), expect(dead_code, reason = "Only used in tests"))]
 pub(crate) fn url_encode(filter: &serde_json::Value) -> String {
     percent_encoding::percent_encode(
         (filter).to_string().as_bytes(),
@@ -13,7 +13,7 @@ mod tests {
     use crate::filters::build;
 
     #[test]
-    fn test_build_decode_all() {
+    fn build_decode_all() {
         let all_unhealthy = build("all");
 
         let all_unhealthy_encoded = url_encode(&all_unhealthy);
@@ -25,7 +25,7 @@ mod tests {
     }
 
     #[test]
-    fn test_build_decode_autoheal() {
+    fn build_decode_autoheal() {
         let autoheal_and_unhealthy = build("autoheal");
 
         let autoheal_and_unhealthy_encoded = url_encode(&autoheal_and_unhealthy);
@@ -37,7 +37,7 @@ mod tests {
     }
 
     #[test]
-    fn test_build_decode_custom() {
+    fn build_decode_custom() {
         let custom_and_unhealthy = build("custom");
 
         let custom_and_unhealthy_encoded = url_encode(&custom_and_unhealthy);

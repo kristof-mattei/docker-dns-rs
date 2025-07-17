@@ -7,8 +7,8 @@ use tokio::sync::mpsc::Receiver;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
-use crate::docker::Event;
 use crate::docker::daemon::Daemon;
+use crate::docker::{Event, EventType};
 use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
@@ -187,22 +187,28 @@ impl Monitor {
 
     pub async fn consume_events(&self, mut receiver: Receiver<Event>, token: &CancellationToken) {
         loop {
-            let event = tokio::select! {
-                () = token.cancelled() => {
-                    event!(Level::INFO, "Listener cancelled");
-                    break;
-                },
-                r = receiver.recv() => {
-                    let Some(event) = r else {
-                        event!(Level::INFO, "Channel closed / dropped");
+            #[expect(
+                clippy::pattern_type_mismatch,
+                reason = "Can't seem to fix this with tokio macro matching"
+            )]
+            let event = {
+                tokio::select! {
+                    () = token.cancelled() => {
+                        event!(Level::INFO, "Listener cancelled");
                         break;
-                    };
+                    },
+                    r = receiver.recv() => {
+                        let Some(event) = r else {
+                            event!(Level::INFO, "Channel closed / dropped");
+                            break;
+                        };
 
-                    event
+                        event
+                    }
                 }
             };
 
-            if let crate::docker::EventType::Container = event.r#type {
+            if let EventType::Container = event.r#type {
                 match event.action.as_str() {
                     "start" => self.handle_start(&event).await,
                     "rename" => self.handle_rename(&event).await,
