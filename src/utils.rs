@@ -5,7 +5,6 @@ use tokio::task::JoinHandle;
 
 pub mod env;
 
-#[expect(dead_code, reason = "Unused")]
 /// Use this when you have a `JoinHandle<Result<T, E>>`
 /// and you want to use it with `tokio::try_join!`
 /// when the task completes with an `Result::Err`
@@ -14,6 +13,7 @@ pub mod env;
 /// `Result::Ok(T)` when both the join-handle AND
 /// the result of the inner function are `Result::Ok`, and `Result::Err`
 /// when either the join failed, or the inner task failed
+#[expect(unused, reason = "Library Code")]
 pub(crate) async fn flatten_handle<T, E>(
     handle: JoinHandle<Result<T, E>>,
 ) -> Result<T, eyre::Report>

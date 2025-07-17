@@ -28,7 +28,7 @@ where
     }
 }
 
-#[expect(dead_code, reason = "Unused")]
+#[expect(unused, reason = "Library Code")]
 pub fn try_parse_optional_env_variable<T>(
     env_variable_name: &str,
 ) -> Result<Option<T>, eyre::Report>
@@ -84,7 +84,7 @@ where
     }
 }
 
-#[expect(dead_code, reason = "Unused")]
+#[expect(unused, reason = "Library Code")]
 pub fn get_env_as_url(key: &str) -> Result<Uri, eyre::Report> {
     let value = std::env::var(key)?;
 

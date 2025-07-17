@@ -1,4 +1,4 @@
-#[cfg_attr(not(test), expect(dead_code, reason = "Only used in tests"))]
+#[cfg_attr(not(test), expect(unused, reason = "Only used in tests"))]
 pub(crate) fn url_encode(filter: &serde_json::Value) -> String {
     percent_encoding::percent_encode(
         (filter).to_string().as_bytes(),

@@ -1,4 +1,4 @@
-#[cfg_attr(not(test), expect(dead_code, reason = "Only used in test"))]
+#[cfg_attr(not(test), expect(unused, reason = "Only used in test"))]
 pub(crate) fn build(autoheal_container_label: &str) -> serde_json::Value {
     let mut json = serde_json::Map::<String, serde_json::Value>::from_iter([(
         "health".into(),
