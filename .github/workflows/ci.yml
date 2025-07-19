@@ -619,7 +619,6 @@ jobs:
           # which will fail All Done
           exit 1
 
-
   cargo-clippy-and-report:
     name: Cargo clippy (and report)
     runs-on: ubuntu-latest
