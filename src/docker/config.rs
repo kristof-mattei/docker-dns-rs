@@ -44,7 +44,10 @@ impl Config {
             }
         } else {
             #[cfg(target_os = "windows")]
-            panic!("Unix Sockets are not supported in Windows");
+            return Err(eyre::Report::msg(format!(
+                "On Windows, you can connect to docker with tcp. You tried to connect with \"{}\"",
+                docker_socket_or_uri
+            )));
 
             // we're connecting over a socket, so the uri is localhost
             #[cfg(not(target_os = "windows"))]

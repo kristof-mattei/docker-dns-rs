@@ -204,7 +204,7 @@ jobs:
           cargo build --all-features --all-targets --locked --workspace --verbose
 
   cargo-build-windows:
-    name: Cargo build
+    name: Cargo build Windows
     runs-on: windows-latest
     needs:
       - changes
@@ -469,7 +469,7 @@ jobs:
           exit 1
 
   cargo-test-and-report-windows:
-    name: Cargo test (and report)
+    name: Cargo test (and report) Windows
     runs-on: windows-latest
     permissions:
       checks: write
@@ -669,7 +669,7 @@ jobs:
           args: --all-features --all-targets --locked --workspace --verbose
 
   cargo-clippy-and-report-windows:
-    name: Cargo clippy (and report)
+    name: Cargo clippy (and report) Windows
     runs-on: windows-latest
     needs:
       - changes
