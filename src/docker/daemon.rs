@@ -7,7 +7,7 @@ use http::Uri;
 use http_body_util::BodyExt as _;
 use hyper::body::Incoming;
 use hyper::{Method, Response};
-use hyper_tls::HttpsConnector;
+use hyper_rustls::HttpsConnectorBuilder;
 #[cfg(not(target_os = "windows"))]
 use hyper_unix_socket::UnixSocketConnector;
 use tokio::time::timeout;
@@ -39,7 +39,12 @@ impl Daemon {
                 ref url,
                 timeout_milliseconds,
             } => {
-                let connector = HttpsConnector::new();
+                let connector = HttpsConnectorBuilder::new()
+                    .with_native_roots()?
+                    .https_or_http()
+                    .enable_http1()
+                    .build();
+
                 let request = build_request(url.clone(), path_and_query, method)?;
 
                 let response = execute_request(connector, request);
