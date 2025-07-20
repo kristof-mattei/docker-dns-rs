@@ -5,7 +5,7 @@ pub mod daemon;
 pub mod monitor;
 
 #[derive(serde::Deserialize, Debug)]
-#[expect(dead_code, reason = "Unused, for now")]
+#[expect(unused, reason = "Unused, for now")]
 pub struct Event {
     #[serde(rename(deserialize = "Type"))]
     r#type: EventType,
