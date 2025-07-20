@@ -203,6 +203,61 @@ jobs:
         run: |
           cargo build --all-features --all-targets --locked --workspace --verbose
 
+  cargo-build-windows:
+    name: Cargo build Windows
+    runs-on: windows-latest
+    needs:
+      - changes
+    if: |
+      github.event_name == 'pull_request' &&
+      fromJSON(needs.changes.outputs.code) == true
+    steps:
+      - name: Disable autocrlf
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          show-progress: false
+
+      - name: Cache dependencies
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        env:
+          CACHE_NAME: cargo-cache-dependencies
+        with:
+          path: |
+            ~/.cargo
+            ./target
+          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-build
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
+            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-
+
+      - name: Set up mold
+        uses: rui314/setup-mold@85c79d00377f0d32cdbae595a46de6f7c2fa6599 # v1
+
+      - name: Set up toolchain
+        shell: pwsh
+        run: |
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/cargo-fmt.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rust-analyzer.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rustfmt.exe
+
+          rustup self update
+          rustup update
+          rustup show active-toolchain || rustup toolchain install
+          rustup show
+
+          cargo --version
+
+      - name: Build
+        shell: pwsh
+        run: |
+          cargo build --all-features --all-targets --locked --workspace --verbose
+
   cargo-fmt:
     name: Cargo fmt
     runs-on: ubuntu-latest
@@ -359,7 +414,7 @@ jobs:
       - name: Upload test results
         uses: EnricoMi/publish-unit-test-result-action@3a74b2957438d0b6e2e61d67b05318aa25c9e6c6 # v2.20.0
         with:
-          check_name: Test results
+          check_name: Test results Linux
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             reports/results.xml
@@ -383,7 +438,9 @@ jobs:
           disable_search: true
           disable_telem: true
           fail_ci_if_error: true
+          flags: linux
           files: reports/lcov.info
+          name: test-linux
           plugins: ""
           use_oidc: true
 
@@ -394,11 +451,164 @@ jobs:
           # doesn't exist here... yet
           # disable_telem: true
           fail_ci_if_error: true
+          flags: linux
           files: reports/results.xml
+          name: test-linux
           use_oidc: true
 
       - name: Fail if tests failed
         shell: bash
+        if: |
+          steps.tests.outcome != 'success'
+        run: |
+          # the test reporter we use (or any for that matter)
+          # all show a report. But we cannot depend on that report because
+          # we don't know which subsection it belongs in GitHub
+          # so we explicitly fail this one
+          # which will fail All Done
+          exit 1
+
+  cargo-test-and-report-windows:
+    name: Cargo test (and report) Windows
+    runs-on: windows-latest
+    permissions:
+      checks: write
+      id-token: write
+      pull-requests: write
+    steps:
+      - name: Disable autocrlf
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          show-progress: false
+
+      - name: Cache dependencies
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        env:
+          CACHE_NAME: cargo-cache-dependencies
+        with:
+          path: |
+            ~/.cargo
+            ./target
+          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-test
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
+            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-
+
+      - name: Set up mold
+        uses: rui314/setup-mold@85c79d00377f0d32cdbae595a46de6f7c2fa6599 # v1
+
+      - name: Set up toolchain
+        shell: pwsh
+        run: |
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/cargo-fmt.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rust-analyzer.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rustfmt.exe
+
+          rustup self update
+          rustup update
+          rustup show active-toolchain || rustup toolchain install
+          rustup show
+
+          cargo --version
+
+      - name: Install llvm-tools
+        shell: pwsh
+        run: |
+          rustup component add llvm-tools
+
+          # restore symlinks
+          rustup update
+
+      - name: Get binstall
+        shell: pwsh
+        working-directory: ${{ env.TEMP }}
+        run: |
+          $archive="cargo-binstall-x86_64-pc-windows-msvc.zip"
+          Invoke-WebRequest "https://github.com/cargo-bins/cargo-binstall/releases/latest/download/${archive}" -OutFile "${archive}"
+
+          Expand-Archive  "./${archive}" -DestinationPath .
+
+          Remove-Item -ErrorAction SilentlyContinue "./${archive}"
+
+          Move-Item -Force ./cargo-binstall.exe ~/.cargo/bin/
+
+      - name: Install nextest, custom test runner, with native support for junit and grcov
+        shell: pwsh
+        run: |
+          cargo binstall --no-confirm cargo-nextest grcov
+
+      - name: Build with instrumentation support
+        shell: pwsh
+        env:
+          RUSTFLAGS: "${{ env.RUSTFLAGS }} --allow=warnings -Cinstrument-coverage"
+          # build-* ones are not parsed by grcov
+          LLVM_PROFILE_FILE: "profiling/build-%p-%m.profraw"
+        run: |
+          cargo build --all-features --all-targets --locked --workspace --verbose
+
+      - name: Run nextest
+        shell: pwsh
+        id: tests
+        env:
+          RUSTFLAGS: "${{ env.RUSTFLAGS }} --allow=warnings -Cinstrument-coverage"
+          LLVM_PROFILE_FILE: "profiling/profile-%p-%m.profraw"
+        run: |
+          cargo nextest run --profile ci --no-fail-fast --all-targets --all-features --workspace
+        continue-on-error: true
+
+      - name: Upload test results
+        uses: EnricoMi/publish-unit-test-result-action/windows@3a74b2957438d0b6e2e61d67b05318aa25c9e6c6 # v2.20.0
+        with:
+          check_name: Test results Windows
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            reports/results.xml
+
+      - name: Run grcov
+        shell: pwsh
+        run: |
+          grcov $(Get-ChildItem -Recurse -Filter '*.profraw' -Path . | % { $_.FullName }) `
+            --binary-path ./target/debug/ `
+            --branch `
+            --ignore-not-existing `
+            --keep-only "src/**" `
+            --llvm `
+            --output-path ./reports/lcov.info `
+            --output-type lcov `
+            --source-dir .
+
+      - name: Upload coverage results (to Codecov.io)
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
+        with:
+          disable_search: true
+          disable_telem: true
+          fail_ci_if_error: true
+          flags: windows
+          files: reports/lcov.info
+          name: test-windows
+          plugins: ""
+          use_oidc: true
+
+      - name: Upload test results to Codecov
+        uses: codecov/test-results-action@47f89e9acb64b76debcd5ea40642d25a4adced9f # v1.1.1
+        with:
+          disable_search: true
+          # doesn't exist here... yet
+          # disable_telem: true
+          fail_ci_if_error: true
+          flags: windows
+          files: reports/results.xml
+          name: test-windows
+          use_oidc: true
+
+      - name: Fail if tests failed
+        shell: pwsh
         if: |
           steps.tests.outcome != 'success'
         run: |
@@ -445,6 +655,61 @@ jobs:
           rm ${HOME}/.cargo/bin/cargo-fmt
           rm ${HOME}/.cargo/bin/rust-analyzer
           rm ${HOME}/.cargo/bin/rustfmt
+
+          rustup self update
+          rustup update
+          rustup show active-toolchain || rustup toolchain install
+          rustup show
+
+          cargo --version
+
+      - name: Run Clippy for GitHub Actions report
+        uses: actions-rs-plus/clippy-check@fe8905c5766416f0593a503a2230a7c83141a8f0 # v2.3.0
+        with:
+          args: --all-features --all-targets --locked --workspace --verbose
+
+  cargo-clippy-and-report-windows:
+    name: Cargo clippy (and report) Windows
+    runs-on: windows-latest
+    needs:
+      - changes
+    if: |
+      github.event_name == 'pull_request' &&
+      fromJSON(needs.changes.outputs.code) == true
+    steps:
+      - name: Disable autocrlf
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          show-progress: false
+
+      - name: Cache dependencies
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        env:
+          CACHE_NAME: cargo-cache-dependencies
+        with:
+          path: |
+            ~/.cargo
+            ./target
+          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-clippy
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
+            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-
+
+      - name: Set up mold
+        uses: rui314/setup-mold@85c79d00377f0d32cdbae595a46de6f7c2fa6599 # v1
+
+      - name: Set up toolchain
+        shell: pwsh
+        run: |
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/cargo-fmt.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rust-analyzer.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rustfmt.exe
 
           rustup self update
           rustup update
@@ -656,7 +921,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       registry:
-        image: registry:3@sha256:45fbac229389d0ee0d2ba80c92df8a2bd5896f51950b6070b6f92e8009955268
+        image: registry:3@sha256:3725021071ec9383eb3d87ddbdff9ed602439b3f7c958c9c2fb941049ea6531d
         ports:
           - 5000:5000
     permissions:
@@ -790,9 +1055,12 @@ jobs:
     needs:
       - calculate-version
       - cargo-build
+      - cargo-build-windows
       - cargo-clippy-and-report
+      - cargo-clippy-and-report-windows
       - cargo-fmt
       - cargo-test-and-report
+      - cargo-test-and-report-windows
       - docker-build
       - docker-publish
     if: |
