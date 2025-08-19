@@ -9,7 +9,8 @@ dpkg_add_arch() {
     apt-get --no-install-recommends install --yes \
         binutils-$2-linux-gnu \
         gcc-$2-linux-gnu \
-        g++-$2-linux-gnu
+        g++-$2-linux-gnu \
+        musl-tools:$1
 }
 
 case $TARGET in
