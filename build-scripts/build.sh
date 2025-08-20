@@ -7,13 +7,21 @@ cpp_compiler="g++"
 rust_flags="-Clink-self-contained=yes -Clinker=rust-lld"
 
 case $TARGET in
-    x86_64-unknown-linux-*)
+    x86_64-unknown-linux-musl)
         c_compiler="x86_64-linux-musl-gcc"
         cpp_compiler="x86_64-linux-musl-g++"
         ;;
-    aarch64-unknown-linux-*)
+    aarch64-unknown-linux-musl)
         c_compiler="aarch64-linux-musl-gcc"
         cpp_compiler="aarch64-linux-musl-g++"
+        ;;
+    x86_64-unknown-linux-gnu)
+        c_compiler="x86_64-linux-gnu-gcc"
+        cpp_compiler="x86_64-linux-gnu-g++"
+        ;;
+    aarch64-unknown-linux-gnu)
+        c_compiler="aarch64-linux-gnu-gcc"
+        cpp_compiler="aarch64-linux-gnu-g++"
         ;;
     *)
         echo "INVALID CONFIGURATION"
