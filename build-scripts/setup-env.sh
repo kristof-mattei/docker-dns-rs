@@ -7,9 +7,6 @@ dpkg_add_arch() {
     fi
     apt-get update
     apt-get --no-install-recommends install --yes \
-        binutils-$2-linux-gnu \
-        gcc-$2-linux-gnu \
-        g++-$2-linux-gnu \
         musl-tools:$1
 }
 
