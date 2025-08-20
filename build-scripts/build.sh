@@ -15,14 +15,6 @@ case $TARGET in
         c_compiler="aarch64-linux-musl-gcc"
         cpp_compiler="aarch64-linux-musl-g++"
         ;;
-    x86_64-unknown-linux-gnu)
-        c_compiler="x86_64-linux-gnu-gcc"
-        cpp_compiler="x86_64-linux-gnu-g++"
-        ;;
-    aarch64-unknown-linux-gnu)
-        c_compiler="aarch64-linux-gnu-gcc"
-        cpp_compiler="aarch64-linux-gnu-g++"
-        ;;
     *)
         echo "INVALID CONFIGURATION"
         exit 1

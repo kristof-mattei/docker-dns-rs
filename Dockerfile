@@ -17,10 +17,10 @@ RUN --mount=type=cache,id=apt-cache,target=/var/cache/apt,sharing=locked \
         musl-dev
 
 FROM rust-base AS rust-linux-amd64
-ARG TARGET=x86_64-unknown-linux-gnu
+ARG TARGET=x86_64-unknown-linux-musl
 
 FROM rust-base AS rust-linux-arm64
-ARG TARGET=aarch64-unknown-linux-gnu
+ARG TARGET=aarch64-unknown-linux-musl
 
 FROM rust-${TARGETPLATFORM//\//-} AS rust-cargo-build
 
