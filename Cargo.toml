@@ -44,7 +44,7 @@ tokio-console = { version = "0.1.13", optional = true }
 tokio-util = { version = "0.7.16", features = ["rt"] }
 tracing = "0.1.41"
 tracing-error = "0.2.1"
-tracing-subscriber = { version = "0.3.19", features = [
+tracing-subscriber = { version = "0.3.20", features = [
     "env-filter",
     "time",
     "tracing-log",
