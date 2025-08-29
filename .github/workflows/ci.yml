@@ -238,7 +238,9 @@ jobs:
 
       - *checkout
 
-      - *cache_dependencies
+      - *cache_cargo
+
+      - *cache_target
 
       - *set_up_mold
 
@@ -414,7 +416,9 @@ jobs:
 
       - *checkout
 
-      - *cache_dependencies
+      - *cache_cargo
+
+      - *cache_target
 
       - *set_up_mold
 
@@ -559,7 +563,9 @@ jobs:
 
       - *checkout
 
-      - *cache_dependencies
+      - *cache_cargo
+
+      - *cache_target
 
       - *set_up_mold
 
