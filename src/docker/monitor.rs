@@ -187,24 +187,18 @@ impl Monitor {
 
     pub async fn consume_events(&self, mut receiver: Receiver<Event>, token: &CancellationToken) {
         loop {
-            #[expect(
-                clippy::pattern_type_mismatch,
-                reason = "Can't seem to fix this with tokio macro matching"
-            )]
-            let event = {
-                tokio::select! {
-                    () = token.cancelled() => {
-                        event!(Level::INFO, "Listener cancelled");
+            let event = tokio::select! {
+                () = token.cancelled() => {
+                    event!(Level::INFO, "Listener cancelled");
+                    break;
+                },
+                r = receiver.recv() => {
+                    let Some(event) = r else {
+                        event!(Level::INFO, "Channel closed / dropped");
                         break;
-                    },
-                    r = receiver.recv() => {
-                        let Some(event) = r else {
-                            event!(Level::INFO, "Channel closed / dropped");
-                            break;
-                        };
+                    };
 
-                        event
-                    }
+                    event
                 }
             };
 
