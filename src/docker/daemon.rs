@@ -109,17 +109,11 @@ impl Daemon {
 
         // Inspired by https://github.com/EmbarkStudios/wasmtime/blob/056ccdec94f89d00325970d1239429a1b39ec729/crates/wasi-http/src/http_impl.rs#L246-L268
         loop {
-            #[expect(
-                clippy::pattern_type_mismatch,
-                reason = "Can't seem to fix this with tokio macro matching"
-            )]
-            let frame = {
-                tokio::select! {
-                    frame = response.frame() => frame,
-                    () = token.cancelled() => {
-                        return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
-                    },
-                }
+            let frame = tokio::select! {
+                frame = response.frame() => frame,
+                () = token.cancelled() => {
+                    return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
+                },
             };
 
             let frame = match frame {

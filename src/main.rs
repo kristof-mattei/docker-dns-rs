@@ -4,8 +4,8 @@ use std::time::Duration;
 
 use clap::Parser as _;
 use color_eyre::eyre;
+mod signal_handlers;
 use tokio::net::{TcpListener, UdpSocket};
-use tokio::signal;
 use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
 use tokio_util::task::TaskTracker;
@@ -129,29 +129,31 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         });
     }
 
-    #[cfg(not(target_os = "windows"))]
-    let sigterm = utils::wait_for_sigterm();
-
-    #[cfg(target_os = "windows")]
-    let sigterm = std::future::pending::<Result<(), std::io::Error>>();
-
-    #[expect(
-        clippy::pattern_type_mismatch,
-        reason = "Can't seem to fix this with tokio macro matching"
-    )]
-    {
-        tokio::select! {
-            // TODO ensure tasks are registered
-            _ = sigterm => {
+    // now we wait forever for either
+    // * SIGTERM
+    // * ctrl + c (SIGINT)
+    // * a message on the shutdown channel, sent either by the server task or
+    // another task when they complete (which means they failed)
+    tokio::select! {
+        result = signal_handlers::wait_for_sigterm() => {
+            if let Err(error) = result {
+                event!(Level::ERROR, ?error, "Failed to register SIGERM handler, aborting");
+            } else {
+                // we completed because ...
                 event!(Level::WARN, "Sigterm detected, stopping all tasks");
-            },
-            _ = signal::ctrl_c() => {
+            }
+        },
+        result = signal_handlers::wait_for_sigint() => {
+            if let Err(error) = result {
+                event!(Level::ERROR, ?error, "Failed to register CTRL+C handler, aborting");
+            } else {
+                // we completed because ...
                 event!(Level::WARN, "CTRL+C detected, stopping all tasks");
-            },
-            () = token.cancelled() => {
-                event!(Level::ERROR, "Underlying task stopped, stopping all others tasks");
-            },
-        };
+            }
+        },
+        () = token.cancelled() => {
+            event!(Level::WARN, "Underlying task stopped, stopping all others tasks");
+        },
     }
 
     // catch all cancel in case we got here via something else than a cancel token
