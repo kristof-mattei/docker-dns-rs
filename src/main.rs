@@ -73,6 +73,22 @@ fn main() -> Result<(), color_eyre::Report> {
 async fn start_tasks() -> Result<(), color_eyre::Report> {
     let args = args::Args::parse();
 
+    let name = env!("CARGO_PKG_NAME");
+    let version = env!("CARGO_PKG_VERSION");
+
+    event!(
+        Level::INFO,
+        "{} v{} - built for {}-{}",
+        name,
+        version,
+        std::env::var("TARGETARCH")
+            .as_deref()
+            .unwrap_or("unknown-arch"),
+        std::env::var("TARGETVARIANT")
+            .as_deref()
+            .unwrap_or("base variant")
+    );
+
     // DNS
     let authority = Arc::new(set_up_authority(args.domain.clone()).await?);
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&authority));
