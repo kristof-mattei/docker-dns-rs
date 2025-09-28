@@ -53,6 +53,9 @@ tracing-subscriber = { version = "0.3.20", features = [
 [target.'cfg(not(target_os = "windows"))'.dependencies]
 hyper-unix-socket = "0.3.0"
 
+[package.metadata.cargo-machete]
+ignored = ["tokio-console"]
+
 [lints.clippy]
 # don't stop from compiling / running
 all = "warn"
