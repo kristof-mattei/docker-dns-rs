@@ -31,6 +31,9 @@ mod models;
 mod table;
 mod utils;
 
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 fn init_tracing() -> Result<(), eyre::Report> {
     let main_filter = EnvFilter::builder().parse(
         env::var(EnvFilter::DEFAULT_ENV)
