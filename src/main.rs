@@ -1,3 +1,4 @@
+mod build_env;
 use std::env;
 use std::sync::Arc;
 use std::time::Duration;
@@ -15,6 +16,7 @@ use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 
+use crate::build_env::get_build_env;
 use crate::dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::config::Config;
 use crate::docker::daemon::Daemon;
@@ -73,24 +75,26 @@ fn main() -> Result<(), color_eyre::Report> {
     rt.block_on(start_tasks())
 }
 
-async fn start_tasks() -> Result<(), color_eyre::Report> {
-    let args = args::Args::parse();
+fn print_header() {
+    const NAME: &str = env!("CARGO_PKG_NAME");
+    const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-    let name = env!("CARGO_PKG_NAME");
-    let version = env!("CARGO_PKG_VERSION");
+    let build_env = get_build_env();
 
     event!(
         Level::INFO,
-        "{} v{} - built for {}-{}",
-        name,
-        version,
-        std::env::var("TARGETARCH")
-            .as_deref()
-            .unwrap_or("unknown-arch"),
-        std::env::var("TARGETVARIANT")
-            .as_deref()
-            .unwrap_or("base variant")
+        "{} v{} - built for {} ({})",
+        NAME,
+        VERSION,
+        build_env.get_target(),
+        build_env.get_target_cpu().unwrap_or("base cpu variant"),
     );
+}
+
+async fn start_tasks() -> Result<(), color_eyre::Report> {
+    let args = args::Args::parse();
+
+    print_header();
 
     // DNS
     let authority = Arc::new(set_up_authority(args.domain.clone()).await?);

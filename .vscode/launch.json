@@ -5,22 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug executable 'docker-dns-rs'",
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'docker-dns-rs'",
             "cargo": {
-                "args": [
-                    "build",
-                    "--bin=docker-dns-rs",
-                    "--package=docker-dns-rs"
-                ],
-                "filter": {
-                    "name": "docker-dns-rs",
-                    "kind": "bin"
-                }
+                "args": ["run", "--bin=docker-dns-rs"]
             },
             "args": [],
-            "cwd": "${workspaceFolder}",
             "env": {
                 // "DOCKER_SOCK": "tcp://0.0.0.0:2375",
                 "RUST_BACKTRACE": "1",
@@ -30,23 +21,12 @@
             "terminal": "integrated"
         },
         {
+            "name": "Debug unit tests in executable 'docker-dns-rs'",
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'docker-dns-rs'",
             "cargo": {
-                "args": [
-                    "test",
-                    "--no-run",
-                    "--bin=docker-dns-rs",
-                    "--package=docker-dns-rs"
-                ],
-                "filter": {
-                    "name": "docker-dns-rs",
-                    "kind": "bin"
-                }
+                "args": ["test", "--bin=docker-dns-rs"]
             },
-            "args": [],
-            "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
                 "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
@@ -55,23 +35,12 @@
             "terminal": "integrated"
         },
         {
+            "name": "Debug integration test 'integration_tests'",
             "type": "lldb",
             "request": "launch",
-            "name": "Debug integration test 'integration_tests'",
             "cargo": {
-                "args": [
-                    "test",
-                    "--no-run",
-                    "--test=integration_tests",
-                    "--package=docker-dns-rs"
-                ],
-                "filter": {
-                    "name": "integration_tests",
-                    "kind": "test"
-                }
+                "args": ["test", "--test=integration_tests"]
             },
-            "args": [],
-            "cwd": "${workspaceFolder}",
             "env": {
                 "RUST_BACKTRACE": "1",
                 "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
