@@ -1,46 +1,21 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Publish crate
+name: Machete
 
 on:
   push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
-
-concurrency:
-  group: "${{ github.workflow }}"
-  cancel-in-progress: false # last one must win in case of multiple releases
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
-  repo-has-crate:
-    name: Repo publishes crate?
+  machete:
+    name: Machete
     runs-on: ubuntu-latest
-    outputs:
-      has_crate: ${{ steps.determine.outputs.has_crate }}
-
-    steps:
-      - name: Repo has crate?
-        id: determine
-        shell: bash
-        run: |
-          has_crate="${{ vars.HAS_CRATE }}"
-          echo "has_crate=${has_crate:-false}" >> ${GITHUB_OUTPUT}
-
-  publish-crate:
-    name: Publish crate
-    runs-on: ubuntu-latest
-    environment: release
-    permissions:
-      id-token: write
-    needs:
-      - repo-has-crate
-    if: |
-      fromJSON(needs.repo-has-crate.outputs.has_crate) == true
     steps:
       - name: Checkout
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
@@ -59,14 +34,10 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          # notice the `docker-build` suffix, so that it will use the same cache
-          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-docker-build
+          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-cargo-machete
           restore-keys: |
             ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
             ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-
-
-      - name: Set up mold
-        uses: rui314/setup-mold@725a8794d15fc7563f59595bd9556495c0564878 # v1
 
       - name: Set up toolchain
         shell: bash
@@ -103,32 +74,12 @@ jobs:
                 --gunzip \
                 --file=-
 
-      - name: Install cargo-edit to do set-version
+      - name: Install cargo-machete to ensure we don't have unneeded packages
         shell: bash
         run: |
-          cargo binstall --github-token ${{ secrets.GITHUB_TOKEN }} --no-confirm cargo-edit
+          cargo binstall --github-token ${{ secrets.GITHUB_TOKEN }} --no-confirm cargo-machete
 
-      - name: Set version in Cargo.toml / Cargo.lock
+      - name: Run cargo machete
         shell: bash
-        id: version
         run: |
-          version="${{ github.ref_name }}"
-          # remove v
-          version="${version//v/}"
-
-          # store
-          cargo set-version ${version}
-
-          # debug
-          cat Cargo.toml
-
-      - uses: rust-lang/crates-io-auth-action@b7e9a28eded4986ec6b1fa40eeee8f8f165559ec # v1.0.3
-        id: auth
-
-      - name: Publish
-        shell: bash
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
-        run: |
-          # we don't commit the version number in our codebase
-          cargo publish --allow-dirty
+          cargo machete

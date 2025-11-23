@@ -1,2848 +1,868 @@
-# Changelog
-All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
+<!-- header goes here -->
+## [0.3.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.2.0..v0.3.0) - 2025-09-21
 
-- - -
-## [v0.2.0](https://github.com/kristof-mattei/docker-dns-rs/compare/1738f54d893c7234d07f6cb4447b1106ecc4baa7..v0.2.0) - 2025-05-04
-#### Features
-- remove support for records and network blacklists - ([1738f54](https://github.com/kristof-mattei/docker-dns-rs/commit/1738f54d893c7234d07f6cb4447b1106ecc4baa7)) - [@kristof-mattei](https://github.com/kristof-mattei)
+### 🚀 Features
 
-- - -
+- Build on windows, guard socket behind os flag - ([72036d1](https://github.com/kristof-mattei/docker-dns-rs/commit/72036d118f2815db773d4ca330d505d1771770b1))
+- Add cross building - ([46dedc2](https://github.com/kristof-mattei/docker-dns-rs/commit/46dedc27e9c8fc8af3110a95ac803c08f6a82aa8))
+- Multiplatform with caching - ([6c5188b](https://github.com/kristof-mattei/docker-dns-rs/commit/6c5188b32d43e0f8ae0bd1d9082871b23e244116))
+- Enable codeql - ([9d22fa5](https://github.com/kristof-mattei/docker-dns-rs/commit/9d22fa5261061d03a3c63a9fa5f5599e374b36ed))
+- Update publish defaults - ([406e06c](https://github.com/kristof-mattei/docker-dns-rs/commit/406e06cae013094a6e2995e2c49158b1677b814e))
+- Ensure formatting works - ([a7ae4c6](https://github.com/kristof-mattei/docker-dns-rs/commit/a7ae4c6870fcd124a76741003d4dce3773f7a056))
+- Attest individual and multiplatform images - ([b2393c1](https://github.com/kristof-mattei/docker-dns-rs/commit/b2393c1478174e162e13e33ac06c4d3ccf028e84))
+- Restrict ALL - ([d88f14d](https://github.com/kristof-mattei/docker-dns-rs/commit/d88f14df3dcb95e2b4bc162048f5a2709c63bab6))
+- Restrict ALL - ([afe5dba](https://github.com/kristof-mattei/docker-dns-rs/commit/afe5dbad60845626dafa904e5b9fbe960fa2b42d))
+- Restrict ALL - ([28544d3](https://github.com/kristof-mattei/docker-dns-rs/commit/28544d39a362f8b2e9066f1a4ba89e8f9a6e3941))
+- Add windows testing - ([978a0b4](https://github.com/kristof-mattei/docker-dns-rs/commit/978a0b4278213df78e4b9691202aee19c1b0a03c))
+- I rule(set) - ([37253e2](https://github.com/kristof-mattei/docker-dns-rs/commit/37253e288eefd5b1e8f7c40184fcf7b9acd90ec4))
+- Use anchors to dedup build - ([f6cafa4](https://github.com/kristof-mattei/docker-dns-rs/commit/f6cafa45b7e0bfd4c29dc2f7f0e57ba258a96922))
+- Pin to trixie, use gcc-14 from trixie - ([e0ea2a2](https://github.com/kristof-mattei/docker-dns-rs/commit/e0ea2a212118b3a24d52bb86ae8bb5ed8e6582bd))
+- Separate cache based on target to allow for more efficient caching - ([89bcb9b](https://github.com/kristof-mattei/docker-dns-rs/commit/89bcb9be9680fa5d0df610d93fb9b978a3362202))
+- Write output to per-target folder, otherwise caches overwrite each other causing recompilation in the install step - ([aabbed1](https://github.com/kristof-mattei/docker-dns-rs/commit/aabbed1fd86be610b46a911d2d1cf7231b0ec5ac))
+- Use git-cliff for better changelogs - ([cb13014](https://github.com/kristof-mattei/docker-dns-rs/commit/cb130144b31681f7bc6d70dd9843d4d2110463bd))
+- Add the self-referencing commit too - ([3b18cba](https://github.com/kristof-mattei/docker-dns-rs/commit/3b18cba9bfb761c67d844e26b0c189f654c68d9b))
+- Diff is generated after the tag, so we don't need to add the as-if message - ([7b9b76e](https://github.com/kristof-mattei/docker-dns-rs/commit/7b9b76e224972b4063357ec818ca403457ea90e9))
 
-## [v0.1.0](https://github.com/kristof-mattei/docker-dns-rs/compare/7af0684c86b197699123cc67d0d87ec66fbd1e2e..v0.1.0) - 2025-05-03
-#### Bug Fixes
-- **(deps)** update rust crate hickory-server to 0.25.2 - ([21db345](https://github.com/kristof-mattei/docker-dns-rs/commit/21db345ee62f40cda79d980b5d20bc9aaccfaf8e)) - renovate[bot]
-- **(deps)** update rust crate tokio-util to 0.7.15 - ([55fafa8](https://github.com/kristof-mattei/docker-dns-rs/commit/55fafa81c68871efc5ea881de1076107537b6bc0)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.37 - ([7569df5](https://github.com/kristof-mattei/docker-dns-rs/commit/7569df58f9d4e29cdaac5e99bee762e4e98dcb14)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.36 - ([451c3b8](https://github.com/kristof-mattei/docker-dns-rs/commit/451c3b8f3eaaf34aa7a5a6bdf9ba4ad5ddddaf83)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.44.2 - ([57d1681](https://github.com/kristof-mattei/docker-dns-rs/commit/57d1681e9c2241dfa6d9362f82d24a054877d3fb)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.72 - ([f2a067e](https://github.com/kristof-mattei/docker-dns-rs/commit/f2a067e716a7134111b98fdeaf47b058c290c329)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.35 - ([f0ba04a](https://github.com/kristof-mattei/docker-dns-rs/commit/f0ba04a545c1c25ee3273ddcc60d5389a4b931b2)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.11 - ([2997d65](https://github.com/kristof-mattei/docker-dns-rs/commit/2997d65a7819c94deb3dba4b927d630c8954d5a6)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.34 - ([8d90bdd](https://github.com/kristof-mattei/docker-dns-rs/commit/8d90bddc3e2bc8bcb468ac4577ba9e04f2183bcf)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.33 - ([8485056](https://github.com/kristof-mattei/docker-dns-rs/commit/8485056a8c2e0e0e562c7b84ff9906356fbb70d0)) - renovate[bot]
-- **(deps)** update rust crate hickory-server to 0.25.1 - ([f711c8e](https://github.com/kristof-mattei/docker-dns-rs/commit/f711c8ed08e52601f6e0c8a0133d6af6a76479e3)) - renovate[bot]
-- **(deps)** update rust crate tokio-util to 0.7.14 - ([36d41ba](https://github.com/kristof-mattei/docker-dns-rs/commit/36d41ba7f1987ec4673a60cdaa286c6bf16b64c8)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.44.1 - ([865e512](https://github.com/kristof-mattei/docker-dns-rs/commit/865e5128484bdb87649f3767c35543737320ea22)) - renovate[bot]
-- **(deps)** update rust crate http to 1.3.1 - ([4fd2c37](https://github.com/kristof-mattei/docker-dns-rs/commit/4fd2c3716e442fd9dfc9cbebff4850155a0e95b9)) - renovate[bot]
-- **(deps)** update rust crate http-body-util to 0.1.3 - ([d792275](https://github.com/kristof-mattei/docker-dns-rs/commit/d79227566982b2878e35b5c4ea0801ac2f4fc716)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.32 - ([3cd786c](https://github.com/kristof-mattei/docker-dns-rs/commit/3cd786c25b822e1d2d671dca39fbebcfd9805114)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.219 - ([e9636be](https://github.com/kristof-mattei/docker-dns-rs/commit/e9636be6ba49a9803bfd9017751c2174b80ef744)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.44.0 - ([3af734c](https://github.com/kristof-mattei/docker-dns-rs/commit/3af734cec8cbbe295cc64628af8acbf6a7cc637e)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.140 - ([5307873](https://github.com/kristof-mattei/docker-dns-rs/commit/5307873351c3146abb6c8117ff35df7cb9adbb52)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.31 - ([d3f0d01](https://github.com/kristof-mattei/docker-dns-rs/commit/d3f0d018725457e0ab90e21e765bf596ac9a10a6)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.218 - ([78ebea6](https://github.com/kristof-mattei/docker-dns-rs/commit/78ebea6db9b04af43a7be619083afaaccbb0b5e6)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.139 - ([9da209b](https://github.com/kristof-mattei/docker-dns-rs/commit/9da209bb248158b8328e7cb7eaa45214280cac6f)) - renovate[bot]
-- **(deps)** update rust crate hickory-server to 0.24.4 - ([0493ab1](https://github.com/kristof-mattei/docker-dns-rs/commit/0493ab1d70468975cde71f4e4526918db27532fc)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.30 - ([d0d7092](https://github.com/kristof-mattei/docker-dns-rs/commit/d0d7092189c7d4ff4803d46ec1e4a4679827ce3f)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.71 - ([9b71f78](https://github.com/kristof-mattei/docker-dns-rs/commit/9b71f78fce9f571067e78ff743cec51643fe3610)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.29 - ([852f509](https://github.com/kristof-mattei/docker-dns-rs/commit/852f509a5b10595c8be158a9558ec90272902036)) - renovate[bot]
-- **(deps)** update rust crate hickory-server to 0.24.3 - ([374d5db](https://github.com/kristof-mattei/docker-dns-rs/commit/374d5dbd0c6504aeacead4b01d93bce146afa8a4)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.28 - ([ad52bef](https://github.com/kristof-mattei/docker-dns-rs/commit/ad52bef95b23877c81631225b8d2a68e38b392f5)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.10.0 - ([3809401](https://github.com/kristof-mattei/docker-dns-rs/commit/3809401fb835a7f10c7eada8d84e74d542a88814)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.70 - ([0d7bce3](https://github.com/kristof-mattei/docker-dns-rs/commit/0d7bce34447cb92efda48ced7a37bfbd7fe93f19)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.138 - ([d840531](https://github.com/kristof-mattei/docker-dns-rs/commit/d840531dec00d0f85ac2687b7e1dd2c0ffedeca7)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.6.0 - ([39eff4e](https://github.com/kristof-mattei/docker-dns-rs/commit/39eff4e58f97db672281bfef80c15d61756ba236)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.69 - ([d77d9b0](https://github.com/kristof-mattei/docker-dns-rs/commit/d77d9b04b7aefa5d9f23b1e24190bfac5a3716a9)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.27 - ([0c02b67](https://github.com/kristof-mattei/docker-dns-rs/commit/0c02b6738cf4135265a6ec3efb7d6dd2e41c0dad)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.137 - ([e5ae10f](https://github.com/kristof-mattei/docker-dns-rs/commit/e5ae10f3e258c6a6d337eeb6fa8e7ba29ebcfe5f)) - renovate[bot]
-- **(deps)** update rust crate ipnet to 2.11.0 - ([c213792](https://github.com/kristof-mattei/docker-dns-rs/commit/c2137920a89cdbc477bb6532e9f5bef06414a07a)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.136 - ([54d4fd9](https://github.com/kristof-mattei/docker-dns-rs/commit/54d4fd94ce32ae4a5068b625ede2797a04120169)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.26 - ([9b06553](https://github.com/kristof-mattei/docker-dns-rs/commit/9b06553c1d5305bdb2d2923bd7adb1528ed8cecb)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.25 - ([7b2055c](https://github.com/kristof-mattei/docker-dns-rs/commit/7b2055c93da132d0c8b1809b5918505b4d048804)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.43.0 - ([ac9281d](https://github.com/kristof-mattei/docker-dns-rs/commit/ac9281ddc0e4f9fbe21222910f4f4d2148d56383)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.24 - ([dd7a568](https://github.com/kristof-mattei/docker-dns-rs/commit/dd7a5689ffed8963d47166ccdf0b1160cb64e979)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.135 - ([142a0e3](https://github.com/kristof-mattei/docker-dns-rs/commit/142a0e316eb4563f676ed30959061c12063fcd4b)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.217 - ([fd7fb00](https://github.com/kristof-mattei/docker-dns-rs/commit/fd7fb00b6c4f5c3ccb94de563cee940475d47019)) - renovate[bot]
-- **(deps)** update rust crate hyper-unix-socket to 0.3.0 - ([22f8113](https://github.com/kristof-mattei/docker-dns-rs/commit/22f811395b3215ec5218826f94b1c7ddf469bb15)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.134 - ([3670bc4](https://github.com/kristof-mattei/docker-dns-rs/commit/3670bc4e0583f2ce3ba53eebfce1b51db0b6c8bc)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.5.2 - ([9ee9648](https://github.com/kristof-mattei/docker-dns-rs/commit/9ee9648e046b2a9fd189a196fb9683715725aa8d)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.216 - ([6a56857](https://github.com/kristof-mattei/docker-dns-rs/commit/6a568575063e55f083ad0566adb08949bc1945ee)) - renovate[bot]
-- **(deps)** update rust crate hickory-server to 0.24.2 - ([b1bafc1](https://github.com/kristof-mattei/docker-dns-rs/commit/b1bafc1a631a5bec965dd7d2f2f851ca2ebbf1b0)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.23 - ([cf361e4](https://github.com/kristof-mattei/docker-dns-rs/commit/cf361e4d2ffb38eaa7f19d9d5e74ab7108cb4675)) - renovate[bot]
-- **(deps)** update rust crate tokio-util to 0.7.13 - ([f9febc9](https://github.com/kristof-mattei/docker-dns-rs/commit/f9febc9905b0b1d7c64fe372b347a22686c34980)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.22 - ([7739373](https://github.com/kristof-mattei/docker-dns-rs/commit/7739373a18e9f3070bfccf06c5bf95069fdf6947)) - renovate[bot]
-- **(deps)** update rust crate http to 1.2.0 - ([f07373c](https://github.com/kristof-mattei/docker-dns-rs/commit/f07373c13768435839aee8ed42846d8da15cf621)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.42.0 - ([6411bb4](https://github.com/kristof-mattei/docker-dns-rs/commit/6411bb4c5eb611a68a7ab3114c1f768dbf0ced72)) - renovate[bot]
-- **(deps)** update rust crate tracing-error to 0.2.1 - ([73da5c4](https://github.com/kristof-mattei/docker-dns-rs/commit/73da5c4d22d30673339285215f33a670a471183c)) - renovate[bot]
-- **(deps)** update rust crate tracing-subscriber to 0.3.19 - ([7332ae0](https://github.com/kristof-mattei/docker-dns-rs/commit/7332ae0d7fef237d1b513a5661f1646df1ef16a0)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.9.0 - ([d5e0fda](https://github.com/kristof-mattei/docker-dns-rs/commit/d5e0fda26eeca45dedb707d0f5c0f8003e9363d0)) - renovate[bot]
-- **(deps)** update rust crate tracing to 0.1.41 - ([1683413](https://github.com/kristof-mattei/docker-dns-rs/commit/1683413ac5cd2f5bca79367c989e82043c28b8c9)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.5.1 - ([909c754](https://github.com/kristof-mattei/docker-dns-rs/commit/909c754fc90f8eb34d015a1e29216c8fdf22576d)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.133 - ([cb9e400](https://github.com/kristof-mattei/docker-dns-rs/commit/cb9e400ec26ab21061137c5331a239bc2fded1be)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.21 - ([f6e45ad](https://github.com/kristof-mattei/docker-dns-rs/commit/f6e45adfc92fa95b4680f78215bfbcd7007c5206)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.215 - ([684160f](https://github.com/kristof-mattei/docker-dns-rs/commit/684160f92e1c9d17efaa0f8ab2c0881ba68b3da2)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.41.1 - ([811d258](https://github.com/kristof-mattei/docker-dns-rs/commit/811d258af6032b5f88aec6e47f770f031291e356)) - renovate[bot]
-- **(deps)** update rust crate url to 2.5.3 - ([dcb5744](https://github.com/kristof-mattei/docker-dns-rs/commit/dcb574497ca06a3372dc0bab7166a4d5b7f7a259)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.10 - ([8847f3f](https://github.com/kristof-mattei/docker-dns-rs/commit/8847f3fd4d54035bb8b4aa4a15c25729bc852de8)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.214 - ([c2c9d65](https://github.com/kristof-mattei/docker-dns-rs/commit/c2c9d656357524959574e72231e69376b58e86ee)) - renovate[bot]
-- **(deps)** update rust crate regex to 1.11.1 - ([53a1807](https://github.com/kristof-mattei/docker-dns-rs/commit/53a1807ae77bd651abd57c2cc8e07e225a382fe1)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.213 - ([e003a0f](https://github.com/kristof-mattei/docker-dns-rs/commit/e003a0f09aed8fb0cfe0b2281a656bc3944019c2)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.41.0 - ([eaf0f14](https://github.com/kristof-mattei/docker-dns-rs/commit/eaf0f1422ffa00a3ab28961f29cdcb3b1b642df0)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.211 - ([d36d7f4](https://github.com/kristof-mattei/docker-dns-rs/commit/d36d7f40cb6c845c422a735c47c66cde9a715aea)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.8.0 - ([93310eb](https://github.com/kristof-mattei/docker-dns-rs/commit/93310eb3cf6d0508bf1f94be83089ced0fe94ed4)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.132 - ([eb86cdb](https://github.com/kristof-mattei/docker-dns-rs/commit/eb86cdb852724c921dc30e13ffc1104e24b8262e)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.131 - ([d258358](https://github.com/kristof-mattei/docker-dns-rs/commit/d258358bcf9ce689bdd3ff5f19e85f3e8a9a5c23)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.130 - ([98d798b](https://github.com/kristof-mattei/docker-dns-rs/commit/98d798bd2bfa5f7630e5462daef558fe54bae6bb)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.129 - ([2326602](https://github.com/kristof-mattei/docker-dns-rs/commit/2326602c79c9dfccb92bb0279ddab7750c4c7e77)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.68 - ([a70ae26](https://github.com/kristof-mattei/docker-dns-rs/commit/a70ae2607f3596ae28f75070e49fa2dca577806f)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.67 - ([ad8cf69](https://github.com/kristof-mattei/docker-dns-rs/commit/ad8cf696b70ed8e45f2ecaa7a6b7e5b9a6c77246)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.5.0 - ([c4a0310](https://github.com/kristof-mattei/docker-dns-rs/commit/c4a0310f29f48b338ae336d78d44ed4f86a8cfe1)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.20 - ([0e18e5f](https://github.com/kristof-mattei/docker-dns-rs/commit/0e18e5f18fa0675020043eda728e8ccce9e8f10d)) - renovate[bot]
-- **(deps)** update rust crate once_cell to 1.20.2 - ([7a89caa](https://github.com/kristof-mattei/docker-dns-rs/commit/7a89caae38e171453fcc0b76e00328564252fe6b)) - renovate[bot]
-- **(deps)** update rust crate ipnet to 2.10.1 - ([00daa10](https://github.com/kristof-mattei/docker-dns-rs/commit/00daa10905b8f928ee08ebf30e55f685fff36ab6)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.19 - ([850c21b](https://github.com/kristof-mattei/docker-dns-rs/commit/850c21bfeb8a453af6e4b1c143c7bcee80b7864c)) - renovate[bot]
-- **(deps)** update rust crate regex to 1.11.0 - ([92ad0d8](https://github.com/kristof-mattei/docker-dns-rs/commit/92ad0d86a6fb937f953f65eff8e00cd6b0556e3b)) - renovate[bot]
-- **(deps)** update rust crate once_cell to 1.20.1 - ([96a0415](https://github.com/kristof-mattei/docker-dns-rs/commit/96a0415ad325cb68c72a6e11c0cfd7fb2e1b08b5)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.9 - ([94a03fe](https://github.com/kristof-mattei/docker-dns-rs/commit/94a03fed5eba17223ce85085de293fd75da05d1a)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.18 - ([217eae6](https://github.com/kristof-mattei/docker-dns-rs/commit/217eae6894819c10419f73a256adcbed09ccb399)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.7.2 - ([980646f](https://github.com/kristof-mattei/docker-dns-rs/commit/980646f11aea40f1393496a88eb93e479a9ae61e)) - renovate[bot]
-- **(deps)** update rust crate once_cell to 1.20.0 - ([f03f244](https://github.com/kristof-mattei/docker-dns-rs/commit/f03f2441c555d830bd091d0a6e55660d7405bb87)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.8 - ([4e8cd54](https://github.com/kristof-mattei/docker-dns-rs/commit/4e8cd54d4bbea1e6b91d7b5da101606b47651e2c)) - renovate[bot]
-- **(deps)** update rust crate ipnet to 2.10.0 - ([e7957fd](https://github.com/kristof-mattei/docker-dns-rs/commit/e7957fd874daef9818852e5d4ad2bb821e89c86c)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.210 - ([f609697](https://github.com/kristof-mattei/docker-dns-rs/commit/f6096978ed0b17252b54f58b0157a81f80c592d5)) - renovate[bot]
-- **(deps)** update rust crate tokio-util to 0.7.12 - ([870e2ab](https://github.com/kristof-mattei/docker-dns-rs/commit/870e2abfade8f77096c19a11d0425ae0e74c7a7d)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.128 - ([f37aa61](https://github.com/kristof-mattei/docker-dns-rs/commit/f37aa6183c776963250b5e4107b0530606fbad7b)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.17 - ([67c84e5](https://github.com/kristof-mattei/docker-dns-rs/commit/67c84e508713f79994754c9cd3283134899a2486)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.40.0 - ([77178a4](https://github.com/kristof-mattei/docker-dns-rs/commit/77178a434f24b8e425be40db7e89aafbdafdc3e3)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.209 - ([e747c9f](https://github.com/kristof-mattei/docker-dns-rs/commit/e747c9fcb4d3650542f232b8fd82a422a89fe2fc)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.127 - ([c508814](https://github.com/kristof-mattei/docker-dns-rs/commit/c508814abaa30d4c3d87d00a05340a59eb056fbf)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.39.3 - ([69cbf22](https://github.com/kristof-mattei/docker-dns-rs/commit/69cbf220bdecbd934e0a3a81a18b3477a6a83fee)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.16 - ([2d1354a](https://github.com/kristof-mattei/docker-dns-rs/commit/2d1354aba987246c9595c9d5b836ac18e68f47f2)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.208 - ([160ea02](https://github.com/kristof-mattei/docker-dns-rs/commit/160ea02dcad6a8780c77d094b21ca19e694610b0)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.125 - ([f579a4e](https://github.com/kristof-mattei/docker-dns-rs/commit/f579a4e11ea32614e960245e9151661464650f5c)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.207 - ([9e06f72](https://github.com/kristof-mattei/docker-dns-rs/commit/9e06f7264efc53affdd0acafee8197371c0c0610)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.124 - ([57e8414](https://github.com/kristof-mattei/docker-dns-rs/commit/57e841431741ffb6ae70aa933cc31cd0a845e81f)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.123 - ([fb38778](https://github.com/kristof-mattei/docker-dns-rs/commit/fb3877888d85d8321d68f4dc19647da760d6c568)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.206 - ([4d79394](https://github.com/kristof-mattei/docker-dns-rs/commit/4d79394c056e9eeb18acb9bcd8c0d51ad7853d61)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.15 - ([5019d22](https://github.com/kristof-mattei/docker-dns-rs/commit/5019d22652487947d287d777ebed7423c02a175d)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.14 - ([feffc00](https://github.com/kristof-mattei/docker-dns-rs/commit/feffc003a087ec7a2a2d7128f4297191a2ae4e30)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.205 - ([19605ec](https://github.com/kristof-mattei/docker-dns-rs/commit/19605ec94d7b83e143335dce031af4706ecf040e)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.7 - ([46cb0e5](https://github.com/kristof-mattei/docker-dns-rs/commit/46cb0e5cd6923340d609b246050cf5d066fa49c4)) - renovate[bot]
-- **(deps)** update rust crate regex to 1.10.6 - ([ebd42b4](https://github.com/kristof-mattei/docker-dns-rs/commit/ebd42b4450756195a3bbddb8f1234f520f55effc)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.122 - ([085f5b9](https://github.com/kristof-mattei/docker-dns-rs/commit/085f5b939a084c65750c73408f6e9962e4f30aef)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.7.1 - ([d54e6c1](https://github.com/kristof-mattei/docker-dns-rs/commit/d54e6c120fde4ea48510adab756482145b37c30c)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.13 - ([c7ce2ff](https://github.com/kristof-mattei/docker-dns-rs/commit/c7ce2ff9b08e12929b0979352e1c54f867c13b47)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.7.0 - ([c393308](https://github.com/kristof-mattei/docker-dns-rs/commit/c393308306318208f3022a6f02538051d5b5f3a4)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.121 - ([6ce7566](https://github.com/kristof-mattei/docker-dns-rs/commit/6ce75668c130740a74829da2d10aa0f11e237d78)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.39.2 - ([f55a34e](https://github.com/kristof-mattei/docker-dns-rs/commit/f55a34e9225ae99b891e547ec02c2911c1371291)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.11 - ([ac72671](https://github.com/kristof-mattei/docker-dns-rs/commit/ac726717626ca1b090bb5713d9c27102b6859585)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.39.1 - ([6d92f86](https://github.com/kristof-mattei/docker-dns-rs/commit/6d92f8653048b1ca6b1ea1e80af2da0be9425cea)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.10 - ([6c25c92](https://github.com/kristof-mattei/docker-dns-rs/commit/6c25c9231a8db9c6610aee863754363fdbb3faf7)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.66 - ([bc39df5](https://github.com/kristof-mattei/docker-dns-rs/commit/bc39df5a67321cadcfe09c7132f345b6482754c1)) - renovate[bot]
-- **(deps)** update rust crate openssl to 0.10.65 - ([dd173f5](https://github.com/kristof-mattei/docker-dns-rs/commit/dd173f5ce36d8b6cbebd93ec8567a7c8c6883b11)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.38.1 - ([5ea45d6](https://github.com/kristof-mattei/docker-dns-rs/commit/5ea45d6acd8547c8cd0598790a5c5ca4e1e99a0f)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.4.1 - ([ebd1d66](https://github.com/kristof-mattei/docker-dns-rs/commit/ebd1d6687ba87fa297c89046405bc39f7b7f7e78)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.9 - ([0c4f892](https://github.com/kristof-mattei/docker-dns-rs/commit/0c4f89255a7697c783c4940a718ae97b20ce25d9)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.204 - ([610c62e](https://github.com/kristof-mattei/docker-dns-rs/commit/610c62e59b70804fcc152a9b57a46d0d08c77461)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.120 - ([ebe67d9](https://github.com/kristof-mattei/docker-dns-rs/commit/ebe67d989d7dd3331632b2262dd89018b6b77fba)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.6 - ([6819569](https://github.com/kristof-mattei/docker-dns-rs/commit/681956943fa149c036869b467f0e5436358dcc3f)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.4.0 - ([dd750c7](https://github.com/kristof-mattei/docker-dns-rs/commit/dd750c7c05fc172514a4345feccdd692b9aece58)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.119 - ([2301f1c](https://github.com/kristof-mattei/docker-dns-rs/commit/2301f1ced27aef87366fbaaebca5155fd750cd83)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.8 - ([4e4f8c9](https://github.com/kristof-mattei/docker-dns-rs/commit/4e4f8c91fa50276fbabc03714764d8f48d4959af)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.118 - ([8a5fe4b](https://github.com/kristof-mattei/docker-dns-rs/commit/8a5fe4bf7529ce44d6f4f12fb4691203da926ae0)) - renovate[bot]
-- **(deps)** update rust crate url to 2.5.2 - ([546f482](https://github.com/kristof-mattei/docker-dns-rs/commit/546f4823805cb47cb6425f3b05d491413a1b1d21)) - renovate[bot]
-- **(deps)** update rust crate http-body-util to 0.1.2 - ([0bb9f79](https://github.com/kristof-mattei/docker-dns-rs/commit/0bb9f79b63dd2c68d14d2222b445cbbfbe8b5fb5)) - renovate[bot]
-- **(deps)** update rust crate url to 2.5.1 - ([805188e](https://github.com/kristof-mattei/docker-dns-rs/commit/805188eaa10adfa07bf51c0c14d6e31bf514caa1)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.7 - ([309e235](https://github.com/kristof-mattei/docker-dns-rs/commit/309e2351f30cb8b3dbe590013f59eabb5d898331)) - renovate[bot]
-- **(deps)** update rust crate regex to 1.10.5 - ([0f675bb](https://github.com/kristof-mattei/docker-dns-rs/commit/0f675bb29d79aaf7d31b6eab029e37aa1e04a813)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.6 - ([b3703ad](https://github.com/kristof-mattei/docker-dns-rs/commit/b3703ada718c1dc480b2785fbf9eff0f715944fb)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.5 - ([2eeb314](https://github.com/kristof-mattei/docker-dns-rs/commit/2eeb314150dc23414f9b0bca772312900ed33585)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.38.0 - ([42dbef5](https://github.com/kristof-mattei/docker-dns-rs/commit/42dbef508ea6d3c186bcb7b44145351303e207a8)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.5 - ([fbf0009](https://github.com/kristof-mattei/docker-dns-rs/commit/fbf00094cd966acdb5dd365293bfeddbe1e460d3)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.203 - ([b14ed2a](https://github.com/kristof-mattei/docker-dns-rs/commit/b14ed2a085f2e8acafdf588d53138d6c00dca175)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.4 - ([086df24](https://github.com/kristof-mattei/docker-dns-rs/commit/086df24f61c00a5374f2094bbec7a1ad537f0519)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.202 - ([04ba4f7](https://github.com/kristof-mattei/docker-dns-rs/commit/04ba4f7b5bbdd31f2f99c8a83eaf5f8e223da59e)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.117 - ([cbd3a16](https://github.com/kristof-mattei/docker-dns-rs/commit/cbd3a16ab1889daa4f1e7aca377d2649d0bb14f4)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.201 - ([ffc6824](https://github.com/kristof-mattei/docker-dns-rs/commit/ffc6824e8c292e8ab6a9b0b7397f76a0766a5169)) - renovate[bot]
-- **(deps)** update rust crate tokio-util to 0.7.11 - ([c9d33f2](https://github.com/kristof-mattei/docker-dns-rs/commit/c9d33f2ddc86732542521e849c5071bfa1c3ae1b)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.200 - ([23bca75](https://github.com/kristof-mattei/docker-dns-rs/commit/23bca750b0e87b68b7d0001ae6e71a88915d7f88)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.199 - ([59a0074](https://github.com/kristof-mattei/docker-dns-rs/commit/59a00749cfc8e40e6facf6e7707fc39becaa9cfd)) - renovate[bot]
-- **(deps)** update rust crate hickory-server to 0.24.1 - ([23d6fca](https://github.com/kristof-mattei/docker-dns-rs/commit/23d6fca5666a62ad0fa226b36695a0e7f4f2c0f3)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.198 - ([677d207](https://github.com/kristof-mattei/docker-dns-rs/commit/677d207790562c96b97e5609dd48fb85d7a8ddd2)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.3.1 - ([f7b19d3](https://github.com/kristof-mattei/docker-dns-rs/commit/f7b19d39a7ab03ac67874da19123fc6e22a4e744)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.116 - ([14a68ef](https://github.com/kristof-mattei/docker-dns-rs/commit/14a68ef72dfedfeb9715960100c8d5843c93ad74)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.3.0 - ([00e9f0a](https://github.com/kristof-mattei/docker-dns-rs/commit/00e9f0a3dbe25d34488f47e831a78d0ded0c8461)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.37.0 - ([371554b](https://github.com/kristof-mattei/docker-dns-rs/commit/371554b76a2b343c061728860bbd44f9c4f9a6a6)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.115 - ([0d18f54](https://github.com/kristof-mattei/docker-dns-rs/commit/0d18f544585b14c0dd016df3363844f946f0edae)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.4 - ([e6cc1bd](https://github.com/kristof-mattei/docker-dns-rs/commit/e6cc1bdbe747cf02376b47d7c5927cea98aae1d7)) - renovate[bot]
-- **(deps)** update rust crate regex to 1.10.4 - ([53a75d7](https://github.com/kristof-mattei/docker-dns-rs/commit/53a75d7f1d89021c2092ee07efec169609413707)) - renovate[bot]
-- **(deps)** update rust crate bytes to 1.6.0 - ([3950bbf](https://github.com/kristof-mattei/docker-dns-rs/commit/3950bbfd2121a54582f28bd3ac8f3f1add086852)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.3 - ([cc085ba](https://github.com/kristof-mattei/docker-dns-rs/commit/cc085ba84f9b9dd3c678c59b8d5d0f6c3018b90f)) - renovate[bot]
-- **(deps)** update rust crate color-eyre to 0.6.3 - ([baf1dc7](https://github.com/kristof-mattei/docker-dns-rs/commit/baf1dc7b4352679914415662a2b16ec8f036d409)) - renovate[bot]
-- **(deps)** update rust crate color-eyre to 0.6.3 - ([3c5d752](https://github.com/kristof-mattei/docker-dns-rs/commit/3c5d752e683fb2340878685e75f62fa935f7d344)) - renovate[bot]
-- **(deps)** update rust crate http-body-util to 0.1.1 - ([36c199d](https://github.com/kristof-mattei/docker-dns-rs/commit/36c199dc2e97be0a3c95543d34e0419a31666df3)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.2 - ([c510156](https://github.com/kristof-mattei/docker-dns-rs/commit/c5101568188fe33fad61992b36ac6a98a7daf438)) - renovate[bot]
-- **(deps)** update rust crate http to 1.1.0 - ([f9a4b72](https://github.com/kristof-mattei/docker-dns-rs/commit/f9a4b729acdca60e87cf100b8f1dec83243c03fe)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.2.0 - ([af50c09](https://github.com/kristof-mattei/docker-dns-rs/commit/af50c09cafa680f2cb6684a5c9944fdf144b62fb)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.197 - ([2591c31](https://github.com/kristof-mattei/docker-dns-rs/commit/2591c3125adc4effcdd29eb23f60fdce5e2b9f50)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.114 - ([70537b9](https://github.com/kristof-mattei/docker-dns-rs/commit/70537b9eced948fbd36be9748ffcfb90d563a1bb)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.1 - ([de4e8f4](https://github.com/kristof-mattei/docker-dns-rs/commit/de4e8f4be022fca652d0590989697b4280108304)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.5.0 - ([d18738f](https://github.com/kristof-mattei/docker-dns-rs/commit/d18738ff94dddbb8f86b17538e629de5bc79e80c)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.36.0 - ([1d17b4d](https://github.com/kristof-mattei/docker-dns-rs/commit/1d17b4dee8bb4502ba1b21a1217cb45c0f2170b1)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.3 - ([a4e5999](https://github.com/kristof-mattei/docker-dns-rs/commit/a4e5999899c8984777d1c1c2ca4b71b9161f59d5)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.113 - ([bd79d43](https://github.com/kristof-mattei/docker-dns-rs/commit/bd79d4382de8695696e1448cc038e3d30bab57f1)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.112 - ([2cc3c77](https://github.com/kristof-mattei/docker-dns-rs/commit/2cc3c77508e738d76d1f84b87a105538bc1e91a5)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.196 - ([f2ce5e1](https://github.com/kristof-mattei/docker-dns-rs/commit/f2ce5e11ded52e020c4bc6c19849bc73eb7b03c1)) - renovate[bot]
-- **(deps)** update rust crate regex to 1.10.3 - ([9647a39](https://github.com/kristof-mattei/docker-dns-rs/commit/9647a396f8dce65229193f511e1160d3ec0ccf68)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.18 - ([13fd0aa](https://github.com/kristof-mattei/docker-dns-rs/commit/13fd0aad217654f76d976f444978eb711b444630)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.17 - ([f51a8d5](https://github.com/kristof-mattei/docker-dns-rs/commit/f51a8d58e6bb633c09c6f016e3314d1168e6774c)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.16 - ([16c9d7c](https://github.com/kristof-mattei/docker-dns-rs/commit/16c9d7c885ff1a6c19f7849ba5bed6c7a15aad65)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.15 - ([16292c9](https://github.com/kristof-mattei/docker-dns-rs/commit/16292c9927f3da7f7ff4833597246ee535126f23)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.14 - ([3edf6c2](https://github.com/kristof-mattei/docker-dns-rs/commit/3edf6c2e891a6c168e309ac24d44101a28e44b15)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.195 - ([8c7bd41](https://github.com/kristof-mattei/docker-dns-rs/commit/8c7bd41622869a3f9a8950358248c40646f6ffaf)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.13 - ([b44b774](https://github.com/kristof-mattei/docker-dns-rs/commit/b44b7742b0bc2835aae7743faca240db9016d9f6)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.111 - ([da8c5f0](https://github.com/kristof-mattei/docker-dns-rs/commit/da8c5f0aa54ee9ac662f077a91fc6c9deb0a4f09)) - renovate[bot]
-- **(deps)** update rust crate serde to 1.0.194 - ([6f3f06e](https://github.com/kristof-mattei/docker-dns-rs/commit/6f3f06e6aa4ef71fa366f35d127f76c6303d23d2)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.110 - ([a9b8f5e](https://github.com/kristof-mattei/docker-dns-rs/commit/a9b8f5ef9373eae472663dbcb25552c2e705be51)) - renovate[bot]
-- **(deps)** update rust crate serde_json to 1.0.109 - ([9ba94c7](https://github.com/kristof-mattei/docker-dns-rs/commit/9ba94c78b335d9f218b037deb7cc47e50102aa18)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.12 - ([0487ffd](https://github.com/kristof-mattei/docker-dns-rs/commit/0487ffd373f9f577ae0f4179b332af39c6311e82)) - renovate[bot]
-- **(deps)** update rust crate hyper-util to 0.1.2 - ([f4e2498](https://github.com/kristof-mattei/docker-dns-rs/commit/f4e2498a829c1aa98cc504c268f1b7461671573d)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.35.1 - ([ea5fbc7](https://github.com/kristof-mattei/docker-dns-rs/commit/ea5fbc733c57f4ea198f3914951eea2553ff9b6e)) - renovate[bot]
-- **(deps)** update rust crate hyper to 1.1.0 - ([b891488](https://github.com/kristof-mattei/docker-dns-rs/commit/b891488b40a5793b5605650d28de091ba9b09498)) - renovate[bot]
-- **(deps)** update rust crate tokio to 1.35.0 - ([65b1d60](https://github.com/kristof-mattei/docker-dns-rs/commit/65b1d604148522e22a00f08e8f091cba04fa9d57)) - renovate[bot]
-- **(deps)** update rust crate once_cell to 1.19.0 - ([37cc41a](https://github.com/kristof-mattei/docker-dns-rs/commit/37cc41ae075080f88e705c0eccebb000387228a8)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.11 - ([df80a7d](https://github.com/kristof-mattei/docker-dns-rs/commit/df80a7d297f29c39e1cdc39db8ecff4dbbb05f79)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.10 - ([c9aa4d5](https://github.com/kristof-mattei/docker-dns-rs/commit/c9aa4d5d047f4f0bea55736186aec48738ae4084)) - renovate[bot]
-- **(deps)** update rust crate clap to 4.4.9 - ([75749bc](https://github.com/kristof-mattei/docker-dns-rs/commit/75749bcc227acaa48cb43147a2a1cd67800c2018)) - renovate[bot]
-- rename functionality now rebuilds recordset, so the returned value is correct - ([15cbe46](https://github.com/kristof-mattei/docker-dns-rs/commit/15cbe46381e4e3252f6398fe714c28d35dcfa9ed)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set fqdn for base domain, reduced logging - ([b1dd37d](https://github.com/kristof-mattei/docker-dns-rs/commit/b1dd37df5b9aff60b449159f583a22d0eb59356b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- start tracking lldb debug helper - ([b662ffa](https://github.com/kristof-mattei/docker-dns-rs/commit/b662ffa8c38b08c5f3d276e6e58646013a051efd)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove @actions/tool-cache - ([3889143](https://github.com/kristof-mattei/docker-dns-rs/commit/3889143b5e053e5d63835407138decb395314a13)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove unneeded conversion - ([9767df7](https://github.com/kristof-mattei/docker-dns-rs/commit/9767df7942575ac09ea1381966682b2f96931616)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- build container from scratch - ([250217a](https://github.com/kristof-mattei/docker-dns-rs/commit/250217a80fa10d152f21f31c6031ce45039b32ce)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow multiple versions of wasi - ([7183d97](https://github.com/kristof-mattei/docker-dns-rs/commit/7183d9758d5ca0cea6d4be61440977d01fd161b4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- restore needed workflows - ([72180e8](https://github.com/kristof-mattei/docker-dns-rs/commit/72180e8239e1a85a892f7713d8986bb9ad34f55c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- prettier 3.41.0 - ([64aa76c](https://github.com/kristof-mattei/docker-dns-rs/commit/64aa76cc522d7ee28a38bfffee53dc789abe4c12)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- revert once_cell 1.20.0 to 1.19.0 as it was yanked, renovate SHOULD do this, but it doesn't work - ([a29b303](https://github.com/kristof-mattei/docker-dns-rs/commit/a29b30386dbba5e4b6df3c09e730aa87f3fba98b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- report tests to codecov for tracking - ([cc1ccdd](https://github.com/kristof-mattei/docker-dns-rs/commit/cc1ccdd729170ab4f8fddc1660911caf587fc3ad)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try something else - ([0efe974](https://github.com/kristof-mattei/docker-dns-rs/commit/0efe9741d77cf9f7ca93f38255aa91e7dcf670af)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- correctly build musl - ([c712945](https://github.com/kristof-mattei/docker-dns-rs/commit/c7129451d3a7618b0304bcf78471f5fd14811bf2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use artifact v4 settings - ([d8c091d](https://github.com/kristof-mattei/docker-dns-rs/commit/d8c091de62781eac1789ad4a11889e3fa4559414)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- filepaths were wrong - ([6d1f131](https://github.com/kristof-mattei/docker-dns-rs/commit/6d1f131d50f29b4e9f58a3ab29cc83da7dd3c0e2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- platform name - ([d8cf974](https://github.com/kristof-mattei/docker-dns-rs/commit/d8cf9747ae7b1c14fa7f70b1f7f612d342d1e31a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set unpack folder, not filepath - ([3612966](https://github.com/kristof-mattei/docker-dns-rs/commit/36129662df205055eedb8fd73e62a4dbeb08e323)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- only upload sarif file itself - ([0629d45](https://github.com/kristof-mattei/docker-dns-rs/commit/0629d45d07730960d087feed26c941ee1d7fa0a6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- separate scan and fixup, as the scan container doesn't have bash / jq anymore - ([4e59581](https://github.com/kristof-mattei/docker-dns-rs/commit/4e595812651951b3e762d8abe0ef7dac61ff6156)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't set shell, not needed in semgrep container - ([de4ab4c](https://github.com/kristof-mattei/docker-dns-rs/commit/de4ab4c42e490e7e5a5ce2a6af342659f9ef3a49)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- cleanup - ([80a9dda](https://github.com/kristof-mattei/docker-dns-rs/commit/80a9dda3495b1f1142304906a9246b8f6072c0ec)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- simplified tags - ([5c2e4f9](https://github.com/kristof-mattei/docker-dns-rs/commit/5c2e4f911c20a994d2c70cbb9105e1ebb156c6ae)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- mixed up config name order - ([6976f89](https://github.com/kristof-mattei/docker-dns-rs/commit/6976f89fbd6f5774047fa42c1dff717e2a37e0e5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- move semantic-release config file as per https://github.com/semantic-release/semantic-release/releases/tag/v23.0.0 - ([e77b9d1](https://github.com/kristof-mattei/docker-dns-rs/commit/e77b9d10a3019ff3c00f28ed49eb6cf4faeb5f1c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use Name instead of string, only need to parse once - ([40aa4da](https://github.com/kristof-mattei/docker-dns-rs/commit/40aa4da5ce3226f21ff636587af5da20f7d11b6a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- docker-dns-rs initial commit - ([c954bca](https://github.com/kristof-mattei/docker-dns-rs/commit/c954bca9d86e21fd8698fe4d99cea5fd557da4c0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add placeholder for env variable - ([4bb5340](https://github.com/kristof-mattei/docker-dns-rs/commit/4bb534066cf1c3471e352cc5c8eb80ea3af113d5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix new version - ([ef697ab](https://github.com/kristof-mattei/docker-dns-rs/commit/ef697abfef681fa7d69f7baa93c9c76b77b3548c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- workflow_dispatch does not take a branch - ([7cb9b28](https://github.com/kristof-mattei/docker-dns-rs/commit/7cb9b2833bc904c936e96cb57d091262d3246933)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't show progress - ([2be0887](https://github.com/kristof-mattei/docker-dns-rs/commit/2be088747fc874dad816ed60d0e49dbf3390e0bb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- consolidate clippy & rust config on top of main, all the rest causes duplication - ([e158e41](https://github.com/kristof-mattei/docker-dns-rs/commit/e158e41a05171aadc4a36bed4f40685e9f15a8fc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- better defaults - ([0c8b4a7](https://github.com/kristof-mattei/docker-dns-rs/commit/0c8b4a74b7e969af7b5b696ba9300b0b6cd31a85)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- we don't use .idea config - ([4d22e96](https://github.com/kristof-mattei/docker-dns-rs/commit/4d22e96241230cf0406dfc2cb3199b38acd2bad3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove unneeded newline - ([4a3fe57](https://github.com/kristof-mattei/docker-dns-rs/commit/4a3fe575e0eb6d3a254a5041ccba662ddcbcbdcd)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- get application name automatically - ([5f71149](https://github.com/kristof-mattei/docker-dns-rs/commit/5f71149c9c86a79155fe7180c8fc7e154febbca3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- env -> vars - ([a4ef4d5](https://github.com/kristof-mattei/docker-dns-rs/commit/a4ef4d59898bea126c2531a76799c0ba557ff2c7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- make BUILD_DOCKER_CONTAINER configurable from variables - ([5ab39f5](https://github.com/kristof-mattei/docker-dns-rs/commit/5ab39f5f95c94aec0291d15c83e10f466fa659e4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- specify version, Renovate will pin it - ([2a44ecb](https://github.com/kristof-mattei/docker-dns-rs/commit/2a44ecbc3cbca50f1fddaf65ec4633b762384ef1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- Coveralls as CodeCov keeps on failing - ([fab1710](https://github.com/kristof-mattei/docker-dns-rs/commit/fab171080b3de6c51c4bc7531699841534366f8a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add update-name script - ([57e5023](https://github.com/kristof-mattei/docker-dns-rs/commit/57e502335d9e4f409054ed5ecfb7d1ad8ab1d2d9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- trace for run and test - ([57bb0f1](https://github.com/kristof-mattei/docker-dns-rs/commit/57bb0f18bcf3c360eca25ee5aeeb61ac37000d46)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- default is to use color-eyre - ([9ec7951](https://github.com/kristof-mattei/docker-dns-rs/commit/9ec795182352fc168b18cd5a9fd623b1930494f3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- trace for all, not just the app - ([e92d8c0](https://github.com/kristof-mattei/docker-dns-rs/commit/e92d8c04661c0a06a6932a701ba7fc4e0f731fc2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- build all with tests too - ([2fdf062](https://github.com/kristof-mattei/docker-dns-rs/commit/2fdf062917c86c9ffebbd81b3b9bb8720aa841ef)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also do RUST_BACKTRACE=full for debugging - ([fde9619](https://github.com/kristof-mattei/docker-dns-rs/commit/fde9619668b4eb33ad41e0265c8ff5cae164001e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set maximum backtrace - ([cd44fe2](https://github.com/kristof-mattei/docker-dns-rs/commit/cd44fe2ab070d930dea9b1040a5e57ec9276ed34)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't retag when we don't build a container - ([fe1a006](https://github.com/kristof-mattei/docker-dns-rs/commit/fe1a006c3d9e9d95f0d8cef01555d3a4c303e92a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- comment indent - ([aff7168](https://github.com/kristof-mattei/docker-dns-rs/commit/aff7168b45600424fed73fb582001cf55c2e2cd3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated cache ids - ([75f6e51](https://github.com/kristof-mattei/docker-dns-rs/commit/75f6e51d56f491eabd2038688a4348f421eaad34)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow disable container retagging - ([8e39b39](https://github.com/kristof-mattei/docker-dns-rs/commit/8e39b39694931df1716d2b79dafcfd7348de04f0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ascii idents only to prevent idents starting with characters my keyboard can't handle - ([0b7f646](https://github.com/kristof-mattei/docker-dns-rs/commit/0b7f6469dbd30ad44508f836277282860cad6cbd)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow for building / not building docker container - ([9a91217](https://github.com/kristof-mattei/docker-dns-rs/commit/9a91217a67620dcae3d4a9dbe5f71712c97aa03c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- more formatting enforcement - ([4825d45](https://github.com/kristof-mattei/docker-dns-rs/commit/4825d45eac04d98c8b20870657fb8346ef5636a3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- lock down with version and digest - ([ea6cda5](https://github.com/kristof-mattei/docker-dns-rs/commit/ea6cda5aff2e89af491654668c95edef6231898c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- yeet code climate - ([0ff8087](https://github.com/kristof-mattei/docker-dns-rs/commit/0ff8087a8aca74832292d787329cb2c30d3cddb7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- pin clippy - ([bd33a24](https://github.com/kristof-mattei/docker-dns-rs/commit/bd33a2469072c2430b02694ebfe406f956de3862)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- editorconfig settings for shell files - ([72d74b7](https://github.com/kristof-mattei/docker-dns-rs/commit/72d74b755522d30b07a00202ddf6e23138a9b1cb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- unset rangeStrategy, move to the renovate base config - ([2dae343](https://github.com/kristof-mattei/docker-dns-rs/commit/2dae3431cfeda8a8ef5c6b78a69f0e32b02db894)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set rangeStrategy - ([752da2c](https://github.com/kristof-mattei/docker-dns-rs/commit/752da2c3898fddaa537083430da3d0fd31d5a5cd)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove version, doesn't work for container > image - ([2ef1e88](https://github.com/kristof-mattei/docker-dns-rs/commit/2ef1e883d0411aeaad4d0ea9e4a925bcd73a4ac1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- hack version (?) - ([58ff338](https://github.com/kristof-mattei/docker-dns-rs/commit/58ff338a043dc581440936114e8e0005a00a938c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add update script - ([bb08a31](https://github.com/kristof-mattei/docker-dns-rs/commit/bb08a315ab8b2269cc5d848c821a75b1ad79e97d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- make clippy more annoying - ([af9bc12](https://github.com/kristof-mattei/docker-dns-rs/commit/af9bc12597c1236c3a642570c3c4fb526f5668b1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow uninlined format args - ([203df05](https://github.com/kristof-mattei/docker-dns-rs/commit/203df05f519b8fa8d6f0f89044320194726ed5ca)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- switch to editorconfig - ([02402b7](https://github.com/kristof-mattei/docker-dns-rs/commit/02402b75b91fc52f36a1140d67f95460670a5f11)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set latest tag - ([1870e1d](https://github.com/kristof-mattei/docker-dns-rs/commit/1870e1da3545c8fee6f6026ba6cece373316c1c4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- prevent cog throwing an error which causes script termination - ([a0e6468](https://github.com/kristof-mattei/docker-dns-rs/commit/a0e6468e9491beccaed2ac227f9f6c93bec69bc4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use cocogitto bump, and support no new version generated - ([68a37df](https://github.com/kristof-mattei/docker-dns-rs/commit/68a37dfdadd533d41497cdfed2cdff70716df06e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- snake in comments is causing parsing failures - ([69d278d](https://github.com/kristof-mattei/docker-dns-rs/commit/69d278dee797be71e67582b6ac0275853d1f5898)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- formatting - ([f71fbed](https://github.com/kristof-mattei/docker-dns-rs/commit/f71fbed5f1ac288c4d25462fbcd013dcca7a9ba0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- formatting - ([a6c47ee](https://github.com/kristof-mattei/docker-dns-rs/commit/a6c47ee700414a12bb6ee60a8a3d9bcdd28b7194)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- settings - ([769ba7d](https://github.com/kristof-mattei/docker-dns-rs/commit/769ba7d6fab0e5833e503b669531a1c9018c15a6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- separate before and after cache - ([82f9775](https://github.com/kristof-mattei/docker-dns-rs/commit/82f97756352773948e9a4572f2740831d5bf9f2c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use up to date action - ([47190c9](https://github.com/kristof-mattei/docker-dns-rs/commit/47190c9524d3029fe2a3dedc570e1b88d2f63105)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set correct nextest config - ([2447503](https://github.com/kristof-mattei/docker-dns-rs/commit/2447503724f960fb66a723705e52810e169ae2aa)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set-output is deprecated - ([8b69dd4](https://github.com/kristof-mattei/docker-dns-rs/commit/8b69dd437a5cec1f3dd7e256be22658338bcbb03)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add other settings - ([f520994](https://github.com/kristof-mattei/docker-dns-rs/commit/f520994518d0f5e13e59ec7c593c76da65062b02)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow overrides - ([33769f0](https://github.com/kristof-mattei/docker-dns-rs/commit/33769f0d2f9451e5411470dc2dfc3b278b036229)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- google -> probot - ([23ac95c](https://github.com/kristof-mattei/docker-dns-rs/commit/23ac95cd6c81f0b0f32accf434f4a50d5c48e65b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- correct cocogitto again with binstall - ([6d58aa7](https://github.com/kristof-mattei/docker-dns-rs/commit/6d58aa766b57ca79248ddfffaa2e405efda60fb2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- no leading pipes - ([1010233](https://github.com/kristof-mattei/docker-dns-rs/commit/101023383a45998b4e0ed2a1dbd86f5681f7a73f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- comment out nightly function, add match | - ([d0c9366](https://github.com/kristof-mattei/docker-dns-rs/commit/d0c936698945e3733e598e229ba117b44557d822)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- quotes - ([91c129c](https://github.com/kristof-mattei/docker-dns-rs/commit/91c129c1d09e29453c37024514cfdda0b3407c87)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- group imports - ([a561eab](https://github.com/kristof-mattei/docker-dns-rs/commit/a561eabca180fbdebe301f830f2bcd3139887134)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set tag & sha256 - ([7b6e267](https://github.com/kristof-mattei/docker-dns-rs/commit/7b6e267179f85e2615185826d42f1ac74b1cb14d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- semgrep from container - ([de3c82d](https://github.com/kristof-mattei/docker-dns-rs/commit/de3c82ddb3ec7fc91b63376ab3db0dfcbd6cfd48)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- deny stuff, nobody reads warnings - ([20a9980](https://github.com/kristof-mattei/docker-dns-rs/commit/20a998015fee19324cf08f8893bb260c69aff3a3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- update rules - ([db556a8](https://github.com/kristof-mattei/docker-dns-rs/commit/db556a800db25f534302a594a120632d709b8a2f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set the correct tag - ([273291f](https://github.com/kristof-mattei/docker-dns-rs/commit/273291fe484addf894f8ddc3c13889b140389103)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- force signed commits - ([9c408fd](https://github.com/kristof-mattei/docker-dns-rs/commit/9c408fdef65a9dbe2599402b5654de69ed9cfbcc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't require reviews - ([921c419](https://github.com/kristof-mattei/docker-dns-rs/commit/921c4193b6dd2b37af2487072117c7586bbc37c3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix schema - ([2363092](https://github.com/kristof-mattei/docker-dns-rs/commit/23630924a373ca06ffed352f8574516afb7e0cda)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- lowercase package fmt - ([d464837](https://github.com/kristof-mattei/docker-dns-rs/commit/d4648375d819651c86216d8b2d3f511622f91d82)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't copy paste - ([d9ed65e](https://github.com/kristof-mattei/docker-dns-rs/commit/d9ed65e9c1ac8e3ffd77a33f5f0956637ee90302)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- binstall now wants stuff with a capital - ([4e862db](https://github.com/kristof-mattei/docker-dns-rs/commit/4e862dbb4fcd5577e2ab36ebf2ba3ceb755eb122)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- download binstall to /tmp to avoid additional untracked files - ([eb3d325](https://github.com/kristof-mattei/docker-dns-rs/commit/eb3d3252dabeeb48c960995a46bb13b4df71796d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try centralized renovate config - ([973829b](https://github.com/kristof-mattei/docker-dns-rs/commit/973829b723a20cdd4b5c5f9d0bf3477cc8d421e2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set permissions - ([d3c9dcf](https://github.com/kristof-mattei/docker-dns-rs/commit/d3c9dcfea41224b596e87672338c66bf5f98f78e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set the right user - ([c82af71](https://github.com/kristof-mattei/docker-dns-rs/commit/c82af712a81c84e773764916c281274377d150e0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add user - ([4e414de](https://github.com/kristof-mattei/docker-dns-rs/commit/4e414de196055df363eb355b100ba5d6e7cb4a06)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove fixes - ([e90953e](https://github.com/kristof-mattei/docker-dns-rs/commit/e90953e4eba7037818de69e8067faa244f6259a0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- switch to auto config - ([71ec2d9](https://github.com/kristof-mattei/docker-dns-rs/commit/71ec2d96c2778dc3c8c9359840b7c43f18323f44)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- instrument coverage is stable! - ([cd2a8e6](https://github.com/kristof-mattei/docker-dns-rs/commit/cd2a8e618131056b33df7711cac1da6d7e267e9c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ignore merge commit linting - ([314180a](https://github.com/kristof-mattei/docker-dns-rs/commit/314180a6a826335dfab4d4425fc29b474871ab33)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- auto dependabot merge - ([cdc772a](https://github.com/kristof-mattei/docker-dns-rs/commit/cdc772a475f030e5135f22ced30af4a74129b8b2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set code climate filter - ([e171505](https://github.com/kristof-mattei/docker-dns-rs/commit/e17150556571145f9295d3f6ed46eb372485b262)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed spaces - ([15a0f18](https://github.com/kristof-mattei/docker-dns-rs/commit/15a0f18752a64ce109f269bd8eb362334982b327)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- no need to bring in action just for this - ([faa92dc](https://github.com/kristof-mattei/docker-dns-rs/commit/faa92dc31731b248339b30e9c2c583164f37afce)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add linebreak - ([4712a1f](https://github.com/kristof-mattei/docker-dns-rs/commit/4712a1f6df2e3005b70e49cc4d6a097d0645a455)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also keep tests - ([a746b08](https://github.com/kristof-mattei/docker-dns-rs/commit/a746b08a460aafa5b984303dc4527ef0046dcbe8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- filter out lcov - ([60e9e4e](https://github.com/kristof-mattei/docker-dns-rs/commit/60e9e4eb97e40080a4c4ec563c27675404e370a9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- tag -> sha - ([7be092d](https://github.com/kristof-mattei/docker-dns-rs/commit/7be092dfdf25244113b8695cf94e7edae3a4ec23)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove dependency on build to run on main - ([0a6b0c6](https://github.com/kristof-mattei/docker-dns-rs/commit/0a6b0c66405b44a17ba512cb8f56f64ee4420c9f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use correct subcommand - ([96fa7aa](https://github.com/kristof-mattei/docker-dns-rs/commit/96fa7aa0d712a2d8feb188ad28587b5f0e697de1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- code climate test reporter - ([9c58b72](https://github.com/kristof-mattei/docker-dns-rs/commit/9c58b72f8b04698b8ef901e4e19ae642f3c99e8e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- typo in env variable - ([d4e47fa](https://github.com/kristof-mattei/docker-dns-rs/commit/d4e47faa41b598137d3e60418a7f4d9d8f8a0921)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- install llvm tools - ([3d5b63b](https://github.com/kristof-mattei/docker-dns-rs/commit/3d5b63b77c7c0b431c4f547c7b429a5266703637)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- merge steps for testbased coverage - ([a7b74e1](https://github.com/kristof-mattei/docker-dns-rs/commit/a7b74e1637ac50f4165507f491278386cb986244)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- corrected title - ([b3b0cb6](https://github.com/kristof-mattei/docker-dns-rs/commit/b3b0cb62e4b96f95daef20bc0d1ec6143e5d2e97)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- filename was wrong + comment update + rust-version bump - ([4371418](https://github.com/kristof-mattei/docker-dns-rs/commit/4371418d7fd70cd8faaee6d77b98c932905339b5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- grcov intstead of tarpaulin - ([d8f1fe1](https://github.com/kristof-mattei/docker-dns-rs/commit/d8f1fe173d6fe3efaa5aa2bb77ae0d988296c51b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- lock down sha256 of docker images - ([659aadd](https://github.com/kristof-mattei/docker-dns-rs/commit/659aadd292af52bade19aeebc00747c8ee3c808d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- missing package - ([a20bc10](https://github.com/kristof-mattei/docker-dns-rs/commit/a20bc107500b531f2e1b23d45ab86063ab125225)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- restored packages configuration - ([506eac8](https://github.com/kristof-mattei/docker-dns-rs/commit/506eac86ff59359bf45758ca4182eeea3069fdbf)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated to 2021 edition - ([cee0bd0](https://github.com/kristof-mattei/docker-dns-rs/commit/cee0bd0a17664f00947cc0d4bfe56fc178bcf9fe)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- merged configuration into 1 - ([db6004a](https://github.com/kristof-mattei/docker-dns-rs/commit/db6004ac753af69521dbb529916b5c9f0fdc293e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed unneeded linting file - ([7a6b3ed](https://github.com/kristof-mattei/docker-dns-rs/commit/7a6b3ed5d44dad4c4eb1360a73016200e4b10834)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try coveralls - ([2e06476](https://github.com/kristof-mattei/docker-dns-rs/commit/2e06476d20cb459d068c9b6daf1f4e2725559835)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use built-in rustup - ([1b2d13b](https://github.com/kristof-mattei/docker-dns-rs/commit/1b2d13b9889b833b3616e825e49714bdfcde2cc8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove cache exclusion - ([baee94e](https://github.com/kristof-mattei/docker-dns-rs/commit/baee94e4f6a90a8696c1e62b43c3d187083ab477)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- renamed step name - ([a7044ff](https://github.com/kristof-mattei/docker-dns-rs/commit/a7044ff77cf15d48660acb46621237e2aad81c82)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try coveralls - ([d7196c5](https://github.com/kristof-mattei/docker-dns-rs/commit/d7196c57c7fa793db927c58dadf8cf6c28bd7a67)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reordered cache restore and toolchain setup - ([5f08e37](https://github.com/kristof-mattei/docker-dns-rs/commit/5f08e374bcb75cc7d1eccd519884f069d05ce758)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ensure we're logged in to use the registry cache - ([994a73c](https://github.com/kristof-mattei/docker-dns-rs/commit/994a73c7c3d49280a7f5b7f6110859bafb7ba1c2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set the right variable - ([18978f8](https://github.com/kristof-mattei/docker-dns-rs/commit/18978f8e875aec0a31553f3ab5dd6d6d998b44f8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set git user and email so that cog bump works - ([01efb04](https://github.com/kristof-mattei/docker-dns-rs/commit/01efb04af74d945bd368152b9281f4ab2d551209)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reduced complexity tied to semantic release because cog doesn't need it - ([21ed988](https://github.com/kristof-mattei/docker-dns-rs/commit/21ed98844785b0addf90a083e624e26aa92e08d8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- npm cleanup - ([12b30b3](https://github.com/kristof-mattei/docker-dns-rs/commit/12b30b3877504b61ec1157e9fc3350ad1f219830)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add commit linting - ([141820a](https://github.com/kristof-mattei/docker-dns-rs/commit/141820aabf5b6a5823bb6c1080304797884187c5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- rebuild when NPM packages change - ([43b4a7f](https://github.com/kristof-mattei/docker-dns-rs/commit/43b4a7fcce073b3ab19ea9d44d2cc8a3189dc285)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't fail tarpaulin when a test fails - ([b065efa](https://github.com/kristof-mattei/docker-dns-rs/commit/b065efadf1e005dcc2c4c4ed8a7ddc74627bcf1b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- -y to accept defaults - ([9280bfc](https://github.com/kristof-mattei/docker-dns-rs/commit/9280bfc01863ebac2baa024c28a447e2cc52098d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set up toolchain manually - ([f5f92d6](https://github.com/kristof-mattei/docker-dns-rs/commit/f5f92d6794df30cf70f7ad9963cd00c2367f1591)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fixed wrong needs name - ([977e159](https://github.com/kristof-mattei/docker-dns-rs/commit/977e1592730e0ac018d1d6e1c7dfcc3a41ff4bfb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- the world is ok - ([b9c1196](https://github.com/kristof-mattei/docker-dns-rs/commit/b9c119625d8f140e0e249ff5fcdafa55db969c0b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- corrected build dependencies, all-done work be a success if docker-build failed - ([ee3789d](https://github.com/kristof-mattei/docker-dns-rs/commit/ee3789db3225903b09255799f34df000d4b79462)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- infer components from rust-toolchain.toml - ([e8aa97d](https://github.com/kristof-mattei/docker-dns-rs/commit/e8aa97da616b81fc8fbdfff829f6b820cac90513)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try with profile and toolchain specified here - ([05991b7](https://github.com/kristof-mattei/docker-dns-rs/commit/05991b716bed23ab70dfc1c6d8cdbfc83489e408)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- getting toolchain file to work - ([15ae1ab](https://github.com/kristof-mattei/docker-dns-rs/commit/15ae1abfbcc6472cd29039c4ef13c720966b5520)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added rust-toolchain, symlinked to rust-toolchain.toml - ([cac0b9a](https://github.com/kristof-mattei/docker-dns-rs/commit/cac0b9aac7d25396a442e45dc3279ad9dd183eee)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- bumped rust version - ([c84b022](https://github.com/kristof-mattei/docker-dns-rs/commit/c84b02218ea3256f0138944b6939860a48236d7f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- synced tool invocation parameters - ([8417c23](https://github.com/kristof-mattei/docker-dns-rs/commit/8417c23b540cd56be8123b85a0796b12ada21740)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- install tarpaulin from source - ([9f1966c](https://github.com/kristof-mattei/docker-dns-rs/commit/9f1966ce22f42e508d223a35ee4b651768fc2786)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- alltargets for tarpaulin - ([3ba7006](https://github.com/kristof-mattei/docker-dns-rs/commit/3ba7006cd3bf3d027a0485aced51810837f41333)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added missing data - ([230c651](https://github.com/kristof-mattei/docker-dns-rs/commit/230c651afffa59e575e6d231d3334314df9179f3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- leverage setup-node's ability to read from .nvmrc - ([f78dc4c](https://github.com/kristof-mattei/docker-dns-rs/commit/f78dc4ce7a4008e34e43a367be283327926f8581)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated concurrency key - ([eda182b](https://github.com/kristof-mattei/docker-dns-rs/commit/eda182b9fd074b2f515ad546d2ac15ef450c9141)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- see if we can cache the whole .cargo directory - ([54d824f](https://github.com/kristof-mattei/docker-dns-rs/commit/54d824f82fd2e12457feaeb08ed259d15960f33f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated cargo cache to use tilde again - ([e650509](https://github.com/kristof-mattei/docker-dns-rs/commit/e650509c93198c1ca654b7ad46bf0f672b6f101a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- corrected environment variable - ([40527e4](https://github.com/kristof-mattei/docker-dns-rs/commit/40527e48765c4a99008d3207173de249c1de0b81)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use environment variable to get cargo location - ([c57b6db](https://github.com/kristof-mattei/docker-dns-rs/commit/c57b6dbcf20fabf1cbbc3cb946e656855acf992d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- a change in build scripts should cause a full rebuild - ([4e3da47](https://github.com/kristof-mattei/docker-dns-rs/commit/4e3da4743be7b4043d46cd10c2f9a05c60c4fc1b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added npm to dependabot - ([f99a1cb](https://github.com/kristof-mattei/docker-dns-rs/commit/f99a1cbce03151e38279c081b2becd4478a5f87b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reran npm install with npm 8 to update package-lock - ([2f51f25](https://github.com/kristof-mattei/docker-dns-rs/commit/2f51f25cf9aec79943511b87b12d57e40224b6c3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- locked node version - ([5a7acea](https://github.com/kristof-mattei/docker-dns-rs/commit/5a7aceafe7488f93450bbeb494f400e5ef60193f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- renamed for clarity - ([319817f](https://github.com/kristof-mattei/docker-dns-rs/commit/319817fac4290114976eab8c87102278c8b87440)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- capture the rest, not the value called 'rest' - ([222ef7c](https://github.com/kristof-mattei/docker-dns-rs/commit/222ef7c6edd6c3011d8d70cb0af0ae6319899842)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- create reports directory, otherwise tool complains - ([15ef2e8](https://github.com/kristof-mattei/docker-dns-rs/commit/15ef2e83b9aff72e8986656d457e9439c2d1b7ba)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- variable correction - ([7e0baaa](https://github.com/kristof-mattei/docker-dns-rs/commit/7e0baaa911c814c430ee69d43edfe3433c189aec)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- forgot .rest - ([2cb78e7](https://github.com/kristof-mattei/docker-dns-rs/commit/2cb78e791ee76ef95925e61a4f7988fc427bdde2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- corrected library usage - ([ed8e289](https://github.com/kristof-mattei/docker-dns-rs/commit/ed8e289589a490b61dc229021fc860d1d52fbb89)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- handle script dependency - ([54be1b9](https://github.com/kristof-mattei/docker-dns-rs/commit/54be1b982120c880256a061895f15784d11752d9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- even dry-run wants a token - ([a1349fc](https://github.com/kristof-mattei/docker-dns-rs/commit/a1349fc215d87c4f5220496ae841c56776c9067f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- dry run still verifies push permissions - ([57b2cde](https://github.com/kristof-mattei/docker-dns-rs/commit/57b2cde87e49ce10c0e9b9b082eb0174409a2b0f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added skip-tags to prevent it from pushing tags - ([3806f32](https://github.com/kristof-mattei/docker-dns-rs/commit/3806f32e8b0e56462a525744feb93954a15e562e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- toUpper() - ([81ba43c](https://github.com/kristof-mattei/docker-dns-rs/commit/81ba43cd7ba41aad25165e5e2232dad00476b3a7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- aspiring comments - ([791bbed](https://github.com/kristof-mattei/docker-dns-rs/commit/791bbedad194c189fb9e35389f1c265c94df29da)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reduce docker tag complexity - ([d187184](https://github.com/kristof-mattei/docker-dns-rs/commit/d187184277fadc66b6c7027624ecb9340c1e2fd9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- initialize otherwise EXITCODE is not set on success, and then it still fails 😅 - ([6658ea7](https://github.com/kristof-mattei/docker-dns-rs/commit/6658ea7799a523b54b122ff6c8d5a33a18e2c7c6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- --quiet isn't quiet - ([764ef0a](https://github.com/kristof-mattei/docker-dns-rs/commit/764ef0ab2140b0b80cf53b476ba6525b3a873b4e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- forgot to put back line to add SHA to $env - ([5e2a12a](https://github.com/kristof-mattei/docker-dns-rs/commit/5e2a12a1eea0baa55a445077396f9468a1a16e3e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reduced parent^2 detection complexity - ([2fab698](https://github.com/kristof-mattei/docker-dns-rs/commit/2fab698158059e4ad8f2c9cc44a553beba68f826)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- split build and push for faster overall times - ([83d504e](https://github.com/kristof-mattei/docker-dns-rs/commit/83d504eb164a50cdd52f850b144a71b467c3cf04)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove be - ([21d027b](https://github.com/kristof-mattei/docker-dns-rs/commit/21d027bdf904697f96c9fe4adfe91fd2cf081d4f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed needs for docker-build to allow parallel operation - ([64986f6](https://github.com/kristof-mattei/docker-dns-rs/commit/64986f67e074439c1433011d5b27eafc725c35e4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix for too much action... - ([8256387](https://github.com/kristof-mattei/docker-dns-rs/commit/8256387796424f2cd5066452cf17a32f0cbe8f35)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- switched to fixed commits for actions - ([2bd59a8](https://github.com/kristof-mattei/docker-dns-rs/commit/2bd59a85d847c6cbe5ce39038e25666c99086674)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed submodules, going direct - ([2e2a71c](https://github.com/kristof-mattei/docker-dns-rs/commit/2e2a71c68a23764369cf67dfc485c9a76372dad2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- centralized names - ([2e2345b](https://github.com/kristof-mattei/docker-dns-rs/commit/2e2345b2f1337ed5c99dea090d94de2b4b932949)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fake commit - ([80eec6e](https://github.com/kristof-mattei/docker-dns-rs/commit/80eec6ed5bdf245ca071780face928adf95848f4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove duplicated login - ([03eeddf](https://github.com/kristof-mattei/docker-dns-rs/commit/03eeddf662f5ebafb049c945d052340c8ee0d7e6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- 2nd param is dest, not flags, null to infer destination though - ([6db1ca8](https://github.com/kristof-mattei/docker-dns-rs/commit/6db1ca87785155c6e124dd99782acd5d9967778f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- arguments go into an array - ([9c6ff93](https://github.com/kristof-mattei/docker-dns-rs/commit/9c6ff93cb599504352c601e3e9f34790859a86d5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't try extract bz2 as gzip - ([edd13c8](https://github.com/kristof-mattei/docker-dns-rs/commit/edd13c85f1f11c38e7bd1be2a1e8a4210346797a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- download grcov from releases, WAY faster - ([9a8c19b](https://github.com/kristof-mattei/docker-dns-rs/commit/9a8c19b538ae5c3cff200aa2460d03055ee1d14b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- make sure husky doesn't install on CI servers - ([6908d84](https://github.com/kristof-mattei/docker-dns-rs/commit/6908d84e175ffab99bd18227bcbd515e0020c778)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- username.toLowerCase() - ([3c41052](https://github.com/kristof-mattei/docker-dns-rs/commit/3c410523e2c154652a3564511bbc90fde0710bb3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- bumped cargo version - ([f47f7d0](https://github.com/kristof-mattei/docker-dns-rs/commit/f47f7d0d5f7c6ba227002ba705a58f2fdf05aa2b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- codecov - ([1f6458f](https://github.com/kristof-mattei/docker-dns-rs/commit/1f6458f7eeb0ba5dd85d02ebcd67734c4dbd5623)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- enabled codecov - ([70a7b60](https://github.com/kristof-mattei/docker-dns-rs/commit/70a7b60de32c66a3c0315f67d0f8278d91fc797a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-#### Continuous Integration
-- Fail done properly - ([9a420bf](https://github.com/kristof-mattei/docker-dns-rs/commit/9a420bf23ae315b64a7a0d20734de30db6ac01df)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- correctly report test failure - ([6250142](https://github.com/kristof-mattei/docker-dns-rs/commit/6250142008a5f74fad09c6088fa64ec87d5c49a5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set test comment mode - ([137affd](https://github.com/kristof-mattei/docker-dns-rs/commit/137affd7ddec571febf32f235fa26ac8702da2eb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't consider it 'all-done' when anything is cancelled - ([4fdc19d](https://github.com/kristof-mattei/docker-dns-rs/commit/4fdc19df0990801ebaf40f25fa955eb22f3f1946)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set nice name - ([22f0bca](https://github.com/kristof-mattei/docker-dns-rs/commit/22f0bcaf26b62359c2afd18cfad6fb280baf3d85)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- exclude rustfmt and cargo-fmt from the cache as rustup doesn't like that - ([2c04592](https://github.com/kristof-mattei/docker-dns-rs/commit/2c04592da28a24dc92b3f1025345654ed51d84cb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use built-in rustup - ([5a98432](https://github.com/kristof-mattei/docker-dns-rs/commit/5a9843252f358198ac7b43bb06825052e7be3fa7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- exclude rustfmt and cargo-fmt from the cache as rustup doesn't like that - ([d95f77f](https://github.com/kristof-mattei/docker-dns-rs/commit/d95f77ffd16ffa56db736e564928aa4726a7c224)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated generated cache name - ([4aa7084](https://github.com/kristof-mattei/docker-dns-rs/commit/4aa7084bddacb70518081f6a5872d4896f3bfd81)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fixed rustup update warning about rustfmt and cargo-fmt - ([bb187f3](https://github.com/kristof-mattei/docker-dns-rs/commit/bb187f384fb1042f363b9d756afc7aa64f5c852b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use built-in rustup - ([e3a791a](https://github.com/kristof-mattei/docker-dns-rs/commit/e3a791a527a9f0e5b8a7696dd310d08f394ca4ce)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- no need to run clippy on push to main - ([44890f7](https://github.com/kristof-mattei/docker-dns-rs/commit/44890f764e814f9d99b92f43fd720cb2ab3998f3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set the checkout name - ([a8a45b4](https://github.com/kristof-mattei/docker-dns-rs/commit/a8a45b4f6ff2ef4783a60d0ddf99a519069e9f0a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use registry cache - ([6e66668](https://github.com/kristof-mattei/docker-dns-rs/commit/6e66668788e41a33e2efa36edf74297e83e58a13)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- respect cargo.lock when doing cargo install - ([20b7f38](https://github.com/kristof-mattei/docker-dns-rs/commit/20b7f38541eb2641b99ede169a18b4323deae8b2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also run clippy when merged to main to track progress - ([bccc597](https://github.com/kristof-mattei/docker-dns-rs/commit/bccc59739a8d274a06f093a2b625b09195d03ce0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- expanded clippy warnings - ([01272f6](https://github.com/kristof-mattei/docker-dns-rs/commit/01272f622b1a588f3fb064c82203222da3f29252)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- aligned commandline parameters - ([fd9d518](https://github.com/kristof-mattei/docker-dns-rs/commit/fd9d51865bd14d729d49d15a6de25fb53a42c869)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- prevent clippy from running twice - ([5db45b9](https://github.com/kristof-mattei/docker-dns-rs/commit/5db45b9964d66de7d9d5377748158bdd624b5bbf)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated task name - ([10882f2](https://github.com/kristof-mattei/docker-dns-rs/commit/10882f2f181ae6d5e441dc8327c37ac729671261)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix condition - ([02df130](https://github.com/kristof-mattei/docker-dns-rs/commit/02df1304baa8a2b096b8e0f29b93eaf6faa552e6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- testing new flow - ([8d9c25a](https://github.com/kristof-mattei/docker-dns-rs/commit/8d9c25a2ff7b97357fd5f385eaf5cf801995d2f4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- give more permissions for dry-run - ([1d5cbf0](https://github.com/kristof-mattei/docker-dns-rs/commit/1d5cbf0ba44ead2afaa0e94bf967155758e8577d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- skip tag, we don't want to give this one rights to push - ([278546c](https://github.com/kristof-mattei/docker-dns-rs/commit/278546c990fc0937d60403b661ac555cee8a966d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- wrong script name - ([517cb82](https://github.com/kristof-mattei/docker-dns-rs/commit/517cb822538623679fcd57d5aaba79317038ee97)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- hack around semantic-release some more - ([3bd1a9c](https://github.com/kristof-mattei/docker-dns-rs/commit/3bd1a9c0f70f33abdc0f51b68ddb6b02cfa298af)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- work around semantic-release restrictions - ([63a6315](https://github.com/kristof-mattei/docker-dns-rs/commit/63a63159018ab9b7806dd669768fcfdc06f6c6b1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- better way to check out the head? - ([04c1587](https://github.com/kristof-mattei/docker-dns-rs/commit/04c1587aea423444d50b9b63ebd78a74b5ec895c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed duplicate version id - ([97ee09a](https://github.com/kristof-mattei/docker-dns-rs/commit/97ee09a29da6ccedb4591b9cd91d1520506cad58)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try get last tag - ([a37253e](https://github.com/kristof-mattei/docker-dns-rs/commit/a37253eb904612f60e0a6e4ea2a891cf7a76e051)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- can't go without --no-ci - ([29fbe92](https://github.com/kristof-mattei/docker-dns-rs/commit/29fbe92afa714985de7f0c6fc8c779a8caaeca04)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- just trying to get  this to work - ([b5478dd](https://github.com/kristof-mattei/docker-dns-rs/commit/b5478dd32304377204c6d7b8960ac877f5af19f4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- semantic-release doesn't like refs/pulls/12/merge, surrounding with quotes to test - ([c3acbf5](https://github.com/kristof-mattei/docker-dns-rs/commit/c3acbf55e23ecd55e4d280efdfc3bb1d7ccfa834)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- hack the semantic-release - ([65bd2eb](https://github.com/kristof-mattei/docker-dns-rs/commit/65bd2ebb3aeea525700fab234db4499581e11fa8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- flip aroud switches until we find the right combination - ([1c225f6](https://github.com/kristof-mattei/docker-dns-rs/commit/1c225f6c17d71594ab8fbb751d5de52df0d821d1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- I used the wrong script - ([7dcc44d](https://github.com/kristof-mattei/docker-dns-rs/commit/7dcc44d2c43e506d4b436c1fdf43bd9cabf3da33)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove spurious ) - ([5a81c7e](https://github.com/kristof-mattei/docker-dns-rs/commit/5a81c7e34b0dbe620524c8399eb6a4f56083084c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ensure checkout so that we have a package-lock - ([4eeb52e](https://github.com/kristof-mattei/docker-dns-rs/commit/4eeb52e02e4eb3c18f39edadbdafe4ed3b47b2fb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add dry-run to make sure we don't publish preemptively - ([5285cee](https://github.com/kristof-mattei/docker-dns-rs/commit/5285cee32977ef1ada378dc306c20b9c5f08ccb5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reduce unneeded builds - ([ed49297](https://github.com/kristof-mattei/docker-dns-rs/commit/ed49297faf6c0300cbfe42ae5b4b5d7fcfbbf091)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set version number of Rust binary at build time - ([5746431](https://github.com/kristof-mattei/docker-dns-rs/commit/57464314eadd600e6ceb395041d8ba6f33c3afb5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added final step - ([ea08b74](https://github.com/kristof-mattei/docker-dns-rs/commit/ea08b74d52466ba5ae07af106737e036b27ce0b1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix space - ([023334b](https://github.com/kristof-mattei/docker-dns-rs/commit/023334b405aabed437cbb00a6f9152f259f30830)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- forgot dependency - ([24064f8](https://github.com/kristof-mattei/docker-dns-rs/commit/24064f83d4cb48e7b908485d1a1c0104e6b07bc4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- debugging changelog printing issues - ([cf9a3de](https://github.com/kristof-mattei/docker-dns-rs/commit/cf9a3de23bf33ea746cd56d0c50b15b3825aca52)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added comment for future me <insert 88mph joke> - ([1c4c032](https://github.com/kristof-mattei/docker-dns-rs/commit/1c4c0321a161d6719796b0724a13eb754b2125c8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed unneeded print - ([045ea6c](https://github.com/kristof-mattei/docker-dns-rs/commit/045ea6c8ecceed3918dd2c5307cbae9e56ff1864)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- spelling correction - ([78e52a8](https://github.com/kristof-mattei/docker-dns-rs/commit/78e52a882d3cc7e22e17e4457e870f9b3b7534d2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- copy tags with docker tags again - ([8ffcf1e](https://github.com/kristof-mattei/docker-dns-rs/commit/8ffcf1ed1de7a080abcea97328b049bf909a1dba)) - [@kristof-mattei](https://github.com/kristof-mattei)
-#### Features
-- hickory dns 0.25.1 - ([23fdbd9](https://github.com/kristof-mattei/docker-dns-rs/commit/23fdbd921e010a25e14d5dca60b9d052482e0867)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- get rid of semantic release, use cocogitto - ([a4b5e8c](https://github.com/kristof-mattei/docker-dns-rs/commit/a4b5e8cf58786d438cccee5678dcad0bc1fdcdb2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- support for releasing crates - ([6da4854](https://github.com/kristof-mattei/docker-dns-rs/commit/6da485494a7d16767c01b0255eae49fff6cb6dcf)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- docker multiplatform - ([c1f9221](https://github.com/kristof-mattei/docker-dns-rs/commit/c1f922116dd2e78d149247667a514f3bb4724aa1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- arm64 build - ([26ca7f4](https://github.com/kristof-mattei/docker-dns-rs/commit/26ca7f461753abf523e4e1ed0e2232b826416b50)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- codecov - ([fac48b6](https://github.com/kristof-mattei/docker-dns-rs/commit/fac48b684db19cf74aae4afbf77783a9d31cacc2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- multi-platform images - ([45196bd](https://github.com/kristof-mattei/docker-dns-rs/commit/45196bd6bd8801472a6db0b76278fbeaa54c1ca1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- generalize dockerfile - ([be4e9a5](https://github.com/kristof-mattei/docker-dns-rs/commit/be4e9a5fe9cc34bcd239080845ace4c6a631ba97)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- sync-repo-settings first pass - ([0d88baa](https://github.com/kristof-mattei/docker-dns-rs/commit/0d88baa34a3d7b167028941aafdf32e5c464b9c2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- more rust 1.62 - ([628756b](https://github.com/kristof-mattei/docker-dns-rs/commit/628756bf8790f9ffe84ac5cb3ff37baac70c7fcc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- devcontainer - ([1d77ed5](https://github.com/kristof-mattei/docker-dns-rs/commit/1d77ed59fbf4915e3b1393867d56ec36a22f9b42)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- upgrade semgrep to latest version - ([c7dc4f5](https://github.com/kristof-mattei/docker-dns-rs/commit/c7dc4f5bf96c15784a6b6b5c7ff260a15f244dcd)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- Rust 1.61.0 - ([c130478](https://github.com/kristof-mattei/docker-dns-rs/commit/c130478ad91eaf6b1cea04a2cfe57f6e926efa92)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- rust 1.60.0 - ([0180532](https://github.com/kristof-mattei/docker-dns-rs/commit/0180532b1e432662ccb7908ebc98d39ad501a227)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- rust 1.58.0 - ([3ac03e8](https://github.com/kristof-mattei/docker-dns-rs/commit/3ac03e829ae931369967728de3326294446a53e5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use shell - ([2a266e9](https://github.com/kristof-mattei/docker-dns-rs/commit/2a266e93167b8a39c482a8a615e12ecd5ddc4c21)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use cog - ([146fdca](https://github.com/kristof-mattei/docker-dns-rs/commit/146fdca905e0a1d268eb9750934e3204803be68b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- grcov -> tarpaulin - ([a37fa30](https://github.com/kristof-mattei/docker-dns-rs/commit/a37fa307247860f4071f31a569506b1bc8544045)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allowed for concurrent building of docker container - ([7a99b3b](https://github.com/kristof-mattei/docker-dns-rs/commit/7a99b3b303846cb1a98e80f54f5950faee7fc28a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use crane as tool instead of elaborate docker setup - ([a5bc70b](https://github.com/kristof-mattei/docker-dns-rs/commit/a5bc70b9231c9fe16b4594e6349d75f5c0986932)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added Quz and test - ([07ee173](https://github.com/kristof-mattei/docker-dns-rs/commit/07ee173edd9983669abfac91aa60245c7347d911)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- initial commit - ([7af0684](https://github.com/kristof-mattei/docker-dns-rs/commit/7af0684c86b197699123cc67d0d87ec66fbd1e2e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-#### Miscellaneous Chores
-- **(deps)** lock file maintenance - ([754b504](https://github.com/kristof-mattei/docker-dns-rs/commit/754b5040d37a516f7e93e9937c40b40d7f16554d)) - renovate[bot]
-- **(deps)** bump color eyre - ([9fce677](https://github.com/kristof-mattei/docker-dns-rs/commit/9fce677fbd4925a440836a719347d6cfc634b4ce)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- **(deps)** update github/codeql-action action to v3.28.17 - ([17f73f2](https://github.com/kristof-mattei/docker-dns-rs/commit/17f73f25aa6904a9e1d0aea6283c4780d13ab64e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.17 - ([4547bae](https://github.com/kristof-mattei/docker-dns-rs/commit/4547baebd95941da9033f36b7a08bb39d5054884)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 640960f - ([c1f3eb1](https://github.com/kristof-mattei/docker-dns-rs/commit/c1f3eb1f46b57ba838f485c0e956ad65462f62ed)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 640960f - ([3adf2d8](https://github.com/kristof-mattei/docker-dns-rs/commit/3adf2d8c336527a61b7700692083fb4e5f2bb6a0)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to f2b92e8 - ([f5853e2](https://github.com/kristof-mattei/docker-dns-rs/commit/f5853e2020546c7e0ce5482a22b8a8638738b447)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to f2b92e8 - ([7af3300](https://github.com/kristof-mattei/docker-dns-rs/commit/7af33007c943cdb2a6238a70c681f8017486d53b)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 173b003 - ([1b21c43](https://github.com/kristof-mattei/docker-dns-rs/commit/1b21c431fd2f874a41ec2d8463d83db12558a945)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 173b003 - ([93a1e96](https://github.com/kristof-mattei/docker-dns-rs/commit/93a1e96a7919fc88b42828e9cc18fb8f6d0c4221)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 13e8910 - ([34299a1](https://github.com/kristof-mattei/docker-dns-rs/commit/34299a120094e943f73b313e98cc6c40bbe19f52)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 13e8910 - ([08a6f7e](https://github.com/kristof-mattei/docker-dns-rs/commit/08a6f7effae865c7622569983e87a4293f77d64f)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to ff735b1 - ([fb0cb27](https://github.com/kristof-mattei/docker-dns-rs/commit/fb0cb272a77e16353ad9fc8da101b2d164fc4c12)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.120.1 - ([7cc36f2](https://github.com/kristof-mattei/docker-dns-rs/commit/7cc36f2391a94eed142ee62a820b1fc149c75e7f)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to ff735b1 - ([de510a9](https://github.com/kristof-mattei/docker-dns-rs/commit/de510a913a1d46c76c315695e4233d09dbaba87e)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.120.1 - ([bff5381](https://github.com/kristof-mattei/docker-dns-rs/commit/bff5381109689fc58e9c79dc870e0235bc33a107)) - renovate[bot]
-- **(deps)** lock file maintenance - ([25540ce](https://github.com/kristof-mattei/docker-dns-rs/commit/25540cef0e82ad836e038f63bbf0033cf8a3a26e)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.3.0 - ([35e8915](https://github.com/kristof-mattei/docker-dns-rs/commit/35e891518e8d1fd96d4ac12bdf211c4f58dfb0dc)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.16.0 - ([ffca817](https://github.com/kristof-mattei/docker-dns-rs/commit/ffca817d8cacbeeb2cec28670a9c3fec8ed55ecf)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.3.0 - ([ecb1fbb](https://github.com/kristof-mattei/docker-dns-rs/commit/ecb1fbb72c7636ece268b5baab06afaccb12c4e2)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.16.0 - ([82dae1b](https://github.com/kristof-mattei/docker-dns-rs/commit/82dae1bcd49f043a43798d4bcb04fe0dda108977)) - renovate[bot]
-- **(deps)** update node.js to v22.15.0 - ([32236e5](https://github.com/kristof-mattei/docker-dns-rs/commit/32236e56ba4dccd8d1c45e044d46c203c58a42c0)) - renovate[bot]
-- **(deps)** update node.js to v22.15.0 - ([427aaea](https://github.com/kristof-mattei/docker-dns-rs/commit/427aaea83c5cbd31779c05e732ea6c6aa7f94850)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.16 - ([e7d1ad6](https://github.com/kristof-mattei/docker-dns-rs/commit/e7d1ad623f8e91c6ac55bcdb176d0a70cddec5bc)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.16 - ([3a5c972](https://github.com/kristof-mattei/docker-dns-rs/commit/3a5c9720baee896b8287af206d97d53062f776a0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.120.0 - ([004ee40](https://github.com/kristof-mattei/docker-dns-rs/commit/004ee40e7fe2e7a6be4f53d95df48b8f32f27a88)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.120.0 - ([b26690e](https://github.com/kristof-mattei/docker-dns-rs/commit/b26690ec8a476d26838749f0fe3d7893ab7ad547)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f262a04](https://github.com/kristof-mattei/docker-dns-rs/commit/f262a0446d29f9533ce3aa975882d1f127ebdeec)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fea67cb](https://github.com/kristof-mattei/docker-dns-rs/commit/fea67cba596f73a4687db71d4d4d29e5c5ec3afa)) - renovate[bot]
-- **(deps)** update softprops/action-gh-release action to v2.2.2 - ([4341abb](https://github.com/kristof-mattei/docker-dns-rs/commit/4341abb7d72dbe2f20a98b06d8a2e03edfa2a9fa)) - renovate[bot]
-- **(deps)** update softprops/action-gh-release action to v2.2.2 - ([14d5b73](https://github.com/kristof-mattei/docker-dns-rs/commit/14d5b73d2c1761a11dd2789ec7840bc3abc3ee4d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.119.0 - ([37f9b65](https://github.com/kristof-mattei/docker-dns-rs/commit/37f9b65a1dfbc9e7b6d45f5ba90aa98f55d1f2d4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.119.0 - ([addb3f7](https://github.com/kristof-mattei/docker-dns-rs/commit/addb3f7ca906e8330b8dff86f72ebe2e587d5dce)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.4.2 - ([1934566](https://github.com/kristof-mattei/docker-dns-rs/commit/1934566d00e9b2f92aa35ef6807b84624aa3b252)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.4.2 - ([80378ea](https://github.com/kristof-mattei/docker-dns-rs/commit/80378ea87ad2939a81492647938a5d97d96dde7f)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.4.0 - ([9a670e3](https://github.com/kristof-mattei/docker-dns-rs/commit/9a670e33d183049a9296e5f338357893042155e8)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.4.0 - ([2ef356b](https://github.com/kristof-mattei/docker-dns-rs/commit/2ef356bebcb2108238a9dcce50c7b11d5bf4a39b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([35d1ee0](https://github.com/kristof-mattei/docker-dns-rs/commit/35d1ee00addfbd0478142f66317900c9825362eb)) - renovate[bot]
-- **(deps)** lock file maintenance - ([d032fa5](https://github.com/kristof-mattei/docker-dns-rs/commit/d032fa5e6d1d5c62252e127afed69a9eefab5e61)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to a87c2e8 - ([0fcab78](https://github.com/kristof-mattei/docker-dns-rs/commit/0fcab78974cdb91b27c5958f3eaf0b6037aeb11f)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to a87c2e8 - ([6d2612e](https://github.com/kristof-mattei/docker-dns-rs/commit/6d2612ec5a350c5a99d398de21bd529a67cbd0e0)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.17.2 - ([9474605](https://github.com/kristof-mattei/docker-dns-rs/commit/94746053dbc5658ead0b9a30ce3ce9fda577bcc6)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.17.2 - ([e6977ae](https://github.com/kristof-mattei/docker-dns-rs/commit/e6977aecc9494a5f0187f6e6ac2394b11b1ff2d2)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.17.1 - ([11f3ff4](https://github.com/kristof-mattei/docker-dns-rs/commit/11f3ff408b35974e10cbac99e5db7ef69459bf09)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.118.0 - ([9277560](https://github.com/kristof-mattei/docker-dns-rs/commit/9277560d2e2987556e7ea4ebcd1c223eacd791a6)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 7b65306 - ([14d0a92](https://github.com/kristof-mattei/docker-dns-rs/commit/14d0a92d8cad7c16b6e76d15b4105f03be33b7ea)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.118.0 - ([b3f6b3d](https://github.com/kristof-mattei/docker-dns-rs/commit/b3f6b3d1f9de4aae48f727a3cb40f0ff2c2c4f63)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 7b65306 - ([fa0aa05](https://github.com/kristof-mattei/docker-dns-rs/commit/fa0aa05c4235cb3d2b610a92b87fd69ffcd7e721)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.17.1 - ([739b3e0](https://github.com/kristof-mattei/docker-dns-rs/commit/739b3e0bb5d657aa39452f0f4b0b409b7f9ccb12)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 947c462 - ([d0417b5](https://github.com/kristof-mattei/docker-dns-rs/commit/d0417b5fbe88df45b422a324f149f241866c676b)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 9fdf93f - ([818278e](https://github.com/kristof-mattei/docker-dns-rs/commit/818278e4540b5078709e05b587551c4e04c82b99)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 9fdf93f - ([823eb11](https://github.com/kristof-mattei/docker-dns-rs/commit/823eb1150015e4774e9fe1809640276fd4ddd027)) - renovate[bot]
-- **(deps)** update npm to >=11.3.0 - ([772d43b](https://github.com/kristof-mattei/docker-dns-rs/commit/772d43bc2e18106537b70c2820bf187fb364048a)) - renovate[bot]
-- **(deps)** update npm to >=11.3.0 - ([20b6780](https://github.com/kristof-mattei/docker-dns-rs/commit/20b6780695f7e58646a789269e32be125196bd7a)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.17.0 - ([ac2b6eb](https://github.com/kristof-mattei/docker-dns-rs/commit/ac2b6ebe4b16140fbf546f911700d961144386c0)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.17.0 - ([d3c9452](https://github.com/kristof-mattei/docker-dns-rs/commit/d3c9452f9c17410ed59ef496cf31ce41baa20739)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 6a6dda6 - ([c66b89b](https://github.com/kristof-mattei/docker-dns-rs/commit/c66b89bd22f0a91c06597fb006d4bbf75a0ae4c6)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 6a6dda6 - ([5ba2671](https://github.com/kristof-mattei/docker-dns-rs/commit/5ba2671700f2a48279111230d1ccfd4c61929a43)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 2494472 - ([d3512f1](https://github.com/kristof-mattei/docker-dns-rs/commit/d3512f13a3b91e6039b3af7818265b5fc31b953e)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 2494472 - ([855617d](https://github.com/kristof-mattei/docker-dns-rs/commit/855617da59ac2931019010fa805d4ebfc6ce8e1f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.15 - ([974f9bb](https://github.com/kristof-mattei/docker-dns-rs/commit/974f9bb47d9736891483d10570f813fb369c4e8a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.15 - ([55e14b0](https://github.com/kristof-mattei/docker-dns-rs/commit/55e14b07984bea60af2428a481c426df90fdb3d7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.14 - ([7268816](https://github.com/kristof-mattei/docker-dns-rs/commit/72688166a7806f722bdf6fdd76c2ca0761e4cac7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.14 - ([9a20ad5](https://github.com/kristof-mattei/docker-dns-rs/commit/9a20ad5bfe025e1ab999f426460ef1fd126ab978)) - renovate[bot]
-- **(deps)** lock file maintenance - ([1ee6fb7](https://github.com/kristof-mattei/docker-dns-rs/commit/1ee6fb705d1ed7aab73796f3a837129a2ff9037a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([93999da](https://github.com/kristof-mattei/docker-dns-rs/commit/93999da1be588ed2fb2c20299a60a5ae50ab03a4)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.16.1 - ([0f86b2b](https://github.com/kristof-mattei/docker-dns-rs/commit/0f86b2b9ab7f610cdd4c6c451ab7b6c499aaafd2)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.16.1 - ([173a57e](https://github.com/kristof-mattei/docker-dns-rs/commit/173a57e292e6390fb64948f0545d489745779d9f)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 563b33d - ([a8f1942](https://github.com/kristof-mattei/docker-dns-rs/commit/a8f1942a6311363fea3496858beba31acc77ef17)) - renovate[bot]
-- **(deps)** update rust:1.86.0 docker digest to 563b33d - ([6412c53](https://github.com/kristof-mattei/docker-dns-rs/commit/6412c534686cb7eb86125f5ef26d40fb6a714396)) - renovate[bot]
-- **(deps)** update rust to v1.86.0 - ([0b5f3c7](https://github.com/kristof-mattei/docker-dns-rs/commit/0b5f3c7b4cc1a6ded2e96949d134305102007367)) - renovate[bot]
-- **(deps)** update rust to v1.86.0 - ([6816afe](https://github.com/kristof-mattei/docker-dns-rs/commit/6816afe5bf9430358a6217f8ecd6f104957dbe8d)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.86.0 - ([b237d68](https://github.com/kristof-mattei/docker-dns-rs/commit/b237d68a4a4da628092451cddb0cd515449a6b4b)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.86.0 - ([271c342](https://github.com/kristof-mattei/docker-dns-rs/commit/271c34269f650cd506324976c3000e692e8476f7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.117.0 - ([f33572c](https://github.com/kristof-mattei/docker-dns-rs/commit/f33572c3a93bcc0d7f880e6cca1160e1633211bc)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.117.0 - ([b86c7ed](https://github.com/kristof-mattei/docker-dns-rs/commit/b86c7ed3b047639888672660d2e56bb1c074b771)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to e16410e - ([26b7631](https://github.com/kristof-mattei/docker-dns-rs/commit/26b763109b8613191602236e50681299393e32f4)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to e16410e - ([43805d0](https://github.com/kristof-mattei/docker-dns-rs/commit/43805d07a64af2944794b6c166278ef01c21a32d)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.19.0 - ([f6e0130](https://github.com/kristof-mattei/docker-dns-rs/commit/f6e013075e6fb7328df8f13d98a2f666cc087c07)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.19.0 - ([1aad1a4](https://github.com/kristof-mattei/docker-dns-rs/commit/1aad1a4102d84ef92a999520b28549da1501e6ca)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8ed0ac0](https://github.com/kristof-mattei/docker-dns-rs/commit/8ed0ac02243eb94eb4a9bb434e6aba03eebebc5a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([244e700](https://github.com/kristof-mattei/docker-dns-rs/commit/244e7000c11a7f2af739eeaceeb68875c51b994f)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.16.0 - ([d8eea8f](https://github.com/kristof-mattei/docker-dns-rs/commit/d8eea8fa400e764095cc14bb355467debe933529)) - renovate[bot]
-- **(deps)** update dependency prettier-plugin-sh to v0.16.0 - ([ab9228f](https://github.com/kristof-mattei/docker-dns-rs/commit/ab9228fa509b05106f26e2f34d12389b2c5c5753)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.116.0 - ([79e5f1f](https://github.com/kristof-mattei/docker-dns-rs/commit/79e5f1f4e6590e9adfc5f50f4ddbe7f6bbbc9b0b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.116.0 - ([4806b08](https://github.com/kristof-mattei/docker-dns-rs/commit/4806b08a975e9d3c9ada5a1f80f0fb8d339e9494)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.13 - ([0e62ca6](https://github.com/kristof-mattei/docker-dns-rs/commit/0e62ca6722c891b8bbf0022e27315265100d0205)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.13 - ([de2619a](https://github.com/kristof-mattei/docker-dns-rs/commit/de2619a919bfd33301bc2f8c512f20633e5832f7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([64b149b](https://github.com/kristof-mattei/docker-dns-rs/commit/64b149b567247ee08a20b586c56974a6fe3a13a3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.114.0 - ([7e0242d](https://github.com/kristof-mattei/docker-dns-rs/commit/7e0242d0f34254b91db48b96cea3bc71d8cc8fb6)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.114.0 - ([791cce7](https://github.com/kristof-mattei/docker-dns-rs/commit/791cce7d155947c7d9f07a7b47efb9c09fb8f8cc)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.12 - ([5f10cdd](https://github.com/kristof-mattei/docker-dns-rs/commit/5f10cddac40dbd974b5acc52523c40ac7ac563c1)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.6.2 - ([ae040fa](https://github.com/kristof-mattei/docker-dns-rs/commit/ae040fabe3c6dd394df4754be8cdbd8ae0cca510)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.6.2 - ([d9eb4b7](https://github.com/kristof-mattei/docker-dns-rs/commit/d9eb4b7d084ac77cf4d40890b6059fb1d2b5b8c9)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.2.1 - ([bb0de9d](https://github.com/kristof-mattei/docker-dns-rs/commit/bb0de9d085e91b5fa5c5e6cd2d369b239007c428)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.3 - ([cc3d005](https://github.com/kristof-mattei/docker-dns-rs/commit/cc3d0059d9f4edfad1cec606cee6a96445a68f74)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.3 - ([106a07a](https://github.com/kristof-mattei/docker-dns-rs/commit/106a07a76b200fc3b0f1fdc32586f9a7f8075ca8)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.2.1 - ([2de7e69](https://github.com/kristof-mattei/docker-dns-rs/commit/2de7e699a958b7d5e70f9fc24d56f47c7e77ebd2)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.12 - ([c7dee3e](https://github.com/kristof-mattei/docker-dns-rs/commit/c7dee3e9f3c39531a15da7f3c35c2bfb8b8e2515)) - renovate[bot]
-- **(deps)** update rust:1.85.1 docker digest to e51d026 - ([3a23008](https://github.com/kristof-mattei/docker-dns-rs/commit/3a230089f4285f08019e49517036434f56132b8e)) - renovate[bot]
-- **(deps)** update rust:1.85.1 docker digest to e51d026 - ([4f3f247](https://github.com/kristof-mattei/docker-dns-rs/commit/4f3f247b6f970691ea657a55a4e7ec3dc3f4bdf6)) - renovate[bot]
-- **(deps)** update rust:1.85.1 docker digest to 12ed23b - ([a79f77a](https://github.com/kristof-mattei/docker-dns-rs/commit/a79f77ad40872dc773016dd884005e7afb8d15df)) - renovate[bot]
-- **(deps)** update rust:1.85.1 docker digest to 12ed23b - ([50e4243](https://github.com/kristof-mattei/docker-dns-rs/commit/50e4243194cfa38c1b02726f799af9681e1b31a4)) - renovate[bot]
-- **(deps)** update rust to v1.85.1 - ([5a0c4e1](https://github.com/kristof-mattei/docker-dns-rs/commit/5a0c4e1d9365faae9edbb324c324adbfc9df4aa6)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.85.1 - ([6ee4807](https://github.com/kristof-mattei/docker-dns-rs/commit/6ee4807204df50f175b6805266f7b2f765d9951a)) - renovate[bot]
-- **(deps)** update rust to v1.85.1 - ([83c683e](https://github.com/kristof-mattei/docker-dns-rs/commit/83c683e5b26a0b8c84b2aea160f7ea213f6f2285)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.85.1 - ([36582bf](https://github.com/kristof-mattei/docker-dns-rs/commit/36582bf1f0c34fd60879e68c252945526383e122)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 0ff31c9 - ([1f8c440](https://github.com/kristof-mattei/docker-dns-rs/commit/1f8c4404a0700764c23185d750f82ed79359f828)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 0ff31c9 - ([f5b6a04](https://github.com/kristof-mattei/docker-dns-rs/commit/f5b6a046b8395ae833fdd4b09297232406d0e4e8)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.2.0 - ([bad75d6](https://github.com/kristof-mattei/docker-dns-rs/commit/bad75d6d45a13be23d9e942ab3358c9e40993e0b)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to e91bad1 - ([6336f75](https://github.com/kristof-mattei/docker-dns-rs/commit/6336f7537393ee42eb1b3311bbd5a4cda351cecd)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.2.0 - ([fc68e93](https://github.com/kristof-mattei/docker-dns-rs/commit/fc68e93f1971d89caae939ba0fdf47178ef6d43c)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 4522a7e - ([b0cbf5e](https://github.com/kristof-mattei/docker-dns-rs/commit/b0cbf5ee17fa8ed42253fe03f00dcfed44f13b26)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 4522a7e - ([286452e](https://github.com/kristof-mattei/docker-dns-rs/commit/286452e21a78c030a5ef26f111d766dc6494896f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.113.0 - ([bf6b968](https://github.com/kristof-mattei/docker-dns-rs/commit/bf6b96832e846edb13ca60c81a97205927e46753)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.113.0 - ([4cd6896](https://github.com/kristof-mattei/docker-dns-rs/commit/4cd689697b7ec74dc6d3f8c8e7d173bc10083986)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to e43bb4c - ([6623290](https://github.com/kristof-mattei/docker-dns-rs/commit/66232900b6c3b13c1fc35717d6fbda7a8668865e)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to e43bb4c - ([59f4b8b](https://github.com/kristof-mattei/docker-dns-rs/commit/59f4b8b62e919e0f324f77225d9f5b2328c329b2)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.3.0 - ([09f5aad](https://github.com/kristof-mattei/docker-dns-rs/commit/09f5aad68ce5e97d17d8f2535a14ab4529c62fa0)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.3.0 - ([35dbd18](https://github.com/kristof-mattei/docker-dns-rs/commit/35dbd18ba260235c9b6cda33a81e09998749fc94)) - renovate[bot]
-- **(deps)** lock file maintenance - ([eb2de62](https://github.com/kristof-mattei/docker-dns-rs/commit/eb2de627ab422dc6045ab4ced74a949190f982f3)) - renovate[bot]
-- **(deps)** lock file maintenance - ([adb33b9](https://github.com/kristof-mattei/docker-dns-rs/commit/adb33b9237e7ccb18d4951d88b1e020c6e998de1)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.4.0 - ([2bed9f5](https://github.com/kristof-mattei/docker-dns-rs/commit/2bed9f51ca5dcd676443d9a10510f450d1247ccc)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.4.0 - ([da5b4ef](https://github.com/kristof-mattei/docker-dns-rs/commit/da5b4ef051f4eeb371a8b40e85367b188a953eff)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.112.0 - ([488e660](https://github.com/kristof-mattei/docker-dns-rs/commit/488e6602441ef1f7a1353c6a256b13de5fc19f19)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.112.0 - ([1e41a8f](https://github.com/kristof-mattei/docker-dns-rs/commit/1e41a8fba704cb48d509b2ad0afbd9e0ea134034)) - renovate[bot]
-- **(deps)** update docker/setup-docker-action action to v4.3.0 - ([2debfb5](https://github.com/kristof-mattei/docker-dns-rs/commit/2debfb5aee95cdd885d7c5682251d767a94f3a64)) - renovate[bot]
-- **(deps)** update docker/setup-docker-action action to v4.3.0 - ([ad2d61d](https://github.com/kristof-mattei/docker-dns-rs/commit/ad2d61d4be70fdbd2c696443b053d29249b008da)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.1.0 - ([f80cf0a](https://github.com/kristof-mattei/docker-dns-rs/commit/f80cf0a056a9eb71db6c29b82ea29fe27a4b3a90)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.1.0 - ([65bbd25](https://github.com/kristof-mattei/docker-dns-rs/commit/65bbd2556bb31a44be784a3d473a61ff9084ab02)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f90b5d6](https://github.com/kristof-mattei/docker-dns-rs/commit/f90b5d6aabc46315aa431318b146d78eed15b1c3)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.11 - ([6629c4c](https://github.com/kristof-mattei/docker-dns-rs/commit/6629c4c86591bcceabd80444d69ebdcb89fa1128)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.11 - ([3d8dee6](https://github.com/kristof-mattei/docker-dns-rs/commit/3d8dee6f0df6905e934707b3d6cc39d90268f00a)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 80ccfb5 - ([f652a18](https://github.com/kristof-mattei/docker-dns-rs/commit/f652a1850f793dbf5f212033f9318f9fccff413d)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 80ccfb5 - ([6d0ee14](https://github.com/kristof-mattei/docker-dns-rs/commit/6d0ee1414d56e73c6c3b623d5a7eab5a77866ef7)) - renovate[bot]
-- **(deps)** update npm to >=11.2.0 - ([1711c75](https://github.com/kristof-mattei/docker-dns-rs/commit/1711c756be6883c67c98485c8466549465eb3a06)) - renovate[bot]
-- **(deps)** update npm to >=11.2.0 - ([db4ad9b](https://github.com/kristof-mattei/docker-dns-rs/commit/db4ad9b23bad781f9fe8a21975d8bef25e82b4a7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.111.0 - ([397efd3](https://github.com/kristof-mattei/docker-dns-rs/commit/397efd354f11ecb213610cca7a8bef6a808583ca)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to e15c642 - ([afd1d21](https://github.com/kristof-mattei/docker-dns-rs/commit/afd1d2125e9ec539515a590581f1e0fdc7759bd9)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to e15c642 - ([99fb357](https://github.com/kristof-mattei/docker-dns-rs/commit/99fb3573667cf0203f56576178218c9661c73458)) - renovate[bot]
-- **(deps)** lock file maintenance - ([559b8ef](https://github.com/kristof-mattei/docker-dns-rs/commit/559b8ef6b925c1f18ac3c7281ee87cee1ecbaf6d)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.3 - ([83e36ab](https://github.com/kristof-mattei/docker-dns-rs/commit/83e36ab63f46310d88e422eb1f20b1b1eb1ddb3b)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.3 - ([6ed0271](https://github.com/kristof-mattei/docker-dns-rs/commit/6ed027132e79495429459a8e85c1508e958c0efa)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.2 - ([9aa32ee](https://github.com/kristof-mattei/docker-dns-rs/commit/9aa32ee34debd6a1b30e6cda3a8968aec783cdbc)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.110.0 - ([808f3e5](https://github.com/kristof-mattei/docker-dns-rs/commit/808f3e57db1caef4c1a00061987b0a83df6d1305)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.2 - ([8f01438](https://github.com/kristof-mattei/docker-dns-rs/commit/8f014380ef5fc7befce0144ff9ef11782108ffa0)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.15.0 - ([7f2a2c8](https://github.com/kristof-mattei/docker-dns-rs/commit/7f2a2c81071ad92314e50ca516116c9524b2de77)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.4.0 - ([4c3619c](https://github.com/kristof-mattei/docker-dns-rs/commit/4c3619cd850968c277ced67bdfb5362fb55cbdb2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.110.0 - ([49c13ac](https://github.com/kristof-mattei/docker-dns-rs/commit/49c13ac22eb3419aec40b53a234bdab915870dc2)) - renovate[bot]
-- **(deps)** update docker/setup-docker-action action to v4.2.0 - ([60872ba](https://github.com/kristof-mattei/docker-dns-rs/commit/60872ba0c520f22f3633298fbb38855c03173d20)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.4.0 - ([89398b8](https://github.com/kristof-mattei/docker-dns-rs/commit/89398b8523c3572eb9b3de287ccf4414c415b030)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.7.0 - ([fb7af91](https://github.com/kristof-mattei/docker-dns-rs/commit/fb7af91ac778c3eb027073aacdd14b5915559590)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.10.0 - ([d094e6f](https://github.com/kristof-mattei/docker-dns-rs/commit/d094e6ffc030fd509e361f9219c18fafcad86b3e)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.10.0 - ([2680649](https://github.com/kristof-mattei/docker-dns-rs/commit/26806493c80a47b24b7135c56415d32b7e72a7c2)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.7.0 - ([586449e](https://github.com/kristof-mattei/docker-dns-rs/commit/586449e80624da03cea3048a1249e11e91402278)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.15.0 - ([e8a1160](https://github.com/kristof-mattei/docker-dns-rs/commit/e8a11606d4c353c2d8e91714e3fafc1de0cb7f20)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to caa4a0e - ([47c628f](https://github.com/kristof-mattei/docker-dns-rs/commit/47c628f5edad34d07667e5ceb4f34e9237151f3b)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to caa4a0e - ([b2e09bf](https://github.com/kristof-mattei/docker-dns-rs/commit/b2e09bf15a9b9d88c6bc23aadd85ea053055e043)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to f495f32 - ([729d9d3](https://github.com/kristof-mattei/docker-dns-rs/commit/729d9d349152d5fa5bc503c5ec78618142391f82)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to f495f32 - ([83ddaf7](https://github.com/kristof-mattei/docker-dns-rs/commit/83ddaf74f6611dd7aef5ddccef7d7b34bc3a5ec4)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.9 - ([939ba72](https://github.com/kristof-mattei/docker-dns-rs/commit/939ba72194d4133a7850d12e2a16ea0139cf77f4)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.9 - ([7594885](https://github.com/kristof-mattei/docker-dns-rs/commit/7594885459689cea99e2031f9cab18774dd15c7a)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 8e5fb4a - ([d5c4471](https://github.com/kristof-mattei/docker-dns-rs/commit/d5c4471d95922460c12787df0ac0a6da6d938caf)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 9285bed - ([795422e](https://github.com/kristof-mattei/docker-dns-rs/commit/795422efb79997a7793183aa5d936a9352cb93bb)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 9285bed - ([70c627e](https://github.com/kristof-mattei/docker-dns-rs/commit/70c627e6ae2d32b5a22ac7f026e451aaae7dc6ed)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to 21b52da - ([22d4577](https://github.com/kristof-mattei/docker-dns-rs/commit/22d45770c7f99e6ab0aaa063301c7685b5561a94)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6ef3d0b](https://github.com/kristof-mattei/docker-dns-rs/commit/6ef3d0b89f51b3c61a8746991dcbfcf401141e15)) - renovate[bot]
-- **(deps)** lock file maintenance - ([1fc6852](https://github.com/kristof-mattei/docker-dns-rs/commit/1fc6852754f961f59eab2eb396ddfa479605344b)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.2 - ([0341e00](https://github.com/kristof-mattei/docker-dns-rs/commit/0341e00bfebac58d4aab27ac1cc98a1c112cc586)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.2 - ([c7465dd](https://github.com/kristof-mattei/docker-dns-rs/commit/c7465dd854008b04b40ec682cd008c32b37bbab9)) - renovate[bot]
-- **(deps)** update docker/setup-docker-action action to v4.1.0 - ([43708f7](https://github.com/kristof-mattei/docker-dns-rs/commit/43708f71d1af8e5356dda4fb402e29b7510c22ab)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.6.1 - ([08c571f](https://github.com/kristof-mattei/docker-dns-rs/commit/08c571f87497491571893b9a4702f29b6f2c2709)) - renovate[bot]
-- **(deps)** pin docker/setup-docker-action action to 370a7da - ([980c947](https://github.com/kristof-mattei/docker-dns-rs/commit/980c9470d6a5c69d3165e764a9455e5a81067b61)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.6.1 - ([1180955](https://github.com/kristof-mattei/docker-dns-rs/commit/1180955ad21d209975aad7c17a5bb99c856e6bb0)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.10 - ([f8ed4ea](https://github.com/kristof-mattei/docker-dns-rs/commit/f8ed4ea6092a7c6139508506291b846884f6e91e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.10 - ([0789e67](https://github.com/kristof-mattei/docker-dns-rs/commit/0789e673ced2a860cb0a7054303094a41b9120b9)) - renovate[bot]
-- **(deps)** update rust to v1.85.0 - ([4719bcf](https://github.com/kristof-mattei/docker-dns-rs/commit/4719bcfb2acef1f0a6674b46aa7fb274202f5680)) - renovate[bot]
-- **(deps)** update rust:1.85.0 docker digest to ad7e5fd - ([d02e202](https://github.com/kristof-mattei/docker-dns-rs/commit/d02e202a2ce265049ef0c6baa1c1a035cef72a51)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.85.0 - ([e9cdaaf](https://github.com/kristof-mattei/docker-dns-rs/commit/e9cdaafefd7594e651743bc4b1fd1776b0da75ce)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.85.0 - ([d65e4a4](https://github.com/kristof-mattei/docker-dns-rs/commit/d65e4a4b6961598dc8778a8064a1a3b0b37eedd3)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check action to v2.2.1 - ([c9849c2](https://github.com/kristof-mattei/docker-dns-rs/commit/c9849c207424301f17ce70ae655378a14522196b)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check action to v2.2.1 - ([57b2b34](https://github.com/kristof-mattei/docker-dns-rs/commit/57b2b34081664e4d4e873f7beb06c9a675d81b8b)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.4 - ([fe9c606](https://github.com/kristof-mattei/docker-dns-rs/commit/fe9c606ad25a156ee8a4d8ca31a47116d2e1156e)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.109.0 - ([9d535f9](https://github.com/kristof-mattei/docker-dns-rs/commit/9d535f9361a9c6bb5af8d86647115f7ea0bbee7c)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.4 - ([9b62850](https://github.com/kristof-mattei/docker-dns-rs/commit/9b628506a2eafb4cd09971d912638e12687d3ce1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.109.0 - ([f033d41](https://github.com/kristof-mattei/docker-dns-rs/commit/f033d41c2fba53590be52e1e21fcfa779920521b)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.14.0 - ([e539fc1](https://github.com/kristof-mattei/docker-dns-rs/commit/e539fc1c517447cbeecc70241cac8849480f7b39)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.14.0 - ([79788c5](https://github.com/kristof-mattei/docker-dns-rs/commit/79788c5e78a69fa9ad97fbb6f6b3705ea5ab7ef8)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.1 - ([719e136](https://github.com/kristof-mattei/docker-dns-rs/commit/719e13684f8b56afc6ecaa1518ad9fa6bde6c9d2)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.1 - ([389870a](https://github.com/kristof-mattei/docker-dns-rs/commit/389870abe4a0f89973da5906ad1c1a4143333be3)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e501329](https://github.com/kristof-mattei/docker-dns-rs/commit/e5013293298b5fc42cd389c6f870c43f2dc92279)) - renovate[bot]
-- **(deps)** lock file maintenance - ([919fd1b](https://github.com/kristof-mattei/docker-dns-rs/commit/919fd1bdef9ee1a1e14016bde9cc46a7364805af)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.21.3 - ([081c9df](https://github.com/kristof-mattei/docker-dns-rs/commit/081c9df05aa0229b1094af58b187417f4aa19801)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.1 - ([538e41d](https://github.com/kristof-mattei/docker-dns-rs/commit/538e41d5b944814247762bfbf510901a9b42eb9a)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.1 - ([1197c91](https://github.com/kristof-mattei/docker-dns-rs/commit/1197c91e588ddbb5865348b0d653f151f64c6ec0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.108.0 - ([da846a3](https://github.com/kristof-mattei/docker-dns-rs/commit/da846a37d8761f0b50425cfcc727d08fb3140a8b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.108.0 - ([ad767ae](https://github.com/kristof-mattei/docker-dns-rs/commit/ad767ae22484086ce03eb59fbc941f31953f8a97)) - renovate[bot]
-- **(deps)** update node.js to v22.14.0 - ([67119d2](https://github.com/kristof-mattei/docker-dns-rs/commit/67119d2eb70b98f6252740e7148f5f7c43ce8386)) - renovate[bot]
-- **(deps)** update node.js to v22.14.0 - ([a70ac30](https://github.com/kristof-mattei/docker-dns-rs/commit/a70ac30751ae9e1383e551427fe5263d32741760)) - renovate[bot]
-- **(deps)** lock file maintenance - ([cfc2fe5](https://github.com/kristof-mattei/docker-dns-rs/commit/cfc2fe52a44e39a2a61af69158615ffd66e461b4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([c68f5a7](https://github.com/kristof-mattei/docker-dns-rs/commit/c68f5a70f2c6a7d9d6743ccdc57810ab0a226e93)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.0 - ([318f8a1](https://github.com/kristof-mattei/docker-dns-rs/commit/318f8a132b4814358388e88b7912bace5ea409e1)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.5.0 - ([3d8932e](https://github.com/kristof-mattei/docker-dns-rs/commit/3d8932e2f49829abbd1e7970d1ad9716869a220b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9049b83](https://github.com/kristof-mattei/docker-dns-rs/commit/9049b83bfea6ff963ad4f16f91fc90d2af905884)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.9 - ([e7f84bb](https://github.com/kristof-mattei/docker-dns-rs/commit/e7f84bb09353a52947ec9d84fb8ab2e1398dc61d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.9 - ([aa0ddcf](https://github.com/kristof-mattei/docker-dns-rs/commit/aa0ddcfc12edc463b33cafca1005573604b9bf50)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.9.0 - ([d92a0b4](https://github.com/kristof-mattei/docker-dns-rs/commit/d92a0b4d0b1572f5888ddca8afe3a2d416e5fb79)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.9.0 - ([481f06f](https://github.com/kristof-mattei/docker-dns-rs/commit/481f06f71b555fcb022c7af64ba038106ef3bdc5)) - renovate[bot]
-- **(deps)** update rust:1.84.1 docker digest to 738ae99 - ([4933f2d](https://github.com/kristof-mattei/docker-dns-rs/commit/4933f2d2358b0e9351e3c82301b7ca36a00e1f1e)) - renovate[bot]
-- **(deps)** update rust:1.84.1 docker digest to 738ae99 - ([5ccc7e3](https://github.com/kristof-mattei/docker-dns-rs/commit/5ccc7e3a16c6e5ed39f239793b9ea9106b9ca6ab)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.107.0 - ([5ee1c14](https://github.com/kristof-mattei/docker-dns-rs/commit/5ee1c1424dad3a43451d88b78c44571461613e52)) - renovate[bot]
-- **(deps)** update rust:1.84.1 docker digest to 8e112a6 - ([7c6c20d](https://github.com/kristof-mattei/docker-dns-rs/commit/7c6c20de8a986da33b2e7bda96fb1f0e6d38ddad)) - renovate[bot]
-- **(deps)** update rust:1.84.1 docker digest to 8e112a6 - ([a2bf02a](https://github.com/kristof-mattei/docker-dns-rs/commit/a2bf02a8f3edb2b4caee00d194705b0a959d5738)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.107.0 - ([fa97032](https://github.com/kristof-mattei/docker-dns-rs/commit/fa97032cf42390922bbe1fa3447f48f1035a18be)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.3 - ([b47b875](https://github.com/kristof-mattei/docker-dns-rs/commit/b47b875a8243d6d0cf05a15c0b20905cb67731a6)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.3 - ([55c549a](https://github.com/kristof-mattei/docker-dns-rs/commit/55c549ae90003a6368d85688fdfa7be4e489d7ba)) - renovate[bot]
-- **(deps)** update rust:1.84.1 docker digest to 4ac764e - ([3e581ae](https://github.com/kristof-mattei/docker-dns-rs/commit/3e581aecf147fa51f50bb3801eef4e2af1958fe1)) - renovate[bot]
-- **(deps)** update rust:1.84.1 docker digest to 4ac764e - ([c36afcf](https://github.com/kristof-mattei/docker-dns-rs/commit/c36afcf508f9d05394365f8ca7c821c431af12f9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([cc6b0d8](https://github.com/kristof-mattei/docker-dns-rs/commit/cc6b0d8bef058bb12391897e2f6cf4487230bb4e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8b55944](https://github.com/kristof-mattei/docker-dns-rs/commit/8b55944435ac3002f2af07a9ccca8c448828d112)) - renovate[bot]
-- **(deps)** update rust to v1.84.1 - ([2da591f](https://github.com/kristof-mattei/docker-dns-rs/commit/2da591f8df6dd8161de7efa24a57d5540c82ed37)) - renovate[bot]
-- **(deps)** update rust to v1.84.1 - ([8153292](https://github.com/kristof-mattei/docker-dns-rs/commit/81532922aa03f79791dd6c12ede5d394c0a22ad7)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.84.1 - ([683b3ae](https://github.com/kristof-mattei/docker-dns-rs/commit/683b3aee61536c4ed4e35e77b60a1316733c119d)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.84.1 - ([f9a04d1](https://github.com/kristof-mattei/docker-dns-rs/commit/f9a04d160ba15838da8eb7a07c5a9d37e3caec00)) - renovate[bot]
-- **(deps)** update npm to >=11.1.0 - ([60447cf](https://github.com/kristof-mattei/docker-dns-rs/commit/60447cfbb3048c47a03ca4cf8601505bd32a62b4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.106.0 - ([6938ba7](https://github.com/kristof-mattei/docker-dns-rs/commit/6938ba731a3593e4b8cb66d6b5a80c86455dea95)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.106.0 - ([fa96d96](https://github.com/kristof-mattei/docker-dns-rs/commit/fa96d9681123a0670ada398a35ca67e0d6d3fa64)) - renovate[bot]
-- **(deps)** update npm to v11 - ([f8f580f](https://github.com/kristof-mattei/docker-dns-rs/commit/f8f580fa01b52bd6405231ecf91f245859f4bf4f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.8 - ([16021ce](https://github.com/kristof-mattei/docker-dns-rs/commit/16021ce743899a5f51003a4a634745d6621c0167)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.8 - ([2d0cbc6](https://github.com/kristof-mattei/docker-dns-rs/commit/2d0cbc619a040ee2335f09ae51ee958f28fef117)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.7 - ([7ca3b3b](https://github.com/kristof-mattei/docker-dns-rs/commit/7ca3b3b5ad608e1ed7c40884a00f531a739c06cf)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.7 - ([1f32198](https://github.com/kristof-mattei/docker-dns-rs/commit/1f3219838775e706c006372646c7cd85ac506f28)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 17a820b - ([ea9360c](https://github.com/kristof-mattei/docker-dns-rs/commit/ea9360c60cdd5fa640da32db78970f24e5d88fe7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.6 - ([28178f6](https://github.com/kristof-mattei/docker-dns-rs/commit/28178f640f8f2725c2965a113f730ee1e2b173a9)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.6 - ([2acf78b](https://github.com/kristof-mattei/docker-dns-rs/commit/2acf78b46053b1acc69e6bd070a778ecceadee72)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.2.0 - ([38a9503](https://github.com/kristof-mattei/docker-dns-rs/commit/38a950378714f0f24fd98c3e49967f6477cbbfa5)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.2.0 - ([cf3e152](https://github.com/kristof-mattei/docker-dns-rs/commit/cf3e15290f0272ce43aeb190242b0a7f309aea6c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a4015c1](https://github.com/kristof-mattei/docker-dns-rs/commit/a4015c14daf2077a6558171710a9e47c60401022)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.3.1 - ([3843d6f](https://github.com/kristof-mattei/docker-dns-rs/commit/3843d6f27ffc64fca29a8b0c20f6d6207d8df6e7)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.3.1 - ([2eb2986](https://github.com/kristof-mattei/docker-dns-rs/commit/2eb298682e1d546bfb346dbdae6e4084e1ba5422)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.5 - ([d1169e6](https://github.com/kristof-mattei/docker-dns-rs/commit/d1169e6144d7bb6d73d42b5d0408cbb8f15e6049)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.5 - ([126293c](https://github.com/kristof-mattei/docker-dns-rs/commit/126293c6ac01218131c75372f618d89bc7541c79)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.13.0 - ([7988485](https://github.com/kristof-mattei/docker-dns-rs/commit/7988485f2c17c263c92dfa57629f37dfa8396f13)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.13.0 - ([e5eb0a0](https://github.com/kristof-mattei/docker-dns-rs/commit/e5eb0a001244304bd1b9682d528e0cfe98450381)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.3.0 - ([5743524](https://github.com/kristof-mattei/docker-dns-rs/commit/57435242bb34d491cfec92ceae3298ef85145775)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.3.0 - ([99f59dd](https://github.com/kristof-mattei/docker-dns-rs/commit/99f59dd37ce929799979990a98071ca33f2512d6)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.4 - ([057c011](https://github.com/kristof-mattei/docker-dns-rs/commit/057c011ec3c1796151b9bcce9ff8c7c982bc5725)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.4 - ([9e72a37](https://github.com/kristof-mattei/docker-dns-rs/commit/9e72a37a3fe8bddf293d105155c71c88d131b37e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.3 - ([ffc7676](https://github.com/kristof-mattei/docker-dns-rs/commit/ffc7676835621c5e33c008e9b7977fbda1546aac)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.3 - ([c62bf8b](https://github.com/kristof-mattei/docker-dns-rs/commit/c62bf8b99a21ba595be5989f64c55f2576e9bcd4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.104.0 - ([02dd265](https://github.com/kristof-mattei/docker-dns-rs/commit/02dd2653fb45c5314375cd37c3b7529d2a4c7e47)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.104.0 - ([a7ea647](https://github.com/kristof-mattei/docker-dns-rs/commit/a7ea647abde829c114370a4dfc993fc39b5355f4)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.2.0 - ([c18fa8b](https://github.com/kristof-mattei/docker-dns-rs/commit/c18fa8bc0897e120f65be656b5892801f1a18ca5)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.2.0 - ([e7e41a8](https://github.com/kristof-mattei/docker-dns-rs/commit/e7e41a8802fa7338473034605596ad75b6776a4d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.2 - ([b0623b2](https://github.com/kristof-mattei/docker-dns-rs/commit/b0623b2610ec7cee789cc9b6f6ee739e18de4f20)) - renovate[bot]
-- **(deps)** update node.js to v22.13.1 - ([3749654](https://github.com/kristof-mattei/docker-dns-rs/commit/3749654318bdb89cfbbc49b6d7ad6d69f973e698)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.2 - ([7bf2529](https://github.com/kristof-mattei/docker-dns-rs/commit/7bf2529f8504662da5be3179922787d17708b3fe)) - renovate[bot]
-- **(deps)** update node.js to v22.13.1 - ([0bbf9b5](https://github.com/kristof-mattei/docker-dns-rs/commit/0bbf9b5b7550d08a830db4b9ef55b2cd5ec61511)) - renovate[bot]
-- **(deps)** update oras-project/setup-oras action to v1.2.2 - ([2867742](https://github.com/kristof-mattei/docker-dns-rs/commit/28677428b5fde8bf2352ed94f9a1e16c97a30990)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f472a46](https://github.com/kristof-mattei/docker-dns-rs/commit/f472a46cb2ac9b19886b8f8505689724a19b2b95)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2ad5d25](https://github.com/kristof-mattei/docker-dns-rs/commit/2ad5d258ac8fa8bce71c4f19e56824cb3f4468a7)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to f80524c - ([2d1893b](https://github.com/kristof-mattei/docker-dns-rs/commit/2d1893b0469a1321666f7fe867b0e8af3a51b00b)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to f80524c - ([18dae7c](https://github.com/kristof-mattei/docker-dns-rs/commit/18dae7c7e013b4c20987c56e8003e354962261f7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.103.0 - ([b98b456](https://github.com/kristof-mattei/docker-dns-rs/commit/b98b456318fa94310f5e4a25058db933c70e751e)) - renovate[bot]
-- **(deps)** update dependency @actions/tool-cache to v2.0.2 - ([69e5468](https://github.com/kristof-mattei/docker-dns-rs/commit/69e54689724b9c986cb34dccbaef9b5893f65959)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to e6e40c0 - ([046bd4d](https://github.com/kristof-mattei/docker-dns-rs/commit/046bd4d6327ea61760044194e1ca75c44ba24e6a)) - renovate[bot]
-- **(deps)** update dependency @actions/tool-cache to v2.0.2 - ([9e9ead0](https://github.com/kristof-mattei/docker-dns-rs/commit/9e9ead0e29f8a19e6bd86b14bf4ed62b4323eef8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.103.0 - ([e0528b7](https://github.com/kristof-mattei/docker-dns-rs/commit/e0528b7f7546a7f69d799f6bef142bccad44b7cc)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to e6e40c0 - ([a43ccbf](https://github.com/kristof-mattei/docker-dns-rs/commit/a43ccbf3d313f9f9cfcde1d15adef2e9d81ee0ff)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to 1857878 - ([1cc436a](https://github.com/kristof-mattei/docker-dns-rs/commit/1cc436aa153203dd2ec827118c1054bb706847d1)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to 1857878 - ([2cf502e](https://github.com/kristof-mattei/docker-dns-rs/commit/2cf502ec8f493648e47dff5947b3b0aa50c7d307)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.12.0 - ([8d7dff1](https://github.com/kristof-mattei/docker-dns-rs/commit/8d7dff13374ebc2f4f3f1ee2e4fe91f0e1f84cbe)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.12.0 - ([905dc39](https://github.com/kristof-mattei/docker-dns-rs/commit/905dc39fbab2a22c070295ba3ff928ba30ed59de)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to ec7dae3 - ([e3cb496](https://github.com/kristof-mattei/docker-dns-rs/commit/e3cb496b00d5adae8c7aa2c95750854188deb2fa)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to ec7dae3 - ([36dc5f9](https://github.com/kristof-mattei/docker-dns-rs/commit/36dc5f9242c480b09022387e8419fdc468c9c891)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to f9ca146 - ([7ae2bcb](https://github.com/kristof-mattei/docker-dns-rs/commit/7ae2bcbcf7beaf096889a95882f6138e5925402c)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to f9ca146 - ([b11e2ea](https://github.com/kristof-mattei/docker-dns-rs/commit/b11e2ea09300b54efbcd225c87c373d75fb1607d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([1d56bad](https://github.com/kristof-mattei/docker-dns-rs/commit/1d56bad5ae2967529dc9c6ff20980eb45b454e5c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.1 - ([d12ca6b](https://github.com/kristof-mattei/docker-dns-rs/commit/d12ca6bb20ca06bc99bcfcc0487b76f39bbb9c4d)) - renovate[bot]
-- **(deps)** update oras-project/setup-oras action to v1.2.1 - ([f35624c](https://github.com/kristof-mattei/docker-dns-rs/commit/f35624cf62a923dee76a6e2ddf343fceede5d486)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.6.0 - ([20de0ea](https://github.com/kristof-mattei/docker-dns-rs/commit/20de0ea08b3dfa8616310a7449a401cc45925d94)) - renovate[bot]
-- **(deps)** pin oras-project/setup-oras action to 9c92598 - ([81550f3](https://github.com/kristof-mattei/docker-dns-rs/commit/81550f3d6c6fefb8a3789b4aec0299295b6a0738)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.1 - ([2048a45](https://github.com/kristof-mattei/docker-dns-rs/commit/2048a45c3cf0fdd4f8208feb94892db6f94c0474)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.6.0 - ([6988857](https://github.com/kristof-mattei/docker-dns-rs/commit/6988857e1e81e41ae7e086178c1b158d3bad6e3f)) - renovate[bot]
-- **(deps)** update rust to v1.84.0 - ([d873f27](https://github.com/kristof-mattei/docker-dns-rs/commit/d873f27306b781e2a4196d4a43416ddd37c7c08e)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to f7cbb35 - ([38688a3](https://github.com/kristof-mattei/docker-dns-rs/commit/38688a3ecbb1e2e7b81f6654e7dbc6bb5ae34db8)) - renovate[bot]
-- **(deps)** update rust to v1.84.0 - ([64254b9](https://github.com/kristof-mattei/docker-dns-rs/commit/64254b96bd49956343ed708e6861998f18f4fccc)) - renovate[bot]
-- **(deps)** update rust:1.84.0 docker digest to f7cbb35 - ([121b5cb](https://github.com/kristof-mattei/docker-dns-rs/commit/121b5cbdb6405b79ed7d31ab8f79f2ffa9143261)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.84.0 - ([63fc136](https://github.com/kristof-mattei/docker-dns-rs/commit/63fc13672d85a0511b5e3cfeaeccd7e72b8f8171)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.84.0 - ([8d16d5a](https://github.com/kristof-mattei/docker-dns-rs/commit/8d16d5a6d8488881a56343437629fa423d9d68d8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.102.0 - ([406d12d](https://github.com/kristof-mattei/docker-dns-rs/commit/406d12d0b01cbc773ae6cd1472df3797dd90fa50)) - renovate[bot]
-- **(deps)** update node.js to v22.13.0 - ([65b3450](https://github.com/kristof-mattei/docker-dns-rs/commit/65b34505186320e1fc4fd7ca14ad8f797d776136)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.102.0 - ([e1328aa](https://github.com/kristof-mattei/docker-dns-rs/commit/e1328aae6337673560788b7400c8d41cf0529fc8)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.11.0 - ([8ec6ab3](https://github.com/kristof-mattei/docker-dns-rs/commit/8ec6ab3ceca021d61d6766bd65a7f13a4a46db4a)) - renovate[bot]
-- **(deps)** update node.js to v22.13.0 - ([a0bc93e](https://github.com/kristof-mattei/docker-dns-rs/commit/a0bc93e1724c6ea80a20221c2be3861eda563072)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.2 - ([ec051a3](https://github.com/kristof-mattei/docker-dns-rs/commit/ec051a37fc4b563c0fc551f019b4e61256f8c2ac)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.21.2 - ([04c8a72](https://github.com/kristof-mattei/docker-dns-rs/commit/04c8a72c481f549908fdfb0268a15123b0fd0fe6)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.2 - ([a1a2f44](https://github.com/kristof-mattei/docker-dns-rs/commit/a1a2f44e47b54fe73bd04cfafad047761a9008f0)) - renovate[bot]
-- **(deps)** update softprops/action-gh-release action to v2.2.1 - ([07ec91f](https://github.com/kristof-mattei/docker-dns-rs/commit/07ec91f1f818d4d67134643fbfdf84eddc1097e4)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.11.0 - ([a45b755](https://github.com/kristof-mattei/docker-dns-rs/commit/a45b755164d8138acecff97c2a38bacae220acab)) - renovate[bot]
-- **(deps)** lock file maintenance - ([093b0bf](https://github.com/kristof-mattei/docker-dns-rs/commit/093b0bfb28eac1ac5a2010257b994473f8bed8bb)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7e4547f](https://github.com/kristof-mattei/docker-dns-rs/commit/7e4547fd7d7782890c868d952e5b93a8fb34add7)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([9247f25](https://github.com/kristof-mattei/docker-dns-rs/commit/9247f25c46682754840c15b820b2e8a7ac01478e)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([17322c8](https://github.com/kristof-mattei/docker-dns-rs/commit/17322c8759290c5dbe1ffbaa10c3b906fb96413e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0791375](https://github.com/kristof-mattei/docker-dns-rs/commit/07913751d36a15dccf8835c9fc2082fff653cfa1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e55c33e](https://github.com/kristof-mattei/docker-dns-rs/commit/e55c33e12336e193e41cff2c4c1b5fad85824bf1)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to a45bf1f - ([69af315](https://github.com/kristof-mattei/docker-dns-rs/commit/69af31573813ccbfad6d68c517ffc75f61465453)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to a45bf1f - ([2f6f15d](https://github.com/kristof-mattei/docker-dns-rs/commit/2f6f15d3198cf66ed628a75095e8f09f478a78e2)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 79f9509 - ([ffcfec8](https://github.com/kristof-mattei/docker-dns-rs/commit/ffcfec86c5452662dbad53f2fd22bde528b077bd)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to a13c9a2 - ([12adfa7](https://github.com/kristof-mattei/docker-dns-rs/commit/12adfa7cb818f422e89885832a0123abb3774656)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to a13c9a2 - ([b996259](https://github.com/kristof-mattei/docker-dns-rs/commit/b996259e5edd3846cc3a5f11036d43d3b9439e6c)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to df1ab82 - ([b399760](https://github.com/kristof-mattei/docker-dns-rs/commit/b399760b73efb85e78dd15654d4bdaf5820d2133)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to df1ab82 - ([4d587b8](https://github.com/kristof-mattei/docker-dns-rs/commit/4d587b83b3eea90619e1a2b911e2d6734f88b1f0)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to d420d09 - ([8d5711d](https://github.com/kristof-mattei/docker-dns-rs/commit/8d5711de61ceda7054c5647a80f9e5bf64878168)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to d420d09 - ([884f9aa](https://github.com/kristof-mattei/docker-dns-rs/commit/884f9aab79d22e5556dee06f980ccaa653f26c29)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 8ec40be - ([f6e7f57](https://github.com/kristof-mattei/docker-dns-rs/commit/f6e7f57366e94d7235366233cb2dbff956fd536a)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 8ec40be - ([4a1e1cf](https://github.com/kristof-mattei/docker-dns-rs/commit/4a1e1cfcb09add8bd8d83ea72f8274744d443d7c)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 39a3134 - ([2ac1898](https://github.com/kristof-mattei/docker-dns-rs/commit/2ac1898bb7ce17d781d73db19f3b2791e5c1dcf1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([151adbb](https://github.com/kristof-mattei/docker-dns-rs/commit/151adbba1b1a44bd0eea3a78110f3e6b2d68d150)) - renovate[bot]
-- **(deps)** lock file maintenance - ([35b2867](https://github.com/kristof-mattei/docker-dns-rs/commit/35b2867cda1f3656fb739fd69ccf4a94a555c286)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.0 - ([66f5b4f](https://github.com/kristof-mattei/docker-dns-rs/commit/66f5b4fd14105e8f86d6c9776819a288c679ff03)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.28.0 - ([78fde9c](https://github.com/kristof-mattei/docker-dns-rs/commit/78fde9ce7722fb162b2e61567323ed82476efa04)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.1.2 - ([5071ed6](https://github.com/kristof-mattei/docker-dns-rs/commit/5071ed6caf9225d1b8eac57ee3c6ee8958fae435)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.1.2 - ([6a904b1](https://github.com/kristof-mattei/docker-dns-rs/commit/6a904b1c7228556abcac239adbf012bf479b4556)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.101.0 - ([e9b52b1](https://github.com/kristof-mattei/docker-dns-rs/commit/e9b52b152d98de1ed430ccce344019e4daa92ccc)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.101.0 - ([935fbc9](https://github.com/kristof-mattei/docker-dns-rs/commit/935fbc914ef001e69dde1ab8467301f3ea6b75bd)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.5.0 - ([b40157b](https://github.com/kristof-mattei/docker-dns-rs/commit/b40157b73ca865b2ab45e0b9cce6ceea21aced2a)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.5.0 - ([69b2338](https://github.com/kristof-mattei/docker-dns-rs/commit/69b233861e62419f37416a2069412afe6baea91a)) - renovate[bot]
-- **(deps)** update npm to v11 - ([c4249e6](https://github.com/kristof-mattei/docker-dns-rs/commit/c4249e6940988ccbd5d4bff2d008de4231319f1c)) - renovate[bot]
-- **(deps)** update npm to v11 - ([5502456](https://github.com/kristof-mattei/docker-dns-rs/commit/5502456829296156d782977541cebf396d434824)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v14.0.2 - ([08547cb](https://github.com/kristof-mattei/docker-dns-rs/commit/08547cbff58fa477e8c53a7c0e310727193272f1)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v14.0.2 - ([628570a](https://github.com/kristof-mattei/docker-dns-rs/commit/628570a0b68e94f117ce7ddd059cc2d4814aaa40)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.8.0 - ([d4971ad](https://github.com/kristof-mattei/docker-dns-rs/commit/d4971ada243408dd7b5c285ea73320d463bf1d04)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.8.0 - ([a9e536d](https://github.com/kristof-mattei/docker-dns-rs/commit/a9e536d87afdf00e46ac3c623ca29ba857b73f88)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0300d00](https://github.com/kristof-mattei/docker-dns-rs/commit/0300d00f187a326ee3d24d42b800bd251b8e1fac)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ca4a53f](https://github.com/kristof-mattei/docker-dns-rs/commit/ca4a53f7fead85746719d7393b9f7bd396433862)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to bac87d5 - ([73b2d3f](https://github.com/kristof-mattei/docker-dns-rs/commit/73b2d3f56ee984cf94ef6002e33376596a53be44)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to bac87d5 - ([f774638](https://github.com/kristof-mattei/docker-dns-rs/commit/f774638e360aed42963230132ccc316bc6fa35f7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.9 - ([bdca1d0](https://github.com/kristof-mattei/docker-dns-rs/commit/bdca1d01091e827aec91fb90d7034b2123d432b1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.100.0 - ([2fb91d5](https://github.com/kristof-mattei/docker-dns-rs/commit/2fb91d5d4fe635a057cc3cc7bfbb3c7a9ece97b2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.100.0 - ([e01532f](https://github.com/kristof-mattei/docker-dns-rs/commit/e01532fec4e79b6bd4d650c46a39ac612f7f8ec4)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.9 - ([bb7fbcb](https://github.com/kristof-mattei/docker-dns-rs/commit/bb7fbcb854d1716adc9f8c3c1146e4b69a938629)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to d30cd14 - ([1f8f251](https://github.com/kristof-mattei/docker-dns-rs/commit/1f8f251fa0d67ebfd8c8bb5f8ce169ef431085a4)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to d30cd14 - ([65e8946](https://github.com/kristof-mattei/docker-dns-rs/commit/65e894623b6ba5e2499ce8fcf7cac91161856c9a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.8 - ([f7ab882](https://github.com/kristof-mattei/docker-dns-rs/commit/f7ab882645c2d2fdbf837217c3a0daa29c5c62a3)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.8 - ([cd2aebe](https://github.com/kristof-mattei/docker-dns-rs/commit/cd2aebe66b958de31c277a4422862ae990bf9a7b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.7 - ([433ed06](https://github.com/kristof-mattei/docker-dns-rs/commit/433ed0670a3ab4c2adb181405ef6d6017db6ddc1)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.7 - ([80d7d91](https://github.com/kristof-mattei/docker-dns-rs/commit/80d7d914f01eee6c66ed5a42fce0e61fc7ddc5ee)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0233751](https://github.com/kristof-mattei/docker-dns-rs/commit/0233751806d6e9841e97dc69a678a1cdc7a21dd9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([5162bad](https://github.com/kristof-mattei/docker-dns-rs/commit/5162bad4cacdb18f77b613ab7aae28058a2ff538)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.99.0 - ([81b13e2](https://github.com/kristof-mattei/docker-dns-rs/commit/81b13e23ddf83c746b391e3fe6d5c330c8083052)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.21.0 - ([1c28a14](https://github.com/kristof-mattei/docker-dns-rs/commit/1c28a14d5b9e1332e626d0875171b052daea39aa)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.99.0 - ([5fa1a9f](https://github.com/kristof-mattei/docker-dns-rs/commit/5fa1a9fc15d314e5d2117c44c4f323fd6cf8eead)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.1.1 - ([2edd020](https://github.com/kristof-mattei/docker-dns-rs/commit/2edd02014fd8afd3093a3c34899d724b0fc3ad49)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.1.1 - ([72562c9](https://github.com/kristof-mattei/docker-dns-rs/commit/72562c93c50e8e526b1578a3dc1b3a9d5c9301ca)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.1.0 - ([308feb8](https://github.com/kristof-mattei/docker-dns-rs/commit/308feb87cc9074770bb8485e843624fa67f8353b)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.1.0 - ([6a033e1](https://github.com/kristof-mattei/docker-dns-rs/commit/6a033e1d9a6afb30ec4e91b99743e686e988c27e)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.0 - ([6f15d78](https://github.com/kristof-mattei/docker-dns-rs/commit/6f15d78428207db424dc99a46956fb7494bafaa7)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.2.0 - ([0f2a4a1](https://github.com/kristof-mattei/docker-dns-rs/commit/0f2a4a121cad37b5dfb4fdfee9142fc531695a5f)) - renovate[bot]
-- **(deps)** update npm to >=10.9.2 - ([a7bbad9](https://github.com/kristof-mattei/docker-dns-rs/commit/a7bbad98dd1e90d75c7200eb9e1391ca9c2ea982)) - renovate[bot]
-- **(deps)** update npm to >=10.9.2 - ([e4ea4e8](https://github.com/kristof-mattei/docker-dns-rs/commit/e4ea4e8ec537ea3413543f150523572bd43d9b9b)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 39a3134 - ([b4694af](https://github.com/kristof-mattei/docker-dns-rs/commit/b4694af15aca4bc22f3a340c24228fa65260d925)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 39a3134 - ([cf29849](https://github.com/kristof-mattei/docker-dns-rs/commit/cf2984939ef13d1e56c5724b3da17861d66e4b94)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.4.2 - ([a36e698](https://github.com/kristof-mattei/docker-dns-rs/commit/a36e6982d426eaa8ed4469cf08793abbd7ed1965)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.4.2 - ([f2cf499](https://github.com/kristof-mattei/docker-dns-rs/commit/f2cf499d47563c0975f77838f5ed5f96d29c2173)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 161969f - ([fa327df](https://github.com/kristof-mattei/docker-dns-rs/commit/fa327df0fdb9bb2305c01866c49a0b14c941d1ee)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 161969f - ([0ef2dad](https://github.com/kristof-mattei/docker-dns-rs/commit/0ef2dad32e05c2db80e8264965e85990ed35173a)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to 08154fb - ([264889a](https://github.com/kristof-mattei/docker-dns-rs/commit/264889a2b7731b4abcf9dc59ff36ff82351bcaa2)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to b1dfd21 - ([800af8d](https://github.com/kristof-mattei/docker-dns-rs/commit/800af8d7c8b5c6b21b43aa0873e24e6b798353ca)) - renovate[bot]
-- **(deps)** update node.js to v22.12.0 - ([20ee194](https://github.com/kristof-mattei/docker-dns-rs/commit/20ee1941020022fc80742d6c8908b082e6d75344)) - renovate[bot]
-- **(deps)** update node.js to v22.12.0 - ([046e1ce](https://github.com/kristof-mattei/docker-dns-rs/commit/046e1cede3ff86aeebbac8e904fff81e6998ee9d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.6 - ([7be6a7e](https://github.com/kristof-mattei/docker-dns-rs/commit/7be6a7ed106d93799e62768573edc83d99acbd29)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.6 - ([057567f](https://github.com/kristof-mattei/docker-dns-rs/commit/057567f3625624c509c330be8857ff6ccca9491c)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to f5375f8 - ([254f688](https://github.com/kristof-mattei/docker-dns-rs/commit/254f688af4ae2c873eec2de955e06b66d7d1f3ef)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to f5375f8 - ([a21e074](https://github.com/kristof-mattei/docker-dns-rs/commit/a21e0741f9b18af36965d9349a6130ceaf46b251)) - renovate[bot]
-- **(deps)** update rust to v1.83.0 - ([5003e9a](https://github.com/kristof-mattei/docker-dns-rs/commit/5003e9ac226a86020cd1c6761a247c371475e03f)) - renovate[bot]
-- **(deps)** update rust:1.83.0 docker digest to d242a48 - ([26466d3](https://github.com/kristof-mattei/docker-dns-rs/commit/26466d38ba2721b6f97afddb28c22371298cb842)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.83.0 - ([f9b72da](https://github.com/kristof-mattei/docker-dns-rs/commit/f9b72daab89a7df0d43dc67ba0d73014d6ab4ba4)) - renovate[bot]
-- **(deps)** update rust to v1.83.0 - ([b9e26a1](https://github.com/kristof-mattei/docker-dns-rs/commit/b9e26a1356e217c4566147d997f81eaa60faf68a)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.83.0 - ([2e458d2](https://github.com/kristof-mattei/docker-dns-rs/commit/2e458d287cc1e0072097e0dc0b437ae935785de5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ea99485](https://github.com/kristof-mattei/docker-dns-rs/commit/ea99485e8f05c77ab2619518e9c3df32b30ef382)) - renovate[bot]
-- **(deps)** lock file maintenance - ([cd03c6a](https://github.com/kristof-mattei/docker-dns-rs/commit/cd03c6a08dd4c5203078457636b3a89d4fabf1d1)) - renovate[bot]
-- **(deps)** update rust to v1.83.0 - ([b73ce5f](https://github.com/kristof-mattei/docker-dns-rs/commit/b73ce5f77579e0ba9d099eca6fcc1ba5e5fd1402)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.4.1 - ([f1c04bb](https://github.com/kristof-mattei/docker-dns-rs/commit/f1c04bb0deb341f0f39ebee125bc36324e98497b)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.4.1 - ([b234a0c](https://github.com/kristof-mattei/docker-dns-rs/commit/b234a0cdb62cec6541c1bdb2261bdc7aa586c1d4)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.10.0 - ([72d3875](https://github.com/kristof-mattei/docker-dns-rs/commit/72d387529028a2c51b4d7d83cf8d12edff98faf1)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.10.0 - ([4173f7f](https://github.com/kristof-mattei/docker-dns-rs/commit/4173f7fe259cc588d0c513afd7aefb3a556197e9)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.4.0 - ([1ad0a30](https://github.com/kristof-mattei/docker-dns-rs/commit/1ad0a300a294c54f0b31e3f2873419957b13e0ee)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.4.0 - ([cee31d0](https://github.com/kristof-mattei/docker-dns-rs/commit/cee31d0996c4d32c3b77f2c746d2222f84eadf63)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2145ca6](https://github.com/kristof-mattei/docker-dns-rs/commit/2145ca63404d3a083de7843719e1830bb781b434)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e234872](https://github.com/kristof-mattei/docker-dns-rs/commit/e2348720e50fd8c3b8be6e0ae6378d27444648e8)) - renovate[bot]
-- **(deps)** update npm to >=10.9.1 - ([fbd2220](https://github.com/kristof-mattei/docker-dns-rs/commit/fbd22201d9a81f28f56eb1209c3747a4f2e0e4c5)) - renovate[bot]
-- **(deps)** update npm to >=10.9.1 - ([86979c5](https://github.com/kristof-mattei/docker-dns-rs/commit/86979c5e37a5b6871dfcff83e3c2b1b08248681e)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.7 - ([a0f66ae](https://github.com/kristof-mattei/docker-dns-rs/commit/a0f66ae9fd4f326f36bea0fcaaffd8247870c2d2)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.7 - ([5c0528c](https://github.com/kristof-mattei/docker-dns-rs/commit/5c0528c4ed71acafea7930bedf0bed525f3bd4cc)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.6 - ([700aaba](https://github.com/kristof-mattei/docker-dns-rs/commit/700aaba4f47a6d3605f026e33ecfd66b538933f9)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.6 - ([cf43da9](https://github.com/kristof-mattei/docker-dns-rs/commit/cf43da97c503454f987259e22361c111ebd5ae01)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.5 - ([0733525](https://github.com/kristof-mattei/docker-dns-rs/commit/0733525cebb134e0d45bdd5f5de6c2d30c38d295)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.5 - ([fb1fd04](https://github.com/kristof-mattei/docker-dns-rs/commit/fb1fd04bf39a5caae08b2506c9306c33504737db)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.5 - ([bc9bc0f](https://github.com/kristof-mattei/docker-dns-rs/commit/bc9bc0f038ad211960d45cd2e3764eab0b9e3bdc)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.5 - ([461f274](https://github.com/kristof-mattei/docker-dns-rs/commit/461f274d1e4047c0edd8f7a7b1898943dc42522c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.97.0 - ([27c0cef](https://github.com/kristof-mattei/docker-dns-rs/commit/27c0ceff1468e11e1b31916b4930a1c081b7653f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.97.0 - ([bd159d2](https://github.com/kristof-mattei/docker-dns-rs/commit/bd159d23e6128642f9e39fb7ac89bbab0b45f6b6)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.4 - ([bf23265](https://github.com/kristof-mattei/docker-dns-rs/commit/bf232654b60d6448e573dbfcc4f7872f9c5b526a)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.3 - ([bb987af](https://github.com/kristof-mattei/docker-dns-rs/commit/bb987af201bb485f5dc8994b7506a0dbd75eea2c)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.3 - ([25b1124](https://github.com/kristof-mattei/docker-dns-rs/commit/25b11243c4cba98cfc5ef0a4529dad4168788eda)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.6.1 - ([5831751](https://github.com/kristof-mattei/docker-dns-rs/commit/5831751ed3fe1cab3832b6422735df8702e4eb58)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.6.1 - ([1d7ab16](https://github.com/kristof-mattei/docker-dns-rs/commit/1d7ab16228fdb6766636e1fe9befaf0cb29aff06)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.6.0 - ([51337c0](https://github.com/kristof-mattei/docker-dns-rs/commit/51337c0ec488e2bae9cb134d473955ca85a4c296)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.6.0 - ([d76ecb7](https://github.com/kristof-mattei/docker-dns-rs/commit/d76ecb79d7f8f258f50f54c5e2f2ccbe895353dc)) - renovate[bot]
-- **(deps)** lock file maintenance - ([80ad24c](https://github.com/kristof-mattei/docker-dns-rs/commit/80ad24cfe0514946f6c39021215cb337f4928fee)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8eb52b6](https://github.com/kristof-mattei/docker-dns-rs/commit/8eb52b621a55517773f9a8ae85ff2e285a633657)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5 - ([27f1872](https://github.com/kristof-mattei/docker-dns-rs/commit/27f1872876ccceea9b90095da90e4ba78f84fc3f)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5.0.2 - ([f811bf0](https://github.com/kristof-mattei/docker-dns-rs/commit/f811bf0bad1c4cfb1e563b705363a77073d9b694)) - renovate[bot]
-- **(deps)** update codecov/codecov-action digest to 5c47607 - ([66d693e](https://github.com/kristof-mattei/docker-dns-rs/commit/66d693e586b01b45153ce226d98e8b733f6da0bf)) - renovate[bot]
-- **(deps)** update codecov/codecov-action digest to 3b1354a - ([20fe9aa](https://github.com/kristof-mattei/docker-dns-rs/commit/20fe9aa66f92f2e1918b4e87706b4fcc6feddd21)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v5 - ([09c8285](https://github.com/kristof-mattei/docker-dns-rs/commit/09c8285c9049ad1d1ddb6ebfc274e16d500ec181)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.4 - ([cec0e05](https://github.com/kristof-mattei/docker-dns-rs/commit/cec0e0599d33d89a7894847eae03afcbfd5f229b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.4 - ([947ab3c](https://github.com/kristof-mattei/docker-dns-rs/commit/947ab3cbd2b6dcfc4e6780d50589a926734421e6)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to d9c3c6f - ([80c74b7](https://github.com/kristof-mattei/docker-dns-rs/commit/80c74b79e3b557efa5e0821cd9acdca2646c1e21)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to d9c3c6f - ([bbc7a50](https://github.com/kristof-mattei/docker-dns-rs/commit/bbc7a5008a534ab01863186f89099c0da0260b85)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to f82e0a7 - ([7501cfe](https://github.com/kristof-mattei/docker-dns-rs/commit/7501cfe0eabe8c1d30a451aadd6f5e8320b200dc)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to f82e0a7 - ([dda81cd](https://github.com/kristof-mattei/docker-dns-rs/commit/dda81cd693e5404613a26598e29dae57ee39a31a)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to e808fe5 - ([a5a922b](https://github.com/kristof-mattei/docker-dns-rs/commit/a5a922bc059dfe8271356bbe4b34e5da5fd3c8fe)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to e808fe5 - ([282fe9e](https://github.com/kristof-mattei/docker-dns-rs/commit/282fe9e81d5c0d98fede24ffe48047184e1d4d27)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 96d0c6f - ([e1b3624](https://github.com/kristof-mattei/docker-dns-rs/commit/e1b36245eade55af7a4e9a6c1a722039778cd797)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 96d0c6f - ([ad3c5e7](https://github.com/kristof-mattei/docker-dns-rs/commit/ad3c5e79ce95e3feba616c3f063cd806b85da121)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.3 - ([433c552](https://github.com/kristof-mattei/docker-dns-rs/commit/433c552065fabea603d0f03ca2f0354251598090)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.3 - ([70f6bdc](https://github.com/kristof-mattei/docker-dns-rs/commit/70f6bdca30cc9947e6edab78e2f0351a5a0dbdcf)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 3da3853 - ([a8efc96](https://github.com/kristof-mattei/docker-dns-rs/commit/a8efc965c0dc99951760a9bd9b413615a64d6fec)) - renovate[bot]
-- **(deps)** update alpine:3.20.3 docker digest to 1e42bbe - ([335d53e](https://github.com/kristof-mattei/docker-dns-rs/commit/335d53e3bc399b44b7bbf45ce37478ba46096e10)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.2 - ([3bb8da2](https://github.com/kristof-mattei/docker-dns-rs/commit/3bb8da241c01991eaa23c36b597cf0af3147a562)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 3da3853 - ([b8bcfb3](https://github.com/kristof-mattei/docker-dns-rs/commit/b8bcfb3bf8695f11d0fcd1eb45c9eb89abe83a09)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.2 - ([364dcca](https://github.com/kristof-mattei/docker-dns-rs/commit/364dccaa161da972ff2526bc6ca501fb7ee8f999)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to ee03980 - ([2d898ef](https://github.com/kristof-mattei/docker-dns-rs/commit/2d898efc18f1ecdb290ff4c6ec514f81651da690)) - renovate[bot]
-- **(deps)** lock file maintenance - ([83a1927](https://github.com/kristof-mattei/docker-dns-rs/commit/83a1927b2aec68d6f5aee8662fa32b1d1b0b62df)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b4176bc](https://github.com/kristof-mattei/docker-dns-rs/commit/b4176bcddb8d748c8bf1c5002dffd3adbfa365bd)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.1 - ([d4676b7](https://github.com/kristof-mattei/docker-dns-rs/commit/d4676b72906b93dbb7487ed70c829f9e37f42e7f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.1 - ([946be93](https://github.com/kristof-mattei/docker-dns-rs/commit/946be93e1a2630471cf9fa8e57e24a10ad8f3973)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.96.0 - ([39a3d8c](https://github.com/kristof-mattei/docker-dns-rs/commit/39a3d8c09169c6528ac10de4e5ea0b4ff27be5bc)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.96.0 - ([9d6a07f](https://github.com/kristof-mattei/docker-dns-rs/commit/9d6a07f0bb19a9bf62cfba7abcc26c94bae8e981)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v11.0.1 - ([a11596a](https://github.com/kristof-mattei/docker-dns-rs/commit/a11596a1b93cb3f644a28a9983a0a7d108fecc7e)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v11.0.1 - ([93a2369](https://github.com/kristof-mattei/docker-dns-rs/commit/93a236933526ee6eaba095ba5cd1bbbfc025bf2a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f32ca4a](https://github.com/kristof-mattei/docker-dns-rs/commit/f32ca4a304a2ab2b96b95e0a8f285c01a3590b55)) - renovate[bot]
-- **(deps)** lock file maintenance - ([aa0f453](https://github.com/kristof-mattei/docker-dns-rs/commit/aa0f45377a8798b0a6d0451a74fd4e0b62c73f4b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.95.0 - ([19d605d](https://github.com/kristof-mattei/docker-dns-rs/commit/19d605d345d7cffa0af70584559e900c3e3bf706)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.95.0 - ([40dde3a](https://github.com/kristof-mattei/docker-dns-rs/commit/40dde3a2a249e4f9dea043fa1fad1129527dba42)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.94.0 - ([9f2c078](https://github.com/kristof-mattei/docker-dns-rs/commit/9f2c07818f6beefbb753dc0abc8e94d2a268d18d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.94.0 - ([5ac0ec0](https://github.com/kristof-mattei/docker-dns-rs/commit/5ac0ec039022d8fe79a5ae94fc5d9a332ae66ce7)) - renovate[bot]
-- **(deps)** update dependency node to v22 - ([997ea0f](https://github.com/kristof-mattei/docker-dns-rs/commit/997ea0f1516766c334c5512dc8be281f64940445)) - renovate[bot]
-- **(deps)** update dependency node to v22 - ([143def2](https://github.com/kristof-mattei/docker-dns-rs/commit/143def2e542c59f4cd2260cd72c6631328f2824d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([4820f28](https://github.com/kristof-mattei/docker-dns-rs/commit/4820f282506afdd8f66a092c2b870b0b2f5b51ca)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2ad322a](https://github.com/kristof-mattei/docker-dns-rs/commit/2ad322a637935cf84eaad5fb8370d2faf0fb44f0)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.2.0 - ([17d6631](https://github.com/kristof-mattei/docker-dns-rs/commit/17d66318bf097fa967360846fc6a7489e5f6c41f)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.2.0 - ([dd887a1](https://github.com/kristof-mattei/docker-dns-rs/commit/dd887a1bb3d8c8c00bef141a0639e37ef3a0991e)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.1.0 - ([36cc9d9](https://github.com/kristof-mattei/docker-dns-rs/commit/36cc9d9e043926bfbd6e47d0bc55f5176a5b6c6f)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.1.0 - ([79661af](https://github.com/kristof-mattei/docker-dns-rs/commit/79661af12225811098758bff3fb73da83c7de5ca)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.93.0 - ([ea15e04](https://github.com/kristof-mattei/docker-dns-rs/commit/ea15e040937b54804752cd091e6cb0318ac58c8c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.93.0 - ([7ce319c](https://github.com/kristof-mattei/docker-dns-rs/commit/7ce319ceccf53dccad680bf6eaf02fc8986ead21)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.2.2 - ([cef80ac](https://github.com/kristof-mattei/docker-dns-rs/commit/cef80ac47e981d173b695b42f79612f3749d3241)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.2.2 - ([d978aa7](https://github.com/kristof-mattei/docker-dns-rs/commit/d978aa725cc793eb34c25e976e96b1c84105a250)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.0 - ([3f5ceef](https://github.com/kristof-mattei/docker-dns-rs/commit/3f5ceeff1ba456d00b93a253f9f2bafe95e05811)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.27.0 - ([ab1fb0d](https://github.com/kristof-mattei/docker-dns-rs/commit/ab1fb0db2d99c4e2fbf436c0d2c9871fe90732b4)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.18.0 - ([11b6c2a](https://github.com/kristof-mattei/docker-dns-rs/commit/11b6c2a89017ee11f315b1e0921e7e40c7513cdb)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.18.0 - ([8d272aa](https://github.com/kristof-mattei/docker-dns-rs/commit/8d272aa53efb10f685b81dcaf26ddcdfe30c3373)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.1.2 - ([54e5f5a](https://github.com/kristof-mattei/docker-dns-rs/commit/54e5f5acc77d3b33c8df4b3dd75149665395386e)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.1.2 - ([e303d94](https://github.com/kristof-mattei/docker-dns-rs/commit/e303d941d52765b690e6e01c39c0183520fdcddc)) - renovate[bot]
-- **(deps)** lock file maintenance - ([dbd3832](https://github.com/kristof-mattei/docker-dns-rs/commit/dbd3832eae30331bec259f4cd881ff147334ffe9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7df7d98](https://github.com/kristof-mattei/docker-dns-rs/commit/7df7d98fdeaeba9f5dd0b1860492b3b421c7e0dd)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 33a0ea4 - ([3a98f46](https://github.com/kristof-mattei/docker-dns-rs/commit/3a98f46f6d7da6a42dfe18eb8610bc2a5fbf7a75)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 33a0ea4 - ([62dd0e7](https://github.com/kristof-mattei/docker-dns-rs/commit/62dd0e75e7bf7683fae298c5afdc7ac360c4fabe)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 9d3759c - ([1aa39a0](https://github.com/kristof-mattei/docker-dns-rs/commit/1aa39a021303a220ed0be673be267906e9bca4ff)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 9d3759c - ([5b6ebfc](https://github.com/kristof-mattei/docker-dns-rs/commit/5b6ebfc0fd9f63738088c9d387d6999eb9c974fe)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to b7f46da - ([4dc6a07](https://github.com/kristof-mattei/docker-dns-rs/commit/4dc6a074d835a98700779256bd517fbe0f494085)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to b7f46da - ([eb1033b](https://github.com/kristof-mattei/docker-dns-rs/commit/eb1033b38d4ec5e65664f0c0e0f79f8b3a3bc7c0)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to e9fec44 - ([bf1f2b0](https://github.com/kristof-mattei/docker-dns-rs/commit/bf1f2b050ba38928c2f0acc96a884644e7adda87)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to e9fec44 - ([15f3e47](https://github.com/kristof-mattei/docker-dns-rs/commit/15f3e475a42b913d6e943cf91ffc9e6dbd9a6230)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.3 - ([089dfa5](https://github.com/kristof-mattei/docker-dns-rs/commit/089dfa55a750760f4bd2df3c3b24c03f5c77c518)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.3 - ([4d6cdbd](https://github.com/kristof-mattei/docker-dns-rs/commit/4d6cdbd012843c96e648f499f9540d496dc1a31f)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 81584ce - ([b205a4d](https://github.com/kristof-mattei/docker-dns-rs/commit/b205a4de96bf15ac9580d14e830652e89dddd848)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to 81584ce - ([96e14fa](https://github.com/kristof-mattei/docker-dns-rs/commit/96e14fa45ba8602e105a2549ddd1031e3d77b3ab)) - renovate[bot]
-- **(deps)** update rust to v1.82.0 - ([b6d3fec](https://github.com/kristof-mattei/docker-dns-rs/commit/b6d3fec51a65775bac74f8707a8ea4c0d558a8bf)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to a24b6cc - ([a996008](https://github.com/kristof-mattei/docker-dns-rs/commit/a996008179c637f06a7093c011da7b52ed066a9c)) - renovate[bot]
-- **(deps)** update rust:1.82.0 docker digest to a24b6cc - ([a8d15a4](https://github.com/kristof-mattei/docker-dns-rs/commit/a8d15a412c49546d4ddc567ef71a3cced096f4c4)) - renovate[bot]
-- **(deps)** update rust to v1.82.0 - ([5cd40cd](https://github.com/kristof-mattei/docker-dns-rs/commit/5cd40cd48319e735ebaf0a08b05a030f8bbb631e)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.82.0 - ([b475967](https://github.com/kristof-mattei/docker-dns-rs/commit/b475967839280f4a175c297962fac33cbf549827)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.82.0 - ([680ad9f](https://github.com/kristof-mattei/docker-dns-rs/commit/680ad9fe5b7a1b8c23d3f34260a47452c8701da3)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 7b7f7ae - ([e54b6b3](https://github.com/kristof-mattei/docker-dns-rs/commit/e54b6b3701c5c375e113bad1c2057a6ef23f281e)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 7b7f7ae - ([b82fc71](https://github.com/kristof-mattei/docker-dns-rs/commit/b82fc7138df876533a81386f93ae7170b4369f75)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 4c1240e - ([72ecd06](https://github.com/kristof-mattei/docker-dns-rs/commit/72ecd0678990f7c9e13759d12261ce37d185121a)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 4c1240e - ([a3a7273](https://github.com/kristof-mattei/docker-dns-rs/commit/a3a7273692f14d0f79c87de9197d117db0c1aaed)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.92.0 - ([df43bdb](https://github.com/kristof-mattei/docker-dns-rs/commit/df43bdb59150755fffabe04bfd908bec6d20cf0f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.92.0 - ([3043259](https://github.com/kristof-mattei/docker-dns-rs/commit/3043259209e61341ac4582132c3152069ec23448)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 0757ed8 - ([bb600ca](https://github.com/kristof-mattei/docker-dns-rs/commit/bb600cadd931f2c6b7a567266f8664f1503efe03)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 0757ed8 - ([2865d38](https://github.com/kristof-mattei/docker-dns-rs/commit/2865d38886b2a5786ba95f36873d43518ffe6096)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to d09f487 - ([a75c1e8](https://github.com/kristof-mattei/docker-dns-rs/commit/a75c1e825c72bf64b2a900c85c227033b899ad99)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to d09f487 - ([574c3af](https://github.com/kristof-mattei/docker-dns-rs/commit/574c3afae0f3de43aa6abdfbc549d313789c00e9)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.13 - ([9a4a297](https://github.com/kristof-mattei/docker-dns-rs/commit/9a4a2973382c34fd691c79e5a2f7fb3dcfa44d85)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.13 - ([e4a5658](https://github.com/kristof-mattei/docker-dns-rs/commit/e4a56588e835e4ee5f786ad01d07d14de86e3085)) - renovate[bot]
-- **(deps)** lock file maintenance - ([4a7815b](https://github.com/kristof-mattei/docker-dns-rs/commit/4a7815b640df2b521f54a7b1d1f66cb7f0f2b402)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9f6fad8](https://github.com/kristof-mattei/docker-dns-rs/commit/9f6fad8619853069f7cb07e5dbc6fb07c4d981b3)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.1 - ([b721c62](https://github.com/kristof-mattei/docker-dns-rs/commit/b721c628db22b4cbc5bffb5754462d515baf7516)) - renovate[bot]
-- **(deps)** update codecov/test-results-action action to v1.0.1 - ([fb979bb](https://github.com/kristof-mattei/docker-dns-rs/commit/fb979bb66b61ffafb0c1c3cf32623bddaa2887b8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.91.0 - ([a240227](https://github.com/kristof-mattei/docker-dns-rs/commit/a24022709b95d50aeacaba653dcb583ba461c98c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.91.0 - ([fd30cad](https://github.com/kristof-mattei/docker-dns-rs/commit/fd30cad8c93c8c1d68b280da640b198662247c4f)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.3 - ([f2c1a99](https://github.com/kristof-mattei/docker-dns-rs/commit/f2c1a994acf6981a29cb9b4a79702a466cbb285a)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.3 - ([1b3a8c5](https://github.com/kristof-mattei/docker-dns-rs/commit/1b3a8c526fb62cef0b94bc13ea48682a5ddeb522)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.2 - ([a89aa67](https://github.com/kristof-mattei/docker-dns-rs/commit/a89aa673a5e1a5d8dec1f6d712e93fe9eb659c28)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.1.1 - ([f02d7b2](https://github.com/kristof-mattei/docker-dns-rs/commit/f02d7b26513f2e6e374b831305d2eed092efea20)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.2 - ([dd9696c](https://github.com/kristof-mattei/docker-dns-rs/commit/dd9696cb6e9f9c778ad9fa891304503a9a69f424)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.1.1 - ([6af4a48](https://github.com/kristof-mattei/docker-dns-rs/commit/6af4a48edcf068937d154e7202f4dcd5c02596ab)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.12 - ([fbcc3c2](https://github.com/kristof-mattei/docker-dns-rs/commit/fbcc3c23d7ac3584c08b023b125c0681da352966)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.2.1 - ([4a6eaa3](https://github.com/kristof-mattei/docker-dns-rs/commit/4a6eaa3b19e7099530ac7cd07f432facc68a5072)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.1 - ([3b9e6b1](https://github.com/kristof-mattei/docker-dns-rs/commit/3b9e6b1e6f78da8702ab61d594c228fdd882e05b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.12 - ([783223a](https://github.com/kristof-mattei/docker-dns-rs/commit/783223ab5d4d6ba8dceea59abbf6f89c85ac1079)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.2.1 - ([2f8552d](https://github.com/kristof-mattei/docker-dns-rs/commit/2f8552d5269afccc73af267c7c7711113d3f7e66)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.1 - ([8b3ef12](https://github.com/kristof-mattei/docker-dns-rs/commit/8b3ef12182aab5db4930e567ff246b3c8d47b3a2)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fca5c62](https://github.com/kristof-mattei/docker-dns-rs/commit/fca5c627c01e44d0733583fb1769ede8e349efc9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9324cc8](https://github.com/kristof-mattei/docker-dns-rs/commit/9324cc8062453d33eee57fa2108cb99c25dfe0bf)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.1.0 - ([ae19f5e](https://github.com/kristof-mattei/docker-dns-rs/commit/ae19f5e37eb39bb2f040c7e4a9f361157de4b482)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.1.0 - ([5d57237](https://github.com/kristof-mattei/docker-dns-rs/commit/5d572370113ca89b55c999381b03b0f542522dfe)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to b015f7e - ([d927808](https://github.com/kristof-mattei/docker-dns-rs/commit/d9278085342210bb823dcb76b67b4d121e10160b)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.7.1 - ([80a62c5](https://github.com/kristof-mattei/docker-dns-rs/commit/80a62c53869b465e971711eb40d56efc0de6f424)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to b015f7e - ([eaf7250](https://github.com/kristof-mattei/docker-dns-rs/commit/eaf7250ac4ad3c2337ee37edc3956fc79d7d9808)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.7.1 - ([0b9780b](https://github.com/kristof-mattei/docker-dns-rs/commit/0b9780bf3dcfe08e62ab13a3e90d92d20d5b122d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.11 - ([ae2d5a9](https://github.com/kristof-mattei/docker-dns-rs/commit/ae2d5a9a103704c303911197367a64a393a098db)) - renovate[bot]
-- **(deps)** update npm to >=10.9.0 - ([5a84a61](https://github.com/kristof-mattei/docker-dns-rs/commit/5a84a61276b9eb8cdb9cd9a20c3281538a6280c7)) - renovate[bot]
-- **(deps)** update npm to >=10.9.0 - ([4df3581](https://github.com/kristof-mattei/docker-dns-rs/commit/4df3581717297f319c438aac478c0135718617db)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.11 - ([bef7bbe](https://github.com/kristof-mattei/docker-dns-rs/commit/bef7bbebd3f21b3ed9d22bf681f2e7f2d90d977b)) - renovate[bot]
-- **(deps)** update dependency node to v20.18.0 - ([b9d9ecf](https://github.com/kristof-mattei/docker-dns-rs/commit/b9d9ecfa8691708e9b767ec22c783087b99d67ac)) - renovate[bot]
-- **(deps)** update dependency node to v20.18.0 - ([0e3ddce](https://github.com/kristof-mattei/docker-dns-rs/commit/0e3ddce4bff8417d6f61691c9bafcf0a65bc9227)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.7.0 - ([0e926b2](https://github.com/kristof-mattei/docker-dns-rs/commit/0e926b287757a0b6e4caca248ed23dbacfef9db5)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.7.0 - ([50ad4d6](https://github.com/kristof-mattei/docker-dns-rs/commit/50ad4d6d2d1a956cb40724f6fd45fcefd8efa39d)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to c49f92e - ([cc3c278](https://github.com/kristof-mattei/docker-dns-rs/commit/cc3c27852eade608908f4da9091766db767f1616)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to c49f92e - ([5d459e0](https://github.com/kristof-mattei/docker-dns-rs/commit/5d459e0515ae17b4eb85a25d5616631246d8dd56)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.6.0 - ([47dc318](https://github.com/kristof-mattei/docker-dns-rs/commit/47dc3183c32419d600095a0eb8cadaae5f8791ab)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.6.0 - ([47f837c](https://github.com/kristof-mattei/docker-dns-rs/commit/47f837c9d10250ca231f9ce0b2e18196392742f5)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 317f242 - ([444fb03](https://github.com/kristof-mattei/docker-dns-rs/commit/444fb03543f12be40358c9903df738cbf6dacb3c)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 317f242 - ([e3614e6](https://github.com/kristof-mattei/docker-dns-rs/commit/e3614e6dfb73895ca62697e1c4e53dd14faad86e)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.9.0 - ([fe866e8](https://github.com/kristof-mattei/docker-dns-rs/commit/fe866e8f3129b1cdf4215db28dd7c34426c6bc90)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.10 - ([1f36c9b](https://github.com/kristof-mattei/docker-dns-rs/commit/1f36c9b262cf7d220d32abc31b02d8f336f743bb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.10 - ([62039bd](https://github.com/kristof-mattei/docker-dns-rs/commit/62039bdd102e22eccc81accb0a5301d89760e9c7)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.9.0 - ([fd8b04d](https://github.com/kristof-mattei/docker-dns-rs/commit/fd8b04d0e1f90a8bfbed4582ab9bb847673d5ab7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b433375](https://github.com/kristof-mattei/docker-dns-rs/commit/b433375046ed9e27277e0e654f35e0e24c5dfe5b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a9f5b23](https://github.com/kristof-mattei/docker-dns-rs/commit/a9f5b23824484147fb3d2d656a0009cddfcc7497)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to a21d540 - ([61bb556](https://github.com/kristof-mattei/docker-dns-rs/commit/61bb556cd3c9226f46bf6b83398a38d22787b581)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to a21d540 - ([46e320e](https://github.com/kristof-mattei/docker-dns-rs/commit/46e320eafc7c4fbdc966ca9d7519ec984df1e347)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 62a1b8f - ([35310da](https://github.com/kristof-mattei/docker-dns-rs/commit/35310da34956871add845ffc17cff1ffee90b65d)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 62a1b8f - ([0c19b21](https://github.com/kristof-mattei/docker-dns-rs/commit/0c19b21c757e04e7065f48dc2e5720dbdf2ed6f8)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 3c2e099 - ([69561d4](https://github.com/kristof-mattei/docker-dns-rs/commit/69561d4f6c2691d65b7b55344a5121b737df10f9)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 3c2e099 - ([2924772](https://github.com/kristof-mattei/docker-dns-rs/commit/2924772cd3366c67dcce384109df5f68b5f08f73)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 86f4731 - ([869b7c0](https://github.com/kristof-mattei/docker-dns-rs/commit/869b7c0799a571ac4daf9ac968ea9e56a3adf10a)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.2 - ([d8c05d7](https://github.com/kristof-mattei/docker-dns-rs/commit/d8c05d752a6d8bd7048eb7150ba56bf29b7b684e)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.2 - ([d635b2f](https://github.com/kristof-mattei/docker-dns-rs/commit/d635b2fac2a40a586ba26d58e48be88d44315d3f)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to de79647 - ([7283e3f](https://github.com/kristof-mattei/docker-dns-rs/commit/7283e3fc711d21a5831048eac8c78c3b01353de9)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to de79647 - ([476819d](https://github.com/kristof-mattei/docker-dns-rs/commit/476819dca9cc49da56c25ab06feb655e315f1170)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.8.0 - ([41accf4](https://github.com/kristof-mattei/docker-dns-rs/commit/41accf48ca08ac1ae862c8643efea7980d3672b5)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.8.0 - ([3e2896a](https://github.com/kristof-mattei/docker-dns-rs/commit/3e2896ac7dae2b17fc54597dc0d144cfbd2103b6)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.90.0 - ([4f5614b](https://github.com/kristof-mattei/docker-dns-rs/commit/4f5614b936f23c0b7c17aae3c4ec4b79927ba07f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.90.0 - ([3508f20](https://github.com/kristof-mattei/docker-dns-rs/commit/3508f2074a9989ea26827dcc7de2ecb5a1119bc3)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.2.0 - ([e6fce2a](https://github.com/kristof-mattei/docker-dns-rs/commit/e6fce2a48b959252426346cd78b0a9c25568090c)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.2.0 - ([bca2eb8](https://github.com/kristof-mattei/docker-dns-rs/commit/bca2eb82a866cce06cb0f63feaad2f15581325f5)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v11 - ([90fabf2](https://github.com/kristof-mattei/docker-dns-rs/commit/90fabf250266497ca6b36ee6fda0e4e6d3c8da31)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v11 - ([2eaf28a](https://github.com/kristof-mattei/docker-dns-rs/commit/2eaf28a2c11307ade7627a866ea080b9d0d535eb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.9 - ([b1c5d4b](https://github.com/kristof-mattei/docker-dns-rs/commit/b1c5d4b08361f440e4a9feecbb9072b5500863f6)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.9 - ([2e7205a](https://github.com/kristof-mattei/docker-dns-rs/commit/2e7205a4d91442f2cafbce91ac2ec6c1886d750e)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 4924241 - ([ef1461f](https://github.com/kristof-mattei/docker-dns-rs/commit/ef1461fadef9d9ac459e2febe25107b515a32201)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 4924241 - ([e59d690](https://github.com/kristof-mattei/docker-dns-rs/commit/e59d690e7b98d72417a8e65a2bc5654ba2f518c5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([674d200](https://github.com/kristof-mattei/docker-dns-rs/commit/674d2002c82adc830e7b1b1f08872e7bd6bbd7b7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b8ba529](https://github.com/kristof-mattei/docker-dns-rs/commit/b8ba5294b9b38f92ab7454efb1d1f38b42bfd1cc)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.5 - ([5697138](https://github.com/kristof-mattei/docker-dns-rs/commit/5697138f9214ef5acea28e6b2bc25adf736cbc39)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.5 - ([d884cde](https://github.com/kristof-mattei/docker-dns-rs/commit/d884cde671f9527e82c0c28bafa979651128276a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.89.0 - ([e968dce](https://github.com/kristof-mattei/docker-dns-rs/commit/e968dceb3f9d806f00b4990eca8ab7aebfa18000)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.89.0 - ([622d61b](https://github.com/kristof-mattei/docker-dns-rs/commit/622d61b855eeffa3ee292f000e04941197dcf555)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.4 - ([b19f14e](https://github.com/kristof-mattei/docker-dns-rs/commit/b19f14e0557d2c65826b19137d895aeef0877d90)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.4 - ([8fe87cc](https://github.com/kristof-mattei/docker-dns-rs/commit/8fe87cc271141cae95543ce2dbb45aad0f217da4)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.8 - ([37be05c](https://github.com/kristof-mattei/docker-dns-rs/commit/37be05cdafd7cc48009d89cabb21f66789dc1a65)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.8 - ([8d4ffdb](https://github.com/kristof-mattei/docker-dns-rs/commit/8d4ffdb85535054738f78473b6d79511aa4106fd)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.88.0 - ([c71f113](https://github.com/kristof-mattei/docker-dns-rs/commit/c71f1137af5be00a8274cc5d209b1b4425100c97)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.88.0 - ([d79d062](https://github.com/kristof-mattei/docker-dns-rs/commit/d79d06267708ef820a42886f2a65a9bd89934931)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to f1d44e2 - ([a8524f5](https://github.com/kristof-mattei/docker-dns-rs/commit/a8524f586dc9eca399690bf8c3f88d0289fd63cd)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to f1d44e2 - ([68a01b6](https://github.com/kristof-mattei/docker-dns-rs/commit/68a01b673ae5a28d8e710b434dd253c0cdd5b6b1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f749f91](https://github.com/kristof-mattei/docker-dns-rs/commit/f749f91dd7e3e86fba0a9c9e02f086b982f001e5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ab433d4](https://github.com/kristof-mattei/docker-dns-rs/commit/ab433d4a78b5a4b81ff12388a8fff00fd7492bad)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.4 - ([7cec660](https://github.com/kristof-mattei/docker-dns-rs/commit/7cec660fd0785b37f86494e39b0c219b981c8f75)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.4 - ([d05a58a](https://github.com/kristof-mattei/docker-dns-rs/commit/d05a58a2c9dc68e1b044526cd5bcba77c7a3beb0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.87.0 - ([82eb303](https://github.com/kristof-mattei/docker-dns-rs/commit/82eb303c59f538e901d4e701974ea20d0f824dd4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.87.0 - ([0510585](https://github.com/kristof-mattei/docker-dns-rs/commit/05105854651c2144dce1cd2f3862d92fe5849972)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.7 - ([2c9671b](https://github.com/kristof-mattei/docker-dns-rs/commit/2c9671bb9c3c13e77c8f669bce76d70b182e0f01)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.7 - ([81d18a1](https://github.com/kristof-mattei/docker-dns-rs/commit/81d18a17cba41393f581165a532ebdebf2a877d2)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 61c9591 - ([231d311](https://github.com/kristof-mattei/docker-dns-rs/commit/231d3114bb51b00b9f541811d582f4706980e7e3)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 61c9591 - ([0d927bd](https://github.com/kristof-mattei/docker-dns-rs/commit/0d927bdaa32579b9b87062b4c8bfa702aea17241)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.1 - ([e255cf7](https://github.com/kristof-mattei/docker-dns-rs/commit/e255cf71ae845bdbfe6c4254f3e1e61743e9adce)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.1 - ([db1d702](https://github.com/kristof-mattei/docker-dns-rs/commit/db1d7028d0b90038f05b7e3ec6cd952dcbc41b8e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([5090a84](https://github.com/kristof-mattei/docker-dns-rs/commit/5090a8499d982b46558db4516c21e9fb2845de80)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7bfe795](https://github.com/kristof-mattei/docker-dns-rs/commit/7bfe795f94f2502e724ff54386c4d63a142a5bd4)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.20.3 - ([bcdc28c](https://github.com/kristof-mattei/docker-dns-rs/commit/bcdc28c24a1914ae7e0722dd1f5d00d454f7d8ac)) - renovate[bot]
-- **(deps)** update rust to v1.81.0 - ([5af1b62](https://github.com/kristof-mattei/docker-dns-rs/commit/5af1b623149a9fd55e4a22ebff0e09c5a0d55832)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to fcd390e - ([88b14d8](https://github.com/kristof-mattei/docker-dns-rs/commit/88b14d8eb6ec63c831594ba3ce0a757da48c446a)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to fcd390e - ([778d9af](https://github.com/kristof-mattei/docker-dns-rs/commit/778d9afd90cd55f932c0564dda3e35015ae45e84)) - renovate[bot]
-- **(deps)** update rust to v1.81.0 - ([09b850e](https://github.com/kristof-mattei/docker-dns-rs/commit/09b850e949f767822b0ae928933327f8dfa60f1b)) - renovate[bot]
-- **(deps)** update rust:1.81.0 docker digest to 7fd6c5b - ([1621a18](https://github.com/kristof-mattei/docker-dns-rs/commit/1621a189a8654e2e111165c526298cdedd63fbc7)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.81.0 - ([c116c7c](https://github.com/kristof-mattei/docker-dns-rs/commit/c116c7c16af5716a6aeb98f1833640e84abddebb)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.81.0 - ([2def646](https://github.com/kristof-mattei/docker-dns-rs/commit/2def646f63f3707f8daef896852e4b486044df49)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.3 - ([baaf71b](https://github.com/kristof-mattei/docker-dns-rs/commit/baaf71ba4fe09b1644e4e4ee94c18e82427b8428)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.3 - ([8838f3d](https://github.com/kristof-mattei/docker-dns-rs/commit/8838f3d06aa5d4d73510f0fb5d404beae762295f)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to d22d893 - ([bd8ec7f](https://github.com/kristof-mattei/docker-dns-rs/commit/bd8ec7f0f54399bbfc7a570a882f267feb13ad22)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to d22d893 - ([4bc2bc7](https://github.com/kristof-mattei/docker-dns-rs/commit/4bc2bc7b65280a996136ec4408fe871ba37500ef)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.86.0 - ([9156b14](https://github.com/kristof-mattei/docker-dns-rs/commit/9156b149206e09a790fe4b0e48e64d6df4ab2c63)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.86.0 - ([f939ab7](https://github.com/kristof-mattei/docker-dns-rs/commit/f939ab77070cd46ff7e2b994292b13813d4a9fef)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.2 - ([034447e](https://github.com/kristof-mattei/docker-dns-rs/commit/034447ecc9753717d3dd2b874a5ff5e95e331ac2)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.17.1 - ([6d9ab21](https://github.com/kristof-mattei/docker-dns-rs/commit/6d9ab21e8cfe9ae3dac6a7ee7974b8cb7ebed015)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.2 - ([bc02363](https://github.com/kristof-mattei/docker-dns-rs/commit/bc023638ec039794e14a4b76229e162c0c4af233)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.17.1 - ([61956d7](https://github.com/kristof-mattei/docker-dns-rs/commit/61956d7ac727972ff129cf758bb49fef969666da)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.1 - ([097df02](https://github.com/kristof-mattei/docker-dns-rs/commit/097df024795cec609e2987ee34fe7ec4803430c8)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.1 - ([6b98024](https://github.com/kristof-mattei/docker-dns-rs/commit/6b98024ad488e0592068f8c802a5be226a1f6440)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.0 - ([3555ec3](https://github.com/kristof-mattei/docker-dns-rs/commit/3555ec3dad0b633446f381099a30d41587b2a471)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.3.0 - ([607d36e](https://github.com/kristof-mattei/docker-dns-rs/commit/607d36eaeef18363c73e01c1de6f782f4eca7a8a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([def5960](https://github.com/kristof-mattei/docker-dns-rs/commit/def5960498843335d7b967ac6cf6925b9e6f1b30)) - renovate[bot]
-- **(deps)** lock file maintenance - ([deea630](https://github.com/kristof-mattei/docker-dns-rs/commit/deea630c5c8bf6ad8799285144b3482d47b3d07f)) - renovate[bot]
-- **(deps)** update rust to v1.80.1 - ([359e0b4](https://github.com/kristof-mattei/docker-dns-rs/commit/359e0b48f8a5b5a1e1054484ff455b4d4df77d30)) - renovate[bot]
-- **(deps)** update rust to v1.80.1 - ([771c93d](https://github.com/kristof-mattei/docker-dns-rs/commit/771c93d1d2ac55d2f412f9c8f583fb137b0e6ab3)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.0 - ([b0f5120](https://github.com/kristof-mattei/docker-dns-rs/commit/b0f51202d1dd3422721d1c75b866ca2481335b56)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.4.0 - ([2e90938](https://github.com/kristof-mattei/docker-dns-rs/commit/2e90938cd4fbcf3753416a15b886fbbf091be56c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.6 - ([339863f](https://github.com/kristof-mattei/docker-dns-rs/commit/339863feeb5c1f16899847d4ab7871ff06043998)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.6 - ([e236688](https://github.com/kristof-mattei/docker-dns-rs/commit/e23668820d69dbc36651fac93f355b5356a4d6b2)) - renovate[bot]
-- **(deps)** pin codecov/test-results-action action to 1b5b448 - ([e0a194b](https://github.com/kristof-mattei/docker-dns-rs/commit/e0a194bd0d6ad76ab75db2936e4ec3bc7ba53e4f)) - renovate[bot]
-- **(deps)** update npm to >=10.8.3 - ([5488745](https://github.com/kristof-mattei/docker-dns-rs/commit/54887454e786774338606c858e64d3319543eee9)) - renovate[bot]
-- **(deps)** update npm to >=10.8.3 - ([769e2ea](https://github.com/kristof-mattei/docker-dns-rs/commit/769e2ea4b22e257b7343802cfe382d71823f3121)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fce98ca](https://github.com/kristof-mattei/docker-dns-rs/commit/fce98ca2670b24f9dc2490f7b41034cc525515e5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f2ca0a6](https://github.com/kristof-mattei/docker-dns-rs/commit/f2ca0a643795da0829f19483ba569a106b21bb5b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.5 - ([0890ad3](https://github.com/kristof-mattei/docker-dns-rs/commit/0890ad369d1e610038ac85fca8fba74ae3640ed6)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.5 - ([5402bce](https://github.com/kristof-mattei/docker-dns-rs/commit/5402bce01c0d664d559377574f139b5349740506)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.4 - ([8401faa](https://github.com/kristof-mattei/docker-dns-rs/commit/8401faa8c95a95c6ae24872463ea057e33d6b744)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.4 - ([db4a011](https://github.com/kristof-mattei/docker-dns-rs/commit/db4a0113a99802a67b9f684c8d0ec377f60b1eb4)) - renovate[bot]
-- **(deps)** update dependency node to v20.17.0 - ([514d64c](https://github.com/kristof-mattei/docker-dns-rs/commit/514d64c2010e4de1c6e4c5a2984067adaa70ce27)) - renovate[bot]
-- **(deps)** update dependency node to v20.17.0 - ([1d3146c](https://github.com/kristof-mattei/docker-dns-rs/commit/1d3146c132e5ddd4e0d707c9650248584b1f8932)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 3614a93 - ([e7b06f5](https://github.com/kristof-mattei/docker-dns-rs/commit/e7b06f5d3989489faf59d6a0ee89f2a582a2500f)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.7 - ([e16c362](https://github.com/kristof-mattei/docker-dns-rs/commit/e16c3628fe8f93d17a867671d3506be5199faec5)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 3614a93 - ([c81fa00](https://github.com/kristof-mattei/docker-dns-rs/commit/c81fa00421702e527fd213522875aa6eb32a8818)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.7 - ([48262fc](https://github.com/kristof-mattei/docker-dns-rs/commit/48262fc4829ed7676a0a211a50fff53c6f5c646d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.3 - ([4b35886](https://github.com/kristof-mattei/docker-dns-rs/commit/4b35886fa21b2862d79583eb919c75f075251c87)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.3 - ([eb1f362](https://github.com/kristof-mattei/docker-dns-rs/commit/eb1f362d772d146bb611f09f18df7c86f4bc0db7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ec6e5a1](https://github.com/kristof-mattei/docker-dns-rs/commit/ec6e5a1064e8995e5c915f35d139d0d21d8c7eca)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0849aa2](https://github.com/kristof-mattei/docker-dns-rs/commit/0849aa240f6daa6a6091a38eeee13b61d16cd530)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.0 - ([b0aaf97](https://github.com/kristof-mattei/docker-dns-rs/commit/b0aaf97f7f7fb4ec6ba072c3bf2e44d9e5f8da13)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v24.1.0 - ([0c42fc8](https://github.com/kristof-mattei/docker-dns-rs/commit/0c42fc86975f734e82841938fb584fce21d93b87)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 0bf4f07 - ([78247b3](https://github.com/kristof-mattei/docker-dns-rs/commit/78247b3fb105e752d261716645301123cc9f0f5b)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 0bf4f07 - ([a3449e3](https://github.com/kristof-mattei/docker-dns-rs/commit/a3449e357ee65d15215de497da1bbb1feaa7e2df)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.6 - ([3d80a4f](https://github.com/kristof-mattei/docker-dns-rs/commit/3d80a4f15ffe84dcaa7b82b7af7dc42023b1e781)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.85.0 - ([343d910](https://github.com/kristof-mattei/docker-dns-rs/commit/343d9100caa710a8b32cab47a9255c4cd1e2ee3e)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.6 - ([112dd02](https://github.com/kristof-mattei/docker-dns-rs/commit/112dd021234e534bdad444db31c7d3b507ac8983)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.85.0 - ([7cc905a](https://github.com/kristof-mattei/docker-dns-rs/commit/7cc905aa07f4b548c8231599e08b72f438ea6de3)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.5 - ([f172796](https://github.com/kristof-mattei/docker-dns-rs/commit/f17279681a12f02c092d74568f85fe5a7f68e3fd)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.5 - ([a5f139d](https://github.com/kristof-mattei/docker-dns-rs/commit/a5f139d711c55f28df16f8aeb210422bebb29cdb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.2 - ([7049da3](https://github.com/kristof-mattei/docker-dns-rs/commit/7049da360112c8d9abae7afd68324dc5c25c133d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.2 - ([040a45f](https://github.com/kristof-mattei/docker-dns-rs/commit/040a45f98dff20b9db2e89f5f0cf1e819f7643ff)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 29fe437 - ([46b4f51](https://github.com/kristof-mattei/docker-dns-rs/commit/46b4f517ac329df6f875088d13765ae4d05ddf7b)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 29fe437 - ([1e44de9](https://github.com/kristof-mattei/docker-dns-rs/commit/1e44de910c98ddf06d3abc8abbeaaa1187ecddbc)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 5890069 - ([ea56cb3](https://github.com/kristof-mattei/docker-dns-rs/commit/ea56cb39b17b66bc408802e9ca335d6e56dcc905)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 5890069 - ([0578eab](https://github.com/kristof-mattei/docker-dns-rs/commit/0578eab93238a8187cdbec26f78bbf3a23b8159d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.1 - ([f3f86c4](https://github.com/kristof-mattei/docker-dns-rs/commit/f3f86c4e5cd113ee9e843d65358c8b4b053af0fa)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.1 - ([39ba300](https://github.com/kristof-mattei/docker-dns-rs/commit/39ba30051531f7978b120212395f7a77f5bfb7bc)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.7.0 - ([5df612a](https://github.com/kristof-mattei/docker-dns-rs/commit/5df612a3e7b39a1dc2bc507c3b1871916cc05946)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.7.0 - ([510f89e](https://github.com/kristof-mattei/docker-dns-rs/commit/510f89e88da9ac8b983c1dce021c921a9cbf59d3)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 536c1a4 - ([911c716](https://github.com/kristof-mattei/docker-dns-rs/commit/911c716e9fc22d13fd4b10f553a1ee0a6ac339f7)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 536c1a4 - ([cf8e56e](https://github.com/kristof-mattei/docker-dns-rs/commit/cf8e56ea0b1e579569b0cef5a534eee25725f5a6)) - renovate[bot]
-- **(deps)** lock file maintenance - ([1260aab](https://github.com/kristof-mattei/docker-dns-rs/commit/1260aab67f5528caacbc9936506ef09ff7d188b1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e3469fd](https://github.com/kristof-mattei/docker-dns-rs/commit/e3469fd1362b6600f7784bb81bef652f0e878c99)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.4 - ([d89f7bb](https://github.com/kristof-mattei/docker-dns-rs/commit/d89f7bbde8a456e568523a755b80c1abd77e292b)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.4 - ([1877195](https://github.com/kristof-mattei/docker-dns-rs/commit/1877195840583d10528d1dadb6fd09db82fab773)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 606b76f - ([d6c86f3](https://github.com/kristof-mattei/docker-dns-rs/commit/d6c86f3854071926820080731061de26a24897f8)) - renovate[bot]
-- **(deps)** update rust:1.80.1 docker digest to 606b76f - ([964b7ff](https://github.com/kristof-mattei/docker-dns-rs/commit/964b7ff7eec5d17844e1da638025d54451b1f687)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.80.1 - ([a70bb30](https://github.com/kristof-mattei/docker-dns-rs/commit/a70bb30e0f6c3fa7a8e9a422c2e4dae52de2ee95)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.80.1 - ([de15c8f](https://github.com/kristof-mattei/docker-dns-rs/commit/de15c8f8ac06605dc52899392b279ac42e4456bf)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 569f65d - ([d2a3352](https://github.com/kristof-mattei/docker-dns-rs/commit/d2a33521a952f07e4bfcc614d11ccdb9dc701daf)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 569f65d - ([b49dc5e](https://github.com/kristof-mattei/docker-dns-rs/commit/b49dc5e8c704a20a9b5de217fa06cd4118767e04)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.84.1 - ([00e66a0](https://github.com/kristof-mattei/docker-dns-rs/commit/00e66a05912af6e0fae8e07349aba8cfb0a2009c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.84.1 - ([4590732](https://github.com/kristof-mattei/docker-dns-rs/commit/45907329d80f3d476e50f6c3ac2d05b9d07041ae)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.6.1 - ([0d4a461](https://github.com/kristof-mattei/docker-dns-rs/commit/0d4a4615fe24be7727e34dbc2f05bfd19746e4bb)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.6.1 - ([a1d1fc0](https://github.com/kristof-mattei/docker-dns-rs/commit/a1d1fc06e8228c2069209a35b98eb37534f87f47)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.6.0 - ([a2f35e3](https://github.com/kristof-mattei/docker-dns-rs/commit/a2f35e37809b7881a9bc5ebb37a688a2ae996cef)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.6.0 - ([8edffc8](https://github.com/kristof-mattei/docker-dns-rs/commit/8edffc8e4fdd92f209593db4de89518fd788195c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.84.0 - ([550d4f5](https://github.com/kristof-mattei/docker-dns-rs/commit/550d4f528c0fb462dc39a5293cc814fe46ff1546)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.84.0 - ([c60d800](https://github.com/kristof-mattei/docker-dns-rs/commit/c60d8007fef76c926cb27ce27111a6280c4c5a35)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.0 - ([be3e5e4](https://github.com/kristof-mattei/docker-dns-rs/commit/be3e5e45b5c0463f130cbf6ef6a9a1edd5b23b2e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.26.0 - ([faf8716](https://github.com/kristof-mattei/docker-dns-rs/commit/faf871644068e6406696ea4908d2b111294d14e9)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.6 - ([ba6681e](https://github.com/kristof-mattei/docker-dns-rs/commit/ba6681e23ea8e96cc967734cc88b65e5d0c7f4c1)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.6 - ([f133081](https://github.com/kristof-mattei/docker-dns-rs/commit/f133081964ae93362da47c28ccff4d6a04ccbe17)) - renovate[bot]
-- **(deps)** lock file maintenance - ([4b7dea9](https://github.com/kristof-mattei/docker-dns-rs/commit/4b7dea93de701ee1a7a0a56f8cc0d77721b1fce9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([311cb6e](https://github.com/kristof-mattei/docker-dns-rs/commit/311cb6eb6b85b4cd5f16e8dbca91485261134b1d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.83.0 - ([8d14584](https://github.com/kristof-mattei/docker-dns-rs/commit/8d14584ac53920bae4d2a71e2ea36d85b36da84d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.83.0 - ([c824754](https://github.com/kristof-mattei/docker-dns-rs/commit/c8247544a12b7def156bb606fa8eadc098f71e95)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.5 - ([7f2efc5](https://github.com/kristof-mattei/docker-dns-rs/commit/7f2efc544bede6684802528587c0adb4491ecdbb)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.5 - ([e97a46f](https://github.com/kristof-mattei/docker-dns-rs/commit/e97a46f2d6bdb09d087fa9966899965564fd722c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.82.0 - ([4330129](https://github.com/kristof-mattei/docker-dns-rs/commit/4330129c06c9381e8d1dddf640bb3dda0990b6ea)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.82.0 - ([23325f5](https://github.com/kristof-mattei/docker-dns-rs/commit/23325f5332a1f907a60e4dfa00d67bcd4c06ebfc)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a10a677](https://github.com/kristof-mattei/docker-dns-rs/commit/a10a677f483f8d9d8a7379e3db2d8db2899a1162)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.6.1 - ([559fe7d](https://github.com/kristof-mattei/docker-dns-rs/commit/559fe7d64c18a42ace447a779bf938079a91dfaf)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.6.1 - ([d65c603](https://github.com/kristof-mattei/docker-dns-rs/commit/d65c603d7c68280fe61e68b72b43a76639b1fbf0)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.6.0 - ([d14e3f8](https://github.com/kristof-mattei/docker-dns-rs/commit/d14e3f81ca492fbadd8dbccd4286f918e75ea6f6)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.6.0 - ([b7d9415](https://github.com/kristof-mattei/docker-dns-rs/commit/b7d94157683b0d2279361d9a3512f6582c0a75b4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fd41dc2](https://github.com/kristof-mattei/docker-dns-rs/commit/fd41dc224ce8de391c4ce4197b4fb7ff7ae14b4b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([64c3376](https://github.com/kristof-mattei/docker-dns-rs/commit/64c3376e67ce0d7661ff369e5be1aac5855daf40)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.15 - ([944a17e](https://github.com/kristof-mattei/docker-dns-rs/commit/944a17ea4cc47ce9657133045cc1a3d241b5de6a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.15 - ([849f9ab](https://github.com/kristof-mattei/docker-dns-rs/commit/849f9ab6da0debe0f5ac498bf4402db90057e771)) - renovate[bot]
-- **(deps)** update rust:1.80.0 docker digest to fcbb950 - ([8dd1f69](https://github.com/kristof-mattei/docker-dns-rs/commit/8dd1f69813e557f20a6e5a5b364c5d004235cb23)) - renovate[bot]
-- **(deps)** update rust to v1.80.0 - ([1e9d0ff](https://github.com/kristof-mattei/docker-dns-rs/commit/1e9d0ff04195b6f07ddd9b72e3b307c9c20886f6)) - renovate[bot]
-- **(deps)** update rust to v1.80.0 - ([61cb2b5](https://github.com/kristof-mattei/docker-dns-rs/commit/61cb2b54cb05ce6bd94c3b0926e9b26eee61a445)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.3 - ([5aaabe4](https://github.com/kristof-mattei/docker-dns-rs/commit/5aaabe481b150fe3138f13a357d4d9cd910efba7)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.3 - ([c375162](https://github.com/kristof-mattei/docker-dns-rs/commit/c3751621943e5053cb320958c488d1e9a5b8ab86)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.2 - ([67ffb48](https://github.com/kristof-mattei/docker-dns-rs/commit/67ffb48578914cd0f9cdd546d2d41588a13288c4)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.2 - ([9ec0ddb](https://github.com/kristof-mattei/docker-dns-rs/commit/9ec0ddbd9569812a4667def60a5eb6932c564a48)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.14 - ([1d0ae80](https://github.com/kristof-mattei/docker-dns-rs/commit/1d0ae80dccd08f531b93ad91d553edf455a03ef7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.14 - ([92fb45a](https://github.com/kristof-mattei/docker-dns-rs/commit/92fb45a9f15dcde77c165e659934be63ababcddc)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.81.0 - ([25a73e4](https://github.com/kristof-mattei/docker-dns-rs/commit/25a73e42cf8d45167962288f43d6e8bd96724f91)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 9b2689d - ([dc74f4e](https://github.com/kristof-mattei/docker-dns-rs/commit/dc74f4eb5944db5abbfbc857852089d1f0da3906)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 9b2689d - ([eafe1fa](https://github.com/kristof-mattei/docker-dns-rs/commit/eafe1fa5a71ef57a22ae95f6da6068b1fb25753d)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 6ed1f22 - ([e013b41](https://github.com/kristof-mattei/docker-dns-rs/commit/e013b41acc93b8a472d225464afbf70f6ee724cd)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.81.0 - ([591a0f8](https://github.com/kristof-mattei/docker-dns-rs/commit/591a0f8059ac7c1f57dc3058b8bd108b550246fd)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 6ed1f22 - ([653b2f9](https://github.com/kristof-mattei/docker-dns-rs/commit/653b2f9ef2e8f1595d649d8eabb38ee4fc2bfc99)) - renovate[bot]
-- **(deps)** update dependency node to v20.16.0 - ([ea354c8](https://github.com/kristof-mattei/docker-dns-rs/commit/ea354c8a39b2f289d3f50676aa20d58149811b9b)) - renovate[bot]
-- **(deps)** update dependency node to v20.16.0 - ([ae50176](https://github.com/kristof-mattei/docker-dns-rs/commit/ae501762754fec672fcd80725621dcb36b12c339)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to eb24e74 - ([ec98a8c](https://github.com/kristof-mattei/docker-dns-rs/commit/ec98a8c9aa3cc413c43b75b159f7a785acab46c0)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to eb24e74 - ([82ae4d9](https://github.com/kristof-mattei/docker-dns-rs/commit/82ae4d92727a8e3be1c6cf5e7f589cbdd6c44815)) - renovate[bot]
-- **(deps)** update alpine:3.20.2 docker digest to 0a4eaa0 - ([09bc483](https://github.com/kristof-mattei/docker-dns-rs/commit/09bc4839185362cee2d299c3ac3d07359b74e405)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.20.2 - ([5508fc9](https://github.com/kristof-mattei/docker-dns-rs/commit/5508fc9e56f0c41de91d7c937a37c29a56da5722)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.5.0 - ([9c50ca0](https://github.com/kristof-mattei/docker-dns-rs/commit/9c50ca0309854334850f2ca73626969dd253c319)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.3.0 - ([6d9af79](https://github.com/kristof-mattei/docker-dns-rs/commit/6d9af79120c9ab084302c55508302aa2339c0414)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.5.0 - ([8a39354](https://github.com/kristof-mattei/docker-dns-rs/commit/8a393546f314cdb5bff01ad08f6cbae2d0c50c5c)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.5.0 - ([1ff542e](https://github.com/kristof-mattei/docker-dns-rs/commit/1ff542e7ade73baee3dcbf9f5374e1a8083c0d98)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.5.0 - ([631c452](https://github.com/kristof-mattei/docker-dns-rs/commit/631c452165f80359f9e0d6dde23ad99ed6afc2e7)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.3.0 - ([30dab5c](https://github.com/kristof-mattei/docker-dns-rs/commit/30dab5ca9b0f9cc3c972ce71d344d7086528d2fa)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6372167](https://github.com/kristof-mattei/docker-dns-rs/commit/6372167bd8bea8339d40a352db446a0cb8743481)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7d7313b](https://github.com/kristof-mattei/docker-dns-rs/commit/7d7313b785a4bc049aa0fc2d16bad79d5065f0bf)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.13 - ([b70568b](https://github.com/kristof-mattei/docker-dns-rs/commit/b70568b1884f723b3434ed438bab7ca9634b44a4)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.1 - ([d336df8](https://github.com/kristof-mattei/docker-dns-rs/commit/d336df8a5f513fac2f601fe68e33266677d83cbb)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.1 - ([197e477](https://github.com/kristof-mattei/docker-dns-rs/commit/197e477268ac4efa1a5a8bd641bbd774d4a482af)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.13 - ([2c304eb](https://github.com/kristof-mattei/docker-dns-rs/commit/2c304eb428eceb87932937479ec8f0e96aa579d3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.80.0 - ([d5dbf80](https://github.com/kristof-mattei/docker-dns-rs/commit/d5dbf806184c5f7175fa09f1dc1f3ac81d781267)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.80.0 - ([78e76fd](https://github.com/kristof-mattei/docker-dns-rs/commit/78e76fd1db4cb2072c2a8a7e54601b9a18b36b9f)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.4.1 - ([a3bf1d3](https://github.com/kristof-mattei/docker-dns-rs/commit/a3bf1d3f2a850df0346958de5a815fa50d1ab6d9)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.4.1 - ([4afbb1e](https://github.com/kristof-mattei/docker-dns-rs/commit/4afbb1edba273812fde794ed2410e18d704091b9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([5e934f9](https://github.com/kristof-mattei/docker-dns-rs/commit/5e934f9f844aecc89bd194cab4dc95f5f8ae400a)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.4.0 - ([940fc4c](https://github.com/kristof-mattei/docker-dns-rs/commit/940fc4ce0c633a600a8f19cf67e92baf3f030c1b)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.4.0 - ([000ddd0](https://github.com/kristof-mattei/docker-dns-rs/commit/000ddd063df6b7b565ba2ae41ac989fc36624451)) - renovate[bot]
-- **(deps)** lock file maintenance - ([854c89b](https://github.com/kristof-mattei/docker-dns-rs/commit/854c89ba289a87cad65727ea39889067f9ebfd7a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([42d744a](https://github.com/kristof-mattei/docker-dns-rs/commit/42d744a9b1de07a7665a7abeaebc871dbb13eba4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9e39bc8](https://github.com/kristof-mattei/docker-dns-rs/commit/9e39bc8d2c1c667cccc4b8873d6f1dff1e104fd9)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.3 - ([ff48661](https://github.com/kristof-mattei/docker-dns-rs/commit/ff48661f13261cfc3a9234a493db32c6032ce2af)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.3 - ([60fe8b2](https://github.com/kristof-mattei/docker-dns-rs/commit/60fe8b26f973af20f36303a79bd11752e8483487)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.12 - ([07c5f20](https://github.com/kristof-mattei/docker-dns-rs/commit/07c5f20aaf0b92759ab2c5d497b8af1fc0851a66)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.12 - ([e38f7c8](https://github.com/kristof-mattei/docker-dns-rs/commit/e38f7c86feb718ac10dbcb16cd94dc6a8b4de734)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 6a4b1fa - ([e395369](https://github.com/kristof-mattei/docker-dns-rs/commit/e3953699682ed7c1ec7f77fa41f32da4d0a5030c)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 6a4b1fa - ([576d238](https://github.com/kristof-mattei/docker-dns-rs/commit/576d2380ab45c9e776a8fb5c117a69b820b3e0be)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.17.0 - ([1cf2516](https://github.com/kristof-mattei/docker-dns-rs/commit/1cf25166f9546aa90172daefc490eed34267d0a1)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.17.0 - ([db0db96](https://github.com/kristof-mattei/docker-dns-rs/commit/db0db96a9e927698e463fdecca50d4d0db539a16)) - renovate[bot]
-- **(deps)** update npm to >=10.8.2 - ([1cec7cf](https://github.com/kristof-mattei/docker-dns-rs/commit/1cec7cf42edf2aa4d923dd0026e1bb5c60695237)) - renovate[bot]
-- **(deps)** update npm to >=10.8.2 - ([dea5b67](https://github.com/kristof-mattei/docker-dns-rs/commit/dea5b67762a541a657918899d2c0f9451b634fbb)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.79.0 - ([bb391bb](https://github.com/kristof-mattei/docker-dns-rs/commit/bb391bbd17f409528af7cf25e9ba656d5f76b77a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.79.0 - ([6099498](https://github.com/kristof-mattei/docker-dns-rs/commit/60994986edc9082158c6712a566877352f72e9ea)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to be2a4d1 - ([0ed8d8b](https://github.com/kristof-mattei/docker-dns-rs/commit/0ed8d8bc9c4e6bea31d7cce4a01262ee3538ca4c)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to be2a4d1 - ([afda5d7](https://github.com/kristof-mattei/docker-dns-rs/commit/afda5d70d790836c0576929860900a9c516b83a0)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.3 - ([ecc10c1](https://github.com/kristof-mattei/docker-dns-rs/commit/ecc10c1f11ce179922a1da9f553ca1b10a3cf5f0)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.3 - ([4b48084](https://github.com/kristof-mattei/docker-dns-rs/commit/4b4808429c8a97a1a16c8866dc23450a3646c05c)) - renovate[bot]
-- **(deps)** update dependency node to v20.15.1 - ([0fa53cb](https://github.com/kristof-mattei/docker-dns-rs/commit/0fa53cb3060108efaa0347b681d01052daad26d9)) - renovate[bot]
-- **(deps)** update dependency node to v20.15.1 - ([8a36ad7](https://github.com/kristof-mattei/docker-dns-rs/commit/8a36ad785fdce6329222ed8440d00271c47ca2d0)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.0 - ([cab4b84](https://github.com/kristof-mattei/docker-dns-rs/commit/cab4b84f7b2d5cc6830ae03e9de938a63a5ef894)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.1.0 - ([a2fe389](https://github.com/kristof-mattei/docker-dns-rs/commit/a2fe3894a72af1389b9106b1ed6393cdbea57a99)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8f58b72](https://github.com/kristof-mattei/docker-dns-rs/commit/8f58b725118a7e2bee9e01099a513954fbfddd66)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b7738fa](https://github.com/kristof-mattei/docker-dns-rs/commit/b7738fa2c04c5464da4433d974be5bc5c52c8496)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 2e332a0 - ([d352aa7](https://github.com/kristof-mattei/docker-dns-rs/commit/d352aa75ef83f22fb4eb5289e24915912f54de7d)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 2e332a0 - ([fd29e85](https://github.com/kristof-mattei/docker-dns-rs/commit/fd29e85111d6c7d3272ebfaaff184354fd6966b1)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.4 - ([da052a7](https://github.com/kristof-mattei/docker-dns-rs/commit/da052a7ae6bbc289f03ade223d901f4ca5ef353e)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.8 - ([b1e4917](https://github.com/kristof-mattei/docker-dns-rs/commit/b1e4917f04d32be47d3294e3ef0999a7d21f7707)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.4 - ([bd8f6e4](https://github.com/kristof-mattei/docker-dns-rs/commit/bd8f6e412bcffdd89ced43ee091ff3c8a380030c)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.8 - ([13178f5](https://github.com/kristof-mattei/docker-dns-rs/commit/13178f5a06565a8f72a880d34995a8dc4fcfdab6)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.4.0 - ([2ef1007](https://github.com/kristof-mattei/docker-dns-rs/commit/2ef10074efdb26547dd7afa7e11aaefb9a0365b8)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.4.0 - ([3b8b296](https://github.com/kristof-mattei/docker-dns-rs/commit/3b8b2961bf8ac107a5087386d329a7beef91fa72)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.3.0 - ([1c71b26](https://github.com/kristof-mattei/docker-dns-rs/commit/1c71b26dd77f39714883c0c2c6ab4f3d21d22b80)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.3.0 - ([d5e02b2](https://github.com/kristof-mattei/docker-dns-rs/commit/d5e02b25c664e7eff8df30114d39dbeb0293a7b1)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 4c45f61 - ([1ce4fee](https://github.com/kristof-mattei/docker-dns-rs/commit/1ce4fee9baa59002ca3b7cbb44e5c0bfd9736265)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 4c45f61 - ([8b09557](https://github.com/kristof-mattei/docker-dns-rs/commit/8b09557a9864ee0583e90d6171fe9c8daa6115f9)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 4c4f16b - ([f6e38a9](https://github.com/kristof-mattei/docker-dns-rs/commit/f6e38a9a9a17d3f0f57248a1320bb908f05ae594)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 4c4f16b - ([4c1c78c](https://github.com/kristof-mattei/docker-dns-rs/commit/4c1c78c58048d6e5ddf666f10f26ab387883066f)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.7 - ([dd450e9](https://github.com/kristof-mattei/docker-dns-rs/commit/dd450e939b0f6a0ec4c7f5ebd163567ccc677ccb)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.7 - ([6bd5b86](https://github.com/kristof-mattei/docker-dns-rs/commit/6bd5b86b621798cbba5321b43b72eb4640f5ebbb)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fa3559e](https://github.com/kristof-mattei/docker-dns-rs/commit/fa3559e127bd6b5a9ffce98ac1653364f0632cba)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f528ec6](https://github.com/kristof-mattei/docker-dns-rs/commit/f528ec6a9a90b7bbe604f0f5e6253ecfd9a04895)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.11 - ([6244fa9](https://github.com/kristof-mattei/docker-dns-rs/commit/6244fa96a1da9a9b1e68a09b601af3ea714784be)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.11 - ([27d71a6](https://github.com/kristof-mattei/docker-dns-rs/commit/27d71a6fc92781ccf6a344da32ef8b2f639271d4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.78.0 - ([baf3f29](https://github.com/kristof-mattei/docker-dns-rs/commit/baf3f29505f54c8a71db6364b58b201b2be28578)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.78.0 - ([2c26e87](https://github.com/kristof-mattei/docker-dns-rs/commit/2c26e87adf2cd4db97b5e3294d4f96baf83e6b7f)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.2.0 - ([e4359c2](https://github.com/kristof-mattei/docker-dns-rs/commit/e4359c2ff422fce26762a9d40f0cd0b1677fa742)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.2.0 - ([5103476](https://github.com/kristof-mattei/docker-dns-rs/commit/510347617968ca8fb700c766b7e48e917b1686a5)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.77.0 - ([dde828c](https://github.com/kristof-mattei/docker-dns-rs/commit/dde828c3b691bcae985b59c7f0fc49ec0f3c18d7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.77.0 - ([1474d88](https://github.com/kristof-mattei/docker-dns-rs/commit/1474d8802b1562a569eea1ea427f777a36bfecf1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([318fc50](https://github.com/kristof-mattei/docker-dns-rs/commit/318fc50d6776171b8fc05f443eb21a1de71f8410)) - renovate[bot]
-- **(deps)** lock file maintenance - ([d7d8fda](https://github.com/kristof-mattei/docker-dns-rs/commit/d7d8fdaaf10bee39b466952f97bca805fa833c7b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8298ffe](https://github.com/kristof-mattei/docker-dns-rs/commit/8298ffeb7c49d3597889ec40593a0d3a732662c9)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v14.0.1 - ([a0c6583](https://github.com/kristof-mattei/docker-dns-rs/commit/a0c65832e85c14cb41ce584bb161256c9e8ffc50)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v14.0.1 - ([39ebf5a](https://github.com/kristof-mattei/docker-dns-rs/commit/39ebf5a4d5205afca458613d9e396613d1172ff4)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.1.0 - ([01e0413](https://github.com/kristof-mattei/docker-dns-rs/commit/01e0413efe4a8c8125e3d6de6d585e97ee675af9)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.1.0 - ([b606d16](https://github.com/kristof-mattei/docker-dns-rs/commit/b606d16c6b12b89323a4a54a08c90c1c2c8669f0)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.20.1 - ([df04afa](https://github.com/kristof-mattei/docker-dns-rs/commit/df04afac41235a1b20ba2761cdc03c6a2c28b27e)) - renovate[bot]
-- **(deps)** update dependency node to v20.15.0 - ([f09c61a](https://github.com/kristof-mattei/docker-dns-rs/commit/f09c61a6f9b9a98cd892b33afc7b026f31664810)) - renovate[bot]
-- **(deps)** update dependency node to v20.15.0 - ([d75978c](https://github.com/kristof-mattei/docker-dns-rs/commit/d75978ced1e4e57b964b8a0a2034e8b221af88bf)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.0.2 - ([7cd9a34](https://github.com/kristof-mattei/docker-dns-rs/commit/7cd9a3490bb8f1313beec52667a10723ef34a817)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.0.2 - ([d8d212c](https://github.com/kristof-mattei/docker-dns-rs/commit/d8d212cd186a711184c1c9a119925ead2abbcce5)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.0.1 - ([c9c0431](https://github.com/kristof-mattei/docker-dns-rs/commit/c9c0431d711887c42062b13c2ad921f3009bcd0b)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6.0.1 - ([8f414eb](https://github.com/kristof-mattei/docker-dns-rs/commit/8f414eb59bbc4c54a9cfc6a3bba91ef0f38436ad)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to 94f8f8c - ([50c25f4](https://github.com/kristof-mattei/docker-dns-rs/commit/50c25f4815d6f7f854c51850f1b8f2df0ef5cc72)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6 - ([80fdf99](https://github.com/kristof-mattei/docker-dns-rs/commit/80fdf996c857c99c1278b1fa19939ed4e215b76b)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v6 - ([6bd2ebd](https://github.com/kristof-mattei/docker-dns-rs/commit/6bd2ebd81491bd9db0f721a6b686ddb042ea0db9)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.76.0 - ([7dd9b4e](https://github.com/kristof-mattei/docker-dns-rs/commit/7dd9b4e86a18beca520ade2a981acbf12d8b9ccb)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.76.0 - ([353df23](https://github.com/kristof-mattei/docker-dns-rs/commit/353df23ce514f0e20d57360adc97b35df6bb3260)) - renovate[bot]
-- **(deps)** lock file maintenance - ([13bda27](https://github.com/kristof-mattei/docker-dns-rs/commit/13bda279c314e77d2df57106c772c8cc0be4caac)) - renovate[bot]
-- **(deps)** lock file maintenance - ([526462a](https://github.com/kristof-mattei/docker-dns-rs/commit/526462aa30d42592c564682b0717fff13467d06c)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 65685f4 - ([15a844f](https://github.com/kristof-mattei/docker-dns-rs/commit/15a844f2ac7cf2789bdb08cad1ba49b0d73c9abf)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 65685f4 - ([710583b](https://github.com/kristof-mattei/docker-dns-rs/commit/710583bddfb06e2714c515bc2f687644788a1ef1)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 2c454db - ([352f724](https://github.com/kristof-mattei/docker-dns-rs/commit/352f7243ee1274b5a68bb981a4ca4f53535a65ce)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 2c454db - ([e21d113](https://github.com/kristof-mattei/docker-dns-rs/commit/e21d1131c3bd059fcd6ada0cfacfad6860e88e21)) - renovate[bot]
-- **(deps)** update rust:1.79.0 docker digest to 5b3e9cc - ([9947b9c](https://github.com/kristof-mattei/docker-dns-rs/commit/9947b9cbee1afaedce899b65a875b0c7e2456b21)) - renovate[bot]
-- **(deps)** update rust to v1.79.0 - ([aca01f4](https://github.com/kristof-mattei/docker-dns-rs/commit/aca01f4f7f8b114016c9d0bb75e5a932854d0d7f)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.79.0 - ([1d12b61](https://github.com/kristof-mattei/docker-dns-rs/commit/1d12b619ec9b847e8c8b18b202712b37f202ada2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- **(deps)** update github/codeql-action action to v3.25.10 - ([b9e4834](https://github.com/kristof-mattei/docker-dns-rs/commit/b9e483475c5b8dd99506e356d9ff3ea07ffaae53)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.10 - ([e20c865](https://github.com/kristof-mattei/docker-dns-rs/commit/e20c86557bb87cf660387aa6ae0b0548bbb45117)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.5.0 - ([d8878fd](https://github.com/kristof-mattei/docker-dns-rs/commit/d8878fdaede3a368f28351d5173aa86d8e007f79)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.5.0 - ([874b4ea](https://github.com/kristof-mattei/docker-dns-rs/commit/874b4ea15e36256dadbf1c1c7db9d84787a908f5)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.7 - ([c72957f](https://github.com/kristof-mattei/docker-dns-rs/commit/c72957fddc2a40af3c05ce7eef25cbceaa5c91f3)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.9 - ([50c805e](https://github.com/kristof-mattei/docker-dns-rs/commit/50c805e29a77ca74279a11c74eb26520ca4fc74f)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.7 - ([e48dbd3](https://github.com/kristof-mattei/docker-dns-rs/commit/e48dbd3b1bb9d5dff267b51c13cbf1d33f6b900b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.9 - ([41db756](https://github.com/kristof-mattei/docker-dns-rs/commit/41db756c914f9726df0eab764a822cfd7330bed0)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.2 - ([4e8653a](https://github.com/kristof-mattei/docker-dns-rs/commit/4e8653a91a8905315fd1e89e89c947cc78127fd7)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.2 - ([7709d28](https://github.com/kristof-mattei/docker-dns-rs/commit/7709d286746b2aa5025d27b2db69ae78b9f7c43a)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.4.0 - ([83e13d0](https://github.com/kristof-mattei/docker-dns-rs/commit/83e13d0274018152d2cc28a526072c9ecb140fd8)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.4.0 - ([435e491](https://github.com/kristof-mattei/docker-dns-rs/commit/435e491f716cfafad59313d1f33e933716ffb990)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e2b7db3](https://github.com/kristof-mattei/docker-dns-rs/commit/e2b7db3c78a0c1b3105cdb7d22f4a98d9b06cf0e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([57450b8](https://github.com/kristof-mattei/docker-dns-rs/commit/57450b8725259b20db391545613a356b83cc4561)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.1 - ([d07836d](https://github.com/kristof-mattei/docker-dns-rs/commit/d07836d50bdde407386afeffcf76eeff9ba37094)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.1 - ([5e337c9](https://github.com/kristof-mattei/docker-dns-rs/commit/5e337c9ec227f681f41fe2aa594652e6da4b98f9)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.6 - ([8de0062](https://github.com/kristof-mattei/docker-dns-rs/commit/8de006214432c2445ca47323db678a124a28afdb)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.6 - ([5275b25](https://github.com/kristof-mattei/docker-dns-rs/commit/5275b25fd92c04a15a5e566c506c9025a46fea07)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.8 - ([17522ac](https://github.com/kristof-mattei/docker-dns-rs/commit/17522ac09147d27ab23b51970cc329ec5fb14d41)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.8 - ([a422314](https://github.com/kristof-mattei/docker-dns-rs/commit/a422314b2185c9d602266cb7a7f4660d40e9433b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.75.0 - ([0c5b096](https://github.com/kristof-mattei/docker-dns-rs/commit/0c5b09673bfbec9e8ea7b19ea14e5b158c55eea8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.75.0 - ([c6282bc](https://github.com/kristof-mattei/docker-dns-rs/commit/c6282bc6278c3938868994157bcb67248e40b2b1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([015e396](https://github.com/kristof-mattei/docker-dns-rs/commit/015e396259057639c5b2196c46ce5aedc61ae73b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([c204870](https://github.com/kristof-mattei/docker-dns-rs/commit/c204870106dd2c401200a2ed0265ce6b45916965)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.0 - ([2512966](https://github.com/kristof-mattei/docker-dns-rs/commit/2512966d9e6ad21303c96e85dc58646e270a7a07)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.3.0 - ([f6f2f8f](https://github.com/kristof-mattei/docker-dns-rs/commit/f6f2f8fd1ffd3507185eaf0ec7a3afc62c168928)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([29b5173](https://github.com/kristof-mattei/docker-dns-rs/commit/29b517311670c18fc101bab5de932798345b67be)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([a45cfd2](https://github.com/kristof-mattei/docker-dns-rs/commit/a45cfd2827c9331e4ec184463509a957e4f6b911)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.7 - ([9d41bdd](https://github.com/kristof-mattei/docker-dns-rs/commit/9d41bdd3c93499c62bc1fc0c5a130004f76f8aa9)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.7 - ([1761b18](https://github.com/kristof-mattei/docker-dns-rs/commit/1761b189ea246579e87b7e792968aea6efeeba24)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to ddc1ee0 - ([1949121](https://github.com/kristof-mattei/docker-dns-rs/commit/19491218b460a753152ab5f21f51209674720faa)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to ddc1ee0 - ([d645f82](https://github.com/kristof-mattei/docker-dns-rs/commit/d645f823cddd2b7be47012dd10fbda19cc48bde4)) - renovate[bot]
-- **(deps)** update npm to >=10.8.1 - ([33f9ac5](https://github.com/kristof-mattei/docker-dns-rs/commit/33f9ac57783f4fc8037a16680a5352dcd0f767ed)) - renovate[bot]
-- **(deps)** update npm to >=10.8.1 - ([d9cf215](https://github.com/kristof-mattei/docker-dns-rs/commit/d9cf2157cbdb7a43aa9c8524bb159b0ce3285cf0)) - renovate[bot]
-- **(deps)** update dependency node to v20.14.0 - ([0607e99](https://github.com/kristof-mattei/docker-dns-rs/commit/0607e99c9f2a1cfce950e7bed7a8098528b3735c)) - renovate[bot]
-- **(deps)** update dependency node to v20.14.0 - ([599479a](https://github.com/kristof-mattei/docker-dns-rs/commit/599479a8b2ee5d5779f6ffa1f133db8e86b32401)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.2.0 - ([72c0c8b](https://github.com/kristof-mattei/docker-dns-rs/commit/72c0c8b6fb072dad88fb33c7926321663a73a1b8)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.2.0 - ([721dc10](https://github.com/kristof-mattei/docker-dns-rs/commit/721dc10fca7002787aeaa76845622d1a9d28c930)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2695448](https://github.com/kristof-mattei/docker-dns-rs/commit/26954485a98419279a9422ba9a1f5f9311d8d7d9)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.74.0 - ([1df693d](https://github.com/kristof-mattei/docker-dns-rs/commit/1df693d4e55e35ca06622f9f4a2fce1f479111e5)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.74.0 - ([3a7086c](https://github.com/kristof-mattei/docker-dns-rs/commit/3a7086ccbab53eed404a60a60eb469ef257f322d)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.20.0 - ([3abee68](https://github.com/kristof-mattei/docker-dns-rs/commit/3abee68167c47d5822400e1a6385c71ec7a5199f)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.5 - ([984ff41](https://github.com/kristof-mattei/docker-dns-rs/commit/984ff41009bf6f84acf679779ca2e176a79b19f7)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.5 - ([03fb92f](https://github.com/kristof-mattei/docker-dns-rs/commit/03fb92f725934d17c32d2235a5eced8d3d77fc87)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.4.1 - ([b008696](https://github.com/kristof-mattei/docker-dns-rs/commit/b008696b3c7fd860023a4a05b54ee2c562f32971)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.4.1 - ([02ea914](https://github.com/kristof-mattei/docker-dns-rs/commit/02ea914565c79e0f62e5ee10e26b8720ad4483c1)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.6 - ([37c2152](https://github.com/kristof-mattei/docker-dns-rs/commit/37c21522e2a37724d9ade57e6f53a1638750e22c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.6 - ([052be01](https://github.com/kristof-mattei/docker-dns-rs/commit/052be017f2d5932eaf8783c84bd071cb9d98e760)) - renovate[bot]
-- **(deps)** lock file maintenance - ([662a300](https://github.com/kristof-mattei/docker-dns-rs/commit/662a3008c2c68d8c597a380ddffe88aa86f8dc9d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e9cfc3e](https://github.com/kristof-mattei/docker-dns-rs/commit/e9cfc3e7057286c17f809653c481cc8e0cac733f)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.6 - ([d2d82e2](https://github.com/kristof-mattei/docker-dns-rs/commit/d2d82e2f8dec7ea691550f37573904706bf01fc5)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.6 - ([1005953](https://github.com/kristof-mattei/docker-dns-rs/commit/10059535b233ed5d1bf77d06e3cc42b3009194f6)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.73.0 - ([ce959fd](https://github.com/kristof-mattei/docker-dns-rs/commit/ce959fdb712f1e216260922e7d57bd2dbd1bcde8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.73.0 - ([dd32ba0](https://github.com/kristof-mattei/docker-dns-rs/commit/dd32ba03d80dbbeccbfd05341d9c721c49be9f87)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.4 - ([2f51a2e](https://github.com/kristof-mattei/docker-dns-rs/commit/2f51a2eeac4e9efd7d99dead5bce433ae5bee936)) - renovate[bot]
-- **(deps)** update npm to >=10.8.0 - ([906b3d4](https://github.com/kristof-mattei/docker-dns-rs/commit/906b3d45b66276a0d95f2dd430be8e5d4ae99756)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.4 - ([d7b8e01](https://github.com/kristof-mattei/docker-dns-rs/commit/d7b8e01442cc7d495503d1c7b1e571f821211ff1)) - renovate[bot]
-- **(deps)** update npm to >=10.8.0 - ([24f0446](https://github.com/kristof-mattei/docker-dns-rs/commit/24f0446a5b86f0e7c59fdc7175bcfc5c8fa7bdc2)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to 5907e96 - ([1fb33dd](https://github.com/kristof-mattei/docker-dns-rs/commit/1fb33dd6f1e88b685d282cd64a258e3b01cf4c17)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to 5907e96 - ([f434053](https://github.com/kristof-mattei/docker-dns-rs/commit/f4340534945c815b203f41e7deafec397f4458b5)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to c296ad0 - ([1535c77](https://github.com/kristof-mattei/docker-dns-rs/commit/1535c7791c5a2591558d11cdbfaf8fd7f207ab82)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to c296ad0 - ([37852e0](https://github.com/kristof-mattei/docker-dns-rs/commit/37852e04a3ed402818de35e192eb54d9a284abbb)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to 0b23e41 - ([025723c](https://github.com/kristof-mattei/docker-dns-rs/commit/025723c297ef53b6a0f4e64a56ea77eeb27bef59)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to d3d021c - ([3c5fecd](https://github.com/kristof-mattei/docker-dns-rs/commit/3c5fecd90d9907d54f00c508c7b5354b0331cc0f)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to d3d021c - ([eecf216](https://github.com/kristof-mattei/docker-dns-rs/commit/eecf216fc9a82636b297db50be86c57738c20609)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.4.0 - ([b5f86fa](https://github.com/kristof-mattei/docker-dns-rs/commit/b5f86fa3aa542625e754e90b1d21d2c3ec3e858d)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.4.0 - ([2b15b83](https://github.com/kristof-mattei/docker-dns-rs/commit/2b15b8324d68b13cdedc391e30ce29a3df5f949f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.5 - ([6a5a8d4](https://github.com/kristof-mattei/docker-dns-rs/commit/6a5a8d4a8f59439f3da0fbe369c6ac973ba1c32c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.5 - ([e3c2ddc](https://github.com/kristof-mattei/docker-dns-rs/commit/e3c2ddc4df8f649ddc853ac3ab380316e71445f7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([555c92e](https://github.com/kristof-mattei/docker-dns-rs/commit/555c92e5ba247d00bd780fec1a28f02493b2a434)) - renovate[bot]
-- **(deps)** lock file maintenance - ([88963f7](https://github.com/kristof-mattei/docker-dns-rs/commit/88963f77b4b480ad368bd85ddbb0201d702cd39b)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 8de9eea - ([b7163f6](https://github.com/kristof-mattei/docker-dns-rs/commit/b7163f6187d03afda65e033536df77b2a3624bf5)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 8de9eea - ([4fcd364](https://github.com/kristof-mattei/docker-dns-rs/commit/4fcd364a611b8518e3884a6ef5e01cc1ca1bdd01)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to eaf386f - ([c2d2958](https://github.com/kristof-mattei/docker-dns-rs/commit/c2d29585f6c47164a9f17bb5f64578c5d6a85c4f)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to eaf386f - ([7029344](https://github.com/kristof-mattei/docker-dns-rs/commit/702934418be65e974f40019f2f68ec46189bdc00)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.1.1 - ([3477124](https://github.com/kristof-mattei/docker-dns-rs/commit/34771242cfabdf82579cdf9b0296d088353e21b6)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.1.1 - ([6d42d93](https://github.com/kristof-mattei/docker-dns-rs/commit/6d42d9380687046ad227c4be0ab89d07472eefe3)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.1.0 - ([fe362ee](https://github.com/kristof-mattei/docker-dns-rs/commit/fe362ee5c8401d5a2c372a5d1b80dbfd8bae6da7)) - renovate[bot]
-- **(deps)** update dependency node to v20.13.1 - ([7f56526](https://github.com/kristof-mattei/docker-dns-rs/commit/7f56526e448a5d997ef621ebd4d133f064017fcd)) - renovate[bot]
-- **(deps)** update dependency node to v20.13.1 - ([9c1d76e](https://github.com/kristof-mattei/docker-dns-rs/commit/9c1d76ee7dbc42b71d7f26fabee3386425fd9325)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.5 - ([c8afd6d](https://github.com/kristof-mattei/docker-dns-rs/commit/c8afd6d70cf114fb03147dbd0fecc4f4e4d042e8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.72.0 - ([83f191b](https://github.com/kristof-mattei/docker-dns-rs/commit/83f191b2f9f31069151bd5d214969f87996c4a3b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.72.0 - ([f86740b](https://github.com/kristof-mattei/docker-dns-rs/commit/f86740bb96edeec15656ce6e1274ad497165fe8c)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.5 - ([20cbb38](https://github.com/kristof-mattei/docker-dns-rs/commit/20cbb387029bcbe500d38e3267f1650ebf0ab25c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.4 - ([c688a4b](https://github.com/kristof-mattei/docker-dns-rs/commit/c688a4b654802d2b050ff41ec345cb732444cfcc)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.4 - ([6754895](https://github.com/kristof-mattei/docker-dns-rs/commit/6754895440a1dee5f1b8867b13133cfb021f164c)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to e6a3886 - ([36774c8](https://github.com/kristof-mattei/docker-dns-rs/commit/36774c8f3802d6f51277ea9fc8124f7cf2ed34d6)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to e6a3886 - ([8ca9107](https://github.com/kristof-mattei/docker-dns-rs/commit/8ca9107e4da5bfbc75e109515baff990ccdac421)) - renovate[bot]
-- **(deps)** update dependency node to v20.13.0 - ([48f525a](https://github.com/kristof-mattei/docker-dns-rs/commit/48f525ad6c512826d5d68d16c642fb81d6e14cf0)) - renovate[bot]
-- **(deps)** update dependency node to v20.13.0 - ([d931dc2](https://github.com/kristof-mattei/docker-dns-rs/commit/d931dc24f38f625cf96de40a6f0727793160eb38)) - renovate[bot]
-- **(deps)** lock file maintenance - ([4de3283](https://github.com/kristof-mattei/docker-dns-rs/commit/4de328392b7a82444628caa5ebb770ef540b4e6e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([1e58396](https://github.com/kristof-mattei/docker-dns-rs/commit/1e58396666f7b104ddd8aa7796964ecb71067f27)) - renovate[bot]
-- **(deps)** update dependency conventional-changelog-conventionalcommits to v8 - ([f197295](https://github.com/kristof-mattei/docker-dns-rs/commit/f1972956fefd0e717d3faa0e196ba34b23e6b464)) - renovate[bot]
-- **(deps)** update dependency conventional-changelog-conventionalcommits to v8 - ([14ea08d](https://github.com/kristof-mattei/docker-dns-rs/commit/14ea08d9be4b97ff278aeac1c31545ae60cd2b29)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.71.0 - ([050af56](https://github.com/kristof-mattei/docker-dns-rs/commit/050af56f2ffb7bca68461611fb91570e2000a4f6)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.71.0 - ([3d0cc5b](https://github.com/kristof-mattei/docker-dns-rs/commit/3d0cc5b8171def2310c6375c36d03703696352e5)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to 0dd183f - ([785d696](https://github.com/kristof-mattei/docker-dns-rs/commit/785d696de9bd7e18d35faec387b3ee34302e5191)) - renovate[bot]
-- **(deps)** update rust:1.78.0 docker digest to 0dd183f - ([4af941a](https://github.com/kristof-mattei/docker-dns-rs/commit/4af941a85e35fe6f72c5388330fa8e3586d3859f)) - renovate[bot]
-- **(deps)** update rust to v1.78.0 - ([d069b51](https://github.com/kristof-mattei/docker-dns-rs/commit/d069b517986d26b7800fe1a632ef3205137ae6ed)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.3.1 - ([aee3fdc](https://github.com/kristof-mattei/docker-dns-rs/commit/aee3fdc4c43430c5e989c3e0bef09ff51b31deef)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.3.1 - ([4748e37](https://github.com/kristof-mattei/docker-dns-rs/commit/4748e37be2873b5668d5736933f5bf6222c050a8)) - renovate[bot]
-- **(deps)** update npm to >=10.7.0 - ([a6d5eec](https://github.com/kristof-mattei/docker-dns-rs/commit/a6d5eecd3e678a55479fa4a3adba1fb66ccecb97)) - renovate[bot]
-- **(deps)** update npm to >=10.7.0 - ([e085b72](https://github.com/kristof-mattei/docker-dns-rs/commit/e085b723f445a63e3feeacfc7bed2db568b376da)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 83101f6 - ([846e272](https://github.com/kristof-mattei/docker-dns-rs/commit/846e272cddcf4cd80c79d85a908a401d4c949fb4)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 83101f6 - ([5a8233f](https://github.com/kristof-mattei/docker-dns-rs/commit/5a8233fdd2969658f9c1a55dee26cbd9398e234e)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 371ae51 - ([e282e41](https://github.com/kristof-mattei/docker-dns-rs/commit/e282e4176d2f5693dd6391f7f9b1b35800f01179)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 371ae51 - ([d67e2b3](https://github.com/kristof-mattei/docker-dns-rs/commit/d67e2b389f1777d4d77aa93f74c07c0606b15529)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 0240e09 - ([d850ea6](https://github.com/kristof-mattei/docker-dns-rs/commit/d850ea6d9cf518cf54b2bc93d1dfdbfcaed4b51c)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 0240e09 - ([13e120b](https://github.com/kristof-mattei/docker-dns-rs/commit/13e120b2c7c581d535f7b8c35d3f7bcb60484007)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to a429f26 - ([a7198b6](https://github.com/kristof-mattei/docker-dns-rs/commit/a7198b6d7db79ba67643cf62e2bd9f3294823d43)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b357131](https://github.com/kristof-mattei/docker-dns-rs/commit/b357131de99f0238aa22d9f9b5fbfc1220dcaa5b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([30d2d63](https://github.com/kristof-mattei/docker-dns-rs/commit/30d2d63751152bfe8195b296774e3967e4fcfb30)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 8f891e6 - ([6be5cb6](https://github.com/kristof-mattei/docker-dns-rs/commit/6be5cb6738811c0a0d2a0640d1587c2b0cc20c20)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 8f891e6 - ([ffc7970](https://github.com/kristof-mattei/docker-dns-rs/commit/ffc7970c015691c1f7832f891a28f5090be029fb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.3 - ([d8844e0](https://github.com/kristof-mattei/docker-dns-rs/commit/d8844e0abbc38d9dfed3b1795bcc36673e77d1f4)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.3 - ([64ef4a8](https://github.com/kristof-mattei/docker-dns-rs/commit/64ef4a8bcaf7e293c8e739b7ced669d4fe119793)) - renovate[bot]
-- **(deps)** update npm to >=10.6.0 - ([9ac89fb](https://github.com/kristof-mattei/docker-dns-rs/commit/9ac89fbd92ad56e4c4a96484385343b1227ca367)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 491c4b7 - ([ca1ba73](https://github.com/kristof-mattei/docker-dns-rs/commit/ca1ba7338d05ecab8863e648a31145ecfcb65d31)) - renovate[bot]
-- **(deps)** update npm to >=10.6.0 - ([6334623](https://github.com/kristof-mattei/docker-dns-rs/commit/633462372e8044c37a10f34c1c3182d9dfebb5c6)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.4 - ([f9f10ff](https://github.com/kristof-mattei/docker-dns-rs/commit/f9f10ff4f1d0263fe738bbbc9517a863dd800c8c)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 491c4b7 - ([4789ccc](https://github.com/kristof-mattei/docker-dns-rs/commit/4789ccc2a82f98f12f35487804d1038c063d3dd6)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.4 - ([fc7e198](https://github.com/kristof-mattei/docker-dns-rs/commit/fc7e19806f46cb54698f956f7f4164db3884a462)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 8824f00 - ([17eb656](https://github.com/kristof-mattei/docker-dns-rs/commit/17eb656af9f32579540dbae78ca99205802bbea4)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 8824f00 - ([efd2397](https://github.com/kristof-mattei/docker-dns-rs/commit/efd239788289817336ce229453f26921e311259a)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 660454d - ([8c5d392](https://github.com/kristof-mattei/docker-dns-rs/commit/8c5d392b1e99b4fb3dcfc8d08676bc87b5be45d0)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 660454d - ([d942e0d](https://github.com/kristof-mattei/docker-dns-rs/commit/d942e0d727cf1ec3bb40bb268fe33f446d29db14)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.70.0 - ([8235f14](https://github.com/kristof-mattei/docker-dns-rs/commit/8235f1456a2a8f0d14a6969ffb04f0b6ca6116f2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.70.0 - ([cce2d68](https://github.com/kristof-mattei/docker-dns-rs/commit/cce2d6892f5e70345c7d9869b603f62aa68fd7e0)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 76b4fd3 - ([5ebeff2](https://github.com/kristof-mattei/docker-dns-rs/commit/5ebeff2cdb4c327cc5f24270e90b1d2ec7b23a31)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 76b4fd3 - ([81eb79f](https://github.com/kristof-mattei/docker-dns-rs/commit/81eb79f02dc1862ab4244c09f8a58a0191da8b8e)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.7 - ([5b50989](https://github.com/kristof-mattei/docker-dns-rs/commit/5b509898043a62fb00aaa6888eb4a5b14ac93f16)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.7 - ([685dc13](https://github.com/kristof-mattei/docker-dns-rs/commit/685dc13a652cd9d1809b8cc159cd88178e837cae)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.2 - ([e59cdfa](https://github.com/kristof-mattei/docker-dns-rs/commit/e59cdfa258117117736e89977ead9cc0423075c2)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.3 - ([604b9d2](https://github.com/kristof-mattei/docker-dns-rs/commit/604b9d23305b965b99a5928c9f8514efa9a92b3d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.2 - ([0f0ca61](https://github.com/kristof-mattei/docker-dns-rs/commit/0f0ca6115496a6b23ed585c6e184aa6b1bfaa858)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.3 - ([ddf1690](https://github.com/kristof-mattei/docker-dns-rs/commit/ddf16902c3d81a47910cec7fccafd4a09b26f99b)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.6 - ([5653762](https://github.com/kristof-mattei/docker-dns-rs/commit/5653762fa0ba7f55913845d1049b2a9c898bec1e)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.3 - ([18f7d24](https://github.com/kristof-mattei/docker-dns-rs/commit/18f7d2419f6f1b7ad7f4fd4962ebbd6010120c76)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.6 - ([b69a339](https://github.com/kristof-mattei/docker-dns-rs/commit/b69a339ca5265e943b44812fe660ab6bb371f3ad)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.3 - ([0d6f579](https://github.com/kristof-mattei/docker-dns-rs/commit/0d6f5799fcdb5ed0e957f7fdfef78ddfa6dd005b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([3082bcb](https://github.com/kristof-mattei/docker-dns-rs/commit/3082bcb40544e64a6b030c04b7894c43a82c8b05)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f2a8bdd](https://github.com/kristof-mattei/docker-dns-rs/commit/f2a8bdd897fbce22656b54dad6a8f9ccadb06058)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 6052afe - ([1cebf40](https://github.com/kristof-mattei/docker-dns-rs/commit/1cebf40924d2332bb55fd2b910e33e4720b85565)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 6052afe - ([f3b0e50](https://github.com/kristof-mattei/docker-dns-rs/commit/f3b0e501ea504dd5b1608d11584aa04a38705363)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 5cff578 - ([8a50ad5](https://github.com/kristof-mattei/docker-dns-rs/commit/8a50ad5e7ad816001ee3a7f5704acc9bb5087036)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 5cff578 - ([8ae4953](https://github.com/kristof-mattei/docker-dns-rs/commit/8ae4953f912092cd9acceeda1f1a6a00f942098b)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.5 - ([cc87294](https://github.com/kristof-mattei/docker-dns-rs/commit/cc872948e7c43d48017edaaf31028382772050bf)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.2 - ([1124abe](https://github.com/kristof-mattei/docker-dns-rs/commit/1124abe785efac8515eaea7dc12d061edcbea2e1)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.2 - ([9802e02](https://github.com/kristof-mattei/docker-dns-rs/commit/9802e02fe207df92f26327183202207f90aa04ac)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.5 - ([30312f6](https://github.com/kristof-mattei/docker-dns-rs/commit/30312f60e460bf2c2582d759454fbdc9e22f0321)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.1 - ([c4e8257](https://github.com/kristof-mattei/docker-dns-rs/commit/c4e8257be370424fec56a6953714b66a91154296)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.1 - ([cb22cec](https://github.com/kristof-mattei/docker-dns-rs/commit/cb22cecd380b9e2992f84b934d12f41049ecaf6a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.69.0 - ([0d47a49](https://github.com/kristof-mattei/docker-dns-rs/commit/0d47a49422674ab49aa8c52ac67ea641a5f56168)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.69.0 - ([933f02e](https://github.com/kristof-mattei/docker-dns-rs/commit/933f02e502f5e76b3d5d126cbf16d29c74b23a3f)) - renovate[bot]
-- **(deps)** update dependency node to v20.12.2 - ([fa9b5ff](https://github.com/kristof-mattei/docker-dns-rs/commit/fa9b5ffa614015bfd66a206c465cb719a175d440)) - renovate[bot]
-- **(deps)** update dependency node to v20.12.2 - ([39abb48](https://github.com/kristof-mattei/docker-dns-rs/commit/39abb48aa5f5f0c00490120f8eef0929f1ab7e47)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.0 - ([d3106f8](https://github.com/kristof-mattei/docker-dns-rs/commit/d3106f8f93a4cd810f442d1df235db2a13a54558)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.25.0 - ([6e91ae5](https://github.com/kristof-mattei/docker-dns-rs/commit/6e91ae5f6f7022eb0ad487eb978e4c6609e47642)) - renovate[bot]
-- **(deps)** lock file maintenance - ([93ab6e6](https://github.com/kristof-mattei/docker-dns-rs/commit/93ab6e63cb3ae2bada53eee05444d11ebaacc39e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7e32b03](https://github.com/kristof-mattei/docker-dns-rs/commit/7e32b0364d8dd7f5a4f5bd2948475c1ac2af92c5)) - renovate[bot]
-- **(deps)** update rust to v1.77.2 - ([5af32f7](https://github.com/kristof-mattei/docker-dns-rs/commit/5af32f760a57bd111e26183d88da17ef707f275b)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to da23629 - ([54d6cbf](https://github.com/kristof-mattei/docker-dns-rs/commit/54d6cbfa712e0042e2ef74ffe69ae2538b18e984)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to e0fd84e - ([1a401a3](https://github.com/kristof-mattei/docker-dns-rs/commit/1a401a3973091eab8b9a3573bbc8cf42b5763ea5)) - renovate[bot]
-- **(deps)** update npm to >=10.5.2 - ([7e1fe13](https://github.com/kristof-mattei/docker-dns-rs/commit/7e1fe131ee480d174782f29b599ac091ff83ad73)) - renovate[bot]
-- **(deps)** update npm to >=10.5.2 - ([0bdca5c](https://github.com/kristof-mattei/docker-dns-rs/commit/0bdca5c3c426920d8391c2a17b7193bb05f53a69)) - renovate[bot]
-- **(deps)** update node.js to >=20.12.2 - ([e2a33e4](https://github.com/kristof-mattei/docker-dns-rs/commit/e2a33e434c76e4e38086f1b0d3805473b50ff78e)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to 5fbf82e - ([21b263c](https://github.com/kristof-mattei/docker-dns-rs/commit/21b263cf9183c47f471b4e6975526b7d63dffc34)) - renovate[bot]
-- **(deps)** update node.js to >=20.12.2 - ([173c779](https://github.com/kristof-mattei/docker-dns-rs/commit/173c779377ab66593eb8b66a3e0ac86059b8abb8)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to bfc490a - ([19b8007](https://github.com/kristof-mattei/docker-dns-rs/commit/19b80079f1f3f96c7cf27389dc72af9a0b9c77d0)) - renovate[bot]
-- **(deps)** update rust:1.77.2 docker digest to d6a147f - ([0385f70](https://github.com/kristof-mattei/docker-dns-rs/commit/0385f708d2b3c0c5df0905055aa6753ef29a6e86)) - renovate[bot]
-- **(deps)** update rust to v1.77.2 - ([37d18f8](https://github.com/kristof-mattei/docker-dns-rs/commit/37d18f8fe64717c30374ac67ca562279d74adbc2)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.8 - ([4fc3bde](https://github.com/kristof-mattei/docker-dns-rs/commit/4fc3bde7a3cdcbf4a073f8f9e4e85e2772d32086)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.8 - ([3dbc4b8](https://github.com/kristof-mattei/docker-dns-rs/commit/3dbc4b818e4e754e2e013c674a19335b94778962)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.3.0 - ([5d17bc3](https://github.com/kristof-mattei/docker-dns-rs/commit/5d17bc39e604ff86377a10abcce0c1b1821a4535)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.3.0 - ([1a1ff40](https://github.com/kristof-mattei/docker-dns-rs/commit/1a1ff40f2270b5344845bcf13f892efc569a54f3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.68.0 - ([79c17fd](https://github.com/kristof-mattei/docker-dns-rs/commit/79c17fdf194ac609c1227782b907a6497e1eceaf)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.68.0 - ([6028a69](https://github.com/kristof-mattei/docker-dns-rs/commit/6028a6961d0f7a98f7fda721b10552d9a6fa4f0b)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.3.0 - ([0c106cc](https://github.com/kristof-mattei/docker-dns-rs/commit/0c106cc1f98101af2e912d8fd73d28911150d1ef)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.3.0 - ([a6996dc](https://github.com/kristof-mattei/docker-dns-rs/commit/a6996dc28dcb56328f56bc7e8a6f235c39a90caf)) - renovate[bot]
-- **(deps)** lock file maintenance - ([530a389](https://github.com/kristof-mattei/docker-dns-rs/commit/530a389b9ed8d1e343bb4103bd7a96ea3de7a8b5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a8b26c6](https://github.com/kristof-mattei/docker-dns-rs/commit/a8b26c66d63ef29eb3b88fd935575ec08b45ac71)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.3 - ([a0205ea](https://github.com/kristof-mattei/docker-dns-rs/commit/a0205eaee008f1766669123bffdd980ae83b3616)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10.0.3 - ([3d1e31f](https://github.com/kristof-mattei/docker-dns-rs/commit/3d1e31fb93345149f690e7321a5ea2a21905b3da)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.10 - ([9354143](https://github.com/kristof-mattei/docker-dns-rs/commit/935414336a545b0f238967f79b269855d37712fd)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.10 - ([1cea0d1](https://github.com/kristof-mattei/docker-dns-rs/commit/1cea0d1994c699b3723fcd18c9647aeab762668f)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.7 - ([db672e2](https://github.com/kristof-mattei/docker-dns-rs/commit/db672e2c46d28980c0df26e2aa9c64c49b464af2)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 6a90fc9 - ([5edcbee](https://github.com/kristof-mattei/docker-dns-rs/commit/5edcbeea5cb3bb0217fdfa17087faa54faa0d340)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4.2.0 - ([f4340b8](https://github.com/kristof-mattei/docker-dns-rs/commit/f4340b8718a35c9ead893f2158dbace36567b3e1)) - renovate[bot]
-- **(deps)** update node.js to >=20.12.1 - ([3e87f95](https://github.com/kristof-mattei/docker-dns-rs/commit/3e87f95deb6a6b4e7351daa53cdb58481569da2c)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.7 - ([1b6555a](https://github.com/kristof-mattei/docker-dns-rs/commit/1b6555a697d634579cf4fd57b0f23fae59795f52)) - renovate[bot]
-- **(deps)** update npm to >=10.5.1 - ([f3b32d7](https://github.com/kristof-mattei/docker-dns-rs/commit/f3b32d7c22cec9d1c9347ae449dd342e0b8edb53)) - renovate[bot]
-- **(deps)** update node.js to >=20.12.1 - ([a1a035a](https://github.com/kristof-mattei/docker-dns-rs/commit/a1a035aaed173413059cba72ec07a1cae2b6f0d2)) - renovate[bot]
-- **(deps)** update npm to >=10.5.1 - ([86abe56](https://github.com/kristof-mattei/docker-dns-rs/commit/86abe565e109bec11715e46a317c318697a9799b)) - renovate[bot]
-- **(deps)** pin docker/setup-qemu-action action to 6882732 - ([e5aa29f](https://github.com/kristof-mattei/docker-dns-rs/commit/e5aa29fb129befd826441db3be17fdb50c368202)) - renovate[bot]
-- **(deps)** update rust:1.77.1 docker digest to e3d3230 - ([b436f7f](https://github.com/kristof-mattei/docker-dns-rs/commit/b436f7f3e56a7cb0477f958e2ea3cc946725ff90)) - renovate[bot]
-- **(deps)** update rust:1.77.1 docker digest to e3d3230 - ([cd898df](https://github.com/kristof-mattei/docker-dns-rs/commit/cd898df8b52797f294ba07bd7d89fdbc5318e3aa)) - renovate[bot]
-- **(deps)** update rust:1.77.1 docker digest to 19daf5b - ([575821d](https://github.com/kristof-mattei/docker-dns-rs/commit/575821d4e4b6a604b52b946421b36b0a22611b5e)) - renovate[bot]
-- **(deps)** update rust:1.77.1 docker digest to 19daf5b - ([315ac61](https://github.com/kristof-mattei/docker-dns-rs/commit/315ac61033911228bc2252f98ebb5edebc553232)) - renovate[bot]
-- **(deps)** update rust to v1.77.1 - ([4a5e732](https://github.com/kristof-mattei/docker-dns-rs/commit/4a5e732fe5e9e9e3b0691521a2ba65519b95983a)) - renovate[bot]
-- **(deps)** update rust to v1.77.1 - ([28b9162](https://github.com/kristof-mattei/docker-dns-rs/commit/28b9162dcd93f3eafb08132649ea41551a43625e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([406f049](https://github.com/kristof-mattei/docker-dns-rs/commit/406f049175f2859a5d84dc75a258584bb2171823)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e652d6a](https://github.com/kristof-mattei/docker-dns-rs/commit/e652d6a71e631fb30a0003d737b4d0375e3bc660)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v4 - ([65c0583](https://github.com/kristof-mattei/docker-dns-rs/commit/65c0583c10f334d581e13bdc1b64274a781e5ee9)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v3.1.6 - ([5e8ec63](https://github.com/kristof-mattei/docker-dns-rs/commit/5e8ec632b2c5576f03765e82d6d6edfc535667c4)) - renovate[bot]
-- **(deps)** pin codecov/codecov-action action to ab904c4 - ([7d3a344](https://github.com/kristof-mattei/docker-dns-rs/commit/7d3a3442084a4eef236e3787c1bee1e67abdbcb2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.67.0 - ([1cec106](https://github.com/kristof-mattei/docker-dns-rs/commit/1cec106344317f993b6512b591f5ad2cf1090f73)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.67.0 - ([3b0b724](https://github.com/kristof-mattei/docker-dns-rs/commit/3b0b7249e45edf21f71617ea26af6d8902ee65f1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.66.2 - ([0eb2e95](https://github.com/kristof-mattei/docker-dns-rs/commit/0eb2e954dfa465d2bd876f569f2386ff2d4ed436)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.66.2 - ([059e6f6](https://github.com/kristof-mattei/docker-dns-rs/commit/059e6f6f332e08bab870e7072d6ce1e3c00bc78b)) - renovate[bot]
-- **(deps)** update node.js to >=20.12.0 - ([a047ffe](https://github.com/kristof-mattei/docker-dns-rs/commit/a047ffe1f956c032353ff0bee4d0fb448ff393f8)) - renovate[bot]
-- **(deps)** update node.js to >=20.12.0 - ([73cc0a0](https://github.com/kristof-mattei/docker-dns-rs/commit/73cc0a0aaf74094fc7e6c05eb61756d45c75f7f3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.66.1 - ([a0ac5fa](https://github.com/kristof-mattei/docker-dns-rs/commit/a0ac5faca435bc6ae97ad572e54740782597b7b5)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.66.1 - ([70c98cd](https://github.com/kristof-mattei/docker-dns-rs/commit/70c98cd901b8c90f40b04dad85cdfcc8bda611fa)) - renovate[bot]
-- **(deps)** lock file maintenance - ([cfa281c](https://github.com/kristof-mattei/docker-dns-rs/commit/cfa281cc02b098daa9e77353e9ea0e62cb92cc1d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a5099bf](https://github.com/kristof-mattei/docker-dns-rs/commit/a5099bf4d39447874829ca80241cdb01f8ffe6b0)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.6 - ([930d38c](https://github.com/kristof-mattei/docker-dns-rs/commit/930d38cd8ca384eb42f105f57475e2ce9abdc9e3)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.6 - ([d7d6cd9](https://github.com/kristof-mattei/docker-dns-rs/commit/d7d6cd994abb74460b87a18f75eb009aee60635b)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v13 - ([66932c4](https://github.com/kristof-mattei/docker-dns-rs/commit/66932c41d02de3ecb1992d3f6a4edc1f984fde67)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v13 - ([d5221a3](https://github.com/kristof-mattei/docker-dns-rs/commit/d5221a329171a01cfe5a2a18b44c3414c30b0a60)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 6bebc01 - ([0aff220](https://github.com/kristof-mattei/docker-dns-rs/commit/0aff220c2b3fc9d54afac0b63f1e26bac3408908)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 6bebc01 - ([ba768ed](https://github.com/kristof-mattei/docker-dns-rs/commit/ba768edd7db4b6ce287a9228e7368b12bc26aac1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep-action digest to 713efdd - ([ecb03b6](https://github.com/kristof-mattei/docker-dns-rs/commit/ecb03b611d1e8631bf345803f07664990c6070cd)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2de2ca8](https://github.com/kristof-mattei/docker-dns-rs/commit/2de2ca8df55738a5f371a76da37ef5cf736e3bc3)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.9 - ([911fb29](https://github.com/kristof-mattei/docker-dns-rs/commit/911fb29b006e68795ee8ab95e168bd68a58ca0fd)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.9 - ([745c57a](https://github.com/kristof-mattei/docker-dns-rs/commit/745c57aa8c38a17d65446b92b99244742f2708df)) - renovate[bot]
-- **(deps)** update rust to v1.77.0 - ([33c22e1](https://github.com/kristof-mattei/docker-dns-rs/commit/33c22e158b7b53e0b4bef76ed8415b2c3586b3f5)) - renovate[bot]
-- **(deps)** update rust to v1.77.0 - ([a79d752](https://github.com/kristof-mattei/docker-dns-rs/commit/a79d7525e85849831cc96734433a8d690c290423)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.16.1 - ([f70e6fc](https://github.com/kristof-mattei/docker-dns-rs/commit/f70e6fcb9d038c1173e4595ba878b44be30d86ed)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.16.1 - ([fb41110](https://github.com/kristof-mattei/docker-dns-rs/commit/fb41110170330b035e6f99aa740ca2e8cf95d1c3)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.16.0 - ([69ef53c](https://github.com/kristof-mattei/docker-dns-rs/commit/69ef53cecda33d380f58b6dc7a58bc866d0ca19c)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.16.0 - ([cc7a3b2](https://github.com/kristof-mattei/docker-dns-rs/commit/cc7a3b2504f206cf993c6dd242effd7c5f6961f0)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.0.2 - ([52302f2](https://github.com/kristof-mattei/docker-dns-rs/commit/52302f254461b80f48aef67a4da2e5269fb7b009)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.66.0 - ([0a6c4ca](https://github.com/kristof-mattei/docker-dns-rs/commit/0a6c4ca64b5f4a3087246478b46ae785c3cec817)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.66.0 - ([74a9312](https://github.com/kristof-mattei/docker-dns-rs/commit/74a9312b64dcbf795cb1fca7d3884b5c374746d1)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.0.2 - ([7f0cec0](https://github.com/kristof-mattei/docker-dns-rs/commit/7f0cec04406b61638062d55d9a3812b97e52be7c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.8 - ([b5b5406](https://github.com/kristof-mattei/docker-dns-rs/commit/b5b54066ebb239576fbca7c5a2d6c4f2ae5dba5b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.8 - ([ddef071](https://github.com/kristof-mattei/docker-dns-rs/commit/ddef071321cbe029913dcbf69dd2d67266a3e59b)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.5 - ([b0ce0ce](https://github.com/kristof-mattei/docker-dns-rs/commit/b0ce0ceef157d1d0750278842159b7dc2ba44b77)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.5 - ([26b9782](https://github.com/kristof-mattei/docker-dns-rs/commit/26b97825250d1616dbf7ad3e438262c793628cb9)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/commit-analyzer to v12 - ([b71999f](https://github.com/kristof-mattei/docker-dns-rs/commit/b71999f01aaedd146abe74ff9f2fd23945048c3f)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/commit-analyzer to v12 - ([ca621a5](https://github.com/kristof-mattei/docker-dns-rs/commit/ca621a5c7e79256cca9dcf658fc32e30c2ea9014)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fe5a3d0](https://github.com/kristof-mattei/docker-dns-rs/commit/fe5a3d089629ae0df89b37f86114a27592f74145)) - renovate[bot]
-- **(deps)** lock file maintenance - ([3ec6c41](https://github.com/kristof-mattei/docker-dns-rs/commit/3ec6c4123dfc03a5488d857b2cc8d1b099af7e69)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.4 - ([c75fe7f](https://github.com/kristof-mattei/docker-dns-rs/commit/c75fe7f43783f7940e05627b3c35d3dd397e6a2d)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.4 - ([0bcdd8a](https://github.com/kristof-mattei/docker-dns-rs/commit/0bcdd8a2f6fdef6d47ae33ebb5126172cc217f6f)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.3 - ([b396724](https://github.com/kristof-mattei/docker-dns-rs/commit/b3967246c6c6b82d2bb0cddce5082d9cc0b1e47a)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.3 - ([1d43880](https://github.com/kristof-mattei/docker-dns-rs/commit/1d4388052cd1ebbbf9c3f5a65b840a80d1ed70cc)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10 - ([5038cd3](https://github.com/kristof-mattei/docker-dns-rs/commit/5038cd326369ca5ba473fb7e2c7e7a0954826d2c)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v10 - ([7a46a38](https://github.com/kristof-mattei/docker-dns-rs/commit/7a46a38c170e125492332371bcdd64be8bded607)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.2.0 - ([b08ff5f](https://github.com/kristof-mattei/docker-dns-rs/commit/b08ff5f5e5468d88933a6bf6a3c1d7560e0dc0f9)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.2.0 - ([5d2591d](https://github.com/kristof-mattei/docker-dns-rs/commit/5d2591dad232357ecc68a67b4e9e94c8fc38e265)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.3.0 - ([450f809](https://github.com/kristof-mattei/docker-dns-rs/commit/450f8098b37a02d93a376cc250d6528e8ba8410c)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.3.0 - ([5474a4f](https://github.com/kristof-mattei/docker-dns-rs/commit/5474a4f893b7dfe42a0bfab060bb3f15f04c4074)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.1.0 - ([674ab1b](https://github.com/kristof-mattei/docker-dns-rs/commit/674ab1bf2c515d0d72d33632d499e04310c8df3a)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3.1.0 - ([8faeced](https://github.com/kristof-mattei/docker-dns-rs/commit/8faeced53df0f3c618e83cc3f91bbdc581c2fd6a)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to d36f9d8 - ([fe92e43](https://github.com/kristof-mattei/docker-dns-rs/commit/fe92e43a3bade590b3ee14823f9b67f2ba9abe04)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to d36f9d8 - ([f503543](https://github.com/kristof-mattei/docker-dns-rs/commit/f503543ac8dcb5d942ffdbc41ce293e6cae67a8e)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to af1e799 - ([5acb814](https://github.com/kristof-mattei/docker-dns-rs/commit/5acb814539f49bbe6deb8388fe4358ab316f8412)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.7 - ([0b023c8](https://github.com/kristof-mattei/docker-dns-rs/commit/0b023c88206296826cbe569af0b844ded326d8d4)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.7 - ([1bc8e7e](https://github.com/kristof-mattei/docker-dns-rs/commit/1bc8e7e5c18a4acd2c444d40f5d1f79967a9c599)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 2d1630a - ([d9cc158](https://github.com/kristof-mattei/docker-dns-rs/commit/d9cc1586904b4ce7c856b7a6f0f709f8bd7132eb)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 2d1630a - ([d37d19e](https://github.com/kristof-mattei/docker-dns-rs/commit/d37d19ed3735642e507e02ca969b1c3cbf445793)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.2 - ([c05c1a1](https://github.com/kristof-mattei/docker-dns-rs/commit/c05c1a1dfb0a588024ee929d7cc80f8e04b25242)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.2 - ([b032ba9](https://github.com/kristof-mattei/docker-dns-rs/commit/b032ba9668669a660b4e4405e4bba099b9cd0dea)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 969ca54 - ([ca10e30](https://github.com/kristof-mattei/docker-dns-rs/commit/ca10e307de7f2b0d0319e697e27686b13b1e9989)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 969ca54 - ([bb2e4d5](https://github.com/kristof-mattei/docker-dns-rs/commit/bb2e4d58df44a405fcd10ccea7c360072eb3c4e2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.65.0 - ([3d93888](https://github.com/kristof-mattei/docker-dns-rs/commit/3d938889072f12e6e130330ca2ed9948a9a755e1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.65.0 - ([3fe4f42](https://github.com/kristof-mattei/docker-dns-rs/commit/3fe4f4254c2e35f3354efbf4a8af042ab7230bda)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0355d87](https://github.com/kristof-mattei/docker-dns-rs/commit/0355d87516a27a75ee0deb41f1b8c30d9888b445)) - renovate[bot]
-- **(deps)** lock file maintenance - ([c4cbbcc](https://github.com/kristof-mattei/docker-dns-rs/commit/c4cbbcc30fb32ae0b2b8d4416c500fc3a1724b08)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 65ebd6e - ([aa4180c](https://github.com/kristof-mattei/docker-dns-rs/commit/aa4180c6cd0744b5da61d8c5731eadc21b5f257d)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 65ebd6e - ([2c7449e](https://github.com/kristof-mattei/docker-dns-rs/commit/2c7449ef0a5d04e01f79495b0e8f43be888d4e39)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.2.0 - ([e9650d4](https://github.com/kristof-mattei/docker-dns-rs/commit/e9650d4079af87dc98569ffb917fa2cf60b07b01)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.2.0 - ([703c683](https://github.com/kristof-mattei/docker-dns-rs/commit/703c6837cfe30c6e0e23e8150833b59317f2eae0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.64.0 - ([a57de26](https://github.com/kristof-mattei/docker-dns-rs/commit/a57de263510a8c397d3674b9b83307452f215120)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.64.0 - ([9a1847a](https://github.com/kristof-mattei/docker-dns-rs/commit/9a1847ad112ae57f5908ab06b6d5c273512939a4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9b0e094](https://github.com/kristof-mattei/docker-dns-rs/commit/9b0e09426faf6c2d10d021ce7d12b6ebf51c08e4)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 77b7c17 - ([90940d5](https://github.com/kristof-mattei/docker-dns-rs/commit/90940d59836428d047ff1cd373150ca416c75185)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 77b7c17 - ([8233fda](https://github.com/kristof-mattei/docker-dns-rs/commit/8233fdaa15a7be0f50671e6fdacae6f1a855f452)) - renovate[bot]
-- **(deps)** lock file maintenance - ([c7971c9](https://github.com/kristof-mattei/docker-dns-rs/commit/c7971c9e956ec3c3047c25c94a46f915976bcf04)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e46a67c](https://github.com/kristof-mattei/docker-dns-rs/commit/e46a67cbddc3ef05a5ec1b32ae5189fe9d7cd10a)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v3.0.2 - ([f2be8c1](https://github.com/kristof-mattei/docker-dns-rs/commit/f2be8c1257b206c7a04bd0f8026de959fec5a15a)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v3.0.2 - ([b036b45](https://github.com/kristof-mattei/docker-dns-rs/commit/b036b456377662d71d6a788a7fa80fbe92a7de11)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.4 - ([48993aa](https://github.com/kristof-mattei/docker-dns-rs/commit/48993aa33dc4bbcd7076696130e054af96d05e4c)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to c9803d2 - ([bed01e8](https://github.com/kristof-mattei/docker-dns-rs/commit/bed01e872cd679c86e6477a9ed8289aab1a30a9e)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to c9803d2 - ([e046dca](https://github.com/kristof-mattei/docker-dns-rs/commit/e046dca6545877736027f3fc70901cdf08babd34)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.4 - ([61a4611](https://github.com/kristof-mattei/docker-dns-rs/commit/61a4611b12b1c99be96de0456b01870ab9040e8b)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 75c22d5 - ([5d408c0](https://github.com/kristof-mattei/docker-dns-rs/commit/5d408c0ec5f32d49cb04a40a81950cc90af5a846)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.0.1 - ([c71123a](https://github.com/kristof-mattei/docker-dns-rs/commit/c71123a7d538bc5642709abdfa64fc7ad6f632df)) - renovate[bot]
-- **(deps)** update actions/cache action to v4.0.1 - ([f71c76b](https://github.com/kristof-mattei/docker-dns-rs/commit/f71c76b4b098934de31351d9d68d938aa32fad20)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.6 - ([cfd6dfe](https://github.com/kristof-mattei/docker-dns-rs/commit/cfd6dfecd70053ee365f7857a651a3ca0f9566bb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.6 - ([a28b762](https://github.com/kristof-mattei/docker-dns-rs/commit/a28b7625915ec5c596c4080e6d27e5991ba46f65)) - renovate[bot]
-- **(deps)** update npm to >=10.5.0 - ([a4c0892](https://github.com/kristof-mattei/docker-dns-rs/commit/a4c08925b9d88071c0e6389b78d572af90fe5085)) - renovate[bot]
-- **(deps)** update npm to >=10.5.0 - ([b03cb35](https://github.com/kristof-mattei/docker-dns-rs/commit/b03cb35c1432a4e8b6d1c79fb9e1ae191bfc7a67)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.15.1 - ([9d0a70a](https://github.com/kristof-mattei/docker-dns-rs/commit/9d0a70ad8a1bde383fd0634f6be90e11c0809e8c)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.15.1 - ([532540a](https://github.com/kristof-mattei/docker-dns-rs/commit/532540ac8bb5d90006eb0ba27d45d63419ad6bef)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.63.0 - ([94791d5](https://github.com/kristof-mattei/docker-dns-rs/commit/94791d5b496522b766f92b8eb8a806c6e6c9c2db)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.63.0 - ([1ce7800](https://github.com/kristof-mattei/docker-dns-rs/commit/1ce7800c7450de97cbb7e5e9e9f76727fc01ea76)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.15.0 - ([5499c0a](https://github.com/kristof-mattei/docker-dns-rs/commit/5499c0ad97d64c7fe1dc3ca9220106571ff0f96e)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.15.0 - ([59f5ada](https://github.com/kristof-mattei/docker-dns-rs/commit/59f5adac730b2c5fbea680f03b7f7dcd31267b51)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.1.0 - ([626e3ef](https://github.com/kristof-mattei/docker-dns-rs/commit/626e3ef04695236a551cc6428f14a5fd803c35c0)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3.1.0 - ([ebecad1](https://github.com/kristof-mattei/docker-dns-rs/commit/ebecad18e520419d23127b540f5ec6a4b0cf7788)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.3 - ([347a1e1](https://github.com/kristof-mattei/docker-dns-rs/commit/347a1e10c394ab3627f027320328ed90f990c6eb)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.3 - ([5199b7e](https://github.com/kristof-mattei/docker-dns-rs/commit/5199b7e3ce531ff65c6ff79fbf806db6e10f15d7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([01d9c12](https://github.com/kristof-mattei/docker-dns-rs/commit/01d9c124b3f47c56ae138fdcefb44f0734daae0d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2078479](https://github.com/kristof-mattei/docker-dns-rs/commit/207847901403dc110ab7a30885224caf0c60b1b7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.5 - ([4d90207](https://github.com/kristof-mattei/docker-dns-rs/commit/4d90207854044addbb786edcbf2d61c2190262a2)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.5 - ([6956561](https://github.com/kristof-mattei/docker-dns-rs/commit/69565614b2797096e7ec130e596a502ed489a64d)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 910273f - ([135360a](https://github.com/kristof-mattei/docker-dns-rs/commit/135360abcafe60396f3c8aaba5055b6788ec16a6)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 910273f - ([903482a](https://github.com/kristof-mattei/docker-dns-rs/commit/903482a2e2196c84ce51c5030b68ab77a399e501)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.62.0 - ([0186f91](https://github.com/kristof-mattei/docker-dns-rs/commit/0186f919dca0b06551f0f1dd51c5ffe891d2b018)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.62.0 - ([f39bea6](https://github.com/kristof-mattei/docker-dns-rs/commit/f39bea62754c1526e3e4cc40c8f477a8623c2339)) - renovate[bot]
-- **(deps)** lock file maintenance - ([5b1c02d](https://github.com/kristof-mattei/docker-dns-rs/commit/5b1c02df617ade7bc45384f5994eb795aadf273a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([043d0a6](https://github.com/kristof-mattei/docker-dns-rs/commit/043d0a69530274f33b1419211dedc4500a9a44d3)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to a71cd88 - ([2aa3c33](https://github.com/kristof-mattei/docker-dns-rs/commit/2aa3c33f6f67acfc09de194a123ff255562bee30)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to a71cd88 - ([7365447](https://github.com/kristof-mattei/docker-dns-rs/commit/7365447e9a7a19bce3293b7bfab53b40a4c07ca1)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.3 - ([c71d9bc](https://github.com/kristof-mattei/docker-dns-rs/commit/c71d9bcaaace4a8ce783aa6389720dd839ba1dd7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.3 - ([046110b](https://github.com/kristof-mattei/docker-dns-rs/commit/046110b25aee9ce6b1cb47380a66450402d43ba1)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.2 - ([78ceeab](https://github.com/kristof-mattei/docker-dns-rs/commit/78ceeabd43a314811f63dbde1b0210393d78d9d7)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v3.0.1 - ([472576f](https://github.com/kristof-mattei/docker-dns-rs/commit/472576f9e3f8ac349bddeeb34429364136cc4893)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v3.0.1 - ([8a2362b](https://github.com/kristof-mattei/docker-dns-rs/commit/8a2362b9ca50f900ea13bb468b80654134c6cba3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.61.1 - ([4a01bcb](https://github.com/kristof-mattei/docker-dns-rs/commit/4a01bcbce4dcaca7d6ba79ae250e21502990bdec)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.61.1 - ([0faff38](https://github.com/kristof-mattei/docker-dns-rs/commit/0faff38e0f0efc2e98c6aeb087c07f5d7dd51c5a)) - renovate[bot]
-- **(deps)** update node.js to >=20.11.1 - ([1ded1ec](https://github.com/kristof-mattei/docker-dns-rs/commit/1ded1ece2bf1324a7b1dd945c53517c259b89ee8)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 3c1dc1b - ([c81af69](https://github.com/kristof-mattei/docker-dns-rs/commit/c81af69ff8e3685939cf8b55bd2e41ecc91f289b)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 3c1dc1b - ([a68a164](https://github.com/kristof-mattei/docker-dns-rs/commit/a68a1643fa09506f9c2155d3b70164a64eb32121)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 01752fc - ([6c86613](https://github.com/kristof-mattei/docker-dns-rs/commit/6c8661364fa05351d5c8b5a12233c4db112e72b7)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 01752fc - ([c8d1128](https://github.com/kristof-mattei/docker-dns-rs/commit/c8d11284dfb11dd61c60ec8cc517d19123788fa1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.61.0 - ([2d15abe](https://github.com/kristof-mattei/docker-dns-rs/commit/2d15abed9f902c85eb446915cd248795c24d5dfa)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.61.0 - ([14ac6de](https://github.com/kristof-mattei/docker-dns-rs/commit/14ac6decf4f9a46c7af982e042723c60c4ab807b)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 3e95fdb - ([d9436bd](https://github.com/kristof-mattei/docker-dns-rs/commit/d9436bde8ab1e24dc4941918c28148f86b13be2f)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 3e95fdb - ([09ef9a6](https://github.com/kristof-mattei/docker-dns-rs/commit/09ef9a6c259b21654137dfa4d127c70fbee4e92e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.1 - ([6b8b28d](https://github.com/kristof-mattei/docker-dns-rs/commit/6b8b28d14ba7191141fc8a574f4ac4a89dc0765e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.1 - ([18bd313](https://github.com/kristof-mattei/docker-dns-rs/commit/18bd313f13aafa33323c90701cd5566726686d4d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a01b861](https://github.com/kristof-mattei/docker-dns-rs/commit/a01b861fde1e58745b153f4b9c4047fb1078411e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6ffcb32](https://github.com/kristof-mattei/docker-dns-rs/commit/6ffcb3234b61d0dea10c55cacdcf2f086f6a061a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.60.1 - ([fc460f0](https://github.com/kristof-mattei/docker-dns-rs/commit/fc460f0c76711cb476c3fc7651e18492c24b524c)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 8e87602 - ([3fdb0ff](https://github.com/kristof-mattei/docker-dns-rs/commit/3fdb0ff6709b6451d22b247e9177d729cbb09736)) - renovate[bot]
-- **(deps)** update rust:1.76.0 docker digest to 8e87602 - ([4195ca7](https://github.com/kristof-mattei/docker-dns-rs/commit/4195ca7312485450e018355c6db62f3745c0d373)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.60.1 - ([239a545](https://github.com/kristof-mattei/docker-dns-rs/commit/239a5458f90ecbd59114835bb1795b0de69af3cb)) - renovate[bot]
-- **(deps)** update rust to v1.76.0 - ([14d3f94](https://github.com/kristof-mattei/docker-dns-rs/commit/14d3f9421667659267676c7c61ac345dcac3bf66)) - renovate[bot]
-- **(deps)** update rust to v1.76.0 - ([ea9b2ab](https://github.com/kristof-mattei/docker-dns-rs/commit/ea9b2ab30782fd400474eed2147d98ede566fad7)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.2 - ([7a8ce6f](https://github.com/kristof-mattei/docker-dns-rs/commit/7a8ce6f3499f2928a35eea3e9aff5aee57319d2e)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.2 - ([c8bec3c](https://github.com/kristof-mattei/docker-dns-rs/commit/c8bec3c50798ca1332d35bbee189bf078d1f78f6)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.2 - ([81cd058](https://github.com/kristof-mattei/docker-dns-rs/commit/81cd0584d9b1c198cb9d92c2b883cb6040e4aa0b)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.2 - ([97d1b8d](https://github.com/kristof-mattei/docker-dns-rs/commit/97d1b8d27bf3a20149c493babef64de82d87f65b)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 64161ff - ([804b9cb](https://github.com/kristof-mattei/docker-dns-rs/commit/804b9cb95e863ea0514c5c1bb2f77ce8ae2a160b)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 64161ff - ([0ae5b45](https://github.com/kristof-mattei/docker-dns-rs/commit/0ae5b45d9229c7e5ed6ce126e9d78f09ce056052)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.1 - ([9d2acb4](https://github.com/kristof-mattei/docker-dns-rs/commit/9d2acb473baa6a9a12c7e7bb9af7f46772135069)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23.0.1 - ([b875c2b](https://github.com/kristof-mattei/docker-dns-rs/commit/b875c2b2ffc79b3318ad1f1804eaff2668e24cd7)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.14.0 - ([ca904ea](https://github.com/kristof-mattei/docker-dns-rs/commit/ca904ea5cd62c9d4bac32c1c77fced1ca6a6568e)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.14.0 - ([c209517](https://github.com/kristof-mattei/docker-dns-rs/commit/c20951775acb3b555edb18fff8cdc33a4a16db99)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.1 - ([8db893b](https://github.com/kristof-mattei/docker-dns-rs/commit/8db893b54134571e6ec47cca95ef918118a7f544)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.1 - ([bea0e8e](https://github.com/kristof-mattei/docker-dns-rs/commit/bea0e8ec6a7d37f883374432874235c694ba996a)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.2 - ([1022565](https://github.com/kristof-mattei/docker-dns-rs/commit/1022565f038711d5679cb8d7a41295a16a467fa7)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.2 - ([10a878b](https://github.com/kristof-mattei/docker-dns-rs/commit/10a878b40a93b7b4ecca22eb0e099c8241dd963d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e2229a3](https://github.com/kristof-mattei/docker-dns-rs/commit/e2229a35df984ab1b4b60b6f198c298b3014d113)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7517803](https://github.com/kristof-mattei/docker-dns-rs/commit/7517803412297b244c464cb10d587297989b91ce)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.5 - ([ba56e16](https://github.com/kristof-mattei/docker-dns-rs/commit/ba56e16d1be4f3de45db4bbcae6b1e787b569ba5)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.5 - ([a1b83bd](https://github.com/kristof-mattei/docker-dns-rs/commit/a1b83bd321ce179f1422d9eb81c0dc80b87d8536)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.13.0 - ([d542eee](https://github.com/kristof-mattei/docker-dns-rs/commit/d542eee67b6dc11af85ed032063cd1c15c03b2b4)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.13.0 - ([a0e8d39](https://github.com/kristof-mattei/docker-dns-rs/commit/a0e8d3991fdf7dd5075c3eaa45c6d1006da8b15e)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 87f3b2f - ([5a9857c](https://github.com/kristof-mattei/docker-dns-rs/commit/5a9857caa9aaf57320b0f437ce6e9b140eed3afd)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 87f3b2f - ([77b569f](https://github.com/kristof-mattei/docker-dns-rs/commit/77b569f2ea716ca4333d7505a8de688228a1cc6a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.0 - ([c71e79b](https://github.com/kristof-mattei/docker-dns-rs/commit/c71e79b480ab0c4a112e7d6970cfc6957963d19f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.24.0 - ([93e290e](https://github.com/kristof-mattei/docker-dns-rs/commit/93e290e6b4e4045891d09243565e781ef496c11d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.59.1 - ([30b8a31](https://github.com/kristof-mattei/docker-dns-rs/commit/30b8a3138c8260ad43b617b31f2eeac6e6ea80f7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.59.1 - ([113e6e7](https://github.com/kristof-mattei/docker-dns-rs/commit/113e6e7886572d3aeee4514a68a39c20f1a0314b)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to fb477b5 - ([dcde798](https://github.com/kristof-mattei/docker-dns-rs/commit/dcde798f141cd0ede2dcbee329eaf1081073ab77)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to fb477b5 - ([07ff052](https://github.com/kristof-mattei/docker-dns-rs/commit/07ff0524be0e682cab5711f12edb9e1c402031bb)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to e173089 - ([b13c849](https://github.com/kristof-mattei/docker-dns-rs/commit/b13c84982cd72159f679143f7f8cfa4aaffb0620)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to e173089 - ([a440b7a](https://github.com/kristof-mattei/docker-dns-rs/commit/a440b7a6067a43f6e08e2bac31e882630434f8bc)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 503aee4 - ([bed4d5b](https://github.com/kristof-mattei/docker-dns-rs/commit/bed4d5b05164e7ee13b1195e05fc16a1dd267fdb)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 503aee4 - ([67199d3](https://github.com/kristof-mattei/docker-dns-rs/commit/67199d317f980b6f786b707fc3f2599c5116afa5)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.5.1 - ([cd30688](https://github.com/kristof-mattei/docker-dns-rs/commit/cd30688f15ddd6ebf10baa1fea07a64c59aa90b1)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.5.1 - ([a781ec8](https://github.com/kristof-mattei/docker-dns-rs/commit/a781ec8ca1dbe4aca25480821cd4d553a20b96ec)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.59.0 - ([9da2518](https://github.com/kristof-mattei/docker-dns-rs/commit/9da25188c7a7560b6f23d909d7040293d96fccbf)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.59.0 - ([133fd6c](https://github.com/kristof-mattei/docker-dns-rs/commit/133fd6c839e00454c049edaeaedc98d5bb02af8f)) - renovate[bot]
-- **(deps)** lock file maintenance - ([83e0226](https://github.com/kristof-mattei/docker-dns-rs/commit/83e02263816974140cbfcd400ea5656cbf132470)) - renovate[bot]
-- **(deps)** lock file maintenance - ([79feb10](https://github.com/kristof-mattei/docker-dns-rs/commit/79feb1034b0fc7cdc74e627ee5c15b080a1f255c)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.19.1 - ([32b2ae5](https://github.com/kristof-mattei/docker-dns-rs/commit/32b2ae57f18a626f45131568705852a61503c37b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.23.2 - ([f5a8e1c](https://github.com/kristof-mattei/docker-dns-rs/commit/f5a8e1c3ca5fa8f90b7ad742b71c2bb8078de04b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.23.2 - ([cdcf054](https://github.com/kristof-mattei/docker-dns-rs/commit/cdcf05418e8f649c887950f89f681343c6b307d5)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v3 - ([df4c2c0](https://github.com/kristof-mattei/docker-dns-rs/commit/df4c2c0ca2b490f3db5c70068e1d1b8fecad2f57)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v3 - ([4c5416d](https://github.com/kristof-mattei/docker-dns-rs/commit/4c5416dbff490ce33766d0d5b488e13efbc817f8)) - renovate[bot]
-- **(deps)** update npm to >=10.4.0 - ([9a2d4d9](https://github.com/kristof-mattei/docker-dns-rs/commit/9a2d4d9cc72f24f4667fb45f8c434fbf843ebb21)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v2.12.0 - ([0a32f45](https://github.com/kristof-mattei/docker-dns-rs/commit/0a32f4567cafc536bb5399a7a3b03317b59358c7)) - renovate[bot]
-- **(deps)** update npm to >=10.4.0 - ([531c58a](https://github.com/kristof-mattei/docker-dns-rs/commit/531c58a375f520c99ec2a636219baecfbf964d04)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v2.12.0 - ([8de5e86](https://github.com/kristof-mattei/docker-dns-rs/commit/8de5e86d2105ffeac069548f6a78b0e82d47a509)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.0 - ([ac8358c](https://github.com/kristof-mattei/docker-dns-rs/commit/ac8358caa9233470b3ac5d28f58753f62d077c91)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.3.0 - ([45db4d5](https://github.com/kristof-mattei/docker-dns-rs/commit/45db4d5d40fdfa8059224c407f1d88461984468f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.58.0 - ([9b59287](https://github.com/kristof-mattei/docker-dns-rs/commit/9b592871f393af05e9430a51b85a2cc5c222832e)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.58.0 - ([83d585f](https://github.com/kristof-mattei/docker-dns-rs/commit/83d585f8fc88cbe12694e36faa7bf6c6b56a3822)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7a846fe](https://github.com/kristof-mattei/docker-dns-rs/commit/7a846feefb0edadbfbb59c9b4d4c9ef900bd89e8)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8aecc21](https://github.com/kristof-mattei/docker-dns-rs/commit/8aecc21b865fa595e347ee8b8d6fa89bf67841e4)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.2.0 - ([630f248](https://github.com/kristof-mattei/docker-dns-rs/commit/630f248aaea459752f96a507616ef3c901dada97)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.57.0 - ([f43fbae](https://github.com/kristof-mattei/docker-dns-rs/commit/f43fbae19fdb119dd9b9dad046b88a79557bef31)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.57.0 - ([f7b0aea](https://github.com/kristof-mattei/docker-dns-rs/commit/f7b0aea7dc650732ffb1e55b04707fe927484941)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.2.0 - ([e9560af](https://github.com/kristof-mattei/docker-dns-rs/commit/e9560af5fa192e040dc3d12753fe4c6323a0d90c)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to ac8c4cb - ([2cc08d4](https://github.com/kristof-mattei/docker-dns-rs/commit/2cc08d468f492109bc31e29a68f9b10ae214ce34)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to ac8c4cb - ([5e59374](https://github.com/kristof-mattei/docker-dns-rs/commit/5e59374480e0817673e98c31bfa9caacdc9c9ba9)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 166aa82 - ([f8ac825](https://github.com/kristof-mattei/docker-dns-rs/commit/f8ac825be4deb6364e34c61492766bf0c5efb721)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 166aa82 - ([d74bbc9](https://github.com/kristof-mattei/docker-dns-rs/commit/d74bbc97479964efccd0af30dd9dea8c75b2fcec)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 2176747 - ([2566c51](https://github.com/kristof-mattei/docker-dns-rs/commit/2566c5169b6ec6ff0d317139a813171ef46051ab)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 2176747 - ([03b4b77](https://github.com/kristof-mattei/docker-dns-rs/commit/03b4b77b4b73d281af13bb68c51211d3b33cc2a9)) - renovate[bot]
-- **(deps)** update actions/cache action to v4 - ([6ca9a33](https://github.com/kristof-mattei/docker-dns-rs/commit/6ca9a331a000501dfd05088a6140d150a2ca6c32)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.23.1 - ([a066275](https://github.com/kristof-mattei/docker-dns-rs/commit/a066275526d460c96fd4dbfe0ffada76b4e91b15)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.4 - ([6acad07](https://github.com/kristof-mattei/docker-dns-rs/commit/6acad07e016ffba9f7593061c2994a646fa4a141)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.23.1 - ([b7f1067](https://github.com/kristof-mattei/docker-dns-rs/commit/b7f1067e2cdfadd84602c020e55a966f02d1e005)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.4 - ([46ed10a](https://github.com/kristof-mattei/docker-dns-rs/commit/46ed10ad9e4886bad76f265b423dc7bb56781ade)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 755b46a - ([ff8488d](https://github.com/kristof-mattei/docker-dns-rs/commit/ff8488d9467e83ad913a21e6e30942c966edad14)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 755b46a - ([795fe3c](https://github.com/kristof-mattei/docker-dns-rs/commit/795fe3c7d5710148e45aa4600a65408c9b28588f)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.3 - ([7bff549](https://github.com/kristof-mattei/docker-dns-rs/commit/7bff5492ece11c1d4266d3a11f287163769bcb2e)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 184a309 - ([cd2f7ae](https://github.com/kristof-mattei/docker-dns-rs/commit/cd2f7ae93e5fcb3723a006e5017aa7430af0b7d8)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.3 - ([5da612f](https://github.com/kristof-mattei/docker-dns-rs/commit/5da612fa9938c1218c95d3d650cacab9153d7f86)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 184a309 - ([37dc0e4](https://github.com/kristof-mattei/docker-dns-rs/commit/37dc0e494e52caf496c0f6b03679e19da3d61c7f)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to b168e2c - ([cafaeaf](https://github.com/kristof-mattei/docker-dns-rs/commit/cafaeaf014419fc0f42abfbc8ed61090f7d6dd39)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to b168e2c - ([a043377](https://github.com/kristof-mattei/docker-dns-rs/commit/a043377f6f3e6b5e542f15db298fdcf63fbb8dee)) - renovate[bot]
-- **(deps)** lock file maintenance - ([5d6f343](https://github.com/kristof-mattei/docker-dns-rs/commit/5d6f343a02e24714a42ea1091afae46a9fab95e2)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f8e992e](https://github.com/kristof-mattei/docker-dns-rs/commit/f8e992eb7423f6cea585b7c3aacf47505ae9046f)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.2 - ([70f5213](https://github.com/kristof-mattei/docker-dns-rs/commit/70f52136c3142e7d659456aa4e79f7dd80a1b773)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.2 - ([9c2ef39](https://github.com/kristof-mattei/docker-dns-rs/commit/9c2ef3987be77bf62e51cec8bff7e3de823e7339)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to c09b1bb - ([1e14763](https://github.com/kristof-mattei/docker-dns-rs/commit/1e14763c111a03ae35491bf0aaa595f9d10e60bc)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23 - ([aef8936](https://github.com/kristof-mattei/docker-dns-rs/commit/aef893693128515e6a6a8c016d7cd6cd60d19628)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to c09b1bb - ([5448c40](https://github.com/kristof-mattei/docker-dns-rs/commit/5448c4009ac5bb1855a903638a478fddc6d9671f)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 1c5eaf3 - ([07aaa65](https://github.com/kristof-mattei/docker-dns-rs/commit/07aaa65b3e369b484d53dbbd826e5f2c7980a02f)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 1c5eaf3 - ([1d6c082](https://github.com/kristof-mattei/docker-dns-rs/commit/1d6c082c304df50156668bf8f4e3361df39c265f)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.1 - ([81ca3a7](https://github.com/kristof-mattei/docker-dns-rs/commit/81ca3a72565f3cde1d1924633a37d81f34b379c6)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v23 - ([7a83cfb](https://github.com/kristof-mattei/docker-dns-rs/commit/7a83cfb1e5a3f7b1f40f6d857e6867d123781c07)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.1.0 - ([37a8529](https://github.com/kristof-mattei/docker-dns-rs/commit/37a8529aa4b9f086971b835332b50068d9fdcc07)) - renovate[bot]
-- **(deps)** update actions/upload-artifact digest to 1eb3cb2 - ([7706f11](https://github.com/kristof-mattei/docker-dns-rs/commit/7706f115869ffaf82a62ece2a97314cf4a0d4a25)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.1 - ([ca827ab](https://github.com/kristof-mattei/docker-dns-rs/commit/ca827abb9d39f358126eb2115853785d4b7dfa0a)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4.1.0 - ([0b0afb5](https://github.com/kristof-mattei/docker-dns-rs/commit/0b0afb5410e06118d8298c1230cbbb89c411f176)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.2.0 - ([81f8302](https://github.com/kristof-mattei/docker-dns-rs/commit/81f83022975eee513640d7fc51bf6dcfb6752a72)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to ea94653 - ([a233995](https://github.com/kristof-mattei/docker-dns-rs/commit/a233995b158794bda27e127152966f721071c9c0)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to ea94653 - ([ef2c413](https://github.com/kristof-mattei/docker-dns-rs/commit/ef2c413727f5cc16715b256de285c16699950b0b)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.3.3 - ([28d2830](https://github.com/kristof-mattei/docker-dns-rs/commit/28d28309974e7b4f50e3f594cbd82d368fb18abd)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 2f73302 - ([3671796](https://github.com/kristof-mattei/docker-dns-rs/commit/3671796ddbd7339b8044db3799390b1e9d4284a8)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 2f73302 - ([b91bea3](https://github.com/kristof-mattei/docker-dns-rs/commit/b91bea32963d1026b4c450b48fe97df8e2572896)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.3.3 - ([f1acc46](https://github.com/kristof-mattei/docker-dns-rs/commit/f1acc460c388917fbcab455dad04ced2ed7bb4ce)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 41c2fff - ([f8bd480](https://github.com/kristof-mattei/docker-dns-rs/commit/f8bd4805e07aadcf921ef822f4cc1c2dc7e372a5)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 41c2fff - ([0caff3b](https://github.com/kristof-mattei/docker-dns-rs/commit/0caff3b3432ca3ec05df8c5b9666fd52ca1b0718)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 13fda46 - ([cc830f1](https://github.com/kristof-mattei/docker-dns-rs/commit/cc830f1bf120a803989057341da50f148f8e38e9)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to 13fda46 - ([ec9e69a](https://github.com/kristof-mattei/docker-dns-rs/commit/ec9e69aae892a7c963fe324ce1a84950946d6e6d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.56.0 - ([241c8ad](https://github.com/kristof-mattei/docker-dns-rs/commit/241c8ad18b17e7b35ab102280afacda3494a2c15)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.56.0 - ([de5ad70](https://github.com/kristof-mattei/docker-dns-rs/commit/de5ad70efc553fd728def0db72236190c4d9d698)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.1 - ([2cf721f](https://github.com/kristof-mattei/docker-dns-rs/commit/2cf721f371089941534d424b9a1791edd2dd5372)) - renovate[bot]
-- **(deps)** update npm to >=10.3.0 - ([fde2114](https://github.com/kristof-mattei/docker-dns-rs/commit/fde2114669bd755bb9b5a0c0b1b49d8c5ff30948)) - renovate[bot]
-- **(deps)** update npm to >=10.3.0 - ([70a7036](https://github.com/kristof-mattei/docker-dns-rs/commit/70a7036eabb7c31aad155681fa70a597743482c0)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to a0435af - ([5282598](https://github.com/kristof-mattei/docker-dns-rs/commit/52825983ef538299e4136d42902d05dfa1ccd2c0)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to a0435af - ([82ead3e](https://github.com/kristof-mattei/docker-dns-rs/commit/82ead3e5bed80b7bf95ac50e5abbe5feb343a4bb)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.1 - ([b8fd988](https://github.com/kristof-mattei/docker-dns-rs/commit/b8fd988f5cdfb4e069e7a77a960df70681dbf3a6)) - renovate[bot]
-- **(deps)** update node.js to >=20.11.0 - ([67f9e80](https://github.com/kristof-mattei/docker-dns-rs/commit/67f9e80603a462ae8267f9d38c3075fd84662109)) - renovate[bot]
-- **(deps)** update node.js to >=20.11.0 - ([9323c3f](https://github.com/kristof-mattei/docker-dns-rs/commit/9323c3f1baa59ee3f850b16f53bcf62e10b04bec)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.23.0 - ([2dbe1a6](https://github.com/kristof-mattei/docker-dns-rs/commit/2dbe1a6a88041e297b5a7e2d709b83b9a005069e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.23.0 - ([f23ca09](https://github.com/kristof-mattei/docker-dns-rs/commit/f23ca09c3593b302c06df9d71b9d7e95de0c3190)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b642bf2](https://github.com/kristof-mattei/docker-dns-rs/commit/b642bf24e18f100a152c526109dc5a9c5db9886e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([5daac8f](https://github.com/kristof-mattei/docker-dns-rs/commit/5daac8f5b02c45da83321df5f51bb0d88a2eb6ed)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.55.2 - ([ba00905](https://github.com/kristof-mattei/docker-dns-rs/commit/ba009059b6692f028438a7e416ed51f852fec679)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.55.2 - ([abf2f00](https://github.com/kristof-mattei/docker-dns-rs/commit/abf2f00c4988525015390e2a0948e104957c50e1)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.5.0 - ([51e4323](https://github.com/kristof-mattei/docker-dns-rs/commit/51e43230808b404155a0002a2ddd3322a07562cd)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.5.0 - ([41ec316](https://github.com/kristof-mattei/docker-dns-rs/commit/41ec3167e64e2ca4da8344df288437668610c9f4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.55.1 - ([fb35704](https://github.com/kristof-mattei/docker-dns-rs/commit/fb357047a57ebd8167389c580299b68502009dc3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.55.1 - ([8cce4f8](https://github.com/kristof-mattei/docker-dns-rs/commit/8cce4f8779bd1c5c7662f11fa856daafaa522cce)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.55.0 - ([b0cb64b](https://github.com/kristof-mattei/docker-dns-rs/commit/b0cb64b0c76b087f8ccd9770ea886184231e8092)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.55.0 - ([32655e1](https://github.com/kristof-mattei/docker-dns-rs/commit/32655e1228d652b0a0e1b3bc8670d2938cae40a8)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0b71d9f](https://github.com/kristof-mattei/docker-dns-rs/commit/0b71d9fc400456aa7a6f1bae7a331b0d99803c55)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fd533e7](https://github.com/kristof-mattei/docker-dns-rs/commit/fd533e7b81a0cb958c5e842e9ad5f27172573624)) - renovate[bot]
-- **(deps)** update rust:1.75.0 docker digest to e17a453 - ([5ccd75b](https://github.com/kristof-mattei/docker-dns-rs/commit/5ccd75b54df72a226d741aa4640fb6ce2b08d2c4)) - renovate[bot]
-- **(deps)** update rust to v1.75.0 - ([0a4db9b](https://github.com/kristof-mattei/docker-dns-rs/commit/0a4db9b95db37844b7d904ee28265c3afa59218a)) - renovate[bot]
-- **(deps)** update rust to v1.75.0 - ([8655e71](https://github.com/kristof-mattei/docker-dns-rs/commit/8655e71a58df19a864dedc9ad6ff77e2cdb056ee)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a45e389](https://github.com/kristof-mattei/docker-dns-rs/commit/a45e389f09d7a055196cacae48bc6f4b0620a7bb)) - renovate[bot]
-- **(deps)** lock file maintenance - ([3ab1ae7](https://github.com/kristof-mattei/docker-dns-rs/commit/3ab1ae784498de1c11e16eaca409dfc6e8a5e0f0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.3 - ([1af7ba7](https://github.com/kristof-mattei/docker-dns-rs/commit/1af7ba7e93f80a24d0e84d9c251dd304f3ff894a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.3 - ([bc1fc70](https://github.com/kristof-mattei/docker-dns-rs/commit/bc1fc7065fc934d4d7992b13111dca1f8f351e79)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.6 - ([77d234b](https://github.com/kristof-mattei/docker-dns-rs/commit/77d234b66e69dce4f7778e8af4d88ea01930437a)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.6 - ([4855a92](https://github.com/kristof-mattei/docker-dns-rs/commit/4855a9294f5aa4f21239b5853c51dc2f910d1a64)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to a06ef65 - ([01055a6](https://github.com/kristof-mattei/docker-dns-rs/commit/01055a62b6c2e448801b845c0c736c933e762bf5)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.12.0 - ([7a0a230](https://github.com/kristof-mattei/docker-dns-rs/commit/7a0a230446915d0706365aaebd5c1c920a556e69)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to a06ef65 - ([6f56f2d](https://github.com/kristof-mattei/docker-dns-rs/commit/6f56f2d8ebe43e3b997ef62b269a0e9fe757ab2e)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.12.0 - ([194c6cb](https://github.com/kristof-mattei/docker-dns-rs/commit/194c6cb3e4df43a806c40658113149618f78f88c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.22.12 - ([7ac41df](https://github.com/kristof-mattei/docker-dns-rs/commit/7ac41df155a7469df50be3ea2e2f24cd65808e84)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3.22.12 - ([0543167](https://github.com/kristof-mattei/docker-dns-rs/commit/054316754b27ddbcd2e3e29ced88c96a16416365)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.2 - ([3fa075a](https://github.com/kristof-mattei/docker-dns-rs/commit/3fa075a12b9d01ccebbca41179602e40b4cf9d77)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.2 - ([f8994b4](https://github.com/kristof-mattei/docker-dns-rs/commit/f8994b4f5ac3bf078a673a61bf086c077a59d989)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.1 - ([bb90ee9](https://github.com/kristof-mattei/docker-dns-rs/commit/bb90ee911938ee3f995f469839d289fb1465b1ea)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.1 - ([e542d47](https://github.com/kristof-mattei/docker-dns-rs/commit/e542d4787934b845d5b6b7ae2df81480d85b6023)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.0 - ([118803b](https://github.com/kristof-mattei/docker-dns-rs/commit/118803b1f7a7608d3a4418b849e8799035b11177)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.54.0 - ([06608c4](https://github.com/kristof-mattei/docker-dns-rs/commit/06608c4501a63e0e4a9d0880efc243990fd5dc14)) - renovate[bot]
-- **(deps)** update rust:1.74.1 docker digest to fd45a54 - ([a3da4b0](https://github.com/kristof-mattei/docker-dns-rs/commit/a3da4b0acdbf7cc0a43b492e81125ab77a98dad2)) - renovate[bot]
-- **(deps)** update rust:1.74.1 docker digest to fd45a54 - ([e26c518](https://github.com/kristof-mattei/docker-dns-rs/commit/e26c5188e92ed0aca3be497c23d72c7ccea33d7e)) - renovate[bot]
-- **(deps)** update rust:1.74.1 docker digest to 0bb7cf3 - ([272eaba](https://github.com/kristof-mattei/docker-dns-rs/commit/272eaba9251ad2f0a2cad079c7ad2780bacced3e)) - renovate[bot]
-- **(deps)** update rust:1.74.1 docker digest to 44dd40c - ([5ba800d](https://github.com/kristof-mattei/docker-dns-rs/commit/5ba800dbf69ae84390b41db69fff02ef50219a54)) - renovate[bot]
-- **(deps)** update rust:1.74.1 docker digest to 44dd40c - ([10ce3e4](https://github.com/kristof-mattei/docker-dns-rs/commit/10ce3e402d635e6f10f943e1ed4e4f7f803f5151)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.0 - ([127f7fe](https://github.com/kristof-mattei/docker-dns-rs/commit/127f7fe84663584fa87b55556862b08532eca6ca)) - renovate[bot]
-- **(deps)** update actions/download-artifact digest to f44cd7b - ([c54a9c9](https://github.com/kristof-mattei/docker-dns-rs/commit/c54a9c98ecd9b8e09c51d83a7650fbd72d0b66ec)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4.1.0 - ([d5c1fee](https://github.com/kristof-mattei/docker-dns-rs/commit/d5c1fee57386cb5e610768263dd35bce536a39e2)) - renovate[bot]
-- **(deps)** update rust to v1.74.1 - ([20d4d1a](https://github.com/kristof-mattei/docker-dns-rs/commit/20d4d1a9ace60359d75cbd5720518dfdedc50aa6)) - renovate[bot]
-- **(deps)** update rust to v1.74.1 - ([44acd6a](https://github.com/kristof-mattei/docker-dns-rs/commit/44acd6a747e0dcd7455e538921a75082ba68cf37)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.1 - ([3376b6d](https://github.com/kristof-mattei/docker-dns-rs/commit/3376b6da799f0228a0b186500806867d5ace220d)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.4.0 - ([0f269a9](https://github.com/kristof-mattei/docker-dns-rs/commit/0f269a941001998b3ca84b4e512a4b817c0f6d9f)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4.0.1 - ([63883ed](https://github.com/kristof-mattei/docker-dns-rs/commit/63883ed557db5d17c9b89bfddebf0b66eeedbd04)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.4.0 - ([f609a32](https://github.com/kristof-mattei/docker-dns-rs/commit/f609a327a4e31f8536e660e57bc3ca101e775e57)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9e20060](https://github.com/kristof-mattei/docker-dns-rs/commit/9e20060d11113c084a256dd51325104a7e83ec7c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([cbf6c78](https://github.com/kristof-mattei/docker-dns-rs/commit/cbf6c78e7dade2746672897deb75150a2484a64e)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4 - ([38de445](https://github.com/kristof-mattei/docker-dns-rs/commit/38de445e647d8783e1af81c789e05bdf74b902a7)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v4 - ([2aa4c38](https://github.com/kristof-mattei/docker-dns-rs/commit/2aa4c38e1f94f406e66cb764b608ceca76e777d6)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4 - ([351de3f](https://github.com/kristof-mattei/docker-dns-rs/commit/351de3f696ca2d0949266bc0d39c348378f88049)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v4 - ([649060e](https://github.com/kristof-mattei/docker-dns-rs/commit/649060e9cef0948a7bc821fa515c67bccb05a8e1)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3 - ([1dec373](https://github.com/kristof-mattei/docker-dns-rs/commit/1dec3735dd0f213e5d4cf0b28b29ccb8a3246fa6)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v3 - ([2f463fa](https://github.com/kristof-mattei/docker-dns-rs/commit/2f463fabda5f20f0de6c3a9cd31d06166a3aa395)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.11 - ([e1248ee](https://github.com/kristof-mattei/docker-dns-rs/commit/e1248eed46698f516aeee0f2a7e297228e0d8a78)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.11 - ([a489cc1](https://github.com/kristof-mattei/docker-dns-rs/commit/a489cc104a083b45b0f0d3207cc2e03d326d86ec)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.53.0 - ([3154b50](https://github.com/kristof-mattei/docker-dns-rs/commit/3154b50444121fd53f8b707cc5f44308d6fe2bf2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.53.0 - ([e044f46](https://github.com/kristof-mattei/docker-dns-rs/commit/e044f46b53a267542fdb80d6a221e0ec56cfcff9)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.10 - ([f623751](https://github.com/kristof-mattei/docker-dns-rs/commit/f623751d518168d5d2c70b983dcce834d6a52c71)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.10 - ([0a9f66d](https://github.com/kristof-mattei/docker-dns-rs/commit/0a9f66db47b0973021161fb245f21995a717f560)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.12 - ([42c6d6b](https://github.com/kristof-mattei/docker-dns-rs/commit/42c6d6b567535f8e99b7ff2ccf1ca213015da8ba)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.12 - ([67c08dc](https://github.com/kristof-mattei/docker-dns-rs/commit/67c08dcdde431269cf9daf7e10d0006c99f49775)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.11 - ([f65bf81](https://github.com/kristof-mattei/docker-dns-rs/commit/f65bf81c397e41111a67edc1225c023d6d265f94)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.11 - ([51bc6cb](https://github.com/kristof-mattei/docker-dns-rs/commit/51bc6cbf89f28b2380ee8194ba6c87300afdfd5c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([81da1cf](https://github.com/kristof-mattei/docker-dns-rs/commit/81da1cf6cdc506bb01097db154fa2d2f050819b5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([82e666f](https://github.com/kristof-mattei/docker-dns-rs/commit/82e666f854978ff356cdff784c0addf4189c036c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([32335c3](https://github.com/kristof-mattei/docker-dns-rs/commit/32335c3023c542c3b761734db649a715a4f54496)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.1.1 - ([53c5cb8](https://github.com/kristof-mattei/docker-dns-rs/commit/53c5cb8bd7898b0dd47c7101f9f47918be0084ac)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.1.1 - ([de6586d](https://github.com/kristof-mattei/docker-dns-rs/commit/de6586d3813079ed3b7bf3032919290b307bfd72)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 4ae1575 - ([e4aaec0](https://github.com/kristof-mattei/docker-dns-rs/commit/e4aaec047f13e9f25e2d3343711db3daca8e7711)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 4ae1575 - ([fe5964c](https://github.com/kristof-mattei/docker-dns-rs/commit/fe5964c436a077af35346f13f47e17a00d957754)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.19.0 - ([b6e8704](https://github.com/kristof-mattei/docker-dns-rs/commit/b6e87047e0c19ec668ac847d7156ba03c46d0894)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.74.1 - ([49c2978](https://github.com/kristof-mattei/docker-dns-rs/commit/49c29785ee2648a61d450795cccaf0c96452a931)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.74.1 - ([76b93ad](https://github.com/kristof-mattei/docker-dns-rs/commit/76b93adef6ecdc6886947c6b11fd59dcb9d6fc3b)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.5 - ([fe4e0a6](https://github.com/kristof-mattei/docker-dns-rs/commit/fe4e0a604f661072c7fb05ece968adcd2bebef2b)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.5 - ([5bfe95d](https://github.com/kristof-mattei/docker-dns-rs/commit/5bfe95d35c3beec97dc3948eeda0043f25d2ad9c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.9 - ([23fe36b](https://github.com/kristof-mattei/docker-dns-rs/commit/23fe36bf98d04f2ec5bb3bcec638ca2ec44713e8)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.9 - ([173360b](https://github.com/kristof-mattei/docker-dns-rs/commit/173360b8ce70b2724039ae5a0734a72807849bcf)) - renovate[bot]
-- **(deps)** update npm to >=10.2.5 - ([428e126](https://github.com/kristof-mattei/docker-dns-rs/commit/428e126ec05353b05b51debde055834d64b084f3)) - renovate[bot]
-- **(deps)** update npm to >=10.2.5 - ([643a0c1](https://github.com/kristof-mattei/docker-dns-rs/commit/643a0c1840c27bf8ec7af8836473cfeb6b83677b)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.10 - ([8770b5a](https://github.com/kristof-mattei/docker-dns-rs/commit/8770b5aff277d18e49175bf5af46065c52295985)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.10 - ([72e3a7c](https://github.com/kristof-mattei/docker-dns-rs/commit/72e3a7c282c9e29bc6b6c82c910cb331a3884774)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.52.0 - ([f807b2f](https://github.com/kristof-mattei/docker-dns-rs/commit/f807b2f794d3dcfb1ab4e3a3565268e1cdaea367)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.52.0 - ([6a57551](https://github.com/kristof-mattei/docker-dns-rs/commit/6a575512a4cc1f245c4c990a4c8d81accb20347a)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.9 - ([8ab40c4](https://github.com/kristof-mattei/docker-dns-rs/commit/8ab40c423892d1c16c3d5dd4698d91c460deca1f)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.9 - ([a112aba](https://github.com/kristof-mattei/docker-dns-rs/commit/a112aba52774dd387b5ca7ca44ee9e8b5ec33590)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.3.0 - ([90cec0f](https://github.com/kristof-mattei/docker-dns-rs/commit/90cec0f4c040955fee392c6248bcf54a8988832d)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.3.0 - ([14835e7](https://github.com/kristof-mattei/docker-dns-rs/commit/14835e7786577bdb2a52a9da675ca9abe6cd91d1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e0bc223](https://github.com/kristof-mattei/docker-dns-rs/commit/e0bc2234f55df3f7cf5ae578daa4640e6e9de941)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7ef1f3a](https://github.com/kristof-mattei/docker-dns-rs/commit/7ef1f3a4108b0e09df499cd99aaff59d655ce435)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.18.5 - ([1b71bbc](https://github.com/kristof-mattei/docker-dns-rs/commit/1b71bbcc89617a213e421bb092b730d6eec003f5)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 6a9a134 - ([093dc42](https://github.com/kristof-mattei/docker-dns-rs/commit/093dc42753a8cf4a54ebf0340936155dc47747d0)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 6a9a134 - ([d25266e](https://github.com/kristof-mattei/docker-dns-rs/commit/d25266e0a1202ead19c81e8c54e4ff44966d69b3)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.2.0 - ([babffd4](https://github.com/kristof-mattei/docker-dns-rs/commit/babffd4a4db8b4cb7a831acc0da3978818166340)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.2.0 - ([6cb6278](https://github.com/kristof-mattei/docker-dns-rs/commit/6cb6278daac1f9b7b3e30832bf9f6dd7437af603)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.1.0 - ([226457e](https://github.com/kristof-mattei/docker-dns-rs/commit/226457e5c7057c1fe78b19cd5fee261e290a5328)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5.1.0 - ([7b65247](https://github.com/kristof-mattei/docker-dns-rs/commit/7b65247d3a84c3bee68c3d380a12360d039f07d9)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.4 - ([1ed85d4](https://github.com/kristof-mattei/docker-dns-rs/commit/1ed85d46dae012f44a2f8949396d35b64a853c15)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.4 - ([9bb7c4f](https://github.com/kristof-mattei/docker-dns-rs/commit/9bb7c4fa89c8e0854076b2d9f909cdefab659bb5)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.51.0 - ([7dce2ac](https://github.com/kristof-mattei/docker-dns-rs/commit/7dce2ac2a4be3c4ec7bafd2882e39ac396a2f833)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.51.0 - ([bc75925](https://github.com/kristof-mattei/docker-dns-rs/commit/bc75925a6a18ed790869f7b9c5eccd87099fbb57)) - renovate[bot]
-- **(deps)** lock file maintenance - ([2351be0](https://github.com/kristof-mattei/docker-dns-rs/commit/2351be07f7436efd836289b16dcc4e3c286da624)) - renovate[bot]
-- **(deps)** lock file maintenance - ([1167183](https://github.com/kristof-mattei/docker-dns-rs/commit/1167183029a32be286ee54dd43f057b37cca5107)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.8 - ([f5f8dca](https://github.com/kristof-mattei/docker-dns-rs/commit/f5f8dca9f6466df88da548e97d095bd4165f45c4)) - renovate[bot]
-- **(deps)** update node.js to >=20.10.0 - ([63f4606](https://github.com/kristof-mattei/docker-dns-rs/commit/63f46062d09daeedc15094de803a1d67381217a3)) - renovate[bot]
-- **(deps)** update rust:1.74.0 docker digest to 6de6071 - ([8c66a14](https://github.com/kristof-mattei/docker-dns-rs/commit/8c66a14e090eac3837ee096fb2abcdc93e69bd7b)) - renovate[bot]
-- **(deps)** update rui314/setup-mold digest to 89146af - ([7882f83](https://github.com/kristof-mattei/docker-dns-rs/commit/7882f838ed45c0e9bf1648ec6a4082ce596f2d1b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ecd3eeb](https://github.com/kristof-mattei/docker-dns-rs/commit/ecd3eebc4e7e8396c73764119d2bd29b081a974b)) - renovate[bot]
-- **(deps)** roll back actions-rs-plus/clippy-check action to v2.2.0 - ([6a7cb55](https://github.com/kristof-mattei/docker-dns-rs/commit/6a7cb55421f1cfbfb45282dc0dbf01df5ca9675b)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check action to v2.2.2 - ([8f92ed2](https://github.com/kristof-mattei/docker-dns-rs/commit/8f92ed2ed9c7045c1a05a890ce7e41fba7f3fa5a)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check action to v2.2.1 - ([a857ce1](https://github.com/kristof-mattei/docker-dns-rs/commit/a857ce156540b7c3b75c817d4ac9d01f628fd853)) - renovate[bot]
-- **(deps)** update actions/github-script action to v7.0.1 - ([51d253b](https://github.com/kristof-mattei/docker-dns-rs/commit/51d253b339562f0f64b58a82e39b0e64ea4e4fbe)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5.1.0 - ([271563f](https://github.com/kristof-mattei/docker-dns-rs/commit/271563fdc74f3daf409e07d2d495b7d430ecf21a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.50.0 - ([c9eb962](https://github.com/kristof-mattei/docker-dns-rs/commit/c9eb9628313548f80c5d33c605545cf2b163a62b)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.8 - ([f85809a](https://github.com/kristof-mattei/docker-dns-rs/commit/f85809a2da4ec11b0e523df7321e3f7db1b47bb1)) - renovate[bot]
-- **(deps)** update rust to v1.74.0 - ([f2fc2d9](https://github.com/kristof-mattei/docker-dns-rs/commit/f2fc2d986a6582bc7c2d412d56c3e03e0fef075f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.7 - ([3ac2fb3](https://github.com/kristof-mattei/docker-dns-rs/commit/3ac2fb397407b943155148b792d5c00ac9f2daa8)) - renovate[bot]
-- **(deps)** update npm to >=10.2.4 - ([d092900](https://github.com/kristof-mattei/docker-dns-rs/commit/d092900a8279a687060dccc2424041ce4b327168)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.49.0 - ([55a2d28](https://github.com/kristof-mattei/docker-dns-rs/commit/55a2d284a5373a37079f108d429ea51534944c93)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.6 - ([a9c7717](https://github.com/kristof-mattei/docker-dns-rs/commit/a9c771745d9b63d723fbda7af4f255e08a0eb2ab)) - renovate[bot]
-- **(deps)** update actions/github-script action to v7 - ([7d2ed24](https://github.com/kristof-mattei/docker-dns-rs/commit/7d2ed24105be6be038fc593518da29f23006e43b)) - renovate[bot]
-- **(deps)** update dependency prettier to v3.1.0 - ([ebc1536](https://github.com/kristof-mattei/docker-dns-rs/commit/ebc153621ff8129b434b773394f4af682298000a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([80c569c](https://github.com/kristof-mattei/docker-dns-rs/commit/80c569c95a1bd78bacff6551066ac193696a53e6)) - renovate[bot]
-- **(deps)** update dependency serialize-error to v11.0.3 - ([7283796](https://github.com/kristof-mattei/docker-dns-rs/commit/72837960d3292a4e9f4c0c06960cb334be14b9af)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.3 - ([fd245bf](https://github.com/kristof-mattei/docker-dns-rs/commit/fd245bff01f964288db159d774dd669f4a928d91)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to v9.2.2 - ([3f8a953](https://github.com/kristof-mattei/docker-dns-rs/commit/3f8a953d1ccd02900b2a5d010598d36f6779f09a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.48.0 - ([4446bf9](https://github.com/kristof-mattei/docker-dns-rs/commit/4446bf9aeb9e5648e60ffd0834d8cd5c0096dd79)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([18577a7](https://github.com/kristof-mattei/docker-dns-rs/commit/18577a773819c17fb76fd4c4f59cbe840d58c1da)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8fa3729](https://github.com/kristof-mattei/docker-dns-rs/commit/8fa372964e0439fe61888a662feb5707234557b3)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v12.0.1 - ([c55a22f](https://github.com/kristof-mattei/docker-dns-rs/commit/c55a22f8e378183517224a5d2a03181f5fa4c499)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.7 - ([1069c9f](https://github.com/kristof-mattei/docker-dns-rs/commit/1069c9f84da649fe4c112a57d10f0ee87fd34794)) - renovate[bot]
-- **(deps)** update npm to >=10.2.3 - ([ff2749c](https://github.com/kristof-mattei/docker-dns-rs/commit/ff2749c2c1d76ffd5bb1af3fa66d680d0e1df9f1)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 066878f - ([4515e55](https://github.com/kristof-mattei/docker-dns-rs/commit/4515e55108f33f188e5be499cc9e4ef54b51879f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.47.0 - ([950c4b9](https://github.com/kristof-mattei/docker-dns-rs/commit/950c4b96b9e94c1393e277ace79b50f1c0e280f3)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 25fa7a9 - ([9d49f38](https://github.com/kristof-mattei/docker-dns-rs/commit/9d49f38a6d278f068b55d5c701bc5a2e91a3ed46)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 4e0bd79 - ([8ebb573](https://github.com/kristof-mattei/docker-dns-rs/commit/8ebb57384d4b89c535dc1dec32de09f28a392da4)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 0dc5fcb - ([25620c2](https://github.com/kristof-mattei/docker-dns-rs/commit/25620c2572ec9787b7728465578e9979379a19a0)) - renovate[bot]
-- **(deps)** update npm to >=10.2.2 - ([e5d9f9a](https://github.com/kristof-mattei/docker-dns-rs/commit/e5d9f9ac838e075d94f3df48f78d623482910ffb)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22.0.6 - ([a80f76e](https://github.com/kristof-mattei/docker-dns-rs/commit/a80f76e81b37f280d8d2ac7f02194e855be4fd82)) - renovate[bot]
-- **(deps)** lock file maintenance - ([12369ba](https://github.com/kristof-mattei/docker-dns-rs/commit/12369ba80170504d68494db22cf89c1c2387171d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.5 - ([e1d64cc](https://github.com/kristof-mattei/docker-dns-rs/commit/e1d64cc2475fe3ab925ab2a069cddfc9d930faf0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.46.0 - ([b87664c](https://github.com/kristof-mattei/docker-dns-rs/commit/b87664c5cc5770f5a1bccae2b16757c03b01948c)) - renovate[bot]
-- **(deps)** update node.js to >=20.9.0 - ([75a1d85](https://github.com/kristof-mattei/docker-dns-rs/commit/75a1d85b809e077c71d4b809e5ae7e492a06cac3)) - renovate[bot]
-- **(deps)** update node.js to v20 - ([2cb8524](https://github.com/kristof-mattei/docker-dns-rs/commit/2cb8524814aa9b019ee71a92cad3b25b1cf4a82b)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v4 - ([2043dc2](https://github.com/kristof-mattei/docker-dns-rs/commit/2043dc2d3041094c443503451b76158e0be98c4a)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.8.2 - ([4423e6f](https://github.com/kristof-mattei/docker-dns-rs/commit/4423e6fa18a407d8aa873535124ca3a8eafa1243)) - renovate[bot]
-- **(deps)** lock file maintenance - ([d3b5840](https://github.com/kristof-mattei/docker-dns-rs/commit/d3b58404b5e0d3fa1efdc75df7bf643753946bf7)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.4 - ([43bc31a](https://github.com/kristof-mattei/docker-dns-rs/commit/43bc31a12323bf382106ff88ed6378bd73af880f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.45.0 - ([5bb43e9](https://github.com/kristof-mattei/docker-dns-rs/commit/5bb43e90c158017596f0b78df2a1e3e461ceb87a)) - renovate[bot]
-- **(deps)** update npm to >=10.2.1 - ([d70b89b](https://github.com/kristof-mattei/docker-dns-rs/commit/d70b89b0f9c4819d965bd93c4575b6d33278a98d)) - renovate[bot]
-- **(deps)** pin dependencies - ([d6c5c01](https://github.com/kristof-mattei/docker-dns-rs/commit/d6c5c01e8b3bc51224bb765cccdec6dd20b3dbf8)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.1 - ([6e75b40](https://github.com/kristof-mattei/docker-dns-rs/commit/6e75b4072dd0e21a099e5079a217931dd28fb348)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6e61ae8](https://github.com/kristof-mattei/docker-dns-rs/commit/6e61ae8bc1bca69e737919d5d8186058a85e4f35)) - renovate[bot]
-- **(deps)** update node.js to >=18.18.2 - ([63f3b4b](https://github.com/kristof-mattei/docker-dns-rs/commit/63f3b4b791c5a465edf119ce1b386fa0fd0a5ade)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.3 - ([724924a](https://github.com/kristof-mattei/docker-dns-rs/commit/724924a8980670a26f59228e468bb8b84282307f)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 73af736 - ([c3fdfc1](https://github.com/kristof-mattei/docker-dns-rs/commit/c3fdfc10428c58a958f11f6baa999a76309002c9)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 054d687 - ([6952262](https://github.com/kristof-mattei/docker-dns-rs/commit/6952262dc1a77768684fd97878d46c81d91005bd)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 0b82242 - ([b649e42](https://github.com/kristof-mattei/docker-dns-rs/commit/b649e42791897d6b90f8491b72443394a68182dd)) - renovate[bot]
-- **(deps)** update rust:1.73.0 docker digest to 1fd670f - ([291f60a](https://github.com/kristof-mattei/docker-dns-rs/commit/291f60ad60cc6bd4be2c7fded80a341b3a6967bb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.2 - ([b75425f](https://github.com/kristof-mattei/docker-dns-rs/commit/b75425f8ed6a6b8cc91942d424cf8615a248170b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.44.0 - ([f0c801b](https://github.com/kristof-mattei/docker-dns-rs/commit/f0c801b9f04e49b3cba9c7aeb4b9417a300390d5)) - renovate[bot]
-- **(deps)** update node.js to >=18.18.1 - ([2f8c882](https://github.com/kristof-mattei/docker-dns-rs/commit/2f8c8820e8902932e45e831f332c6498c5a9300d)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.11.0 - ([338da5d](https://github.com/kristof-mattei/docker-dns-rs/commit/338da5db410d4c6d133cf07946c84640c94f7dd1)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.1 - ([078d7e7](https://github.com/kristof-mattei/docker-dns-rs/commit/078d7e7266decd12d0c550eb1a830877e900dd17)) - renovate[bot]
-- **(deps)** lock file maintenance - ([61506cd](https://github.com/kristof-mattei/docker-dns-rs/commit/61506cd786d5ab930a2db4914ca164f30ff8891d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.22.0 - ([8f731e6](https://github.com/kristof-mattei/docker-dns-rs/commit/8f731e66e2329d3b3aeece05c492fe2113964950)) - renovate[bot]
-- **(deps)** update rust to v1.73.0 - ([7882ad1](https://github.com/kristof-mattei/docker-dns-rs/commit/7882ad1137f09318fc65fa185f06bb5035342aa2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.43.0 - ([0da7ffd](https://github.com/kristof-mattei/docker-dns-rs/commit/0da7ffd6fba1cc2efbfe10b7d4eeef703b957429)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 05a0d13 - ([76a5784](https://github.com/kristof-mattei/docker-dns-rs/commit/76a5784b5c903ce49c42f163fde0e846fcec2460)) - renovate[bot]
-- **(deps)** update npm to >=10.2.0 - ([6d7b1dd](https://github.com/kristof-mattei/docker-dns-rs/commit/6d7b1dd3e8f4f331f5b16324020b0e0ff67ec9b1)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8e532c3](https://github.com/kristof-mattei/docker-dns-rs/commit/8e532c37da60f6fb93a6f8cc4adcbcf0ca27520c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.42.0 - ([cff6257](https://github.com/kristof-mattei/docker-dns-rs/commit/cff62576fb6ccd640b0ea9be31aac763ae1a26e2)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.18.4 - ([a3deff3](https://github.com/kristof-mattei/docker-dns-rs/commit/a3deff3d80296f0e8df57f9ae155f5a29663c4fa)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check action to v2.1.1 - ([6465cb6](https://github.com/kristof-mattei/docker-dns-rs/commit/6465cb611ff514be674ee59352ce482cc24a3259)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.2.1 - ([5405545](https://github.com/kristof-mattei/docker-dns-rs/commit/54055455622fcbcb3c313075d9c368eb6d816a6a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.9 - ([688b596](https://github.com/kristof-mattei/docker-dns-rs/commit/688b5967082bdf6853ec94b42bb3ebac5fa5bde2)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.2.0 - ([5e66378](https://github.com/kristof-mattei/docker-dns-rs/commit/5e6637807898127a7b2fc3ad88b1ef374bc0547b)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.1.0 - ([e352405](https://github.com/kristof-mattei/docker-dns-rs/commit/e352405a7615ffc8f9ecaebbf3ae0b5fb1d3660e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6aabac0](https://github.com/kristof-mattei/docker-dns-rs/commit/6aabac03ec6d00d598359d5de980ab549e8fb4cf)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^22.0.5 - ([a8e0b55](https://github.com/kristof-mattei/docker-dns-rs/commit/a8e0b553f56b16397c61642698673e92f52a1433)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.0.7 - ([74ce883](https://github.com/kristof-mattei/docker-dns-rs/commit/74ce883f7cba5e06e83cc4d6b3cb0f3ea2994189)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^22.0.4 - ([8ab97c7](https://github.com/kristof-mattei/docker-dns-rs/commit/8ab97c77e713559f3ea16a36adfd9d48dd9c03b6)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4.1.0 - ([3be8553](https://github.com/kristof-mattei/docker-dns-rs/commit/3be8553bf706f7f2e98a70a4cc02c9b9788ef4ec)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.10.0 - ([fcb6eb5](https://github.com/kristof-mattei/docker-dns-rs/commit/fcb6eb570336414ee97d45b2abb7b7731ca21d91)) - renovate[bot]
-- **(deps)** update rust:1.72.1 docker digest to 911acdf - ([c5ae0de](https://github.com/kristof-mattei/docker-dns-rs/commit/c5ae0dec001810d103dcbf3a7e802a7040482ee9)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^22.0.1 - ([6ac2f04](https://github.com/kristof-mattei/docker-dns-rs/commit/6ac2f0493061ba6f076b1cbd86edcaff83774dd9)) - renovate[bot]
-- **(deps)** update rust:1.72.1 docker digest to d601f6c - ([d8c9447](https://github.com/kristof-mattei/docker-dns-rs/commit/d8c94474e71770a7a2f459ea9cf920b05f31b3cb)) - renovate[bot]
-- **(deps)** update rust:1.72.1 docker digest to 0935c74 - ([48671ab](https://github.com/kristof-mattei/docker-dns-rs/commit/48671ab2fe004394d897646fd66c3412a1b8ca79)) - renovate[bot]
-- **(deps)** update rust:1.72.1 docker digest to 1a03e33 - ([7b1cea9](https://github.com/kristof-mattei/docker-dns-rs/commit/7b1cea986d0d4c09671767755e5ea427826354ca)) - renovate[bot]
-- **(deps)** update rust to v1.72.1 - ([c8cd93a](https://github.com/kristof-mattei/docker-dns-rs/commit/c8cd93a18d926c89905668385f3b8697b067df69)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.72.1 - ([7a74926](https://github.com/kristof-mattei/docker-dns-rs/commit/7a74926efd6340d500fd49c5c3f5266775e7ff9a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.8 - ([d350d13](https://github.com/kristof-mattei/docker-dns-rs/commit/d350d131608582b06e0ab0f9a4af48ea19bb6a7f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.41.0 - ([12f8cc5](https://github.com/kristof-mattei/docker-dns-rs/commit/12f8cc54935ca018c40b8c5edb562cde365967d4)) - renovate[bot]
-- **(deps)** update node.js to >=v18.18.0 - ([b3e7f93](https://github.com/kristof-mattei/docker-dns-rs/commit/b3e7f936af17240ffbdd6a3d919ca637b6b19576)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([c0da9fe](https://github.com/kristof-mattei/docker-dns-rs/commit/c0da9fed1c5926213d2655ae70d67fe5a5aa13b1)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v22 - ([fa7a51e](https://github.com/kristof-mattei/docker-dns-rs/commit/fa7a51eee3dbad3e7ce0bbcb963c985d9b93d1b2)) - renovate[bot]
-- **(deps)** lock file maintenance - ([bcfdcab](https://github.com/kristof-mattei/docker-dns-rs/commit/bcfdcab1528290fd6195c9b5e81411b8c06e1506)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.1.2 - ([30a8e4c](https://github.com/kristof-mattei/docker-dns-rs/commit/30a8e4cc9fe4ecceceeaf61349d7b166f3c7d335)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.40.0 - ([48e10ca](https://github.com/kristof-mattei/docker-dns-rs/commit/48e10ca059f186199c29804dd097e4ddb9e9bf19)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.0.6 - ([853d7c7](https://github.com/kristof-mattei/docker-dns-rs/commit/853d7c7982f23a00a62f7e9dcf7f3f29b8f41888)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.7 - ([1e90767](https://github.com/kristof-mattei/docker-dns-rs/commit/1e9076764b690ade4cec1b95eeee6b78458c424e)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to 3d6ac10 - ([86e06f9](https://github.com/kristof-mattei/docker-dns-rs/commit/86e06f937826da10a9da50e2e2becb85d3216d62)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.6 - ([f37be73](https://github.com/kristof-mattei/docker-dns-rs/commit/f37be731b7a33f7fe4f3261d5bfc0ab62e24be67)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v5 - ([b199179](https://github.com/kristof-mattei/docker-dns-rs/commit/b1991790b3d0d906d1cbb1594a835c3a11e0e09c)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v5 - ([ebca25c](https://github.com/kristof-mattei/docker-dns-rs/commit/ebca25c1582d8685e59cb49f48abbdc50f767805)) - renovate[bot]
-- **(deps)** update docker/login-action action to v3 - ([ae01a77](https://github.com/kristof-mattei/docker-dns-rs/commit/ae01a77711cde9512e3e6cd528ba1879ddd1327c)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v3 - ([80d595d](https://github.com/kristof-mattei/docker-dns-rs/commit/80d595d9db19758d84f768e3dbad5d2088a22d87)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ef80e0e](https://github.com/kristof-mattei/docker-dns-rs/commit/ef80e0ebd960cfa1d514e1b0aaf92571c2839757)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.0.5 - ([30b0f4e](https://github.com/kristof-mattei/docker-dns-rs/commit/30b0f4e9b48f5a35cdc98e0733e04df6af7c1a04)) - renovate[bot]
-- **(deps)** update npm to v10 - ([d248b0f](https://github.com/kristof-mattei/docker-dns-rs/commit/d248b0fdbefe0572a52eb45ce0961e6653fb10c2)) - renovate[bot]
-- **(deps)** update dependency conventional-changelog-conventionalcommits to ^7.0.2 - ([614748e](https://github.com/kristof-mattei/docker-dns-rs/commit/614748e9e5a446cffa72451c449b2bb5d2eab253)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.3.2 - ([077385d](https://github.com/kristof-mattei/docker-dns-rs/commit/077385d8bb5dc28879f2184ee70eeb8a1ea92411)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v4.2.1 - ([ce17b37](https://github.com/kristof-mattei/docker-dns-rs/commit/ce17b378c81ce1d2664eed03de1a4c2feebf46cc)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v4.2.0 - ([220e3b9](https://github.com/kristof-mattei/docker-dns-rs/commit/220e3b9ba0ca4f78daaea05512395dba3870a4f5)) - renovate[bot]
-- **(deps)** update rust:1.72.0 docker digest to 8a4ca3c - ([124bf35](https://github.com/kristof-mattei/docker-dns-rs/commit/124bf35c07afc807d5932a29c6f11b41246cde78)) - renovate[bot]
-- **(deps)** update rust:1.72.0 docker digest to fb4f69b - ([63a677c](https://github.com/kristof-mattei/docker-dns-rs/commit/63a677c6112421a39e7f21239864079457bc1247)) - renovate[bot]
-- **(deps)** update rust:1.72.0 docker digest to 535b72c - ([6a1c6dd](https://github.com/kristof-mattei/docker-dns-rs/commit/6a1c6ddafccea3e4ea87680bf1e5eec4aaa2d85c)) - renovate[bot]
-- **(deps)** update coverallsapp/github-action action to v2.2.3 - ([d0e6dd8](https://github.com/kristof-mattei/docker-dns-rs/commit/d0e6dd80cea8f8d77f752495883d59fc97d8ff21)) - renovate[bot]
-- **(deps)** update rust:1.72.0 docker digest to b166ff9 - ([f75550a](https://github.com/kristof-mattei/docker-dns-rs/commit/f75550a6993d8d256359208949deece4044c3de8)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.39.0 - ([9684df9](https://github.com/kristof-mattei/docker-dns-rs/commit/9684df96ed2ce4a3254cc3308fad113c1007eb57)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v3.1.3 - ([acce1ee](https://github.com/kristof-mattei/docker-dns-rs/commit/acce1ee034b64cbe2ee3923343716fc76bb952d4)) - renovate[bot]
-- **(deps)** update actions/checkout action to v4 - ([80ecaf4](https://github.com/kristof-mattei/docker-dns-rs/commit/80ecaf4df274d98d79ecbab04b447530c5007e57)) - renovate[bot]
-- **(deps)** update coverallsapp/github-action action to v2.2.2 - ([8a642ef](https://github.com/kristof-mattei/docker-dns-rs/commit/8a642ef9812e7c5f803d0e02d0d6d75da3bef970)) - renovate[bot]
-- **(deps)** lock file maintenance - ([d2d7e87](https://github.com/kristof-mattei/docker-dns-rs/commit/d2d7e8755a45e253c307bbb763b0b8ff3630ab2d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep:1.38.3 docker digest to 4bdf124 - ([3bed75f](https://github.com/kristof-mattei/docker-dns-rs/commit/3bed75f5e97a75174732524eedf6feca83405604)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.38.3 - ([5b5a3aa](https://github.com/kristof-mattei/docker-dns-rs/commit/5b5a3aa061e3273754beee3927787eec50099efe)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.38.2 - ([29e7c41](https://github.com/kristof-mattei/docker-dns-rs/commit/29e7c41960902e247a0a1d9cff09b966e6a127f4)) - renovate[bot]
-- **(deps)** update npm to v10 - ([bfd7e3f](https://github.com/kristof-mattei/docker-dns-rs/commit/bfd7e3f2365596b53e3c64688d408adcb3b8d2d0)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.38.1 - ([71b64ac](https://github.com/kristof-mattei/docker-dns-rs/commit/71b64ac789b2436692619328e814abc06832c85c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.38.0 - ([7dbc88b](https://github.com/kristof-mattei/docker-dns-rs/commit/7dbc88b6ad4829384f5bc74241907ab0c3534ec0)) - renovate[bot]
-- **(deps)** update dependency prettier to ^3.0.3 - ([ccce13d](https://github.com/kristof-mattei/docker-dns-rs/commit/ccce13dec9bc39fbadb5719f2072dfd91461e48e)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([3abd06c](https://github.com/kristof-mattei/docker-dns-rs/commit/3abd06cd35731a79024179cb7464c2f7f426a72e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.5 - ([4d3db83](https://github.com/kristof-mattei/docker-dns-rs/commit/4d3db8357b8f6ca71b4c1d8b2ed56ae7e50313e2)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.10.0 - ([64bcbc1](https://github.com/kristof-mattei/docker-dns-rs/commit/64bcbc175944fe773f385defca3e1a2ff1587cff)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([4c8a2e6](https://github.com/kristof-mattei/docker-dns-rs/commit/4c8a2e6b75e88a21c4c8ca5a7fea601991b4a927)) - renovate[bot]
-- **(deps)** lock file maintenance - ([d4f72da](https://github.com/kristof-mattei/docker-dns-rs/commit/d4f72daae296960ede9a20b0a279aa05eed94652)) - renovate[bot]
-- **(deps)** update dependency conventional-changelog-conventionalcommits to v7 - ([97cddd5](https://github.com/kristof-mattei/docker-dns-rs/commit/97cddd5d80503f88e8cd66f158b53f9eb2109ee7)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/commit-analyzer to ^10.0.2 - ([484c555](https://github.com/kristof-mattei/docker-dns-rs/commit/484c555fc099c1df264bd4e05b94cf5cbc141cef)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to ^11.0.5 - ([6b9d166](https://github.com/kristof-mattei/docker-dns-rs/commit/6b9d1668e682f4768d9fd7b73ffcdebb4065c417)) - renovate[bot]
-- **(deps)** update dependency serialize-error to ^11.0.2 - ([f1e9e77](https://github.com/kristof-mattei/docker-dns-rs/commit/f1e9e77309b9160a404bfb362da826b1cd7d9d2f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.37.0 - ([887a71e](https://github.com/kristof-mattei/docker-dns-rs/commit/887a71eba1c4fb5f6941e5db4c8d1ab78f58b4f8)) - renovate[bot]
-- **(deps)** update rust to v1.72.0 - ([d51ce4a](https://github.com/kristof-mattei/docker-dns-rs/commit/d51ce4ad6176b0e2ae5ddccc25f6da4c2325af20)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.6.0 - ([b5f0093](https://github.com/kristof-mattei/docker-dns-rs/commit/b5f00938a52c791e87f5e5051e550163bca4c0a6)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.1.1 - ([68de378](https://github.com/kristof-mattei/docker-dns-rs/commit/68de378929fb70ad3116014c959fd20ce60b960b)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.1.0 - ([0fec648](https://github.com/kristof-mattei/docker-dns-rs/commit/0fec64883681b901e3f3e1af19c6b5cb2f1b23e6)) - renovate[bot]
-- **(deps)** lock file maintenance - ([728aa61](https://github.com/kristof-mattei/docker-dns-rs/commit/728aa6150c88aab3ada2250c0952b7fada10c1f7)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.9 - ([bcf2818](https://github.com/kristof-mattei/docker-dns-rs/commit/bcf281866f94f364459495ec6f9aff3e23b1460c)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.8.1 - ([1f82230](https://github.com/kristof-mattei/docker-dns-rs/commit/1f82230ce9de2803d1073a26575a7a95fc1bfe5c)) - renovate[bot]
-- **(deps)** update rust:1.71.1 docker digest to b988926 - ([417cffb](https://github.com/kristof-mattei/docker-dns-rs/commit/417cffb3e4620302f777f9f5b1ec10607f742ea1)) - renovate[bot]
-- **(deps)** update rust:1.71.1 docker digest to 69dcbc9 - ([d1af2e6](https://github.com/kristof-mattei/docker-dns-rs/commit/d1af2e6935ca556895dbefc55f33a1acc85bc49f)) - renovate[bot]
-- **(deps)** update dependency prettier to ^3.0.2 - ([50d2135](https://github.com/kristof-mattei/docker-dns-rs/commit/50d213507ca720202e8690da98d56ee01f839d5d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.36.0 - ([470276a](https://github.com/kristof-mattei/docker-dns-rs/commit/470276a2d3f491b12904952d09c9d641efe8c332)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.4 - ([b283adc](https://github.com/kristof-mattei/docker-dns-rs/commit/b283adcd993ad3e5e9926558ae7d5fe464b1a05e)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.8.0 - ([face293](https://github.com/kristof-mattei/docker-dns-rs/commit/face2938f0c5d65dcbf5945310e926511a693f98)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0b1602b](https://github.com/kristof-mattei/docker-dns-rs/commit/0b1602b0f4a9aae2794529087545cc48d68ca83d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.35.0 - ([f0bf534](https://github.com/kristof-mattei/docker-dns-rs/commit/f0bf5348b7b601b169a9248e22ee72dd608526aa)) - renovate[bot]
-- **(deps)** update node.js to >=v18.17.1 - ([a702d5e](https://github.com/kristof-mattei/docker-dns-rs/commit/a702d5edfc7910720d4f0b582ac3a335f204f6f6)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.3 - ([d14a7d1](https://github.com/kristof-mattei/docker-dns-rs/commit/d14a7d14caf69a3b4911ee206023c63d38ceafee)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.18.3 - ([ec2c611](https://github.com/kristof-mattei/docker-dns-rs/commit/ec2c6119b1038633c5cbee80a251670647eaad17)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e7cccb2](https://github.com/kristof-mattei/docker-dns-rs/commit/e7cccb2f06e0055657065499390fc7b92e879656)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.71.1 - ([ae647d8](https://github.com/kristof-mattei/docker-dns-rs/commit/ae647d858f14b69b7b46c6f1ae123a5445226a1b)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to cf9b9da - ([4431141](https://github.com/kristof-mattei/docker-dns-rs/commit/44311416819f1689cf132a6d337bd555225e584c)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.9.0 - ([21115f5](https://github.com/kristof-mattei/docker-dns-rs/commit/21115f5e479bca886be5d57f13b4155dfd337ad9)) - renovate[bot]
-- **(deps)** update dependency prettier to ^3.0.1 - ([1eb6aa2](https://github.com/kristof-mattei/docker-dns-rs/commit/1eb6aa2b3498c1ba17f9f9866e91293f77dcd86e)) - renovate[bot]
-- **(deps)** update dependency serialize-error to ^11.0.1 - ([8b4676c](https://github.com/kristof-mattei/docker-dns-rs/commit/8b4676c737564432ca0e3ae1eeb90ae9e7e21ac4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([cce6544](https://github.com/kristof-mattei/docker-dns-rs/commit/cce6544dc94b6c29f019ea4a374501f8ad303a41)) - renovate[bot]
-- **(deps)** update rust:1.71.0 docker digest to f4465d2 - ([536b12a](https://github.com/kristof-mattei/docker-dns-rs/commit/536b12a5fd674728dda4cf2f6c130f96f2a4a359)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.34.1 - ([b6ea17b](https://github.com/kristof-mattei/docker-dns-rs/commit/b6ea17be2ffcbd620b4adc19c29a84231077bcf1)) - renovate[bot]
-- **(deps)** update rust:1.71.0 docker digest to 92d62e4 - ([6a94f8c](https://github.com/kristof-mattei/docker-dns-rs/commit/6a94f8c1f05e0f574d59b618673381eb2e78240f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.2 - ([716e10e](https://github.com/kristof-mattei/docker-dns-rs/commit/716e10eb026eab6e716608c1d737524e5e978daa)) - renovate[bot]
-- **(deps)** update rust:1.71.0 docker digest to a93ade4 - ([cd8d5c1](https://github.com/kristof-mattei/docker-dns-rs/commit/cd8d5c1a406a7efd8763436afd377329d636d210)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.34.0 - ([e60c964](https://github.com/kristof-mattei/docker-dns-rs/commit/e60c964c79e9f01c24f3896e6d7f22046fe1eeca)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.1 - ([f554e25](https://github.com/kristof-mattei/docker-dns-rs/commit/f554e253ad76aaa4b02e33c13f015eaf7261f8ed)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7dc6448](https://github.com/kristof-mattei/docker-dns-rs/commit/7dc6448f4d807252342db24b2a7bd113b77b82ae)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.33.2 - ([6bd7be3](https://github.com/kristof-mattei/docker-dns-rs/commit/6bd7be32012c8c631314c8d5d893c406bf762805)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.33.1 - ([f6f791d](https://github.com/kristof-mattei/docker-dns-rs/commit/f6f791dc1adfdc7270e3a3c87393fa83d210e90b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.33.0 - ([70e79d4](https://github.com/kristof-mattei/docker-dns-rs/commit/70e79d46a160cd6236a181e17e6140278e2c2e59)) - renovate[bot]
-- **(deps)** update npm to >=9.8.1 - ([a3350d4](https://github.com/kristof-mattei/docker-dns-rs/commit/a3350d41fb967c4fc280b6c66cac4b506065e42a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.21.0 - ([56c0ff6](https://github.com/kristof-mattei/docker-dns-rs/commit/56c0ff6fc4c53691c7290529866041bd439e134c)) - renovate[bot]
-- **(deps)** update node.js to >=v18.17.0 - ([85f0a6f](https://github.com/kristof-mattei/docker-dns-rs/commit/85f0a6f1679d8b4219c9e3c6e34291fbccbb171a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([debd204](https://github.com/kristof-mattei/docker-dns-rs/commit/debd20470f7fa56faf588edf2244364f7693bcd9)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^9.0.4 - ([50ca615](https://github.com/kristof-mattei/docker-dns-rs/commit/50ca6154b79be4306ddcaeb046c6ff1865b0f4a2)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e4a61b2](https://github.com/kristof-mattei/docker-dns-rs/commit/e4a61b2d3cca1727e201ebe9b725085e586331ef)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.32.0 - ([bd84d5f](https://github.com/kristof-mattei/docker-dns-rs/commit/bd84d5fca55935e1bf607123d24139ba99658e0c)) - renovate[bot]
-- **(deps)** update rust to v1.71.0 - ([56ea549](https://github.com/kristof-mattei/docker-dns-rs/commit/56ea5495d74c59211cf3eaa880d0781da854313f)) - renovate[bot]
-- **(deps)** pin coverallsapp/github-action action to 95b1a23 - ([4a4d0be](https://github.com/kristof-mattei/docker-dns-rs/commit/4a4d0beb0bf942c49326bc75d0d04554deccb5a6)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.20.4 - ([1ca5000](https://github.com/kristof-mattei/docker-dns-rs/commit/1ca50009aaa35fbdae6a5244a120d48d6b3d6e2f)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.9.1 - ([8c779f9](https://github.com/kristof-mattei/docker-dns-rs/commit/8c779f941f0c49c691f225b478eff37f1943eec4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([90dd211](https://github.com/kristof-mattei/docker-dns-rs/commit/90dd2113b5302262e5a1940da9e641bd1cf509b5)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.31.2 - ([9142fa3](https://github.com/kristof-mattei/docker-dns-rs/commit/9142fa3ad5de958604f606140a5c58826fe5d9b3)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.5.4 - ([d45d44d](https://github.com/kristof-mattei/docker-dns-rs/commit/d45d44daef5149b1d4e12169499533cedee72226)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.31.1 - ([61b4597](https://github.com/kristof-mattei/docker-dns-rs/commit/61b4597209fd3eb8ab3139bc1f08c2e2093bf2fb)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.9.0 - ([ab86d38](https://github.com/kristof-mattei/docker-dns-rs/commit/ab86d38a0ae76088072129dc0d31737764e70683)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:1-1-bullseye docker digest to b732d41 - ([ba8a14e](https://github.com/kristof-mattei/docker-dns-rs/commit/ba8a14e6525a9c97b97baa19c6fb488ec989d04e)) - renovate[bot]
-- **(deps)** update dependency prettier to v3 - ([b82941b](https://github.com/kristof-mattei/docker-dns-rs/commit/b82941bcb6817612477cd7448d7f8b33af3de50d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.20.3 - ([69f3ab1](https://github.com/kristof-mattei/docker-dns-rs/commit/69f3ab19e6efe245cd4949e912f0b84866023473)) - renovate[bot]
-- **(deps)** update npm to >=9.8.0 - ([d7f4877](https://github.com/kristof-mattei/docker-dns-rs/commit/d7f4877e903387207998391bc5ffdd26cafa2136)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.7.0 - ([822fe7a](https://github.com/kristof-mattei/docker-dns-rs/commit/822fe7ab5df50083bc6468b45327283a57ee816d)) - renovate[bot]
-- **(deps)** update rust:1.70.0 docker digest to dbdf889 - ([bb134c2](https://github.com/kristof-mattei/docker-dns-rs/commit/bb134c2fd487f08179eedd33eea590461dafde17)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.7 - ([cad0c17](https://github.com/kristof-mattei/docker-dns-rs/commit/cad0c177cecf5afe9f3de6b2b950c799cde2aa95)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to ^11.0.4 - ([af61494](https://github.com/kristof-mattei/docker-dns-rs/commit/af614943dbbcc4b469630c6c7ac8a004dfa10059)) - renovate[bot]
-- **(deps)** update rust:1.70.0 docker digest to 28ee882 - ([f70d80d](https://github.com/kristof-mattei/docker-dns-rs/commit/f70d80d796f4bea5824f6dd0116d5e7c10cac510)) - renovate[bot]
-- **(deps)** update rust:1.70.0 docker digest to a8d4f44 - ([ba65547](https://github.com/kristof-mattei/docker-dns-rs/commit/ba65547ae9cb2913d0cda2da51322afd74aac49a)) - renovate[bot]
-- **(deps)** update rust:1.70.0 docker digest to d3283ba - ([6f72cbf](https://github.com/kristof-mattei/docker-dns-rs/commit/6f72cbf385c52e54507322fd5511046d2705f56c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.20.2 - ([e1539c1](https://github.com/kristof-mattei/docker-dns-rs/commit/e1539c157fb3214e5505515552cc63b54103f756)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8174e92](https://github.com/kristof-mattei/docker-dns-rs/commit/8174e929d3427a1661cd326d30cae623b071546a)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.6 - ([aebe192](https://github.com/kristof-mattei/docker-dns-rs/commit/aebe1921195bc3ef458655df9f2aaf6ff0f86cf4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.30.0 - ([abac933](https://github.com/kristof-mattei/docker-dns-rs/commit/abac9337e48b9acc57f8147ef9a5efedf5d6ed86)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.8.0 - ([58f0f6a](https://github.com/kristof-mattei/docker-dns-rs/commit/58f0f6a883a55a781fabe7b22f03b45db386b12a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.29.0 - ([03cb12c](https://github.com/kristof-mattei/docker-dns-rs/commit/03cb12c073012ccbea6bca74ca5623edb7304f5c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8808402](https://github.com/kristof-mattei/docker-dns-rs/commit/88084028fe3c737af6fb2629d937e27802e3f0d4)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.5.3 - ([9a8c721](https://github.com/kristof-mattei/docker-dns-rs/commit/9a8c7214f40be1af36e651e05d4f606c41dca9d7)) - renovate[bot]
-- **(deps)** update npm to >=9.7.2 - ([643ebf7](https://github.com/kristof-mattei/docker-dns-rs/commit/643ebf7829df50313fc1a56d6a567dfadb8939ba)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.20.1 - ([c705081](https://github.com/kristof-mattei/docker-dns-rs/commit/c705081af55fda4d8a4ab0c579b246e90ea0b628)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.28.0 - ([4476eb7](https://github.com/kristof-mattei/docker-dns-rs/commit/4476eb79e7871da32446f6900f9561f7a11bdbfd)) - renovate[bot]
-- **(deps)** update node.js to >=v18.16.1 - ([ce60c70](https://github.com/kristof-mattei/docker-dns-rs/commit/ce60c709f702b626b48cd147760b40a3e5460253)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.8.0 - ([0b44293](https://github.com/kristof-mattei/docker-dns-rs/commit/0b44293e87c32f5bf23d791718fd4d2ca3e63bd7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e27688b](https://github.com/kristof-mattei/docker-dns-rs/commit/e27688ba8b40143d8765302113bc1efe0a6881d0)) - renovate[bot]
-- **(deps)** update dependency conventional-changelog-conventionalcommits to ^6.1.0 - ([622d3dc](https://github.com/kristof-mattei/docker-dns-rs/commit/622d3dc96a7546f2c569bfbf5ca87c2460b94da7)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.5.2 - ([85e3371](https://github.com/kristof-mattei/docker-dns-rs/commit/85e337100fbdbebb35cf9ab3b5598b152a1062d0)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust docker tag to v1 - ([13b335a](https://github.com/kristof-mattei/docker-dns-rs/commit/13b335acba45a38eec073eab47d0d1f98be9e385)) - renovate[bot]
-- **(deps)** update alpine:3.18.2 docker digest to 82d1e9d - ([848923a](https://github.com/kristof-mattei/docker-dns-rs/commit/848923a73b12774642f7ae96dec7df9bcea74d74)) - renovate[bot]
-- **(deps)** update alpine:3.18.2 docker digest to 5246eec - ([631cb80](https://github.com/kristof-mattei/docker-dns-rs/commit/631cb8001af4d2479bcbc9fcfa326f5d99d2f918)) - renovate[bot]
-- **(deps)** update alpine:3.18.2 docker digest to c7431a7 - ([5faa555](https://github.com/kristof-mattei/docker-dns-rs/commit/5faa55515505674196b7d5b8d0a8b935b0100286)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.20.0 - ([fbfc34d](https://github.com/kristof-mattei/docker-dns-rs/commit/fbfc34d8ed4fc57eedfd6ea1f0651db47958203e)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.7.0 - ([980b38a](https://github.com/kristof-mattei/docker-dns-rs/commit/980b38a60681cd8977fda7caf48aa99a19136e2b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.27.0 - ([3741fa8](https://github.com/kristof-mattei/docker-dns-rs/commit/3741fa893767c1b038a826ea6f95eb57b4ff16e4)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.18.2 - ([4e4ae0f](https://github.com/kristof-mattei/docker-dns-rs/commit/4e4ae0fd920c450a9cad647d0360ca6914383fbb)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.6.0 - ([ff106a8](https://github.com/kristof-mattei/docker-dns-rs/commit/ff106a89d4bc8b62e75b0d41464012db841bb628)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.5 - ([95dd9c4](https://github.com/kristof-mattei/docker-dns-rs/commit/95dd9c4bb1d9271632e2fe2921398402e9e55dfd)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v4.1.1 - ([766dc9c](https://github.com/kristof-mattei/docker-dns-rs/commit/766dc9c8b725ef5989e47584a27c0f203496d9c4)) - renovate[bot]
-- **(deps)** update rust:1.70.0 docker digest to 508253a - ([4bd3aa6](https://github.com/kristof-mattei/docker-dns-rs/commit/4bd3aa613607742453c06b1c35008d946c1c3b01)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.26.0 - ([3ba9ff7](https://github.com/kristof-mattei/docker-dns-rs/commit/3ba9ff762ce31cd5faadf64bc251d352a808665f)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.5.3 - ([f718fae](https://github.com/kristof-mattei/docker-dns-rs/commit/f718fae0f7864f860a064cd1adc55bfaae3d8be3)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v4.1.0 - ([f3bad8f](https://github.com/kristof-mattei/docker-dns-rs/commit/f3bad8faa7b27e69944ad6de8cc820a4ffa201b6)) - renovate[bot]
-- **(deps)** update dependency conventional-changelog-conventionalcommits to v6 - ([ccf796c](https://github.com/kristof-mattei/docker-dns-rs/commit/ccf796c69a7b4080132cf331f458cacce450b63c)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([1409fc0](https://github.com/kristof-mattei/docker-dns-rs/commit/1409fc02b09318923f0300bd02a77e966115a15e)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.6.0 - ([c706083](https://github.com/kristof-mattei/docker-dns-rs/commit/c70608373edfee03a1ee8598674d5a7d4f3cb49b)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:0-1-bullseye docker digest to b723b13 - ([f081555](https://github.com/kristof-mattei/docker-dns-rs/commit/f0815551f63666d7f879c54b83c45e103c972843)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to ^11.0.3 - ([3499594](https://github.com/kristof-mattei/docker-dns-rs/commit/3499594fac0ff03d62276af600e3235e85fa90e8)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.5.0 - ([d2c7929](https://github.com/kristof-mattei/docker-dns-rs/commit/d2c7929bf2ea071f7e97004096a17d6bda0c1de8)) - renovate[bot]
-- **(deps)** update npm to >=9.7.1 - ([6240e68](https://github.com/kristof-mattei/docker-dns-rs/commit/6240e6846cd0d8b2d0e8401381f01e838269a053)) - renovate[bot]
-- **(deps)** update docker/login-action action to v2.2.0 - ([78a5d54](https://github.com/kristof-mattei/docker-dns-rs/commit/78a5d547d5333db5c3af029acd26e6738212c769)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.25.0 - ([bdd2eb9](https://github.com/kristof-mattei/docker-dns-rs/commit/bdd2eb9fd4633546038f19dda173792fb3ee9d3e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([da59020](https://github.com/kristof-mattei/docker-dns-rs/commit/da590207483445f0d80a2ed558cf4642936c6b4d)) - renovate[bot]
-- **(deps)** update rust:1.70.0 docker digest to cf5513b - ([5f4253c](https://github.com/kristof-mattei/docker-dns-rs/commit/5f4253c957f5e14733151645c948698539144e82)) - renovate[bot]
-- **(deps)** update rust to v1.70.0 - ([69c6d89](https://github.com/kristof-mattei/docker-dns-rs/commit/69c6d891ff91349ac9456d3b23cf4c5756b64849)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.3 - ([2a2f93c](https://github.com/kristof-mattei/docker-dns-rs/commit/2a2f93cd33eebf22c47b912760c31fbcdade707c)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([b6af361](https://github.com/kristof-mattei/docker-dns-rs/commit/b6af36167cfaaebea3262465a3f2ae7f02e93ec7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.24.1 - ([c7cbd71](https://github.com/kristof-mattei/docker-dns-rs/commit/c7cbd712826697b982d21eebef595170a2be68a5)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.6 - ([63d2e4b](https://github.com/kristof-mattei/docker-dns-rs/commit/63d2e4b775de17540722cd2a33a6a8e36b2ea819)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/github to ^8.0.8 - ([9200b35](https://github.com/kristof-mattei/docker-dns-rs/commit/9200b351133504c1a6aeea9ca8ceebfb9912c1f8)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.5 - ([6bc72fd](https://github.com/kristof-mattei/docker-dns-rs/commit/6bc72fd6596c850f6b7f26e4ba78f9814370efb9)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.4 - ([e7a98e9](https://github.com/kristof-mattei/docker-dns-rs/commit/e7a98e9d0c007fa604669cbff03ca849f7069e2b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.23.0 - ([7ebc64f](https://github.com/kristof-mattei/docker-dns-rs/commit/7ebc64fafc3bb8692e817cdfce75a93cb31bf417)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to c2dcc19 - ([36d91f4](https://github.com/kristof-mattei/docker-dns-rs/commit/36d91f4d1786c258de8322f4f24a71f48c8da027)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to 3d8684d - ([ef14335](https://github.com/kristof-mattei/docker-dns-rs/commit/ef14335886bc7ba1158d953a82834327fe9ec266)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to abebc02 - ([a5ca7ae](https://github.com/kristof-mattei/docker-dns-rs/commit/a5ca7aeb9e2347c3dd9c40ac8a61948408f7b356)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to 4c1cab3 - ([ecaaefa](https://github.com/kristof-mattei/docker-dns-rs/commit/ecaaefa173e9709f0bba81dc66e634143206639d)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8006175](https://github.com/kristof-mattei/docker-dns-rs/commit/8006175e2cd9938ad0446b92bdaad7373c79b513)) - renovate[bot]
-- **(deps)** update npm to >=9.6.7 - ([2cad06b](https://github.com/kristof-mattei/docker-dns-rs/commit/2cad06be92d8667f7348c2d6c2dc47fe1fbffcaa)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.22.0 - ([c2eb0b7](https://github.com/kristof-mattei/docker-dns-rs/commit/c2eb0b7f5abdb2cfbbd1773280454633af388114)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v3.1.4 - ([af108f1](https://github.com/kristof-mattei/docker-dns-rs/commit/af108f1b87ee3c33c16467ceb53cef123c2e9621)) - renovate[bot]
-- **(deps)** lock file maintenance - ([591ab06](https://github.com/kristof-mattei/docker-dns-rs/commit/591ab069a983bc01d8786979f003655f81d91438)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.5.1 - ([6a60d7d](https://github.com/kristof-mattei/docker-dns-rs/commit/6a60d7d39fe4d5526298acd8850dba60f665b904)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.18.0 - ([12cec17](https://github.com/kristof-mattei/docker-dns-rs/commit/12cec171b25978291d6ce6f3fb38a34d5ecf03b9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([d5cc6a9](https://github.com/kristof-mattei/docker-dns-rs/commit/d5cc6a9784cdfde2b31160f2282459d8f83ad07d)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/release-notes-generator to v11 - ([a0ea4a6](https://github.com/kristof-mattei/docker-dns-rs/commit/a0ea4a65a213fb577aee62a3f9f114572b0e3953)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.21.0 - ([0aa2ac3](https://github.com/kristof-mattei/docker-dns-rs/commit/0aa2ac31a521129f1336f65518de1f94a24c1a47)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.3 - ([d547244](https://github.com/kristof-mattei/docker-dns-rs/commit/d5472440996c045d08d6c42a12a036bfc5fe06c0)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to ee5de98 - ([8a2e5f3](https://github.com/kristof-mattei/docker-dns-rs/commit/8a2e5f35c9a81eb504f8a811239db0916aa426bb)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to af08886 - ([be9d188](https://github.com/kristof-mattei/docker-dns-rs/commit/be9d188cff530f84071755a72ed163b8770122bc)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to 5fb0729 - ([03526f5](https://github.com/kristof-mattei/docker-dns-rs/commit/03526f522bb5686b2a464fe028e7a43849259990)) - renovate[bot]
-- **(deps)** update npm to >=9.6.6 - ([e45cec8](https://github.com/kristof-mattei/docker-dns-rs/commit/e45cec87fc74b2db458ceb438e039eb6482359ef)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to ac46609 - ([6f30cea](https://github.com/kristof-mattei/docker-dns-rs/commit/6f30cea86dd4f388baf526d06f78ce256fea9221)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to e6187ab - ([c2132c6](https://github.com/kristof-mattei/docker-dns-rs/commit/c2132c6b7b35c389624fa50edbe3cf4cc509f8ca)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.2 - ([0a03be9](https://github.com/kristof-mattei/docker-dns-rs/commit/0a03be90fbac202f5f7bc3df6003a3259e6b6d3a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.20.0 - ([be5f473](https://github.com/kristof-mattei/docker-dns-rs/commit/be5f473b80f5f71a703ce4089e7c20c5dcf5adcd)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.2 - ([570c474](https://github.com/kristof-mattei/docker-dns-rs/commit/570c4748bb3debe5a3e0fc637f129429c9be9069)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.1 - ([c08c3ad](https://github.com/kristof-mattei/docker-dns-rs/commit/c08c3adc24d0aa753759a1e423bdce7842be0b71)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:0-1-bullseye docker digest to fdcde64 - ([1b6cd2a](https://github.com/kristof-mattei/docker-dns-rs/commit/1b6cd2a51c94312cfed47b66bef023e335f5cc20)) - renovate[bot]
-- **(deps)** update dependency prettier to ^2.8.8 - ([bc526ca](https://github.com/kristof-mattei/docker-dns-rs/commit/bc526cadfbfeaf30a847dc09854f2e349b6caab5)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.19.0 - ([bcc4d79](https://github.com/kristof-mattei/docker-dns-rs/commit/bcc4d79e8ad2dcb6cebc39a08a36d1a6d7ca4464)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.3.0 - ([d9716d8](https://github.com/kristof-mattei/docker-dns-rs/commit/d9716d868d6f8d5335ecd9d460dff3d20978e1a6)) - renovate[bot]
-- **(deps)** update rust:1.69.0 docker digest to 9d78a0a - ([ac6f9da](https://github.com/kristof-mattei/docker-dns-rs/commit/ac6f9da54f53b2f17f2aef9b48cc8fc023fe767d)) - renovate[bot]
-- **(deps)** update rust to v1.69.0 - ([2f45af3](https://github.com/kristof-mattei/docker-dns-rs/commit/2f45af339f8e7e50ac2dd4da0817d813b24a6088)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v3.1.3 - ([b303455](https://github.com/kristof-mattei/docker-dns-rs/commit/b3034553d72149a541e31178d1652144397a929a)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.7.0 - ([d97087e](https://github.com/kristof-mattei/docker-dns-rs/commit/d97087e4436b5c0a2d276520dc73abc4ab5c2085)) - renovate[bot]
-- **(deps)** update npm to >=9.6.5 - ([a82d05b](https://github.com/kristof-mattei/docker-dns-rs/commit/a82d05bc92bbb226bddbb533b5537b62d0f2e238)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.4.0 - ([d85cf2b](https://github.com/kristof-mattei/docker-dns-rs/commit/d85cf2b6e6954178f682f60128587c936912c8c2)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.5.0 - ([eb41402](https://github.com/kristof-mattei/docker-dns-rs/commit/eb4140200ef7f3ebfda9b4b6bbc6cb7c7cf8d058)) - renovate[bot]
-- **(deps)** lock file maintenance - ([40fd5c0](https://github.com/kristof-mattei/docker-dns-rs/commit/40fd5c0ab9ede93a1b95d39119f7608bed88907f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.18.0 - ([7ef6e30](https://github.com/kristof-mattei/docker-dns-rs/commit/7ef6e3013dca09d83b623bb2123df7a58a47d477)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.12 - ([12f328e](https://github.com/kristof-mattei/docker-dns-rs/commit/12f328e12be2b7fefd831bec31f2cacdba6fb6f1)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.5.2 - ([93fb3c3](https://github.com/kristof-mattei/docker-dns-rs/commit/93fb3c3411155ab54006c7a5785aab852772c875)) - renovate[bot]
-- **(deps)** update node.js to >=v18.16.0 - ([12e3711](https://github.com/kristof-mattei/docker-dns-rs/commit/12e371185b7fd62f862ce1f6f3cace6e4f686118)) - renovate[bot]
-- **(deps)** update rust:1.68.2 docker digest to 346a6ec - ([a931d8c](https://github.com/kristof-mattei/docker-dns-rs/commit/a931d8cb7fbd5626289558247f9785ab61089ef6)) - renovate[bot]
-- **(deps)** update rust:1.68.2 docker digest to b4bf530 - ([f1beb8e](https://github.com/kristof-mattei/docker-dns-rs/commit/f1beb8e26bca72c6131ae219e798b7e3acd48c9c)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.5.1 - ([2e8402b](https://github.com/kristof-mattei/docker-dns-rs/commit/2e8402b53f6817e3c38bf1717f5aaa1d5ba341c3)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v3.1.2 - ([0a8d6b5](https://github.com/kristof-mattei/docker-dns-rs/commit/0a8d6b5650110eb4ddbbe752a135ed379fa5a152)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.6.2 - ([53c14b4](https://github.com/kristof-mattei/docker-dns-rs/commit/53c14b406f7be206ab636f227767cff5af26e6a4)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.4.0 - ([33bfe81](https://github.com/kristof-mattei/docker-dns-rs/commit/33bfe81c0768a5792b1c1a94334828587ebe57f9)) - renovate[bot]
-- **(deps)** lock file maintenance - ([41ef9f1](https://github.com/kristof-mattei/docker-dns-rs/commit/41ef9f137c987541e8a4a95707ec73e1071ca626)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.11 - ([4e9c3c9](https://github.com/kristof-mattei/docker-dns-rs/commit/4e9c3c9b0d9f2ac3b5576d5774e97365f23199cf)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.4.1 - ([ee4e3a1](https://github.com/kristof-mattei/docker-dns-rs/commit/ee4e3a140c7f3e012c54d2c75581dcc2e2ed78a3)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.17.1 - ([32dcfe8](https://github.com/kristof-mattei/docker-dns-rs/commit/32dcfe8564a9c0141359e2a6ddb18438cd602623)) - renovate[bot]
-- **(deps)** update npm to >=9.6.4 - ([f3debd1](https://github.com/kristof-mattei/docker-dns-rs/commit/f3debd1c788a0aeeb2fa14238f06f6307d5b5561)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.10 - ([d563164](https://github.com/kristof-mattei/docker-dns-rs/commit/d5631640fc62cd3863db11f8ea591977dfcb9ef7)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.17.0 - ([c1b6f28](https://github.com/kristof-mattei/docker-dns-rs/commit/c1b6f28d9f55759a0947e452a6e7d4b6a87fe42a)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:0-1-bullseye docker digest to 601b3b8 - ([0e180c8](https://github.com/kristof-mattei/docker-dns-rs/commit/0e180c8154bf000ec3a16ca90a90707618258c35)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^21.0.1 - ([8ef16e7](https://github.com/kristof-mattei/docker-dns-rs/commit/8ef16e74aca296b68e245b31e8e795df18f61030)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.16.0 - ([1524996](https://github.com/kristof-mattei/docker-dns-rs/commit/1524996c326dbaaf74a665b19b466c4aa3fcea5f)) - renovate[bot]
-- **(deps)** update npm to >=9.6.3 - ([6980145](https://github.com/kristof-mattei/docker-dns-rs/commit/6980145817bbe026d4aef7559906c38cdaafad2e)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.17.3 - ([09ce4db](https://github.com/kristof-mattei/docker-dns-rs/commit/09ce4db54199d43e7dde15373d46a50fad8e781d)) - renovate[bot]
-- **(deps)** update rust to v1.68.2 - ([0504764](https://github.com/kristof-mattei/docker-dns-rs/commit/05047646a170438018d3eaacc7ff59d6d04dd633)) - renovate[bot]
-- **(deps)** update rust to v1.68.1 - ([a75450b](https://github.com/kristof-mattei/docker-dns-rs/commit/a75450b5a751ecce6354d59a897803feb5e29605)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.9 - ([66e6f47](https://github.com/kristof-mattei/docker-dns-rs/commit/66e6f4764b3f7fa7b8fe6d1b5a03209208d015c0)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v21 - ([3362fdf](https://github.com/kristof-mattei/docker-dns-rs/commit/3362fdf64eb4a2a654f7a36f6a03f317bc048eb8)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.5.0 - ([f57f5d0](https://github.com/kristof-mattei/docker-dns-rs/commit/f57f5d004d5a792aa94fb3ac0f8afda46c6622f7)) - renovate[bot]
-- **(deps)** update dependency prettier to ^2.8.7 - ([a738e71](https://github.com/kristof-mattei/docker-dns-rs/commit/a738e71219789513fda3194bfe6e9c109ff7aadb)) - renovate[bot]
-- **(deps)** update rust:1.68.1 docker digest to 516b408 - ([46ea438](https://github.com/kristof-mattei/docker-dns-rs/commit/46ea438bad6d4b1c85bb20a6d962ed1dccffaa2a)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.68.1 - ([7127339](https://github.com/kristof-mattei/docker-dns-rs/commit/71273390948040482bae6e4395757ac04561d55f)) - renovate[bot]
-- **(deps)** update dependency @semantic-release/changelog to ^6.0.3 - ([0f4b16a](https://github.com/kristof-mattei/docker-dns-rs/commit/0f4b16a40de6366532abdde972ea712b899b2114)) - renovate[bot]
-- **(deps)** update rust:1.68.0 docker digest to e10f1e3 - ([f7373cc](https://github.com/kristof-mattei/docker-dns-rs/commit/f7373cc086f93f7a3eca643a4bb4e26986f9e20d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.8 - ([f7f9895](https://github.com/kristof-mattei/docker-dns-rs/commit/f7f98959c177199f50bc6bbdac57576c1b24baf8)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.6.1 - ([4d48513](https://github.com/kristof-mattei/docker-dns-rs/commit/4d48513a4e2245f15303e0884dbba70168db3f72)) - renovate[bot]
-- **(deps)** update dependency prettier to ^2.8.6 - ([a77a614](https://github.com/kristof-mattei/docker-dns-rs/commit/a77a614cf6837cd7c4a851fb2e53fe3be0edfe84)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.6.0 - ([227172d](https://github.com/kristof-mattei/docker-dns-rs/commit/227172d63fe04931fb4b8e1729b2b8cd1811c6d7)) - renovate[bot]
-- **(deps)** update dependency prettier to ^2.8.5 - ([3c818b3](https://github.com/kristof-mattei/docker-dns-rs/commit/3c818b312f9ba03159a78572ca45c527cb48912c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6ab4c7c](https://github.com/kristof-mattei/docker-dns-rs/commit/6ab4c7c0de4e89905a3cd0d9952c4b66a1ffbdb7)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^20.1.3 - ([a84a03f](https://github.com/kristof-mattei/docker-dns-rs/commit/a84a03f9a35e2c191a865ee28464fc2a9d124dea)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.5.0 - ([d405158](https://github.com/kristof-mattei/docker-dns-rs/commit/d405158c803fac336ef620662758db53a52be6f1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.15.0 - ([4f64076](https://github.com/kristof-mattei/docker-dns-rs/commit/4f64076e161b6ca76c9ee987a78072f4cfb073e9)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.4.0 - ([655f90e](https://github.com/kristof-mattei/docker-dns-rs/commit/655f90ebb9dcc79e758b778659586d09c01cf5fe)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.7 - ([850f9c2](https://github.com/kristof-mattei/docker-dns-rs/commit/850f9c2fbcfb9700a1fd78407a090fbac8a5c05c)) - renovate[bot]
-- **(deps)** update npm to >=9.6.2 - ([e10bc4e](https://github.com/kristof-mattei/docker-dns-rs/commit/e10bc4e142cf4ef3dfc00489774e0e85a2e01b9f)) - renovate[bot]
-- **(deps)** update alpine:3.17.2 docker digest to ff6bdca - ([1d0e2e0](https://github.com/kristof-mattei/docker-dns-rs/commit/1d0e2e0a7f8bb88222a342089e4358c42d9a44df)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f8fd955](https://github.com/kristof-mattei/docker-dns-rs/commit/f8fd95515ccd462d6a06d18ee348b49aa638e553)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.3.1 - ([d348fce](https://github.com/kristof-mattei/docker-dns-rs/commit/d348fce17886f44924aa3a2d9280b38d8ba4d4f8)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.6 - ([9dbf81c](https://github.com/kristof-mattei/docker-dns-rs/commit/9dbf81c8f0df8acfb50d31fb4b740bee211dae63)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.5.0 - ([f9d516f](https://github.com/kristof-mattei/docker-dns-rs/commit/f9d516fb5f1bb67c101830b10c0c8c2f17aab5a1)) - renovate[bot]
-- **(deps)** update rust to v1.68.0 - ([5505165](https://github.com/kristof-mattei/docker-dns-rs/commit/5505165113396e7f0e434dddd5578ede56ed9f9d)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:0-1-bullseye docker digest to d034d73 - ([56056f9](https://github.com/kristof-mattei/docker-dns-rs/commit/56056f92428007682dfc1e9aed12a6dc934fe070)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.3.0 - ([b26288a](https://github.com/kristof-mattei/docker-dns-rs/commit/b26288af1dd2bfd994dbb99cea0e9f29ecaa48f5)) - renovate[bot]
-- **(deps)** update npm to >=9.6.1 - ([f7d3e91](https://github.com/kristof-mattei/docker-dns-rs/commit/f7d3e9164c9cc3d6f8a2b48e64a541dc15373714)) - renovate[bot]
-- **(deps)** update node.js to >=v18.15.0 - ([eb4d82a](https://github.com/kristof-mattei/docker-dns-rs/commit/eb4d82a7b41d911d0cff84a39d2161623c7cd633)) - renovate[bot]
-- **(deps)** lock file maintenance - ([839490e](https://github.com/kristof-mattei/docker-dns-rs/commit/839490ee8ad5b34c05e61cc48eaaf235390fae17)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/devcontainers/rust:0-1-bullseye docker digest to 3bef9bc - ([17311d3](https://github.com/kristof-mattei/docker-dns-rs/commit/17311d386fdc7146765dd21693668b5d5fa1a61f)) - renovate[bot]
-- **(deps)** update npm to >=9.6.0 - ([fac3e69](https://github.com/kristof-mattei/docker-dns-rs/commit/fac3e69b0bf6ea1fc89d85c2af32f409dc9f035c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.14.0 - ([bea6de8](https://github.com/kristof-mattei/docker-dns-rs/commit/bea6de8f99129b32a2c981468716766dd7e7399c)) - renovate[bot]
-- **(deps)** update rust:1.67.1 docker digest to aed98ad - ([6aff469](https://github.com/kristof-mattei/docker-dns-rs/commit/6aff469d289062da2f551dccfa2c3465459a342e)) - renovate[bot]
-- **(deps)** update rust:1.67.1 docker digest to 7bbf692 - ([4826319](https://github.com/kristof-mattei/docker-dns-rs/commit/48263193c8bb95dcc1d5dd9df12a99d176d80fd5)) - renovate[bot]
-- **(deps)** update dependency semantic-release to ^20.1.1 - ([70c016c](https://github.com/kristof-mattei/docker-dns-rs/commit/70c016cd61dbd5dd0da2c86d16dc73548b07ebb7)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f87e49c](https://github.com/kristof-mattei/docker-dns-rs/commit/f87e49cd08bf2df8c536a9ee4d13ddbac7f2837f)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.4.2 - ([a2d0339](https://github.com/kristof-mattei/docker-dns-rs/commit/a2d03390c465f36c8effda5587835677227ab9fe)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.5 - ([c6282ec](https://github.com/kristof-mattei/docker-dns-rs/commit/c6282ecf5f32ab68458589c4c0dfd74d8791194e)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.13.0 - ([6a52797](https://github.com/kristof-mattei/docker-dns-rs/commit/6a52797d0d43797c17040b59893b3805d2997120)) - renovate[bot]
-- **(deps)** update npm to >=9.5.1 - ([d1645eb](https://github.com/kristof-mattei/docker-dns-rs/commit/d1645eb0156ea938673bb40db1b6b918f4fa9c3b)) - renovate[bot]
-- **(deps)** pin mcr.microsoft.com/devcontainers/rust docker tag to 7eb80e1 - ([92df66a](https://github.com/kristof-mattei/docker-dns-rs/commit/92df66a5cf37f63c07b08279e8c00b927a76ddf0)) - renovate[bot]
-- **(deps)** update node.js to >=v18.14.2 - ([9e815cf](https://github.com/kristof-mattei/docker-dns-rs/commit/9e815cf8bff3a3ad7765236231cca6e89120d3c8)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.6 - ([8373e71](https://github.com/kristof-mattei/docker-dns-rs/commit/8373e711defb9861c18a39eeb33b82a89e88b306)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a69ad2f](https://github.com/kristof-mattei/docker-dns-rs/commit/a69ad2f8d5dd16ac4b764fc871958f94f0f27128)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker tag to v1.12.1 - ([40d787c](https://github.com/kristof-mattei/docker-dns-rs/commit/40d787cc7060dc158b8b5a1fe13cf8ff200ddf3b)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep:1.2.1 docker digest to 4569a84 - ([7ca08fe](https://github.com/kristof-mattei/docker-dns-rs/commit/7ca08fe58a5ee5686bc3d8b5f1ac202546b7d72c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 23d35d2 - ([d0facf0](https://github.com/kristof-mattei/docker-dns-rs/commit/d0facf08a963f1a59b2a5d8f521282f1a19164e1)) - renovate[bot]
-- **(deps)** update node.js to >=v18.14.1 - ([63858ed](https://github.com/kristof-mattei/docker-dns-rs/commit/63858ed75531936191e530bc6c9c352d31de0419)) - renovate[bot]
-- **(deps)** update npm to >=9.5.0 - ([c37c580](https://github.com/kristof-mattei/docker-dns-rs/commit/c37c58003e02354bb8651851d2e78f0c680ee6e7)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 7eb80e1 - ([d81622a](https://github.com/kristof-mattei/docker-dns-rs/commit/d81622a890d13b8a39866b30ade3a1e8c22e36ac)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 7a9c18d - ([0102adb](https://github.com/kristof-mattei/docker-dns-rs/commit/0102adb27275bc52d83ea844cacaf1d050fd8c4a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([7732c96](https://github.com/kristof-mattei/docker-dns-rs/commit/7732c961b9a6e6a2019c415ff2325d701c0a7b61)) - renovate[bot]
-- **(deps)** pin actions-rs-plus/clippy-check action to 9035ac3 - ([d94072c](https://github.com/kristof-mattei/docker-dns-rs/commit/d94072c150e977dd3ce1d2f258dc1b8e1866f028)) - renovate[bot]
-- **(deps)** update alpine:3.17.2 docker digest to 69665d0 - ([1c06ae0](https://github.com/kristof-mattei/docker-dns-rs/commit/1c06ae048a4d08e51e15cba3f9d32010aa33bfec)) - renovate[bot]
-- **(deps)** update node.js to v18 - ([d56b28a](https://github.com/kristof-mattei/docker-dns-rs/commit/d56b28a26c24483c90d3cbd4eeb4acaf83bde6c7)) - renovate[bot]
-- **(deps)** update npm to v9 - ([83d5a25](https://github.com/kristof-mattei/docker-dns-rs/commit/83d5a25878e8e4040786e2620a06fc26b16a0639)) - renovate[bot]
-- **(deps)** update semantic-release monorepo - ([2f8b9b3](https://github.com/kristof-mattei/docker-dns-rs/commit/2f8b9b30e2522237e1a501027359a7c68b9faba5)) - renovate[bot]
-- **(deps)** update dependency prettier to ^2.8.4 - ([75c93f6](https://github.com/kristof-mattei/docker-dns-rs/commit/75c93f6544e21b25d21b79b93872aeac83598108)) - renovate[bot]
-- **(deps)** update dependency semver to ^7.3.8 - ([c8e5f1a](https://github.com/kristof-mattei/docker-dns-rs/commit/c8e5f1a38e4f24a6941a9003880ceb354fd30e03)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.4 - ([39b1b1f](https://github.com/kristof-mattei/docker-dns-rs/commit/39b1b1f09158d8315a669487a60056f4fd72b37c)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to a645506 - ([435c137](https://github.com/kristof-mattei/docker-dns-rs/commit/435c137c70c8854356092e4aa6d12d9e7ebc5e08)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.17.2 - ([2b02d93](https://github.com/kristof-mattei/docker-dns-rs/commit/2b02d93a3e1c5ac7d1f965a1f2372b156ffa91ca)) - renovate[bot]
-- **(deps)** update rust:1.67.1 docker digest to 02a53e7 - ([15b94b8](https://github.com/kristof-mattei/docker-dns-rs/commit/15b94b858670b248f8f6a942aa7850f3d0b57139)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 4837f9b - ([c6f4f30](https://github.com/kristof-mattei/docker-dns-rs/commit/c6f4f30fd2ce5d018ceb6fddab6b5087fe269ffb)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.4.1 - ([c27b8d0](https://github.com/kristof-mattei/docker-dns-rs/commit/c27b8d05335be4b247bdc259e661c25d3a3ba2f0)) - renovate[bot]
-- **(deps)** update rust to v1.67.1 - ([134d721](https://github.com/kristof-mattei/docker-dns-rs/commit/134d7216a5b07dcd40cb9e91ecbf2595c8c423e4)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.5 - ([f26c2e9](https://github.com/kristof-mattei/docker-dns-rs/commit/f26c2e94712be926e8069ad67b31cdf55647fc38)) - renovate[bot]
-- **(deps)** update rust:1.67.1 docker digest to 6f9c300 - ([f28719e](https://github.com/kristof-mattei/docker-dns-rs/commit/f28719edc2d7113760cd5a8fb6ebc72d60abddcd)) - renovate[bot]
-- **(deps)** update rust docker tag to v1.67.1 - ([d96a46c](https://github.com/kristof-mattei/docker-dns-rs/commit/d96a46ce7caf12ed80c09bc888d9401595208f6c)) - renovate[bot]
-- **(deps)** update rust:1.67.0 docker digest to f17725f - ([c83354a](https://github.com/kristof-mattei/docker-dns-rs/commit/c83354a5f4a7574c5058ddb03ab0c88617693ece)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to ffc6f35 - ([27a3b59](https://github.com/kristof-mattei/docker-dns-rs/commit/27a3b59b1ab7f61e1912e1a51f1c33c47aed9a68)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 24949b2 - ([464dc9c](https://github.com/kristof-mattei/docker-dns-rs/commit/464dc9cb7b68706384c004d75f08233b896b5ef5)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.3 - ([872552a](https://github.com/kristof-mattei/docker-dns-rs/commit/872552a38521830ac5439c085c017ce6a951f947)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 377c478 - ([43750e6](https://github.com/kristof-mattei/docker-dns-rs/commit/43750e6ac0680980b43be3ed47b6802fbd781a34)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 2b1cc67 - ([be15cbb](https://github.com/kristof-mattei/docker-dns-rs/commit/be15cbbc909af48bc3acdc519fe6153298ba26ab)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 11c2600 - ([cdb4bee](https://github.com/kristof-mattei/docker-dns-rs/commit/cdb4bee1dabc0338e24c90f715e56ce555df9ba9)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.2 - ([77b9d6d](https://github.com/kristof-mattei/docker-dns-rs/commit/77b9d6de4ff7456048890979f9731f5a61d93730)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.4.1 - ([e619a6d](https://github.com/kristof-mattei/docker-dns-rs/commit/e619a6d6fcafc05ee26acbf9379980be0d977040)) - renovate[bot]
-- **(deps)** update rust:1.67.0 docker digest to a906d23 - ([8697178](https://github.com/kristof-mattei/docker-dns-rs/commit/86971784e81ca432dded0886c37b30822e448989)) - renovate[bot]
-- **(deps)** update rust:1.67.0 docker digest to 9b9706c - ([85ab4af](https://github.com/kristof-mattei/docker-dns-rs/commit/85ab4af518a9505ce44c8cd39224efce18c57c72)) - renovate[bot]
-- **(deps)** update rust:1.67.0 docker digest to b23ec48 - ([cbfb260](https://github.com/kristof-mattei/docker-dns-rs/commit/cbfb2604e5c1556f6be56d8b734de609b3c2b525)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to d7c4a86 - ([312549a](https://github.com/kristof-mattei/docker-dns-rs/commit/312549a8f5cbf076756d9efc576711e92468a80e)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 93d798a - ([77adf9b](https://github.com/kristof-mattei/docker-dns-rs/commit/77adf9b36e62887bd2e19896b18afb74bf842c77)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to b09a9c3 - ([ad5c558](https://github.com/kristof-mattei/docker-dns-rs/commit/ad5c5583814b6d1e2fcc7bdf67b76c7c80a64e76)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v4 - ([e77e910](https://github.com/kristof-mattei/docker-dns-rs/commit/e77e9104d6d914c6d19035b13f53aede601031a6)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 9413f4a - ([b81404a](https://github.com/kristof-mattei/docker-dns-rs/commit/b81404a46d1aa4131803fb0eb4ca3ed6b46661f3)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v3.3.1 - ([ac752be](https://github.com/kristof-mattei/docker-dns-rs/commit/ac752bef10000b83bd0e653b6e69f9de10503321)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.4.0 - ([3c12030](https://github.com/kristof-mattei/docker-dns-rs/commit/3c12030437c0da214c3297aee474b2b1a20a7d93)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.4 - ([409de9b](https://github.com/kristof-mattei/docker-dns-rs/commit/409de9b203e72d5a8f7932a2078920f38ffc5615)) - renovate[bot]
-- **(deps)** lock file maintenance - ([62f9017](https://github.com/kristof-mattei/docker-dns-rs/commit/62f9017068fd44143a01daaaa73aa70fab852afb)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.3.0 - ([d8738a2](https://github.com/kristof-mattei/docker-dns-rs/commit/d8738a2a9d76dd449163788839e32e0e03798a97)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 4a3ac0d - ([dbbfd0a](https://github.com/kristof-mattei/docker-dns-rs/commit/dbbfd0adf6ec98de99003e50f7e78052b007388f)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.1 - ([0a1a10b](https://github.com/kristof-mattei/docker-dns-rs/commit/0a1a10b27630d508637ce3e33219962546588f5e)) - renovate[bot]
-- **(deps)** update rust to v1.67.0 - ([3d54307](https://github.com/kristof-mattei/docker-dns-rs/commit/3d54307362a2f4ad41bbe405c0587a8f275c792b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.2.0 - ([821a4e5](https://github.com/kristof-mattei/docker-dns-rs/commit/821a4e5444a9630cbe95fb44e39905032b84e142)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.4.0 - ([1cfd6be](https://github.com/kristof-mattei/docker-dns-rs/commit/1cfd6be2e71e15e1999a34999f41e453a8a721a5)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 4f0f406 - ([99d34b2](https://github.com/kristof-mattei/docker-dns-rs/commit/99d34b24a50422646bb18b5429e1e050e5381e86)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 81dead6 - ([61e9d69](https://github.com/kristof-mattei/docker-dns-rs/commit/61e9d69119bfa85e6954e3cefafa4d4bbb04a5e2)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to bc105ec - ([087582c](https://github.com/kristof-mattei/docker-dns-rs/commit/087582c424d26d4e6e9288af50ed7384c65432b2)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 9edbda7 - ([415ab93](https://github.com/kristof-mattei/docker-dns-rs/commit/415ab93879a9ae061d9982ccf654202a0d4fa71a)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to c4cb3d7 - ([1fb31c8](https://github.com/kristof-mattei/docker-dns-rs/commit/1fb31c8804a0e8bef1f26073d18778e209dfd10d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to e497fcd - ([52cef48](https://github.com/kristof-mattei/docker-dns-rs/commit/52cef4882d26b11c0ce9a3ea002db2022c6ca470)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to c842b28 - ([e36d8b1](https://github.com/kristof-mattei/docker-dns-rs/commit/e36d8b1efbcb58c32dde3602bed8369e4bd95334)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.39 - ([4826e29](https://github.com/kristof-mattei/docker-dns-rs/commit/4826e290ac02762f2e313fa4105d5f294ed8fb10)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 5eb300c - ([8ca4390](https://github.com/kristof-mattei/docker-dns-rs/commit/8ca4390d89c426a0e42b8f7c3ca1171cfb52cea7)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 08a3308 - ([1a3dcd6](https://github.com/kristof-mattei/docker-dns-rs/commit/1a3dcd6afcf0947e3b4673c5e7d9619966eb0288)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 8440e99 - ([d4ada6d](https://github.com/kristof-mattei/docker-dns-rs/commit/d4ada6d8529fd1d09f739f0ef28fd070fcbbfd26)) - renovate[bot]
-- **(deps)** lock file maintenance - ([ecf9383](https://github.com/kristof-mattei/docker-dns-rs/commit/ecf93834df4cdd31950c8ae1d08843e68a3e3d5d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 855cbe1 - ([21c3262](https://github.com/kristof-mattei/docker-dns-rs/commit/21c3262a0f442b0060c89bd89b0ee4b562bddbd3)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v3.3.0 - ([973a1a3](https://github.com/kristof-mattei/docker-dns-rs/commit/973a1a353190d682773d88a15882c78342744700)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 02fcef9 - ([e4696a8](https://github.com/kristof-mattei/docker-dns-rs/commit/e4696a8249e60af0a8aa9ebcf92283c1a4ec8e8a)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.3.0 - ([430644f](https://github.com/kristof-mattei/docker-dns-rs/commit/430644f90e083a1afe01890435f52f34ef91e971)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.38 - ([a1585da](https://github.com/kristof-mattei/docker-dns-rs/commit/a1585da281345a26b9864e82f7afe24843abe81c)) - renovate[bot]
-- **(deps)** update rust:1.66.1 docker digest to 23b7815 - ([0b34b6c](https://github.com/kristof-mattei/docker-dns-rs/commit/0b34b6c42249f9bf589e5bb531f14040710de530)) - renovate[bot]
-- **(deps)** update rust:1.66.1 docker digest to b9adf48 - ([9784a1f](https://github.com/kristof-mattei/docker-dns-rs/commit/9784a1f693247d9279bfb046951ea1edde48379a)) - renovate[bot]
-- **(deps)** update rust to v1.66.1 - ([5b4d21c](https://github.com/kristof-mattei/docker-dns-rs/commit/5b4d21c52d06f892ae5db09b0b7186ef1bd86790)) - renovate[bot]
-- **(deps)** update rust:1.66.0 docker digest to 7d80aa9 - ([b6fa2d1](https://github.com/kristof-mattei/docker-dns-rs/commit/b6fa2d1f468b2a93e477de2767f9dc5170ee63a9)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to fd916e6 - ([a52e318](https://github.com/kristof-mattei/docker-dns-rs/commit/a52e31866d45539a137d2642e2f29b6934f105f4)) - renovate[bot]
-- **(deps)** update rust:1.66.0 docker digest to 5a051df - ([747f562](https://github.com/kristof-mattei/docker-dns-rs/commit/747f562b950f18138246d59b07f7d8236e54751f)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.2.0 - ([b24eaa4](https://github.com/kristof-mattei/docker-dns-rs/commit/b24eaa439e9812584d882af1bc8602f9c5292c5c)) - renovate[bot]
-- **(deps)** update rust:1.66.0 docker digest to 1e82d23 - ([4d0fa6a](https://github.com/kristof-mattei/docker-dns-rs/commit/4d0fa6af10a748c57ed1a94853960fcc5ff79296)) - renovate[bot]
-- **(deps)** update dependency semantic-release to v20 - ([9a53414](https://github.com/kristof-mattei/docker-dns-rs/commit/9a534147104ffa4ae3d27989f0f9a503f3ccc6e1)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to cbcfbff - ([82f89c9](https://github.com/kristof-mattei/docker-dns-rs/commit/82f89c98a18293539a51a59281cd832c394c8bf4)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 6000cd3 - ([28b3331](https://github.com/kristof-mattei/docker-dns-rs/commit/28b33310e9df2a1a40a448e2b8fb49d9ebdd3184)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.17.1 - ([d9cfd4a](https://github.com/kristof-mattei/docker-dns-rs/commit/d9cfd4a0d76c8cddb66044ddb5de475a33bb1721)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.3 - ([d3428dc](https://github.com/kristof-mattei/docker-dns-rs/commit/d3428dca0247687da99b7ebe754973b96875a401)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f7a3db5](https://github.com/kristof-mattei/docker-dns-rs/commit/f7a3db5238942ae6b11001df5149bf9739ad09db)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.3.0 - ([c6a99b3](https://github.com/kristof-mattei/docker-dns-rs/commit/c6a99b3d0937de4d980dea2b00f3856756213d51)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v3.1.2 - ([f20d411](https://github.com/kristof-mattei/docker-dns-rs/commit/f20d4112175b5922242d65beb52d14c7c6a2d0ca)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.6.0 - ([286ae0c](https://github.com/kristof-mattei/docker-dns-rs/commit/286ae0c9aa78cbc317b559f542dc3187786836ed)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v3.0.2 - ([b200f06](https://github.com/kristof-mattei/docker-dns-rs/commit/b200f06185d70a78ab284185a8d08640c3223e32)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to d508503 - ([664af99](https://github.com/kristof-mattei/docker-dns-rs/commit/664af99d4d69e1f1b62fc4a353764bd5945e7dd3)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.3.0 - ([fbeef7b](https://github.com/kristof-mattei/docker-dns-rs/commit/fbeef7b646da83de49ade3432f26a91077b44e41)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to c71f3f2 - ([b61ef97](https://github.com/kristof-mattei/docker-dns-rs/commit/b61ef97eb2dbf29816e45f5e01af08e93d221d05)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 6f0b6d8 - ([71a17e7](https://github.com/kristof-mattei/docker-dns-rs/commit/71a17e7ed3881f2b2b3ceabd5b0c203a69894e10)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to b21d496 - ([3422ac3](https://github.com/kristof-mattei/docker-dns-rs/commit/3422ac3219e3dafe7569b1e547508705c4f39590)) - renovate[bot]
-- **(deps)** lock file maintenance - ([c47a8ea](https://github.com/kristof-mattei/docker-dns-rs/commit/c47a8ea66e2d98e039aa14ab5628eb34324f8b8d)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to d315872 - ([11db4b5](https://github.com/kristof-mattei/docker-dns-rs/commit/11db4b57d67bb78cf289d4446441817e79ec7515)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.2 - ([9fb9b1b](https://github.com/kristof-mattei/docker-dns-rs/commit/9fb9b1b06dd35e857e86e69444e7986fb637bd27)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to b1697fd - ([1c25cf3](https://github.com/kristof-mattei/docker-dns-rs/commit/1c25cf3b58a7f6e60d0040642c3e151c84af9684)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6a33da6](https://github.com/kristof-mattei/docker-dns-rs/commit/6a33da632361cb497d478bfbea9b67ca124a3b59)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.1 - ([4c14732](https://github.com/kristof-mattei/docker-dns-rs/commit/4c14732ac5fbc56d89c25528c26f84451b89a8ae)) - renovate[bot]
-- **(deps)** update rust:1.66.0 docker digest to 0067330 - ([6f6a3ec](https://github.com/kristof-mattei/docker-dns-rs/commit/6f6a3ecd04c9ba435bc5d348fb472d58cd0e1b71)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.2.0 - ([2da6d64](https://github.com/kristof-mattei/docker-dns-rs/commit/2da6d648e387ba6e7bd22e402875eda94e42970a)) - renovate[bot]
-- **(deps)** update rust:1.66.0 docker digest to 3d66c18 - ([a01ab00](https://github.com/kristof-mattei/docker-dns-rs/commit/a01ab00cb2ba9c190bc5ea297ef72c5c5087d28a)) - renovate[bot]
-- **(deps)** update rust:1.66.0 docker digest to 4da0fa2 - ([c478b39](https://github.com/kristof-mattei/docker-dns-rs/commit/c478b399ba577e1405f815f353a35daad828d615)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to f3ff555 - ([66e3d36](https://github.com/kristof-mattei/docker-dns-rs/commit/66e3d362569174abc9162316c380601b252a6216)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 629582b - ([2d7752a](https://github.com/kristof-mattei/docker-dns-rs/commit/2d7752a2191f4067c8696ad7c8f0b8455cb097c1)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 95d642e - ([3e9b4fa](https://github.com/kristof-mattei/docker-dns-rs/commit/3e9b4faa4f528354a897a427038585b84dfc2599)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 4569a84 - ([6a8a1b2](https://github.com/kristof-mattei/docker-dns-rs/commit/6a8a1b23ea1b2503f3285cdffa1d407bcff98707)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 527fa76 - ([1ab034a](https://github.com/kristof-mattei/docker-dns-rs/commit/1ab034a72274b8d3a1b80aa1944fa8e4402e65d1)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 6d94265 - ([41902f0](https://github.com/kristof-mattei/docker-dns-rs/commit/41902f0e44705a5ae0054ed8e8ddd76b72f1ad9c)) - renovate[bot]
-- **(deps)** update rust to v1.66.0 - ([2a5774c](https://github.com/kristof-mattei/docker-dns-rs/commit/2a5774cedcdaf574cbd2099ca4b261b6dd58c67b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.37 - ([017f428](https://github.com/kristof-mattei/docker-dns-rs/commit/017f4285b757e8d329b07d0630c3cbcdfa769ec6)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 4269001 - ([121f34d](https://github.com/kristof-mattei/docker-dns-rs/commit/121f34d47d12c0831d74526cb53dac1eaf147e29)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 5ffba2a - ([eacd024](https://github.com/kristof-mattei/docker-dns-rs/commit/eacd0240c1e06ecbf0bb1c51df52129257b0d638)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.2.0 - ([2cc9dbf](https://github.com/kristof-mattei/docker-dns-rs/commit/2cc9dbfd07af567449efb08cc049a8b49cd099e2)) - renovate[bot]
-- **(deps)** lock file maintenance - ([f571b7f](https://github.com/kristof-mattei/docker-dns-rs/commit/f571b7fcf1eff05c0ec211b77fdef43bab9e3c5b)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 3e12469 - ([3ed41d6](https://github.com/kristof-mattei/docker-dns-rs/commit/3ed41d6bda85fe132d3cd0f4e15197a0c48bd1bf)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.36 - ([90eaab5](https://github.com/kristof-mattei/docker-dns-rs/commit/90eaab5e63df1c6a6c118b63d2d15e8b2060cb8d)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 8952f9a - ([b0bf458](https://github.com/kristof-mattei/docker-dns-rs/commit/b0bf458d155923b9530dc825b2a72ce43b7baa39)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 6507bd9 - ([b15a7f4](https://github.com/kristof-mattei/docker-dns-rs/commit/b15a7f4f2c3378a2dfd9783c0400766fa2f05d41)) - renovate[bot]
-- **(deps)** update rust:1.65.0 docker digest to 891bc3b - ([e7f576e](https://github.com/kristof-mattei/docker-dns-rs/commit/e7f576e4ec08f17a97124c80116038b54b45522a)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to a6e19d2 - ([6f40545](https://github.com/kristof-mattei/docker-dns-rs/commit/6f405453a3cb864ad65ce3137604f2f71d886a7c)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 01d1b57 - ([3ee0ff5](https://github.com/kristof-mattei/docker-dns-rs/commit/3ee0ff5ffa30364efd186a26808a263de556d52e)) - renovate[bot]
-- **(deps)** lock file maintenance - ([e09eed8](https://github.com/kristof-mattei/docker-dns-rs/commit/e09eed8d1d64e5705e0b95678d48c7ab2db15807)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 00f7bee - ([e528956](https://github.com/kristof-mattei/docker-dns-rs/commit/e5289565c33a06cfbff76fdb8247fb96893bf70e)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 54f7bec - ([f658db1](https://github.com/kristof-mattei/docker-dns-rs/commit/f658db10e2b0c6eafc7bb0c56b1be2ade333720c)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.35 - ([8838731](https://github.com/kristof-mattei/docker-dns-rs/commit/8838731ea69939b386476420c5c11646f850be40)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 830340a - ([b039f9d](https://github.com/kristof-mattei/docker-dns-rs/commit/b039f9d1c7210831c3e1d6263025c1b4dcbb77dd)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 3c95062 - ([863159c](https://github.com/kristof-mattei/docker-dns-rs/commit/863159c0714fd7da93ee1f73b5798907571cda41)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 2bee29b - ([868cbcf](https://github.com/kristof-mattei/docker-dns-rs/commit/868cbcfb466ed21dea353f3b595d3fac4fa92eea)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 7b7f82d - ([0f8f0e4](https://github.com/kristof-mattei/docker-dns-rs/commit/0f8f0e4e9919631f7fe4d02d95e13265266de082)) - renovate[bot]
-- **(deps)** update actions-rs-plus/clippy-check digest to 6d7abc0 - ([c441e9b](https://github.com/kristof-mattei/docker-dns-rs/commit/c441e9be394a3510f97a0c2875c6c8f0722ced2f)) - renovate[bot]
-- **(deps)** lock file maintenance - ([704a12c](https://github.com/kristof-mattei/docker-dns-rs/commit/704a12cdf8ba04646ddd450d1dd732db563d7d63)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.34 - ([04920d3](https://github.com/kristof-mattei/docker-dns-rs/commit/04920d36ec75a2020cf0de7befe8970d5ec6ef88)) - renovate[bot]
-- **(deps)** update alpine:3.17.0 docker digest to 8914eb5 - ([ec10d30](https://github.com/kristof-mattei/docker-dns-rs/commit/ec10d3071cb5d803d2f9daef65056cc815a8c1cc)) - renovate[bot]
-- **(deps)** update alpine:3.17.0 docker digest to 6ddfa2a - ([c6f65c3](https://github.com/kristof-mattei/docker-dns-rs/commit/c6f65c3b7f7fd9e3f869b2fab480da98546b2d34)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.17.0 - ([ba3fec1](https://github.com/kristof-mattei/docker-dns-rs/commit/ba3fec15c5bb20dd55842961b8a3d275adb782ec)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a32c44c](https://github.com/kristof-mattei/docker-dns-rs/commit/a32c44c941634028ad3de6ae3b1d27f7b2d8b82f)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to b01b350 - ([1237648](https://github.com/kristof-mattei/docker-dns-rs/commit/12376482ca8726d52bf51af37dc48b835e1f0990)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 090bb7f - ([9546311](https://github.com/kristof-mattei/docker-dns-rs/commit/954631106684a4667eef4e10c64c576bf26fb6bd)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.33 - ([bf24b0d](https://github.com/kristof-mattei/docker-dns-rs/commit/bf24b0dfaa308c0d7b0d258caefcee3608a6f528)) - renovate[bot]
-- **(deps)** update rust:1.65.0 docker digest to 6d44ed8 - ([a6389a7](https://github.com/kristof-mattei/docker-dns-rs/commit/a6389a7c4ec6d3cb662ffcdb8436ef8bbd052534)) - renovate[bot]
-- **(deps)** update rust:1.65.0 docker digest to 42ce0b7 - ([d014450](https://github.com/kristof-mattei/docker-dns-rs/commit/d0144506f54b5347ac834df8226c7aba84e864dc)) - renovate[bot]
-- **(deps)** update rust:1.65.0 docker digest to 9d3caff - ([8dc2a76](https://github.com/kristof-mattei/docker-dns-rs/commit/8dc2a76a1b713bd8f153728ab2e36a72612524f5)) - renovate[bot]
-- **(deps)** update rust:1.65.0 docker digest to a4a3aa7 - ([7ba00a2](https://github.com/kristof-mattei/docker-dns-rs/commit/7ba00a2a07b656cefa472e06315540ebad87bfbc)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.32 - ([15efb9e](https://github.com/kristof-mattei/docker-dns-rs/commit/15efb9ec159ee703ac493e4d7923f15aa7cebcfa)) - renovate[bot]
-- **(deps)** lock file maintenance - ([b5c25ec](https://github.com/kristof-mattei/docker-dns-rs/commit/b5c25ecf6163bf245900efb24445fb30edeb9515)) - renovate[bot]
-- **(deps)** update alpine docker tag to v3.16.3 - ([3ab9465](https://github.com/kristof-mattei/docker-dns-rs/commit/3ab946513a4d845567a83e11069e9bc21c24f4f2)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to b774330 - ([cd380c3](https://github.com/kristof-mattei/docker-dns-rs/commit/cd380c3459352720f53a40f374c7374f723478fc)) - renovate[bot]
-- **(deps)** update alpine:3.16.2 docker digest to 65a2763 - ([704206d](https://github.com/kristof-mattei/docker-dns-rs/commit/704206d6e4567f9e02cf96e821273e45bc1f273a)) - renovate[bot]
-- **(deps)** update alpine:3.16.2 docker digest to d6be110 - ([88f180f](https://github.com/kristof-mattei/docker-dns-rs/commit/88f180f10575d2c356bf40584a6535102d5e189f)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 4010a43 - ([19327fc](https://github.com/kristof-mattei/docker-dns-rs/commit/19327fc0289a10babb1e103afe20098c56784187)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 37736e4 - ([cc3c329](https://github.com/kristof-mattei/docker-dns-rs/commit/cc3c3294835630fc80d1f97dc66306a47949eee5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([c1b3421](https://github.com/kristof-mattei/docker-dns-rs/commit/c1b342175deaec40c98a389b1de23bc348e83c4e)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.31 - ([2f9c7c5](https://github.com/kristof-mattei/docker-dns-rs/commit/2f9c7c5dd247dce6de83532ed40a5a194d124c4d)) - renovate[bot]
-- **(deps)** update rust:1.65.0 docker digest to b0f2a9e - ([d6f20ee](https://github.com/kristof-mattei/docker-dns-rs/commit/d6f20ee45a907daeaaa999beb94b2bcd6ede33ca)) - renovate[bot]
-- **(deps)** update rust to v1.65.0 - ([240886c](https://github.com/kristof-mattei/docker-dns-rs/commit/240886cd601215c14ec358bcb179fdf151ab7b02)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 5f64ba0 - ([8310595](https://github.com/kristof-mattei/docker-dns-rs/commit/831059581401073c9afda2a6cf9f7dc632b7eb82)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.30 - ([2303f9c](https://github.com/kristof-mattei/docker-dns-rs/commit/2303f9c28c9ef5d6b809ac77e9d88793e9f60220)) - renovate[bot]
-- **(deps)** lock file maintenance - ([8a896aa](https://github.com/kristof-mattei/docker-dns-rs/commit/8a896aaaf5c99a526bfad8d82c3b96211f966503)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to b12d215 - ([75dcf42](https://github.com/kristof-mattei/docker-dns-rs/commit/75dcf42b484c7ca002c9c228c2b82f16dc8f0ba4)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 57e7406 - ([d48cb71](https://github.com/kristof-mattei/docker-dns-rs/commit/d48cb710eacc98bba151d4a4cadd8bd42b18d453)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to 53ded1c - ([956f2e0](https://github.com/kristof-mattei/docker-dns-rs/commit/956f2e07d3b7c6cce3210dcc4282b9f5fcd6553d)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 7a5d7f2 - ([e48fbc2](https://github.com/kristof-mattei/docker-dns-rs/commit/e48fbc2d7447a8450b32366c31b579923cc438fe)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.29 - ([a97779f](https://github.com/kristof-mattei/docker-dns-rs/commit/a97779f9f3d074167fab546b855da41f404ea631)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to dec677e - ([0667342](https://github.com/kristof-mattei/docker-dns-rs/commit/066734299ee4dbbab04119e623baed59cc1bd2eb)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to 1d14a35 - ([cf77966](https://github.com/kristof-mattei/docker-dns-rs/commit/cf779668be826c475b2857bf8be41c437d831a8b)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to 4b8c993 - ([f48b90c](https://github.com/kristof-mattei/docker-dns-rs/commit/f48b90c1b0faaaa0c0586d115b419f69f6a75ef4)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to 5fadb1f - ([f06ffdd](https://github.com/kristof-mattei/docker-dns-rs/commit/f06ffdd8feb846aec3f35bf9f4d25fe7fd1658dd)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.2.0 - ([4e79d7b](https://github.com/kristof-mattei/docker-dns-rs/commit/4e79d7b57181abcd87f12efaa7a507540ed3582b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([409ba46](https://github.com/kristof-mattei/docker-dns-rs/commit/409ba46e4fa9197c972cd3f447d3b3a26e832e1e)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v3.1.1 - ([2d52d03](https://github.com/kristof-mattei/docker-dns-rs/commit/2d52d03473609d4e3842113a3c5e519a62782206)) - renovate[bot]
-- **(deps)** update actions/download-artifact action to v3.0.1 - ([7b23fea](https://github.com/kristof-mattei/docker-dns-rs/commit/7b23fea7a75171b7b9c11771d6f755d7fc326712)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to b32eb3d - ([ed4717d](https://github.com/kristof-mattei/docker-dns-rs/commit/ed4717d677e9ee023769a96125392a09a7e8c8bf)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to ba7c417 - ([483cfd4](https://github.com/kristof-mattei/docker-dns-rs/commit/483cfd4395deb87dc42b075ff4fe8f1f75e1b20b)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.28 - ([bf9fd03](https://github.com/kristof-mattei/docker-dns-rs/commit/bf9fd0322172e195db874089d67e176dfcb4047e)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.2.1 - ([205b6c5](https://github.com/kristof-mattei/docker-dns-rs/commit/205b6c5e60b3755115e5bc5948486e73cd6f4d7a)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.1.1 - ([81ffcdb](https://github.com/kristof-mattei/docker-dns-rs/commit/81ffcdba64d09eb67f379090374bb65fab44d324)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.2.0 - ([c29a529](https://github.com/kristof-mattei/docker-dns-rs/commit/c29a5297e4bf30ca6ba058509d19dfbbe522d618)) - renovate[bot]
-- **(deps)** lock file maintenance - ([aecfb0b](https://github.com/kristof-mattei/docker-dns-rs/commit/aecfb0b3525b1320d9e0445feeb6ec48ff489a95)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action action to v2.1.0 - ([37999a5](https://github.com/kristof-mattei/docker-dns-rs/commit/37999a51a8e28d567d2c17e627b5e818d7c96159)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to 713caf1 - ([856456a](https://github.com/kristof-mattei/docker-dns-rs/commit/856456a2e9d29843c34c043bca2c5cd91b662e8b)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.3.3 - ([c7dc23d](https://github.com/kristof-mattei/docker-dns-rs/commit/c7dc23d56e2d595e1818ec14d29157915fd6abc8)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.0.11 - ([41413fe](https://github.com/kristof-mattei/docker-dns-rs/commit/41413fe3cb2debfbe769707da10a58e3d8cdc44b)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.5.1 - ([4a3c3fb](https://github.com/kristof-mattei/docker-dns-rs/commit/4a3c3fbb0530429252d7ff01ff9dde813169e362)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 5b7334f - ([d12053f](https://github.com/kristof-mattei/docker-dns-rs/commit/d12053f65aa87b3e608b4cbb4ff31ef5584c5caa)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v2.11.1 - ([f82905e](https://github.com/kristof-mattei/docker-dns-rs/commit/f82905efb322731f334463f8dd67fe47951903b9)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action action to v2.1.0 - ([69ce19a](https://github.com/kristof-mattei/docker-dns-rs/commit/69ce19a475ebcfef436c009d347597547e91892e)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v3.2.0 - ([dfde04a](https://github.com/kristof-mattei/docker-dns-rs/commit/dfde04a60e3011c81c3b8ff519cc6b572d2bc6b1)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.1.0 - ([93c925b](https://github.com/kristof-mattei/docker-dns-rs/commit/93c925b438d9e109b922201c9da4180dbc83195b)) - renovate[bot]
-- **(deps)** update docker/login-action action to v2.1.0 - ([5c0561a](https://github.com/kristof-mattei/docker-dns-rs/commit/5c0561acb3bf54d948bd17392a0fa984249eeb8d)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to 6e97601 - ([83d842b](https://github.com/kristof-mattei/docker-dns-rs/commit/83d842be369f3b98ba5256acde388a73ddb92dee)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v2.11.0 - ([fb42c39](https://github.com/kristof-mattei/docker-dns-rs/commit/fb42c3905729e15257fa98e7a254c3d9d4c8268f)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.3.2 - ([8b5f719](https://github.com/kristof-mattei/docker-dns-rs/commit/8b5f71951b7ba404e12dc1639e31e947b03b1db2)) - renovate[bot]
-- **(deps)** lock file maintenance - ([77e9135](https://github.com/kristof-mattei/docker-dns-rs/commit/77e913547f97d3417007559ff4f7dc0443057b65)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.27 - ([94f3637](https://github.com/kristof-mattei/docker-dns-rs/commit/94f3637a25f026cecb5cb6709542ec240919029f)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to b1412b7 - ([f14ede3](https://github.com/kristof-mattei/docker-dns-rs/commit/f14ede303eaffcfd099efc44d3a388b4bcaf12d9)) - renovate[bot]
-- **(deps)** update returntocorp/semgrep docker digest to fb36c02 - ([a7e907c](https://github.com/kristof-mattei/docker-dns-rs/commit/a7e907c48951fccfd8b2f29df38e8ea929582459)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to 922d814 - ([7584a4c](https://github.com/kristof-mattei/docker-dns-rs/commit/7584a4c2daaab3feccf3ad6f5d9a89d069c41ae7)) - renovate[bot]
-- **(deps)** update rust:1.64.0 docker digest to 5ec3393 - ([17b27d6](https://github.com/kristof-mattei/docker-dns-rs/commit/17b27d67cf101a16320927f2f615816d37ecb55d)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.1.0 - ([e6ec026](https://github.com/kristof-mattei/docker-dns-rs/commit/e6ec02695b868edd805eeb2bf0c681ae994ebd83)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.0.10 - ([1b05518](https://github.com/kristof-mattei/docker-dns-rs/commit/1b055181dfa9bb0ef82ba3aa522baf094ee68144)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.3.1 - ([cb99e30](https://github.com/kristof-mattei/docker-dns-rs/commit/cb99e30095cb088147ee12825fba6f663106bf76)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.0.9 - ([e49b02c](https://github.com/kristof-mattei/docker-dns-rs/commit/e49b02c57a128f7262dabb4d6491bb8f11a097ac)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.26 - ([9c1f29f](https://github.com/kristof-mattei/docker-dns-rs/commit/9c1f29fdea8511571e95f1fb5cf80b6619efb5da)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to c2ce4f7 - ([6c5d489](https://github.com/kristof-mattei/docker-dns-rs/commit/6c5d489c3adeaf4407aa20483a8b871032458a53)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.5.0 - ([a6c8563](https://github.com/kristof-mattei/docker-dns-rs/commit/a6c8563b90488535045d8b890e4c0b963a2512d0)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.3.0 - ([8956d44](https://github.com/kristof-mattei/docker-dns-rs/commit/8956d4451687de60408cd27cbc4e1e608025adeb)) - renovate[bot]
-- **(deps)** lock file maintenance - ([fc76471](https://github.com/kristof-mattei/docker-dns-rs/commit/fc76471e0b6d7fa461570e2d03c13e3d350e579e)) - renovate[bot]
-- **(deps)** update rust to v1.64.0 - ([516becc](https://github.com/kristof-mattei/docker-dns-rs/commit/516becc1c53cdfbc8c55bd9f49a4022b2485c509)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.25 - ([b96db43](https://github.com/kristof-mattei/docker-dns-rs/commit/b96db437c93b23054b5d01d67e7499cf7b569eed)) - renovate[bot]
-- **(deps)** lock file maintenance - ([eca1dab](https://github.com/kristof-mattei/docker-dns-rs/commit/eca1dab1b867b122ba337091ca799fc6445319ac)) - renovate[bot]
-- **(deps)** update codecov/codecov-action action to v3.1.1 - ([1da0e9d](https://github.com/kristof-mattei/docker-dns-rs/commit/1da0e9d45a0dcf556742f237d6f60c47fd31ae9b)) - renovate[bot]
-- **(deps)** lock file maintenance - ([6e2185c](https://github.com/kristof-mattei/docker-dns-rs/commit/6e2185cf35277427190794fed337311f381abfbb)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.24 - ([a5171d8](https://github.com/kristof-mattei/docker-dns-rs/commit/a5171d8438621d3b9981a07bb89c937c22fd2c18)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.23 - ([2fc005a](https://github.com/kristof-mattei/docker-dns-rs/commit/2fc005a939109c675fb0573b7cd93c19db10c3ac)) - renovate[bot]
-- **(deps)** update rust:1.63.0 docker digest to 54f17dc - ([c0ae44b](https://github.com/kristof-mattei/docker-dns-rs/commit/c0ae44b827cf46aa0209d82c4ffd9575b8a88a08)) - renovate[bot]
-- **(deps)** update rust:1.63.0 docker digest to c5f0f8e - ([2fe206d](https://github.com/kristof-mattei/docker-dns-rs/commit/2fe206d2b44e31121a8fa64ff503df5a381c1d72)) - renovate[bot]
-- **(deps)** update rust:1.63.0 docker digest to 61d7058 - ([20b7d4b](https://github.com/kristof-mattei/docker-dns-rs/commit/20b7d4b0309fc303884488b8124a1a69d7cf51d5)) - renovate[bot]
-- **(deps)** lock file maintenance - ([966cff0](https://github.com/kristof-mattei/docker-dns-rs/commit/966cff0fda24aa1d7fc39ec449aa01f635767d47)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to 2b9faec - ([e291ad8](https://github.com/kristof-mattei/docker-dns-rs/commit/e291ad80141c4dda01fa6a72e1f4bf1ae29fb2c4)) - renovate[bot]
-- **(deps)** lock file maintenance - ([10b6f01](https://github.com/kristof-mattei/docker-dns-rs/commit/10b6f01e531cbb13461ea75d22c35f72cbdacbee)) - renovate[bot]
-- **(deps)** update mcr.microsoft.com/vscode/devcontainers/rust:1-bullseye docker digest to c0e74ef - ([c44559f](https://github.com/kristof-mattei/docker-dns-rs/commit/c44559f2c1b3647a43d868f190f7f5484bc95b8d)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.22 - ([a6c95ec](https://github.com/kristof-mattei/docker-dns-rs/commit/a6c95ec027e667e5c242bf92e18aa4ef144e756a)) - renovate[bot]
-- **(deps)** lock file maintenance - ([28ca026](https://github.com/kristof-mattei/docker-dns-rs/commit/28ca0264c460fe81ea4fe2cd9495611614279bcd)) - renovate[bot]
-- **(deps)** pin dependencies - ([3cc99bd](https://github.com/kristof-mattei/docker-dns-rs/commit/3cc99bda5ab3d82f4399ee466384c60a4c2d603d)) - renovate[bot]
-- **(deps)** update actions/setup-node action to v3.4.1 - ([999a9ec](https://github.com/kristof-mattei/docker-dns-rs/commit/999a9ecb3c20e63abc622cf21be288eeb69f0b8a)) - renovate[bot]
-- **(deps)** update github/codeql-action action to v2.1.21 - ([df09ea7](https://github.com/kristof-mattei/docker-dns-rs/commit/df09ea76d4155746b2024f191c89b6be9e3290f9)) - renovate[bot]
-- **(deps)** update dorny/paths-filter action to v2.10.2 - ([35d85ec](https://github.com/kristof-mattei/docker-dns-rs/commit/35d85ec2ab30e5a892305e57a04261918293b009)) - renovate[bot]
-- **(deps)** update docker/build-push-action action to v3.1.1 - ([c8588ea](https://github.com/kristof-mattei/docker-dns-rs/commit/c8588eace3fd20e9b98f9eac2f040853a3e8957a)) - renovate[bot]
-- **(deps)** update actions/upload-artifact action to v3.1.0 - ([ea3cea5](https://github.com/kristof-mattei/docker-dns-rs/commit/ea3cea5a7b38f56bc2ad4902ef6756ef94cf27fa)) - renovate[bot]
-- **(deps)** update actions/github-script action to v6.2.0 - ([bd3baf4](https://github.com/kristof-mattei/docker-dns-rs/commit/bd3baf47bde60d0f8ea79a0cfb8de78a6956228e)) - renovate[bot]
-- **(deps)** update actions/checkout action to v3.0.2 - ([f4818b8](https://github.com/kristof-mattei/docker-dns-rs/commit/f4818b8fca6c9aeb4530b9dc92843d64510f53c1)) - renovate[bot]
-- **(deps)** update docker/metadata-action action to v4.0.1 - ([cd30141](https://github.com/kristof-mattei/docker-dns-rs/commit/cd30141d5809f2982271843133517c28850443ce)) - renovate[bot]
-- **(deps)** update actions/cache action to v3.0.8 - ([0672980](https://github.com/kristof-mattei/docker-dns-rs/commit/06729805a5c33e889bf78b40bcc8de44e10351c9)) - renovate[bot]
-- **(deps)** update actions-rs/clippy-check action to v1.0.7 - ([84ded7a](https://github.com/kristof-mattei/docker-dns-rs/commit/84ded7a41d1a42c0565ac92bcb582779efd0d671)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to d92a91c - ([ea1953e](https://github.com/kristof-mattei/docker-dns-rs/commit/ea1953e52f60639763297e1c8e3c6c4df3a03160)) - renovate[bot]
-- **(deps)** update actions/setup-node digest to 9fc76ff - ([7054338](https://github.com/kristof-mattei/docker-dns-rs/commit/70543389bb0084ef24623cb40f5b846e37e626f2)) - renovate[bot]
-- **(deps)** update actions/cache digest to b195c99 - ([7853de3](https://github.com/kristof-mattei/docker-dns-rs/commit/7853de3207023209d56e66bba6112e8bf07e7034)) - renovate[bot]
-- **(deps)** update actions/setup-node digest to d04c34e - ([0581ed8](https://github.com/kristof-mattei/docker-dns-rs/commit/0581ed8fa52e646195df81e2dda4613a8911ddf5)) - renovate[bot]
-- **(deps)** update actions/cache digest to a213d1e - ([72d9aaf](https://github.com/kristof-mattei/docker-dns-rs/commit/72d9aaf4e94df63a073a357631f43fc22ac3499e)) - renovate[bot]
-- **(deps)** update actions/github-script digest to c713e51 - ([53c4bec](https://github.com/kristof-mattei/docker-dns-rs/commit/53c4bec2c70624ad871bc7f529238d7719eefc4a)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to a59fbe2 - ([a2e980f](https://github.com/kristof-mattei/docker-dns-rs/commit/a2e980f56f9bceb86dd719f0d085268367c8fff9)) - renovate[bot]
-- **(deps)** update actions/cache digest to 6c9470d - ([e20b210](https://github.com/kristof-mattei/docker-dns-rs/commit/e20b2108925cdd04e816e3f2d5aabe3cb5029177)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action digest to bea6a01 - ([2b77f18](https://github.com/kristof-mattei/docker-dns-rs/commit/2b77f1862883ae5121e64ef2510d5cac518525cc)) - renovate[bot]
-- **(deps)** update docker/metadata-action digest to 59bc9dd - ([2c8969d](https://github.com/kristof-mattei/docker-dns-rs/commit/2c8969d8672d9d9e5c970845deeb0e3eb655695d)) - renovate[bot]
-- **(deps)** update docker/login-action digest to be010b4 - ([d92677c](https://github.com/kristof-mattei/docker-dns-rs/commit/d92677c426ef01f178e31645469118f880ed02a3)) - renovate[bot]
-- **(deps)** update actions/cache digest to d785f8b - ([bf27fb0](https://github.com/kristof-mattei/docker-dns-rs/commit/bf27fb00e51e31935e2f694a1b7872ac258ca006)) - renovate[bot]
-- **(deps)** update rust:1.63.0 docker digest to 8307760 - ([bf2c703](https://github.com/kristof-mattei/docker-dns-rs/commit/bf2c7034cf0ada8cb244ff98ea2515635882cbc7)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 1cd5043 - ([d349c9c](https://github.com/kristof-mattei/docker-dns-rs/commit/d349c9c1f6db9beb58e548420b9214173c69f445)) - renovate[bot]
-- **(deps)** update rust:1.63.0 docker digest to 7066d64 - ([b2ab9a1](https://github.com/kristof-mattei/docker-dns-rs/commit/b2ab9a16c838f3bf7f8c90161c014a54d50b0813)) - renovate[bot]
-- **(deps)** update actions/cache digest to 5f975d0 - ([cbeecd4](https://github.com/kristof-mattei/docker-dns-rs/commit/cbeecd48cc6df00f9a37509e64a204177bf17074)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to c2c0a29 - ([dee82aa](https://github.com/kristof-mattei/docker-dns-rs/commit/dee82aaedde8acdeddf6be076682bc2ed1424292)) - renovate[bot]
-- **(deps)** update actions/cache digest to 2048ecf - ([3eaa80d](https://github.com/kristof-mattei/docker-dns-rs/commit/3eaa80d9e2429c677252b443609ba7943c1906f0)) - renovate[bot]
-- **(deps)** update actions/setup-node digest to e954e15 - ([8e01a8c](https://github.com/kristof-mattei/docker-dns-rs/commit/8e01a8cce907612673b232654e1fb109569b42f0)) - renovate[bot]
-- **(deps)** update actions/cache digest to fd5de65 - ([1df23a8](https://github.com/kristof-mattei/docker-dns-rs/commit/1df23a8c263239e48638a482b483d7282d354de4)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 53a7a27 - ([e35067b](https://github.com/kristof-mattei/docker-dns-rs/commit/e35067b576e3849e7eb3bd668387a0f2ffba78f9)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 66bb63a - ([b32575b](https://github.com/kristof-mattei/docker-dns-rs/commit/b32575bf75bd46ed18c7add781548c72873f1c3e)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 5502fef - ([1f12917](https://github.com/kristof-mattei/docker-dns-rs/commit/1f1291736797686df84903c265234f3a079fa06d)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to 965c6a4 - ([da85664](https://github.com/kristof-mattei/docker-dns-rs/commit/da8566461bd2a21311e5189f4aaf9eab5a0bcacf)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 9b7fa3d - ([7be1f15](https://github.com/kristof-mattei/docker-dns-rs/commit/7be1f15068c66288507f1fdd88f6d258058b5855)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to b0d61cf - ([d73250f](https://github.com/kristof-mattei/docker-dns-rs/commit/d73250fc809719408ab29219b161c25386e92222)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to 60624fd - ([fee33c5](https://github.com/kristof-mattei/docker-dns-rs/commit/fee33c588b11b3dbb239e08b175c382ee897e3c1)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to b3adcb7 - ([c289f25](https://github.com/kristof-mattei/docker-dns-rs/commit/c289f25c60c6c7fdbdff0f95f8e0afd5dd39ad79)) - renovate[bot]
-- **(deps)** lock file maintenance - ([a8233ac](https://github.com/kristof-mattei/docker-dns-rs/commit/a8233ac1c0aa4a307eb4ac1d1ff3088cfb248d81)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 680d08e - ([6fdf4c7](https://github.com/kristof-mattei/docker-dns-rs/commit/6fdf4c7670c990ea46bfb4024b9f5a82ba24e599)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to 1527803 - ([9533ac3](https://github.com/kristof-mattei/docker-dns-rs/commit/9533ac39994513717cec511fb934b2b48412977a)) - renovate[bot]
-- **(deps)** update actions/github-script digest to d50f485 - ([9142a65](https://github.com/kristof-mattei/docker-dns-rs/commit/9142a65c460b4c90272efadfde1f6d946c9f071e)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 5836ad9 - ([32a6610](https://github.com/kristof-mattei/docker-dns-rs/commit/32a66108be230a8b2c1d35eec4eaf3ccf4c2410b)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to c12cfbc - ([0c664f6](https://github.com/kristof-mattei/docker-dns-rs/commit/0c664f6c2c54b6ab8e7d067a0f7447c85b9281c1)) - renovate[bot]
-- **(deps)** update actions/cache digest to a7c34ad - ([478038e](https://github.com/kristof-mattei/docker-dns-rs/commit/478038e82c96ead4df8d1ceb7320c813e91ac972)) - renovate[bot]
-- **(deps)** update rust to v1.63.0 - ([3f6424f](https://github.com/kristof-mattei/docker-dns-rs/commit/3f6424ffcc8fb3823550ad1dc246089bb4852058)) - renovate[bot]
-- **(deps)** update actions/setup-node digest to 094c36e - ([dc4d7f0](https://github.com/kristof-mattei/docker-dns-rs/commit/dc4d7f00609587d2932676a136b916f71ac9d9c6)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to c7db5d9 - ([0f64048](https://github.com/kristof-mattei/docker-dns-rs/commit/0f6404897f4f69a9945536bd3b96a0bff027ebc3)) - renovate[bot]
-- **(deps)** update dependency alpine to v3.16.2 - ([0b37f01](https://github.com/kristof-mattei/docker-dns-rs/commit/0b37f01936b6633020e6fb39b1e908f82101d193)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 07720c7 - ([6d41d88](https://github.com/kristof-mattei/docker-dns-rs/commit/6d41d886edca2c376d0ac8abf6b9ed65446c4d18)) - renovate[bot]
-- **(deps)** update codecov/codecov-action digest to 7f20bd4 - ([02c914e](https://github.com/kristof-mattei/docker-dns-rs/commit/02c914e58005805509172669deded7b0d64343c4)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to cade2b5 - ([fb6fe50](https://github.com/kristof-mattei/docker-dns-rs/commit/fb6fe5004f59b2f2b06cb0b5e838afff25ffc4d7)) - renovate[bot]
-- **(deps)** update actions/cache digest to f427802 - ([91ac2f2](https://github.com/kristof-mattei/docker-dns-rs/commit/91ac2f214b9d334b981b634f77bb81246c348d7e)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 9990b40 - ([f70958e](https://github.com/kristof-mattei/docker-dns-rs/commit/f70958e60f31e981a5f9fe58a70495c6019116bf)) - renovate[bot]
-- **(deps)** update actions/setup-node digest to 348e008 - ([3025484](https://github.com/kristof-mattei/docker-dns-rs/commit/30254849868f44ce2d05eea88ed85a206da1c626)) - renovate[bot]
-- **(deps)** update rust digest to 2cd5c85 - ([a70d633](https://github.com/kristof-mattei/docker-dns-rs/commit/a70d633ff98f8afc64eb5fa6075107413db349b0)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 1a0331c - ([bb71340](https://github.com/kristof-mattei/docker-dns-rs/commit/bb713403327b1d4260d5c60c66343c2fa596b9f8)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to c84f382 - ([ad8aca3](https://github.com/kristof-mattei/docker-dns-rs/commit/ad8aca3d767a122a9b4e852c440f8d97e074919e)) - renovate[bot]
-- **(deps)** update docker/metadata-action digest to ee26683 - ([a28c103](https://github.com/kristof-mattei/docker-dns-rs/commit/a28c103ffe1f73116cff9990caf61a4b7d58305e)) - renovate[bot]
-- **(deps)** update rust digest to e9bf71b - ([7ad10c2](https://github.com/kristof-mattei/docker-dns-rs/commit/7ad10c2f144eb54ec448ec371173e1365a4dd475)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 329cb8b - ([83d7726](https://github.com/kristof-mattei/docker-dns-rs/commit/83d77262998fa565626e1832a93eaa62d803081f)) - renovate[bot]
-- **(deps)** update actions/cache digest to 4387dbc - ([c096db3](https://github.com/kristof-mattei/docker-dns-rs/commit/c096db34af78d16a7b1b8eda31511105868eb1f4)) - renovate[bot]
-- **(deps)** update rust digest to 0cf42f1 - ([cc3aad3](https://github.com/kristof-mattei/docker-dns-rs/commit/cc3aad3d872481d4c7af917540cbbab215fa6c22)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 19d025e - ([a8ea965](https://github.com/kristof-mattei/docker-dns-rs/commit/a8ea96502eb2b95cbb9b6b078257ea2f2d1d8a55)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 495c200 - ([f307cf4](https://github.com/kristof-mattei/docker-dns-rs/commit/f307cf4896fe2fd8a62a4e17464ba869e0b9b32c)) - renovate[bot]
-- **(deps)** lock file maintenance - ([0e747cd](https://github.com/kristof-mattei/docker-dns-rs/commit/0e747cd41e9230d794bda31ae1b19dabaac13f15)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to b100b75 - ([84afba1](https://github.com/kristof-mattei/docker-dns-rs/commit/84afba155f533f799a3cb9d003bfbf784736bb83)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to ac744c8 - ([8f08236](https://github.com/kristof-mattei/docker-dns-rs/commit/8f08236be63b9cb6318a5d63e3a8903c65731e55)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to 67af6dc - ([76b0b04](https://github.com/kristof-mattei/docker-dns-rs/commit/76b0b042a22c74047aa98d6d2d5d58a9e71c9906)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to f51fd8b - ([65b1cb5](https://github.com/kristof-mattei/docker-dns-rs/commit/65b1cb5a2630d8a56ef92336378ce63ae892bedc)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to bbc2e70 - ([0423c96](https://github.com/kristof-mattei/docker-dns-rs/commit/0423c9688288772d2abf7e8a75f4634d99277150)) - renovate[bot]
-- **(deps)** update actions/cache digest to 71e3ee5 - ([fbe3ad8](https://github.com/kristof-mattei/docker-dns-rs/commit/fbe3ad8600859cd6cd6e833d3cc4d1edc6c7b565)) - renovate[bot]
-- **(deps)** update codecov/codecov-action digest to 5c0da1b - ([63f0634](https://github.com/kristof-mattei/docker-dns-rs/commit/63f0634ff993631b8bf33934235c36895bc32e27)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to 8b03530 - ([45dbc78](https://github.com/kristof-mattei/docker-dns-rs/commit/45dbc788b285c00a8be47c8cb273834395187d50)) - renovate[bot]
-- **(deps)** update actions/setup-node digest to 2a814b5 - ([7a5b924](https://github.com/kristof-mattei/docker-dns-rs/commit/7a5b924604972f9786e4f3e9acd221c0bfa83c27)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to 8171514 - ([858cc35](https://github.com/kristof-mattei/docker-dns-rs/commit/858cc3518a2ba76a43089a48deb2819d88694feb)) - renovate[bot]
-- **(deps)** lock file maintenance - ([9d328f5](https://github.com/kristof-mattei/docker-dns-rs/commit/9d328f501a0a874c820b5dd333e99e22bb88e5ad)) - renovate[bot]
-- **(deps)** update rust to v1.62.1 - ([e5f06ff](https://github.com/kristof-mattei/docker-dns-rs/commit/e5f06ffe68823f0e64b1af457f7502c6b223bf4d)) - renovate[bot]
-- **(deps)** update dependency rust to v1.62.1 - ([95cc461](https://github.com/kristof-mattei/docker-dns-rs/commit/95cc4610438eef04fc9ecccb2af29335d66c7c6c)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to b8bd06e - ([1c239b6](https://github.com/kristof-mattei/docker-dns-rs/commit/1c239b6ada37d8a844af12c9b68831083d8a3b41)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to 4cab3f4 - ([772c8ed](https://github.com/kristof-mattei/docker-dns-rs/commit/772c8ed2f3fa0e80b4bd073cc63ebe25a6f5bb0d)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to 1cb9d22 - ([e425423](https://github.com/kristof-mattei/docker-dns-rs/commit/e4254230935fc28bf066e9683964b42b076920ca)) - renovate[bot]
-- **(deps)** update dependency alpine to v3.16.1 - ([5ed45d0](https://github.com/kristof-mattei/docker-dns-rs/commit/5ed45d0464fc06c49af53766e213e669af038122)) - renovate[bot]
-- **(deps)** update github/codeql-action digest to ba95eeb - ([2c3c23c](https://github.com/kristof-mattei/docker-dns-rs/commit/2c3c23c952f22ddbf2b94df0003a102875044b0a)) - renovate[bot]
-- **(deps)** update enricomi/publish-unit-test-result-action digest to c82c0f5 - ([81ab237](https://github.com/kristof-mattei/docker-dns-rs/commit/81ab23705d5be0875f9299e54b8bec428159c5c3)) - renovate[bot]
-- **(deps)** update dorny/paths-filter digest to 8c7f485 - ([e372605](https://github.com/kristof-mattei/docker-dns-rs/commit/e372605ac38ffd28b9e81f15cc8e0c283f090f06)) - renovate[bot]
-- **(deps)** update docker/setup-buildx-action digest to 312f67c - ([31c2a28](https://github.com/kristof-mattei/docker-dns-rs/commit/31c2a2863f51bad376c04add63555f94ba3eabf8)) - renovate[bot]
-- **(deps)** update docker/login-action digest to d398f07 - ([49eda52](https://github.com/kristof-mattei/docker-dns-rs/commit/49eda52ace255ef7d138e49066e0c1be0051b3af)) - renovate[bot]
-- **(deps)** update docker/metadata-action digest to 97c170d - ([706af82](https://github.com/kristof-mattei/docker-dns-rs/commit/706af82875f2fed4b6fe79dad67bfa2618c4bb73)) - renovate[bot]
-- **(deps)** update docker/build-push-action digest to a8d76c0 - ([3e724f0](https://github.com/kristof-mattei/docker-dns-rs/commit/3e724f080ba4638311dd8f1f68ff8acf048115a3)) - renovate[bot]
-- **(deps)** update coverallsapp/github-action digest to 3284643 - ([dd0675e](https://github.com/kristof-mattei/docker-dns-rs/commit/dd0675ef2efe3f1e530f522af0cbaa3fda97339a)) - renovate[bot]
-- **(deps)** update codecov/codecov-action digest to 2a829b9 - ([ec46102](https://github.com/kristof-mattei/docker-dns-rs/commit/ec46102baf1250e7c3ae4f29442c4ad56c8cffec)) - renovate[bot]
-- **(deps)** update actions/download-artifact digest to 076f0f7 - ([21a8aab](https://github.com/kristof-mattei/docker-dns-rs/commit/21a8aab70d44db82c0e8a660a163a11031c318a2)) - renovate[bot]
-- **(deps)** update actions/github-script digest to 46a476b - ([f8b3014](https://github.com/kristof-mattei/docker-dns-rs/commit/f8b301409c52ce7dfc02244a1fd853cc4e4fdacf)) - renovate[bot]
-- **(deps)** bump actions/setup-node from 3.4.0 to 3.4.1 - ([6019a33](https://github.com/kristof-mattei/docker-dns-rs/commit/6019a33283d56dc34012b96036f5d1e0525ec56c)) - dependabot[bot]
-- **(deps)** bump actions/cache from 3.0.4 to 3.0.5 - ([97296aa](https://github.com/kristof-mattei/docker-dns-rs/commit/97296aac43e98e657ce4f6290d1b1664140b8035)) - dependabot[bot]
-- **(deps)** bump github/codeql-action from 2.1.15 to 2.1.16 - ([d062495](https://github.com/kristof-mattei/docker-dns-rs/commit/d0624958c01ec419a3bd43db6d565f3c1f7d67ed)) - dependabot[bot]
-- **(deps)** bump rust from `e8a88ed` to `5777f20` - ([81e00ee](https://github.com/kristof-mattei/docker-dns-rs/commit/81e00ee612e91d29fedc4729d6fd32c2f9941545)) - dependabot[bot]
-- **(deps)** bump rust from `8220e4f` to `e8a88ed` - ([b5db935](https://github.com/kristof-mattei/docker-dns-rs/commit/b5db935b4a93d1d72fbad868423d246a01e2af01)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 3.3.0 to 3.4.0 - ([9a2a421](https://github.com/kristof-mattei/docker-dns-rs/commit/9a2a421d7e68390174b4aae0e17f4054dcaae77d)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([481d3a2](https://github.com/kristof-mattei/docker-dns-rs/commit/481d3a25eb72af2bf30c38037c4beb5082ef1bf5)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([2ac4f9d](https://github.com/kristof-mattei/docker-dns-rs/commit/2ac4f9d2c6725adcdd9f05e63fb7e1eec5618380)) - dependabot[bot]
-- **(deps)** bump dependabot/fetch-metadata from 1.3.1 to 1.3.3 - ([c861d40](https://github.com/kristof-mattei/docker-dns-rs/commit/c861d40d0dd09487f9cfa90679fff2203f97e769)) - dependabot[bot]
-- **(deps)** bump rust from 1.61.0 to 1.62.0 - ([28a0d46](https://github.com/kristof-mattei/docker-dns-rs/commit/28a0d46b038824eeee3feb9f08624c335d03bf94)) - dependabot[bot]
-- **(deps)** bump github/codeql-action from 2.1.14 to 2.1.15 - ([793d618](https://github.com/kristof-mattei/docker-dns-rs/commit/793d61895e81179d6b4f46701e36348692f8265a)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([beae4af](https://github.com/kristof-mattei/docker-dns-rs/commit/beae4af47b73db19bb2076e9eb26fdb387234b96)) - dependabot[bot]
-- **(deps)** bump rust from `a2dff3d` to `e9a087a` - ([8f08155](https://github.com/kristof-mattei/docker-dns-rs/commit/8f081556e8ae9b9ec13a81f425e7bed8f4b31166)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([0327052](https://github.com/kristof-mattei/docker-dns-rs/commit/0327052daa04c294a8e191f99c711d6e984e3c43)) - dependabot[bot]
-- **(deps)** bump actions/cache from 3.0.3 to 3.0.4 - ([c3944b3](https://github.com/kristof-mattei/docker-dns-rs/commit/c3944b3f22e806773cefd43cd7cdd718c1b6e486)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 3.2.0 to 3.3.0 - ([78f0c08](https://github.com/kristof-mattei/docker-dns-rs/commit/78f0c085fdbce41981263ef18bad05540d79ebb0)) - dependabot[bot]
-- **(deps)** bump semver-regex from 3.1.3 to 3.1.4 - ([1dac372](https://github.com/kristof-mattei/docker-dns-rs/commit/1dac3725b6b7331cc631a63f9376f432ef61e62f)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([955af47](https://github.com/kristof-mattei/docker-dns-rs/commit/955af470f0cb80edd91ed89c8833f5cf974d3e69)) - dependabot[bot]
-- **(deps)** bump npm from 8.3.1 to 8.12.0 - ([43a514a](https://github.com/kristof-mattei/docker-dns-rs/commit/43a514a089e0251fd4b7c99a0e3daf7b3bb69518)) - dependabot[bot]
-- **(deps)** bump actions/cache from 3.0.2 to 3.0.3 - ([e9790bd](https://github.com/kristof-mattei/docker-dns-rs/commit/e9790bd01da085fa2d4c4a829a29fae4d1348ee4)) - dependabot[bot]
-- **(deps)** bump rust from `b0139fa` to `a2dff3d` - ([502c029](https://github.com/kristof-mattei/docker-dns-rs/commit/502c0292a3fe724f691f38fd0db2a5309b15ddf9)) - dependabot[bot]
-- **(deps)** bump alpine from 3.15.4 to 3.16.0 - ([2c3cea4](https://github.com/kristof-mattei/docker-dns-rs/commit/2c3cea42cebd9fc6275e101b4275e659e33ffe92)) - dependabot[bot]
-- **(deps)** bump actions/upload-artifact from 3.0.0 to 3.1.0 - ([bb9f09e](https://github.com/kristof-mattei/docker-dns-rs/commit/bb9f09e0ea4806ce05d50acb2875c3c3a793c6de)) - dependabot[bot]
-- **(deps)** bump rust from 1.60.0 to 1.61.0 - ([3f1af1a](https://github.com/kristof-mattei/docker-dns-rs/commit/3f1af1a27d8dc976a155f97f0178c2c9d595b025)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([0345868](https://github.com/kristof-mattei/docker-dns-rs/commit/0345868ea07e8aa0f5de517617ef5f4a9d718dc2)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 3.1.1 to 3.2.0 - ([1ad066f](https://github.com/kristof-mattei/docker-dns-rs/commit/1ad066f6155a155189bbe71e5640460f157351bc)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([c263261](https://github.com/kristof-mattei/docker-dns-rs/commit/c263261c519146930aafce91bc24e6804213a243)) - dependabot[bot]
-- **(deps)** bump actions/github-script from 6.0.0 to 6.1.0 - ([512bbba](https://github.com/kristof-mattei/docker-dns-rs/commit/512bbba8a3539c4fd0a510cf4a30f8804898bf89)) - dependabot[bot]
-- **(deps)** bump rust from `0293d3d` to `48d3b5b` - ([5d64e23](https://github.com/kristof-mattei/docker-dns-rs/commit/5d64e23883375cfc4493177d997fadec0376bbc1)) - dependabot[bot]
-- **(deps)** bump docker/build-push-action from 2.10.0 to 3 - ([3d81592](https://github.com/kristof-mattei/docker-dns-rs/commit/3d81592a4b8c7782662264903a97dc86343d88ce)) - dependabot[bot]
-- **(deps)** bump rust from `b3237b7` to `0293d3d` - ([7eaee8e](https://github.com/kristof-mattei/docker-dns-rs/commit/7eaee8e0d552f4f8730c528d5e93238aefb644c3)) - dependabot[bot]
-- **(deps)** bump docker/metadata-action from 3.8.0 to 4.0.1 - ([ff5a88c](https://github.com/kristof-mattei/docker-dns-rs/commit/ff5a88ccab8e4b5937df634ceac93b6a9bbddabc)) - dependabot[bot]
-- **(deps)** bump docker/login-action from 1.14.1 to 2 - ([34faae6](https://github.com/kristof-mattei/docker-dns-rs/commit/34faae69c3a9756f7f4c6cf1edbf7f0282fe1afe)) - dependabot[bot]
-- **(deps)** bump docker/setup-buildx-action from 1.7.0 to 2 - ([bda98ab](https://github.com/kristof-mattei/docker-dns-rs/commit/bda98ab66e8a68589bc775528683d4b1952c7f10)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([45dbd4d](https://github.com/kristof-mattei/docker-dns-rs/commit/45dbd4dfd33a754c5b379e7798eb90fc8a666a33)) - dependabot[bot]
-- **(deps)** bump docker/setup-buildx-action from 1.6.0 to 1.7.0 - ([26b00aa](https://github.com/kristof-mattei/docker-dns-rs/commit/26b00aaad96cba2cea4b1e93a5f644026969829a)) - dependabot[bot]
-- **(deps)** bump docker/metadata-action from 3.7.0 to 3.8.0 - ([530b29e](https://github.com/kristof-mattei/docker-dns-rs/commit/530b29e1e2ef5d7bd28553ec683d2cc7dcc5f213)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([ee8b25c](https://github.com/kristof-mattei/docker-dns-rs/commit/ee8b25ca42ddefeec987c07c4323e8d4ca745bc5)) - dependabot[bot]
-- **(deps)** bump codecov/codecov-action from 3.0.0 to 3.1.0 - ([97d713b](https://github.com/kristof-mattei/docker-dns-rs/commit/97d713ba3dc2c5b932905c3c182916eb2a5c65fe)) - dependabot[bot]
-- **(deps)** bump rust from `ff41a88` to `b3237b7` - ([1cca223](https://github.com/kristof-mattei/docker-dns-rs/commit/1cca2230f34fd3e51c23fac008008192ca9518fa)) - dependabot[bot]
-- **(deps)** bump actions/checkout from 3.0.1 to 3.0.2 - ([00b0cc7](https://github.com/kristof-mattei/docker-dns-rs/commit/00b0cc75914d751ea140e1a931e5f2ada7860421)) - dependabot[bot]
-- **(deps)** bump rust from `25c7388` to `ff41a88` - ([aeb5799](https://github.com/kristof-mattei/docker-dns-rs/commit/aeb579964790d4b0bfdba5df4044c70aee427336)) - dependabot[bot]
-- **(deps)** bump dependabot/fetch-metadata from 1.3.0 to 1.3.1 - ([ea62f18](https://github.com/kristof-mattei/docker-dns-rs/commit/ea62f18e75e038e867ff1d9604c09e056dc35df9)) - dependabot[bot]
-- **(deps)** bump actions/checkout from 3.0.0 to 3.0.1 - ([9fff341](https://github.com/kristof-mattei/docker-dns-rs/commit/9fff3411c27e01f843fa9199de04eb3158424c88)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 3.1.0 to 3.1.1 - ([51f7827](https://github.com/kristof-mattei/docker-dns-rs/commit/51f7827198eb8b0942e3c9da05016f36d19b6a0f)) - dependabot[bot]
-- **(deps)** bump actions/cache from 3.0.1 to 3.0.2 - ([9f96b86](https://github.com/kristof-mattei/docker-dns-rs/commit/9f96b8637df3bac75057e1b92072b0e77db26f43)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([14738e6](https://github.com/kristof-mattei/docker-dns-rs/commit/14738e6b47c8cb74e8993c9fa5fdb38f54cb05fd)) - dependabot[bot]
-- **(deps)** bump rust from 1.59.0 to 1.60.0 - ([44a59c2](https://github.com/kristof-mattei/docker-dns-rs/commit/44a59c221ceb8a60927b7ad67d4bbcd2ff627eba)) - dependabot[bot]
-- **(deps)** bump docker/metadata-action from 3.6.2 to 3.7.0 - ([4cfbcfe](https://github.com/kristof-mattei/docker-dns-rs/commit/4cfbcfe403f93a3f9f5f04dcd820c7a2551322a7)) - dependabot[bot]
-- **(deps)** bump minimist from 1.2.5 to 1.2.6 - ([0e9dfc1](https://github.com/kristof-mattei/docker-dns-rs/commit/0e9dfc16abd02755734856726651c006063d7a24)) - dependabot[bot]
-- **(deps)** bump codecov/codecov-action from 2.1.0 to 3 - ([0acdde6](https://github.com/kristof-mattei/docker-dns-rs/commit/0acdde60418c711a3839b811f79828ff5d8fe5f5)) - dependabot[bot]
-- **(deps)** bump alpine from 3.15.3 to 3.15.4 - ([0c3d789](https://github.com/kristof-mattei/docker-dns-rs/commit/0c3d7896ae65fe723f28438ca5632d63d0c55474)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 3.0.0 to 3.1.0 - ([43276be](https://github.com/kristof-mattei/docker-dns-rs/commit/43276be34c6ee34e48387e759d5754efbdd665be)) - dependabot[bot]
-- **(deps)** bump rust from `db2731e` to `7c0ea3e` - ([8b38a53](https://github.com/kristof-mattei/docker-dns-rs/commit/8b38a53f1e17dcfe38bf20c15691e3b041ed9fbd)) - dependabot[bot]
-- **(deps)** bump rust from `cab550a` to `db2731e` - ([5f72967](https://github.com/kristof-mattei/docker-dns-rs/commit/5f729678bcd9b6455c5609325bb2f8ec7ca11e60)) - dependabot[bot]
-- **(deps)** bump actions/cache from 3.0.0 to 3.0.1 - ([c71044d](https://github.com/kristof-mattei/docker-dns-rs/commit/c71044dccdeaa5cc047459b4393ba8fb5d3618c9)) - dependabot[bot]
-- **(deps)** bump rust from `fea2328` to `cab550a` - ([329127b](https://github.com/kristof-mattei/docker-dns-rs/commit/329127bffca4dd860d93bf50500935b1010e27d9)) - dependabot[bot]
-- **(deps)** bump alpine from 3.15.2 to 3.15.3 - ([9051e95](https://github.com/kristof-mattei/docker-dns-rs/commit/9051e9549e2ded87fa8251a3a09b39b03d6f9b99)) - dependabot[bot]
-- **(deps)** bump alpine from 3.15.1 to 3.15.2 - ([b43e450](https://github.com/kristof-mattei/docker-dns-rs/commit/b43e4503154cea5453654f275aa27777b766a807)) - dependabot[bot]
-- **(deps)** bump actions/cache from 2.1.7 to 3 - ([48ef861](https://github.com/kristof-mattei/docker-dns-rs/commit/48ef86129bbc8d2533082d377106302e2ef58478)) - dependabot[bot]
-- **(deps)** bump rust from `12993d6` to `fea2328` - ([a888ceb](https://github.com/kristof-mattei/docker-dns-rs/commit/a888ceb3405b858eec7250b1add859f7086e888a)) - dependabot[bot]
-- **(deps)** bump alpine from 3.15.0 to 3.15.1 - ([eaaf316](https://github.com/kristof-mattei/docker-dns-rs/commit/eaaf3169efcb56574c3c957b4ed29efddcd70c89)) - dependabot[bot]
-- **(deps)** bump docker/build-push-action from 2.9.0 to 2.10.0 - ([861ff51](https://github.com/kristof-mattei/docker-dns-rs/commit/861ff51a40a032576282c13b0421f460ce75a420)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([6aa52f8](https://github.com/kristof-mattei/docker-dns-rs/commit/6aa52f8377d7ec88086f199a20d2b28bf8b0d4da)) - dependabot[bot]
-- **(deps)** bump actions/upload-artifact from 2.3.1 to 3 - ([b847279](https://github.com/kristof-mattei/docker-dns-rs/commit/b8472790c42235eee6056a3a3bc99d2ad5188d88)) - dependabot[bot]
-- **(deps)** bump actions/download-artifact from 2.1.0 to 3 - ([58d4d51](https://github.com/kristof-mattei/docker-dns-rs/commit/58d4d519bcf8a7b596e8186628f777de362d20aa)) - dependabot[bot]
-- **(deps)** bump rust from `567713a` to `12993d6` - ([b4346c7](https://github.com/kristof-mattei/docker-dns-rs/commit/b4346c758585d4e94a90fdeb5a33b6f843f39e71)) - dependabot[bot]
-- **(deps)** bump dependabot/fetch-metadata from 1.1.1 to 1.3.0 - ([7a74568](https://github.com/kristof-mattei/docker-dns-rs/commit/7a74568915241c13ae6c8f32cd52a078e3e62620)) - dependabot[bot]
-- **(deps)** bump docker/login-action from 1.14.0 to 1.14.1 - ([fe741ad](https://github.com/kristof-mattei/docker-dns-rs/commit/fe741ad907f8e69c51a3a58bddd106edbb80954b)) - dependabot[bot]
-- **(deps)** bump actions/checkout from 2.4.0 to 3 - ([f0019be](https://github.com/kristof-mattei/docker-dns-rs/commit/f0019bee531e18f98310f373327e4c82735f14de)) - dependabot[bot]
-- **(deps)** bump docker/login-action from 1.13.0 to 1.14.0 - ([65de73f](https://github.com/kristof-mattei/docker-dns-rs/commit/65de73feb5ea14748d18e61cd22ba0b3b1d83c45)) - dependabot[bot]
-- **(deps)** bump rust from `80bb90d` to `567713a` - ([2e4239f](https://github.com/kristof-mattei/docker-dns-rs/commit/2e4239f5e834560cfadf1ec2a328ac58d58feb29)) - dependabot[bot]
-- **(deps)** bump rust from 1.58.1 to 1.59.0 - ([a58f233](https://github.com/kristof-mattei/docker-dns-rs/commit/a58f2333e88cbec184b4ac25c45f273171263ef4)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([0efa298](https://github.com/kristof-mattei/docker-dns-rs/commit/0efa298504703d6efca6a908e82d37f15ab527a4)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 2.5.1 to 3.0.0 - ([41956bf](https://github.com/kristof-mattei/docker-dns-rs/commit/41956bf22cfa2ee7a8c93154f508c017500a1b20)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([64ced5f](https://github.com/kristof-mattei/docker-dns-rs/commit/64ced5f7dd8c7bf3f7549f3f047183c15f8c91c7)) - dependabot[bot]
-- **(deps)** bump docker/login-action from 1.12.0 to 1.13.0 - ([56ead6d](https://github.com/kristof-mattei/docker-dns-rs/commit/56ead6d81c35cc62fb2ab6d85a3bb55fd762bfb7)) - dependabot[bot]
-- **(deps)** bump actions/github-script from 5.1.0 to 6 - ([c30935e](https://github.com/kristof-mattei/docker-dns-rs/commit/c30935e611fceb33fcaca365d81af464740d0a96)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([a3c24e4](https://github.com/kristof-mattei/docker-dns-rs/commit/a3c24e4a136931dcebfe11d14208f2ee3c4c0a0b)) - dependabot[bot]
-- **(deps)** bump node-fetch from 2.6.6 to 2.6.7 - ([5dfa5dd](https://github.com/kristof-mattei/docker-dns-rs/commit/5dfa5dd2ba94847a885d11cf148ad205e95cf4ef)) - dependabot[bot]
-- **(deps)** bump docker/build-push-action from 2.8.0 to 2.9.0 - ([d90e72d](https://github.com/kristof-mattei/docker-dns-rs/commit/d90e72d851e1c4d231eec63fb40d36dce8a63e02)) - dependabot[bot]
-- **(deps)** bump rust from `8ad28b7` to `e4979d3` - ([5ed408b](https://github.com/kristof-mattei/docker-dns-rs/commit/5ed408baaa873acb0a8e134311c04c5b8618fb10)) - dependabot[bot]
-- **(deps)** bump rust from `ef7ed2b` to `8ad28b7` - ([921fa45](https://github.com/kristof-mattei/docker-dns-rs/commit/921fa45dd9b85d6195b560792b3804bfb21c0465)) - dependabot[bot]
-- **(deps)** bump rust from 1.58.0 to 1.58.1 - ([1f032ef](https://github.com/kristof-mattei/docker-dns-rs/commit/1f032efc753088b4e6f63f7d3fc574f3ced15c1a)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([7da9ea8](https://github.com/kristof-mattei/docker-dns-rs/commit/7da9ea80eac2b7b56824e5e88a2d747a79bd72e5)) - dependabot[bot]
-- **(deps)** bump docker/build-push-action from 2.7.0 to 2.8.0 - ([2c6f757](https://github.com/kristof-mattei/docker-dns-rs/commit/2c6f757aaf85e68f375afbcfa6b2bbb94446a952)) - dependabot[bot]
-- **(deps)** bump actions/github-script from 5.0.0 to 5.1.0 - ([cfe15b1](https://github.com/kristof-mattei/docker-dns-rs/commit/cfe15b12e91b28d626a01b31ba5fa3e1b8a7aea2)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([cc0e282](https://github.com/kristof-mattei/docker-dns-rs/commit/cc0e28265c484ba1819d596db34a2f16d7ab27a8)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 2.5.0 to 2.5.1 - ([b7ff3d6](https://github.com/kristof-mattei/docker-dns-rs/commit/b7ff3d60be0372425f51cf64ad32b3fcec7cec14)) - dependabot[bot]
-- **(deps)** bump docker/login-action from 1.10.0 to 1.12.0 - ([a151cfe](https://github.com/kristof-mattei/docker-dns-rs/commit/a151cfebe1cdc7958b2ae6a0013eaf86a041b4ac)) - dependabot[bot]
-- **(deps)** bump actions/upload-artifact from 2.3.0 to 2.3.1 - ([16ba0f7](https://github.com/kristof-mattei/docker-dns-rs/commit/16ba0f7907dc3d9599a225dbef3eb041d6590f35)) - dependabot[bot]
-- **(deps)** bump actions/upload-artifact from 2.2.4 to 2.3.0 - ([8e5ee23](https://github.com/kristof-mattei/docker-dns-rs/commit/8e5ee23fcdcc7f429d90f0935bef4656b7d31b00)) - dependabot[bot]
-- **(deps)** bump actions/download-artifact from 2.0.10 to 2.1.0 - ([082c82f](https://github.com/kristof-mattei/docker-dns-rs/commit/082c82f93fa6d39540495bd77704184460cb8c73)) - dependabot[bot]
-- **(deps)** bump docker/metadata-action from 3.6.1 to 3.6.2 - ([acf386b](https://github.com/kristof-mattei/docker-dns-rs/commit/acf386be37c16ea68bfb16be366556f1cd2877f3)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([6705be4](https://github.com/kristof-mattei/docker-dns-rs/commit/6705be4a769ce78dcd399cc32faee20fd8421347)) - dependabot[bot]
-- **(deps)** bump docker/metadata-action from 3.6.0 to 3.6.1 - ([4b3c70d](https://github.com/kristof-mattei/docker-dns-rs/commit/4b3c70d42023c4565c967a323f35657434e18dbf)) - dependabot[bot]
-- **(deps)** bump actions/setup-node from 2.4.1 to 2.5.0 - ([24bb2b2](https://github.com/kristof-mattei/docker-dns-rs/commit/24bb2b27527a3a33db35c763305b36efc4731148)) - dependabot[bot]
-- **(deps)** bump alpine from 3.14.3 to 3.15.0 - ([b6f77c5](https://github.com/kristof-mattei/docker-dns-rs/commit/b6f77c564bd7236a7d413f04b1988dbc096e7621)) - dependabot[bot]
-- **(deps)** bump actions/cache from 2.1.6 to 2.1.7 - ([a85da0d](https://github.com/kristof-mattei/docker-dns-rs/commit/a85da0d6c766d00fc48084d49651ca1a5bbcdabe)) - dependabot[bot]
-- **(deps)** bump EnricoMi/publish-unit-test-result-action - ([0eae094](https://github.com/kristof-mattei/docker-dns-rs/commit/0eae094a00fa4a206066e5f753401dc07ab10bdf)) - dependabot[bot]
-- **(deps)** bump alpine from 3.14.2 to 3.14.3 - ([cde7179](https://github.com/kristof-mattei/docker-dns-rs/commit/cde71798206becaa77f379a6024dbd4a06ca2bf8)) - dependabot[bot]
-- **(deps)** bump actions/checkout from 2.3.5 to 2.4.0 - ([fadee26](https://github.com/kristof-mattei/docker-dns-rs/commit/fadee2650791300660b0d2183e1a5f99a4eb0b17)) - dependabot[bot]
-- **(deps)** bump rust from 1.56.0 to 1.56.1 - ([b54a3c6](https://github.com/kristof-mattei/docker-dns-rs/commit/b54a3c63e0e53264c0c394e0de140faca5f22dae)) - dependabot[bot]
-- **(deps)** bump actions-rs/cargo from 1.0.1 to 1.0.3 - ([7a1065e](https://github.com/kristof-mattei/docker-dns-rs/commit/7a1065e413ddaadc8b45794d2fe6e84e05970935)) - dependabot[bot]
-- **(deps)** bump actions-rs/toolchain from 1.0.6 to 1.0.7 - ([1601a9f](https://github.com/kristof-mattei/docker-dns-rs/commit/1601a9fc60f83791ed62d4b2f894aa016f03e1a6)) - dependabot[bot]
-- **(deps-dev)** bump @semantic-release/github from 8.0.4 to 8.0.5 - ([5b01be1](https://github.com/kristof-mattei/docker-dns-rs/commit/5b01be125cd7cea6b6610383561bb1c6c5665e64)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.7.0 to 2.7.1 - ([a1f9464](https://github.com/kristof-mattei/docker-dns-rs/commit/a1f9464de2a1176780fe1ff7356a16ce7d1af97c)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.6.2 to 2.7.0 - ([a375386](https://github.com/kristof-mattei/docker-dns-rs/commit/a37538605ffd0035b307c7728099b20c734947b3)) - dependabot[bot]
-- **(deps-dev)** bump semantic-release from 19.0.2 to 19.0.3 - ([11670e1](https://github.com/kristof-mattei/docker-dns-rs/commit/11670e15a32c5e21a7642da330965b0ce8ea853a)) - dependabot[bot]
-- **(deps-dev)** bump conventional-changelog-conventionalcommits - ([f29a2ba](https://github.com/kristof-mattei/docker-dns-rs/commit/f29a2ba78e9248f9d040a5cba08d9f77443a5f53)) - dependabot[bot]
-- **(deps-dev)** bump serialize-error from 10.0.0 to 11.0.0 - ([681bcb7](https://github.com/kristof-mattei/docker-dns-rs/commit/681bcb79ce7a64cfc1c0d54103f74eac2945055a)) - dependabot[bot]
-- **(deps-dev)** bump @actions/tool-cache from 2.0.0 to 2.0.1 - ([d15ca37](https://github.com/kristof-mattei/docker-dns-rs/commit/d15ca37e5fd8d77b913fa3354d8993cc9922bf2b)) - dependabot[bot]
-- **(deps-dev)** bump @actions/tool-cache from 1.7.2 to 2.0.0 - ([eb42e6a](https://github.com/kristof-mattei/docker-dns-rs/commit/eb42e6adf4772392713598d725a6a35f9f5cfdfc)) - dependabot[bot]
-- **(deps-dev)** bump serialize-error from 9.1.1 to 10.0.0 - ([d5fe7b5](https://github.com/kristof-mattei/docker-dns-rs/commit/d5fe7b529672641c8334bf75c4b41d47316cac2f)) - dependabot[bot]
-- **(deps-dev)** bump semver from 7.3.6 to 7.3.7 - ([2a9b11e](https://github.com/kristof-mattei/docker-dns-rs/commit/2a9b11ef1f1f677a7806f26011c5b699e5828e9b)) - dependabot[bot]
-- **(deps-dev)** bump semver from 7.3.5 to 7.3.6 - ([e3818a1](https://github.com/kristof-mattei/docker-dns-rs/commit/e3818a15697ec222a92d797d80cbdefc9b028665)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.6.1 to 2.6.2 - ([7d11a39](https://github.com/kristof-mattei/docker-dns-rs/commit/7d11a39b7858322bddbbb244d0f602c8989ea3a7)) - dependabot[bot]
-- **(deps-dev)** bump @semantic-release/github from 8.0.2 to 8.0.4 - ([84d4ff8](https://github.com/kristof-mattei/docker-dns-rs/commit/84d4ff8f77bdedd9b9d5dfbcea0fabb0b177b821)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.6.0 to 2.6.1 - ([2e08f59](https://github.com/kristof-mattei/docker-dns-rs/commit/2e08f59137fa18790afa57473c935bc94ce49fc1)) - dependabot[bot]
-- **(deps-dev)** bump serialize-error from 9.1.0 to 9.1.1 - ([e86ae62](https://github.com/kristof-mattei/docker-dns-rs/commit/e86ae620958eeb058acc8ff604a1c5dcf19471a9)) - dependabot[bot]
-- **(deps-dev)** bump @actions/tool-cache from 1.7.1 to 1.7.2 - ([cdcc476](https://github.com/kristof-mattei/docker-dns-rs/commit/cdcc4767dc1792c68e36e61796074a2b8dd77677)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.5.1 to 2.6.0 - ([6bea22d](https://github.com/kristof-mattei/docker-dns-rs/commit/6bea22dd7bf943d9e16c70f946ec080ca3e50287)) - dependabot[bot]
-- **(deps-dev)** bump serialize-error from 8.1.0 to 9.1.0 - ([6577209](https://github.com/kristof-mattei/docker-dns-rs/commit/65772097f1e4b2dfddad59f7883b8445ecfb1d58)) - dependabot[bot]
-- **(deps-dev)** bump semantic-release from 18.0.1 to 19.0.2 - ([2dcd854](https://github.com/kristof-mattei/docker-dns-rs/commit/2dcd854817086eaec0698bd3e186f0589154e745)) - dependabot[bot]
-- **(deps-dev)** bump conventional-changelog-conventionalcommits - ([3c4e6c2](https://github.com/kristof-mattei/docker-dns-rs/commit/3c4e6c2bb45971aa6fa1cee19530d39fbbb8c343)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.5.0 to 2.5.1 - ([8cf0b79](https://github.com/kristof-mattei/docker-dns-rs/commit/8cf0b793f9caa15632fe6c6a9ce7c8cbafc3f654)) - dependabot[bot]
-- **(deps-dev)** bump semantic-release from 18.0.0 to 18.0.1 - ([bfb89d9](https://github.com/kristof-mattei/docker-dns-rs/commit/bfb89d912dca967553c251d2ec30cf5ee9d12b80)) - dependabot[bot]
-- **(deps-dev)** bump prettier from 2.4.1 to 2.5.0 - ([50238e1](https://github.com/kristof-mattei/docker-dns-rs/commit/50238e10c4a84ba0cb3fba463aa0296279e922fe)) - dependabot[bot]
-- **(deps-dev)** bump @commitlint/config-conventional - ([eeaf7b5](https://github.com/kristof-mattei/docker-dns-rs/commit/eeaf7b52975338fecc6e61331a25b48f20f1aca4)) - dependabot[bot]
-- **(deps-dev)** bump @commitlint/cli from 14.1.0 to 15.0.0 - ([894cabe](https://github.com/kristof-mattei/docker-dns-rs/commit/894cabe548a33708fbe6d451271e3a5ab575dbec)) - dependabot[bot]
-- **(version)** v1.2.0 - ([1dbbec6](https://github.com/kristof-mattei/docker-dns-rs/commit/1dbbec608864c5cb559a90d8904996011daef52c)) - github-actions
-- update debug setup - ([59756b7](https://github.com/kristof-mattei/docker-dns-rs/commit/59756b712762276d2032290b7d24f3a9e900d059)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set default debug visualizer - ([6941793](https://github.com/kristof-mattei/docker-dns-rs/commit/69417931ad3e2506dbee9732bef5b1ef9649c885)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fmt - ([cfe1ce0](https://github.com/kristof-mattei/docker-dns-rs/commit/cfe1ce02e4450600606029e285518b1290394469)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- disable required signatures - ([445e425](https://github.com/kristof-mattei/docker-dns-rs/commit/445e4253a7dcbe8fac577cdcaff328466590abe1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- clippy 1.86 fixes - ([57cfae2](https://github.com/kristof-mattei/docker-dns-rs/commit/57cfae214fc53fe7b42b75a1bcb3c76a038ae050)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- clippy 1.86 fixes - ([1ba9e82](https://github.com/kristof-mattei/docker-dns-rs/commit/1ba9e82c8de2d8fd2ba93018639ec3683e95c9e6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- restore comment - ([1ad010d](https://github.com/kristof-mattei/docker-dns-rs/commit/1ad010db62e6c9d0d3536710459bfcbcd0af73ee)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ignore generated changelog - ([9084f3f](https://github.com/kristof-mattei/docker-dns-rs/commit/9084f3fe60d2794d98ca6fff47428c169a8f3f80)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add template clippy.toml - ([307cbdb](https://github.com/kristof-mattei/docker-dns-rs/commit/307cbdb563c89194cf50119410509e4f4030659b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove incorrect comment - ([82a8d6d](https://github.com/kristof-mattei/docker-dns-rs/commit/82a8d6d47279919c074137571d5901367e9826d3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ensure we restore symlinks - ([ceede20](https://github.com/kristof-mattei/docker-dns-rs/commit/ceede20c91e783b56d32c109e7e989834ea38cfe)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set working-directory - ([f657766](https://github.com/kristof-mattei/docker-dns-rs/commit/f657766fd5b75716fa316bd1ad90c5d7c32e975b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use working-directory - ([e7e90d5](https://github.com/kristof-mattei/docker-dns-rs/commit/e7e90d51a297e56a3fabc95ee2ade32c4150bb57)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- install rust-fmt - ([234465e](https://github.com/kristof-mattei/docker-dns-rs/commit/234465e358cc52c0fead88af8f2116bac0f632b7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix for rustup 1.28.0 not installing needed toolchain by default - ([9f283b7](https://github.com/kristof-mattei/docker-dns-rs/commit/9f283b736f6e0f03ac8c2afaa2fda5cbbb86896d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add logging, try remove unneeded (?) buildx - ([baafce6](https://github.com/kristof-mattei/docker-dns-rs/commit/baafce66428bb303013f3dbc2760556cbbeca150)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- push by tag, not filepath... - ([cb03a00](https://github.com/kristof-mattei/docker-dns-rs/commit/cb03a00f208e2e3116f048bc6dcd42615933d90d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- forgot `push` - ([6842ab4](https://github.com/kristof-mattei/docker-dns-rs/commit/6842ab4e26a3417520d3334da6fd542d1d240871)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove oras - ([8eceae9](https://github.com/kristof-mattei/docker-dns-rs/commit/8eceae99297f4f5900549ef08f6105df530069cb)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fmt also 1.85.0 - ([c9488e3](https://github.com/kristof-mattei/docker-dns-rs/commit/c9488e384c6ac0816b2a02574f18e0e54eff3b12)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- format dockerfile - ([edb1f30](https://github.com/kristof-mattei/docker-dns-rs/commit/edb1f309e3326acbad14b3b83aea65b53e12e506)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- rust 1.85.0 - ([d876c00](https://github.com/kristof-mattei/docker-dns-rs/commit/d876c00796252ef81adf85ea6ae8fc25b9d5e0d8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- clean up duplicate crates - ([a7cd55f](https://github.com/kristof-mattei/docker-dns-rs/commit/a7cd55fd65cc333213220df0f983cef04f2f5992)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- install cargo-binstall from updated url - ([8172e7f](https://github.com/kristof-mattei/docker-dns-rs/commit/8172e7fe5a8996eb4b499ccd4ee443f7e5ee2cca)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix title - ([1ecfb70](https://github.com/kristof-mattei/docker-dns-rs/commit/1ecfb70f8778f65098b117403bbc1574a2f6a017)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ensure we have oras - ([adb17dd](https://github.com/kristof-mattei/docker-dns-rs/commit/adb17dd3071a0f100b7f9b25d5ee79b2af0594da)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- enable more lints - ([4cb6bb7](https://github.com/kristof-mattei/docker-dns-rs/commit/4cb6bb7967f130408917be3a75e19421c5fedb86)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- formatting - ([978f4b2](https://github.com/kristof-mattei/docker-dns-rs/commit/978f4b2a669b1d2f6ab3d9e7d738ab2b87516be4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove unneeded .ci - ([3be9c19](https://github.com/kristof-mattei/docker-dns-rs/commit/3be9c19e347578b89a0c2e9b3448e5df3e9aeaee)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- formatting - ([773e45a](https://github.com/kristof-mattei/docker-dns-rs/commit/773e45a7839624fef2056ed1e7f4e37339860f23)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- syntax consistency, as -> AS - ([ba8d334](https://github.com/kristof-mattei/docker-dns-rs/commit/ba8d3344466d98c4ddd2260291cecbe946c7c9ec)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- formatting - ([451c5de](https://github.com/kristof-mattei/docker-dns-rs/commit/451c5deb4f0905a77d670ff76aa528197f81804e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- enforce_admins should be null if you want to disable it... - ([97a3c84](https://github.com/kristof-mattei/docker-dns-rs/commit/97a3c846ebfaa2489bb7af87f4149ec7b9276efc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- separate the name so the rename script doesn't update it - ([db3de07](https://github.com/kristof-mattei/docker-dns-rs/commit/db3de077fe7c68dfd00b94332eb776c889abc19b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- change name - ([7bcbcb6](https://github.com/kristof-mattei/docker-dns-rs/commit/7bcbcb6b9a667327f8b239b4f49743efc6e55130)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove unneeded id - ([81b3536](https://github.com/kristof-mattei/docker-dns-rs/commit/81b35367789ed5722e391766ed52dd73b02ac259)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add linebreaks in the if statements, otherwise the vscode parser gets upset - ([79ecc87](https://github.com/kristof-mattei/docker-dns-rs/commit/79ecc8745e7629e60c75b1990aae2850543eb4d0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- disable codecov running plugins, disable codecov searching - ([c946f90](https://github.com/kristof-mattei/docker-dns-rs/commit/c946f90a1a119f7f97f1e2830c2c55eef3050c6a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- always run reporting, even when no changes as reports are mandatory - ([c86f535](https://github.com/kristof-mattei/docker-dns-rs/commit/c86f5353d6813262e0bf327dbe2db641f87d363c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- more readme - ([2e2e2e1](https://github.com/kristof-mattei/docker-dns-rs/commit/2e2e2e114ef815ef98f2915f8ed2d65ac3512967)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- added readme - ([e81d635](https://github.com/kristof-mattei/docker-dns-rs/commit/e81d635bebca2c93dda247b1dbae64bc0afa9f1a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also rebuild when .nvmrc changes - ([6155455](https://github.com/kristof-mattei/docker-dns-rs/commit/61554551d015d07fb230e09d8d5e33da2cfd1e54)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix typo - ([3a3e968](https://github.com/kristof-mattei/docker-dns-rs/commit/3a3e96855b5eadc81a2d0704a1c4de6569d721a5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- minor build changes, formatting - ([8b1e9f8](https://github.com/kristof-mattei/docker-dns-rs/commit/8b1e9f8aa2e6a37c268dd7587d0912d251afdea4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- arm64 - ([9510d6d](https://github.com/kristof-mattei/docker-dns-rs/commit/9510d6d00bbb8b67a8317f3e452fc5fda93b0036)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- copy in linker into docker container - ([57ff932](https://github.com/kristof-mattei/docker-dns-rs/commit/57ff9320ee1aa210641ea66041351a3d308cd9a0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- linker for aarch64 - ([112a197](https://github.com/kristof-mattei/docker-dns-rs/commit/112a19734f542c4ce61a93e1e1d365dbc4b0619d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- disable arm64 - musl - ([c017958](https://github.com/kristof-mattei/docker-dns-rs/commit/c017958ad330362bc4524d51005003c0bd6fd28b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use vendored openssl - ([d0224da](https://github.com/kristof-mattei/docker-dns-rs/commit/d0224daf46fd7adafca5c2359843ccf9a042dbb4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- prettier - ([abe1135](https://github.com/kristof-mattei/docker-dns-rs/commit/abe113575b1383bb35be5849d65ced7b7bf7b240)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- export docker - ([5cff099](https://github.com/kristof-mattei/docker-dns-rs/commit/5cff0993fca0e1a278b63e91059474efe6853486)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- debugging - ([89153e2](https://github.com/kristof-mattei/docker-dns-rs/commit/89153e203b481aa34552ffdb093e608138b5bc10)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- correct params - ([3b4513c](https://github.com/kristof-mattei/docker-dns-rs/commit/3b4513c6dfd7d46a21b41594173de731f9139ece)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also add rust target to name - ([fa11cb5](https://github.com/kristof-mattei/docker-dns-rs/commit/fa11cb5b76646809cd5de6451a07818bec922b93)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- build with matrix - ([87566ad](https://github.com/kristof-mattei/docker-dns-rs/commit/87566adcc016b050b52b7749ce47183f7d78e791)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try OCI - ([d40e4f7](https://github.com/kristof-mattei/docker-dns-rs/commit/d40e4f7901c299a5429579c484e5fbc3c24716dc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- support for ARM64 - ([8658748](https://github.com/kristof-mattei/docker-dns-rs/commit/865874837be48194e825e92178951bdd7859d744)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try codecov - ([e1dd293](https://github.com/kristof-mattei/docker-dns-rs/commit/e1dd29358d55d597f95fa4053b76a7a99b1154f7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix ] typo - ([3648333](https://github.com/kristof-mattei/docker-dns-rs/commit/3648333faa3377507bef44aa89fdbc06882293d3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- set checks with new API - ([8361952](https://github.com/kristof-mattei/docker-dns-rs/commit/83619524f171939a235a921255eea4f52c4e9e07)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow warnings in test - ([e49075f](https://github.com/kristof-mattei/docker-dns-rs/commit/e49075f2c6d6ab5b98e0d81304a2a6acad966c8a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- allow warnings in test - ([83d3bb2](https://github.com/kristof-mattei/docker-dns-rs/commit/83d3bb205342485cf9f3ff8f87c20cd1a9df616e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix filename - ([3802280](https://github.com/kristof-mattei/docker-dns-rs/commit/3802280c2239d9a4174a315ccd172cfe8fc7f181)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- semgrep 1 job - ([5c6c2ee](https://github.com/kristof-mattei/docker-dns-rs/commit/5c6c2ee8527a899ec058e6194fea015c957e23a9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add category - ([df3df77](https://github.com/kristof-mattei/docker-dns-rs/commit/df3df77ba61c070a904f3d2f721cb245a0ac6ad9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- back to container, the action is outdated - ([dc2bd52](https://github.com/kristof-mattei/docker-dns-rs/commit/dc2bd5258b484556d1600145067aa2a1fdb20d56)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use semgrep action, not container - ([738b8de](https://github.com/kristof-mattei/docker-dns-rs/commit/738b8deb1606266e1106577b3f61231efe5b2d4c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- rename semgrep job to make it register with semgrep - ([9720764](https://github.com/kristof-mattei/docker-dns-rs/commit/9720764f82f17f202c8886bd638cf0faa36c4897)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ignore warning certain packages pulling in same crate with different version, and moved hyper-tls to crates.io version - ([6ba4884](https://github.com/kristof-mattei/docker-dns-rs/commit/6ba4884b508700ca5d7a5515213a432132bb10f1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- checkout to satisfy the codeql tool - ([d6f858a](https://github.com/kristof-mattei/docker-dns-rs/commit/d6f858a3a1f026bb0c219e0dfdc199f3b3676af6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- align title - ([0a560bf](https://github.com/kristof-mattei/docker-dns-rs/commit/0a560bf62205abac716b75abe3a54d1776fbca81)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- explicitely set prettierrc's path - ([3787f7f](https://github.com/kristof-mattei/docker-dns-rs/commit/3787f7f1842f1b72aad3ad93a86af660c438f138)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix startColumn/endColumn being 0. Is invalid. Normalize json file for diffing, ignore output. Diff is expected - ([d37020f](https://github.com/kristof-mattei/docker-dns-rs/commit/d37020fdd19bd9f2d7348fd7b9553dd0921afa6f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use internal console, not the terminal for debugging - ([33e467c](https://github.com/kristof-mattei/docker-dns-rs/commit/33e467c0afbef21f88e46190f86ad01431cb41aa)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- no trailing commas in json - ([a7b01be](https://github.com/kristof-mattei/docker-dns-rs/commit/a7b01be89742c69a3a671fba6f674d7895cec524)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- console isn't useful, updated casing of levels - ([0cb31d5](https://github.com/kristof-mattei/docker-dns-rs/commit/0cb31d5840aaf7672d71398a96e119fbc9d9a722)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ensure run and debug from main add the right LOG settings - ([d271883](https://github.com/kristof-mattei/docker-dns-rs/commit/d27188314fa89fdcac88034f612d5bce6a13bcb4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- start the update for capturing incomplete frames - ([dfe6b4a](https://github.com/kristof-mattei/docker-dns-rs/commit/dfe6b4abcde63fce3cdd6030a00bb27ac98cd219)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- rename nextversion to next_version - ([4821da4](https://github.com/kristof-mattei/docker-dns-rs/commit/4821da4b016aa974cffaf974c43165b504c1f125)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- from scratch - ([e9686ab](https://github.com/kristof-mattei/docker-dns-rs/commit/e9686abc974af11cc44436068b1550098dc6f510)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- disable function-next-line formatting, it looks weird - ([1eb4dd2](https://github.com/kristof-mattei/docker-dns-rs/commit/1eb4dd2f28f2e6955ba36f09e464e6891b6d4c2c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- slight refactor - ([18a7dfe](https://github.com/kristof-mattei/docker-dns-rs/commit/18a7dfee6ab02db2a379b91e273adc0e7311bded)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add TODO - ([b6fb2d2](https://github.com/kristof-mattei/docker-dns-rs/commit/b6fb2d2884d787db33723bba0efa7022b02d2f53)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- clean up unused deps - ([64564c3](https://github.com/kristof-mattei/docker-dns-rs/commit/64564c38bb096c7d6d478280a90449927dbf5fe3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- pin mold - ([6222e7a](https://github.com/kristof-mattei/docker-dns-rs/commit/6222e7a5d096509d7b714b152c1dbfc4a5f32692)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix typo - ([3bc4758](https://github.com/kristof-mattei/docker-dns-rs/commit/3bc4758d422559eab53724774bda44684c585eb3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- restore backtrace always optimize - ([9f2d778](https://github.com/kristof-mattei/docker-dns-rs/commit/9f2d77895397e064a3b86e0e75624318181d3f27)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add mold, use lints - ([7a06c47](https://github.com/kristof-mattei/docker-dns-rs/commit/7a06c474c0b4fcb9df8099bd46a933872d017b8c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- bump uninlined format args priority - ([61e818b](https://github.com/kristof-mattei/docker-dns-rs/commit/61e818b5e0f6f209e8f28d601e99ff98d3b922ea)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove redundant quotes - ([50c419b](https://github.com/kristof-mattei/docker-dns-rs/commit/50c419b558e160a602b69911a6356fb2f875ced9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ALLOW uninlined format args - ([73e964d](https://github.com/kristof-mattei/docker-dns-rs/commit/73e964d65776a2eed8c71af0ab734b9ef517f2ea)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- DENY uninlined format args - ([9a8e100](https://github.com/kristof-mattei/docker-dns-rs/commit/9a8e1007eba0101c9aa5cbefb1e1edcfb2bb5f2c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use lints - ([3f9d4ef](https://github.com/kristof-mattei/docker-dns-rs/commit/3f9d4ef710834eb82812c2cba60986df58494117)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- move to node 20, make backtrace always compile release as we don't care about their internals - ([47ce350](https://github.com/kristof-mattei/docker-dns-rs/commit/47ce350ee2b385ddb05e0f04271950fa344b11a1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated devcontainer config - ([fd84775](https://github.com/kristof-mattei/docker-dns-rs/commit/fd84775429513a4be51795a717b780eb303fcfdc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- ensure we take the longest tag, v1.0.0 instead of v1 - ([f9d106a](https://github.com/kristof-mattei/docker-dns-rs/commit/f9d106a78779f14e61abea3416341a0801268a3b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- bump package-lock.json - ([1e0d6eb](https://github.com/kristof-mattei/docker-dns-rs/commit/1e0d6eb569c0928fc17eba447bf64a4fe6e4f809)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- node v18 - ([33b78ea](https://github.com/kristof-mattei/docker-dns-rs/commit/33b78ea423dedd7d25bfc96395aa1f532347afa3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try codecov again - ([f53b8db](https://github.com/kristof-mattei/docker-dns-rs/commit/f53b8dbce2882cfdbff917b4ee2261bc7fa47ad2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove variable from dockerfile - ([1a47885](https://github.com/kristof-mattei/docker-dns-rs/commit/1a478854622fd3426534ebceac142ac2b633eaf5)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- put versions so that renovate can tag correctly - ([dce5fd5](https://github.com/kristof-mattei/docker-dns-rs/commit/dce5fd57af8aa1a1a7722f4bfedc42e7be29a306)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- disable coveralls & codecov - ([c43c49a](https://github.com/kristof-mattei/docker-dns-rs/commit/c43c49a500d053d5c1d2a5861a8ffa8d44281093)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- restored codecov, remove executable modifier - ([b45eb0f](https://github.com/kristof-mattei/docker-dns-rs/commit/b45eb0f353f1928990d23fd54996ed97b70e1c61)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- testing renovate's custom file updater - ([7918b9c](https://github.com/kristof-mattei/docker-dns-rs/commit/7918b9c204a40bd5b5ce19c8d3ad6abb61f2e148)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fixed double update typo - ([bc15a92](https://github.com/kristof-mattei/docker-dns-rs/commit/bc15a92e9c4eb0910f44a9368bbae281c5a4eb91)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also include rust-specific configs - ([0888cb2](https://github.com/kristof-mattei/docker-dns-rs/commit/0888cb2abb68acd808d532186220ebabe986de36)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- disable coveralls, it's acting up - ([e8ff3d3](https://github.com/kristof-mattei/docker-dns-rs/commit/e8ff3d3eca52fc746ef5ad8120071d9619f0b17e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- explicitly set token to avoid failed uploads - ([45e6bcf](https://github.com/kristof-mattei/docker-dns-rs/commit/45e6bcfbb31f1e1219db97bf65da1c33fdc64961)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- enable renovate - ([741b4bd](https://github.com/kristof-mattei/docker-dns-rs/commit/741b4bd48ce77da72268caddf460cba3fe7ea75e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- Remove duplicate `USER`, not needed - ([2bc87f5](https://github.com/kristof-mattei/docker-dns-rs/commit/2bc87f5cdc946847eef2f215f9316a45ec840f3b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated file property to junit_files as per https://github.com/EnricoMi/publish-unit-test-result-action/pull/285 - ([73a0ad7](https://github.com/kristof-mattei/docker-dns-rs/commit/73a0ad75fdb21be7081eb628fc2d8da728355629)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- spacing, made lint-commits also use binstall - ([c4daf59](https://github.com/kristof-mattei/docker-dns-rs/commit/c4daf591677669b2603f25019f5176dc850bbbe8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix the binary names - ([e700aaa](https://github.com/kristof-mattei/docker-dns-rs/commit/e700aaaae4cd095ab196892fb19e86cac143b8bf)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- try to speed up by using binstall - ([ddf6fc7](https://github.com/kristof-mattei/docker-dns-rs/commit/ddf6fc7bb52110b4da4d67c3e380ed915442d848)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- and more 1.62 - ([f048ac0](https://github.com/kristof-mattei/docker-dns-rs/commit/f048ac05a5aaed0f6a39ae632d7595c352acfaf1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- crlf to lf - ([fdca795](https://github.com/kristof-mattei/docker-dns-rs/commit/fdca795c627dbed981e6ed02fe4287c37b29d169)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- use token to get more rules - ([342529b](https://github.com/kristof-mattei/docker-dns-rs/commit/342529ba015edca81583186343b7d93949f5ac76)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- install latest semgrep - ([b720d30](https://github.com/kristof-mattei/docker-dns-rs/commit/b720d30449d174b74e1ed3fa184d4c1e9e69f255)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- clean up semgrep file, update package-lock - ([df7e1e4](https://github.com/kristof-mattei/docker-dns-rs/commit/df7e1e4d3942aa0f3b703de1c14005093ef41dec)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- update packages - ([c39ff7e](https://github.com/kristof-mattei/docker-dns-rs/commit/c39ff7e8cc8032f91fa8d765d600a1acce21e3de)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- delete unneeded file - ([4734616](https://github.com/kristof-mattei/docker-dns-rs/commit/4734616fc8be237c5ee89130cd942fa971ad767f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- consolidated extensions - ([7ebc90c](https://github.com/kristof-mattei/docker-dns-rs/commit/7ebc90c506e2570c0ec92145c4b4a6d23270c2cf)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add shell name and consolidated format - ([00ca5d7](https://github.com/kristof-mattei/docker-dns-rs/commit/00ca5d7c67d31eed62556cdcf12b0a77318a0be4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add title (name) to step - ([8f4396d](https://github.com/kristof-mattei/docker-dns-rs/commit/8f4396d247c865897e0088c6af23a54a0affef7c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- docker images names should always be lowercase - ([9932b72](https://github.com/kristof-mattei/docker-dns-rs/commit/9932b72ad08d8a5eeacc0946b1fc367320c9e19f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- add release test script - ([0918c90](https://github.com/kristof-mattei/docker-dns-rs/commit/0918c90afafcb26396983767979f08dc46d5d7c0)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- spacing and remove verbose - ([abceeeb](https://github.com/kristof-mattei/docker-dns-rs/commit/abceeeb0e023cd1629df3540fe5f9d310b8dbd36)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- made task file rust-analyzer compliant - ([6f244be](https://github.com/kristof-mattei/docker-dns-rs/commit/6f244beea8c5c8232b66f51bb1dcd0d42759d223)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also update cargo & toolchain - ([52e4649](https://github.com/kristof-mattei/docker-dns-rs/commit/52e46491946ebb62922e3f120ec4d9b5c33f8d81)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also update cargo & toolchain - ([291be2a](https://github.com/kristof-mattei/docker-dns-rs/commit/291be2aa3dd1d15c726686b0dd71ff2e35bff341)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fixed title - ([14bdc49](https://github.com/kristof-mattei/docker-dns-rs/commit/14bdc49a2c8135972be93fef36a425bd9b094c80)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't create new comment, recycle! - ([c3a7cb4](https://github.com/kristof-mattei/docker-dns-rs/commit/c3a7cb4dd9fa46c893969e84e42c5b673e7adb8b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- formatting! - ([f2ab063](https://github.com/kristof-mattei/docker-dns-rs/commit/f2ab06359a1a980404bf2aebd013e43aef804662)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- cleaned up rustfmt, added 2 settings - ([b484519](https://github.com/kristof-mattei/docker-dns-rs/commit/b484519b041b4336e93bbc556d202f70f68bf73e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also bump rust-toolchain to rust 1.58.1 - ([1f91934](https://github.com/kristof-mattei/docker-dns-rs/commit/1f919341edc6d1538f96ae02ec832424ea0a9395)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated npm packages - ([79e5129](https://github.com/kristof-mattei/docker-dns-rs/commit/79e5129e640c62201cc72d4807e3ff44a8ad2033)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also rebuild on cargo.lock changes - ([b196ad4](https://github.com/kristof-mattei/docker-dns-rs/commit/b196ad45b3b648f7588091e083df970f896b8185)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- don't clean before clippy, not needed - ([253afc2](https://github.com/kristof-mattei/docker-dns-rs/commit/253afc287d6ce9aafd9d906066a54410270ef80e)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- run prettier - ([46ff0fb](https://github.com/kristof-mattei/docker-dns-rs/commit/46ff0fb4c6b3f3509f42798b1b9adbd59617f0b4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed todo that's not gonna happen - ([5205794](https://github.com/kristof-mattei/docker-dns-rs/commit/5205794394c05e1f65333e4936def18162a8db0d)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- removed unneeded comments - ([dca69dc](https://github.com/kristof-mattei/docker-dns-rs/commit/dca69dc3ea2cbacb0a490e011c8c5a385ebf7c51)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- typo, docker -> Docker - ([8571cd7](https://github.com/kristof-mattei/docker-dns-rs/commit/8571cd7fd8d6153eb75bef254aaa2e7ae8a1dc0f)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- switch to cog wip - ([70bc0fe](https://github.com/kristof-mattei/docker-dns-rs/commit/70bc0fee3bec0b60d2eabd27999c80b43018bd92)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- switch to cog - ([d9dc537](https://github.com/kristof-mattei/docker-dns-rs/commit/d9dc537936181daea34d14a6958064ff9c507eea)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- remove outdated comment - ([88369f7](https://github.com/kristof-mattei/docker-dns-rs/commit/88369f7ade36328e1b5156841a8127358c4a69a3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fixed the name - ([7166635](https://github.com/kristof-mattei/docker-dns-rs/commit/716663523d3c1e3d10b86a6b477298fa70196312)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- create LICENSE - ([9662fd0](https://github.com/kristof-mattei/docker-dns-rs/commit/9662fd0bc59b52956cd6b30e26e6c5d4854ead9a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also run test-and-report on main to update 'main' coverage - ([07cab02](https://github.com/kristof-mattei/docker-dns-rs/commit/07cab02c61478f168aa0fc7984a2dc5e79265ef1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- also run pedantic and cargo test on push - ([23ba6db](https://github.com/kristof-mattei/docker-dns-rs/commit/23ba6db09d220e17608aa43ab4ffe903507f2ada)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- beautified titles - ([00b5d37](https://github.com/kristof-mattei/docker-dns-rs/commit/00b5d37f9dde952c90c8684fe7d2dec900d1e341)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- reduced complexity of filter - ([20f398c](https://github.com/kristof-mattei/docker-dns-rs/commit/20f398c8adbd47f93754d42298ca2a59c808bf6b)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- split steps - ([95bf3b6](https://github.com/kristof-mattei/docker-dns-rs/commit/95bf3b6a5c85f11cfb08c9594369d58bd7a9188c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- restructure, remove unneeded submodule pull - ([cfebd29](https://github.com/kristof-mattei/docker-dns-rs/commit/cfebd2921b7e87dec2003216c88e2e0efb58dcd7)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- check for changes - ([39f071c](https://github.com/kristof-mattei/docker-dns-rs/commit/39f071cd709181ee79f9e42869332af34a142da1)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix publish script - ([68bb738](https://github.com/kristof-mattei/docker-dns-rs/commit/68bb738d6d2f86e71f91588e1c5fe2f4ccc45a62)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- foundation for correct version numbers - ([82fe6c5](https://github.com/kristof-mattei/docker-dns-rs/commit/82fe6c562db8fcc81eed9ff614346e1dcb6ca8e3)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- cleanup un-used script - ([e8ab324](https://github.com/kristof-mattei/docker-dns-rs/commit/e8ab3245bc3ac74a7bd96844047c68ee789f18b4)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- consolidated npm usage - ([146c18f](https://github.com/kristof-mattei/docker-dns-rs/commit/146c18fa3ddc6c63cd2fa1e32a9cfefaf346ffa2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fixed name - ([eb13981](https://github.com/kristof-mattei/docker-dns-rs/commit/eb13981ac036fa28dfe7f8df5665d28ef071aab2)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- bumped rust numbers everywhere - ([a0577b5](https://github.com/kristof-mattei/docker-dns-rs/commit/a0577b5c76c2c590f7ec371dab5669b648b31bf9)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- updated name everywhere - ([e0da1df](https://github.com/kristof-mattei/docker-dns-rs/commit/e0da1dfbaab56c5bfe15145abab04ddfbd05539c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- update README.md - ([f043d40](https://github.com/kristof-mattei/docker-dns-rs/commit/f043d40421a8e5836e2b18711e751965e67103ae)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- fix linebreaks - ([25900e3](https://github.com/kristof-mattei/docker-dns-rs/commit/25900e3490df1800b89ed40ad727f64a74ef8252)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- renamed files - ([e34981a](https://github.com/kristof-mattei/docker-dns-rs/commit/e34981a3a8506a261ad818f45ea726e3d2e20e7c)) - [@kristof-mattei](https://github.com/kristof-mattei)
-#### Tests
-- trigger build - ([8ea2267](https://github.com/kristof-mattei/docker-dns-rs/commit/8ea226738eb615fce0abdffc37ef8cd01c6fabe6)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- failure test - ([fc23c01](https://github.com/kristof-mattei/docker-dns-rs/commit/fc23c01aee19e787bf952f9ce9b2205e62ff15cc)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- print changelog.md - ([ce90089](https://github.com/kristof-mattei/docker-dns-rs/commit/ce900894ee712c58c14955ec4bfa9b90b0c050e8)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- flow - ([9e940fb](https://github.com/kristof-mattei/docker-dns-rs/commit/9e940fbe55fa07e3b24358b023720ba2d73d8c86)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- sign with GPG signature - ([63d0aa2](https://github.com/kristof-mattei/docker-dns-rs/commit/63d0aa281c26653cb62b1e7416fc047fe72c589a)) - [@kristof-mattei](https://github.com/kristof-mattei)
-- sign with GPG signature - ([979cd32](https://github.com/kristof-mattei/docker-dns-rs/commit/979cd322c6433c7f9200ed36c0deb84ab02b0706)) - [@kristof-mattei](https://github.com/kristof-mattei)
+### 🐛 Bug Fixes
 
-- - -
+- *(deps)* Update rust crate tokio to 1.45.0 - ([9257c22](https://github.com/kristof-mattei/docker-dns-rs/commit/9257c229d603416fdb33431af4883c323db51c2b))
+- *(deps)* Update rust crate clap to 4.5.38 - ([646c44a](https://github.com/kristof-mattei/docker-dns-rs/commit/646c44a80a685c863c58d8b914a4e5add4935cf6))
+- *(deps)* Update rust crate hyper-util to 0.1.12 - ([801322e](https://github.com/kristof-mattei/docker-dns-rs/commit/801322e1c1b3a85439fc6816b472d9154898414a))
+- *(deps)* Update rust crate tokio to 1.45.1 - ([30e8eae](https://github.com/kristof-mattei/docker-dns-rs/commit/30e8eae6dc5ca040a27930f1469171806a5b2d12))
+- *(deps)* Update rust crate hyper-util to 0.1.13 - ([6debd39](https://github.com/kristof-mattei/docker-dns-rs/commit/6debd39411a142810c398d612372678f49d8dc77))
+- *(deps)* Update rust crate clap to 4.5.39 - ([a4e6feb](https://github.com/kristof-mattei/docker-dns-rs/commit/a4e6feb307595e2bada56284f7023fe6c530184f))
+- *(deps)* Update rust crate openssl to 0.10.73 - ([9e15de9](https://github.com/kristof-mattei/docker-dns-rs/commit/9e15de95ee29cbedfe7e124d3aec42a22bbf1c08))
+- *(deps)* Update rust crate color-eyre to 0.6.5 - ([ca460e5](https://github.com/kristof-mattei/docker-dns-rs/commit/ca460e5a2608577c7fc6e16cc96e8d103b1ba830))
+- *(deps)* Update rust crate hyper-util to 0.1.14 - ([1d69382](https://github.com/kristof-mattei/docker-dns-rs/commit/1d6938221c8795289953f5fe8c808ba61459ac25))
+- *(deps)* Update rust crate openssl to 0.10.73 - ([818d5d7](https://github.com/kristof-mattei/docker-dns-rs/commit/818d5d763e04fc8e3f0638a9264e9c8f1aecc4cb))
+- *(deps)* Update rust crate color-eyre to 0.6.5 - ([6cbb98d](https://github.com/kristof-mattei/docker-dns-rs/commit/6cbb98dc877f5d2785ceb938f3fca30172c21bbe))
+- *(deps)* Update rust crate clap to 4.5.40 - ([1eec482](https://github.com/kristof-mattei/docker-dns-rs/commit/1eec482ec86d5e4bb3a5db6cfc19dd89ed1296f6))
+- *(deps)* Update rust crate tokio to 1.46.0 - ([dbd228e](https://github.com/kristof-mattei/docker-dns-rs/commit/dbd228e84815fefd471e0867e5650727d36c02b1))
+- *(deps)* Update rust crate tokio to 1.46.1 - ([01f5b68](https://github.com/kristof-mattei/docker-dns-rs/commit/01f5b687ea18e8e63a66df100741a3af80d15d3c))
+- *(deps)* Update rust crate hyper-util to 0.1.15 - ([db0d882](https://github.com/kristof-mattei/docker-dns-rs/commit/db0d882ab59833d10f7cef918f0359c79692b115))
+- *(deps)* Update rust crate clap to 4.5.41 - ([0bba878](https://github.com/kristof-mattei/docker-dns-rs/commit/0bba878a8018789fa5a6f57769be34efd40ea665))
+- *(deps)* Update rust crate serde_json to 1.0.141 - ([200d83f](https://github.com/kristof-mattei/docker-dns-rs/commit/200d83fd793f8b21ad2d5b49ddbaac0bba9f189f))
+- *(deps)* Update rust crate hyper-util to 0.1.16 - ([369ff0f](https://github.com/kristof-mattei/docker-dns-rs/commit/369ff0f70ba3796db5c7f217198fd8c00ea0b8ec))
+- *(deps)* Update rust crate tokio to 1.47.0 - ([d40a7fd](https://github.com/kristof-mattei/docker-dns-rs/commit/d40a7fd8d5a9e637c0bf5c4179ed9e33e498022c))
+- *(deps)* Update rust crate clap to 4.5.42 - ([4d4c1fc](https://github.com/kristof-mattei/docker-dns-rs/commit/4d4c1fc338e711e471679a6f81fb4e6125d539b1))
+- *(deps)* Update rust crate serde_json to 1.0.142 - ([f1e7790](https://github.com/kristof-mattei/docker-dns-rs/commit/f1e7790692fceb791c539f08e35d71db53edad98))
+- *(deps)* Update rust crate tokio to 1.47.1 - ([49a9c9c](https://github.com/kristof-mattei/docker-dns-rs/commit/49a9c9c0bfe18c716702b5e47afae3f660a1f850))
+- *(deps)* Update rust crate tokio-util to 0.7.16 - ([f4acca3](https://github.com/kristof-mattei/docker-dns-rs/commit/f4acca3d437340ac8f927f2b12b2bcc304caa3bd))
+- *(deps)* Update rust crate clap to 4.5.43 - ([b4c85c6](https://github.com/kristof-mattei/docker-dns-rs/commit/b4c85c623eba6c5f6702459f9931cb74780772e2))
+- *(deps)* Update rust crate clap to 4.5.44 - ([e475876](https://github.com/kristof-mattei/docker-dns-rs/commit/e4758769c95a0bc55096b0290030672922ad2ebb))
+- *(deps)* Update rust crate clap to 4.5.45 - ([b96486f](https://github.com/kristof-mattei/docker-dns-rs/commit/b96486fe2cfbbe7a2d5ef46ea7d368b17477eef2))
+- *(deps)* Update rust crate hyper to 1.7.0 - ([f78738c](https://github.com/kristof-mattei/docker-dns-rs/commit/f78738c68f4a2e360052b0440859b1617fefba69))
+- *(deps)* Update rust crate serde_json to 1.0.143 - ([8f3bb70](https://github.com/kristof-mattei/docker-dns-rs/commit/8f3bb70953124ac24630348ff95135b36cd7dd74))
+- *(deps)* Update rust crate percent-encoding to 2.3.2 - ([59e8643](https://github.com/kristof-mattei/docker-dns-rs/commit/59e8643bf13e808569a2869e1d2b58f0cdbfbf0c))
+- *(deps)* Update rust crate regex to 1.11.2 - ([64497a6](https://github.com/kristof-mattei/docker-dns-rs/commit/64497a6b83b928398dba10c7446d62c6201398a0))
+- *(deps)* Update rust crate clap to 4.5.46 - ([e453b3a](https://github.com/kristof-mattei/docker-dns-rs/commit/e453b3a6bdc4f7549e8178edc5adf2ad2c014b01))
+- *(deps)* Update rust crate tracing-subscriber to v0.3.20 [security] - ([fc20a52](https://github.com/kristof-mattei/docker-dns-rs/commit/fc20a527c03cd52c70272ed05a1bbdbd3159318d))
+- *(deps)* Update rust crate tracing-subscriber to 0.3.20 - ([9ec59d9](https://github.com/kristof-mattei/docker-dns-rs/commit/9ec59d9487f2172871df467a2e8e3e8e7f4da169))
+- *(deps)* Update rust crate clap to 4.5.47 - ([69b240e](https://github.com/kristof-mattei/docker-dns-rs/commit/69b240e3228d0271ea3dd6dd6f00f74069da8fb8))
+- *(deps)* Update rust crate serde to 1.0.221 - ([818aafc](https://github.com/kristof-mattei/docker-dns-rs/commit/818aafc3ffe1ba30bbdf3b0e4e4dfd4fbf7df27b))
+- *(deps)* Update rust crate serde_json to 1.0.144 - ([d15ba80](https://github.com/kristof-mattei/docker-dns-rs/commit/d15ba80410ff93000419af73a34c9f5a9df49c10))
+- *(deps)* Update rust crate serde_json to 1.0.145 - ([a78c8b8](https://github.com/kristof-mattei/docker-dns-rs/commit/a78c8b85289828b7abafe2b4227c76e8f79bd2c9))
+- *(deps)* Update rust crate serde to 1.0.223 - ([a22174a](https://github.com/kristof-mattei/docker-dns-rs/commit/a22174abe78384889b0d7b8e918ab4263cb3d896))
+- *(deps)* Update rust crate hyper-util to 0.1.17 - ([a0cd34b](https://github.com/kristof-mattei/docker-dns-rs/commit/a0cd34b03f48168f13ac22081cd23f401f9064e6))
+- *(deps)* Update rust crate serde to 1.0.225 - ([ebd55bd](https://github.com/kristof-mattei/docker-dns-rs/commit/ebd55bde192b0ffacba9d9e94e4137e428f0bf45))
+- *(deps)* Update rust crate clap to 4.5.48 - ([e8fdef2](https://github.com/kristof-mattei/docker-dns-rs/commit/e8fdef2c7aaec18027408d60b534762592ba88c5))
+- *(deps)* Update rust crate serde to 1.0.226 - ([4a6796c](https://github.com/kristof-mattei/docker-dns-rs/commit/4a6796ccba4e4214af7883d662f03fa0cae77c13))
+- Make return type same - ([ad071ef](https://github.com/kristof-mattei/docker-dns-rs/commit/ad071efea91ed383625e53194d6cc022be78017b))
+- Remove unused options, set correct filemodes for scripts - ([ff8d4d8](https://github.com/kristof-mattei/docker-dns-rs/commit/ff8d4d802157c6450c09da74c5550188cafcffbb))
+- Rust 1.87.0, use .display() - ([5b7a2e4](https://github.com/kristof-mattei/docker-dns-rs/commit/5b7a2e4f2065137de53b27441812587baa668eb7))
+- Disable clippy 1.87.0 let_and_return - ([9246d86](https://github.com/kristof-mattei/docker-dns-rs/commit/9246d861995c87085c04618a8619320afdbd771d))
+- Add runner.arch to the cache keys - ([64b63e2](https://github.com/kristof-mattei/docker-dns-rs/commit/64b63e2f99501f0208e54f3d1d35e19990751cec))
+- Set correct cache key for the docker step - ([bb875b8](https://github.com/kristof-mattei/docker-dns-rs/commit/bb875b8d038162d657082014a7070edb573cae92))
+- Don't install binstall, cargo-edit doesn't have a package anyway - ([377a21e](https://github.com/kristof-mattei/docker-dns-rs/commit/377a21ec73fd822d22099945fb196dcb89b75cc4))
+- Remove incorrec exit - ([3791382](https://github.com/kristof-mattei/docker-dns-rs/commit/379138240224b860cf69d1249f93cacc8c847b6e))
+- Switch to prettier's mjs setup, widen limit for non-json files - ([15954b2](https://github.com/kristof-mattei/docker-dns-rs/commit/15954b23a004049eb88cbce34cc69bd231dce81e))
+- Correct dpkg-architecture architecture check - ([83055c9](https://github.com/kristof-mattei/docker-dns-rs/commit/83055c9bba144255202d4d12658323903be69d53))
+- Install with locked to prevent cargo from updating deps during cargo install - ([bdb7e91](https://github.com/kristof-mattei/docker-dns-rs/commit/bdb7e91b3054f6ef902f1c87870118ff035638e3))
+- Cache per arch, as these overwrite each other - ([90bb69a](https://github.com/kristof-mattei/docker-dns-rs/commit/90bb69af3c0d082b4cea18a161b99e34d61cd5fc))
+- Dir, path, I don't know anymore - ([4bfa22d](https://github.com/kristof-mattei/docker-dns-rs/commit/4bfa22d121e114bb8fbb8435ec90735f4f30466c))
+- Line continuation - ([8239c41](https://github.com/kristof-mattei/docker-dns-rs/commit/8239c4108c487acea05461ebe09f69887a3bd597))
+- Uppercase - ([e70a0ca](https://github.com/kristof-mattei/docker-dns-rs/commit/e70a0ca8dda3bc0126f539a945a0477ab6c8c875))
+- Use expect instead of allow, it is more explicit - ([ae9f1ff](https://github.com/kristof-mattei/docker-dns-rs/commit/ae9f1ff19371f95f2cc0fed18a1d40b595efa2e8))
+- Remove no-deps - ([80518c0](https://github.com/kristof-mattei/docker-dns-rs/commit/80518c0b1875c34158846e16e7de58d7b422b6e9))
+- Reduce permissions - ([54b4398](https://github.com/kristof-mattei/docker-dns-rs/commit/54b4398e66ee00c3e8f2254b9479d7ff79b29026))
+- Manually build Rust for codeql as per our standard build - ([af9390e](https://github.com/kristof-mattei/docker-dns-rs/commit/af9390ee873ba6968417c2749569cc630214ca7e))
+- Build-mode `manual` is not supported for Rust - ([7659499](https://github.com/kristof-mattei/docker-dns-rs/commit/76594994e616ebef734f5a7c275c5a19249d5d52))
+- Pnpm - ([229ffad](https://github.com/kristof-mattei/docker-dns-rs/commit/229ffad2a4bb0deb7f0c2d4fa954c84691262494))
+- Ignore pnpm-lock.yaml format - ([34ee806](https://github.com/kristof-mattei/docker-dns-rs/commit/34ee80670cf28b511be17ca61fdb52d0eb463ce4))
+- Ensure cargo.lock is up to date - ([75f241b](https://github.com/kristof-mattei/docker-dns-rs/commit/75f241bf01868d419fa383572650b891c06cacc6))
+- Remove unused script - ([f8aa057](https://github.com/kristof-mattei/docker-dns-rs/commit/f8aa05727ba3a31d557bb9287eccf147edc8827d))
+- Also set style_edition - ([172d6ab](https://github.com/kristof-mattei/docker-dns-rs/commit/172d6ab04a50b2f19415ec0b64726b6d6d773db5))
+- Infer edition from Cargo.toml - ([f1d0742](https://github.com/kristof-mattei/docker-dns-rs/commit/f1d0742fa46c850b4c983d5c6e378108bd22e942))
+- Schema - ([df22c46](https://github.com/kristof-mattei/docker-dns-rs/commit/df22c4616102dd6af00cd2f8993cf6d955467c99))
+- Fix clone_on_ref_ptr violation - ([44a1ee9](https://github.com/kristof-mattei/docker-dns-rs/commit/44a1ee9cbaf924cf96b7002fdc99684f5966235b))
+- Also ignore samply output - ([87357c9](https://github.com/kristof-mattei/docker-dns-rs/commit/87357c9d0439fd731cb818c830898947a3735025))
+- Simplify license, use MIT license instead of BSD, simplify package.json - ([da64573](https://github.com/kristof-mattei/docker-dns-rs/commit/da64573e286744b1e812856b7d8cb8e27d600447))
+- Validate toml & sh & ... formatting as part of PR process - ([69f84c6](https://github.com/kristof-mattei/docker-dns-rs/commit/69f84c6436c864b272611f8629b1dbda46560e45))
+- Ignore Cargo.lock from being formatted - ([e721512](https://github.com/kristof-mattei/docker-dns-rs/commit/e72151217ff0eb6b92d4a15dfd11aeba8ee2687d))
+- Restore package.json 2 tab width - ([f8851e3](https://github.com/kristof-mattei/docker-dns-rs/commit/f8851e36b4f0f8795b4a945211e673f3aa8dcb55))
+- Reorder - ([d0080cd](https://github.com/kristof-mattei/docker-dns-rs/commit/d0080cde013c86eab0087d897024be4ab18df1ae))
+- Remove unused env that comes in via variables - ([adf0cd7](https://github.com/kristof-mattei/docker-dns-rs/commit/adf0cd7117034c106eac21c2384bfa282d4271b8))
+- Set correct guard name - ([3131d66](https://github.com/kristof-mattei/docker-dns-rs/commit/3131d663eac696ac0d1ed2aa522051f1218e8067))
+- Cleanup unused lints - ([5a38041](https://github.com/kristof-mattei/docker-dns-rs/commit/5a38041fe40daa98087753ea9c3a2a4cab2a842e))
+- No more openssl - ([c947023](https://github.com/kristof-mattei/docker-dns-rs/commit/c947023a2af528aface265cf3f43b5d15f536fbc))
+- Cleaner Windows build - ([c9079c2](https://github.com/kristof-mattei/docker-dns-rs/commit/c9079c22a7f18070784ea1f9ab9db4c4a3240399))
+- Test titles - ([9774c81](https://github.com/kristof-mattei/docker-dns-rs/commit/9774c8118a703f1beb32d8b547ea5cbe66e8fb69))
+- Update lints used - ([f5f9ac8](https://github.com/kristof-mattei/docker-dns-rs/commit/f5f9ac84e526ea021e436e239e8e770e786d0c09))
+- We know that sort order when iterating over hash-type isn't guaranteed - ([82a22ac](https://github.com/kristof-mattei/docker-dns-rs/commit/82a22acb0bf4caf05e96785c69f69db94a7f07fa))
+- Allow cargo features selection - ([bb52f2f](https://github.com/kristof-mattei/docker-dns-rs/commit/bb52f2fe772f0cbed2ae63ebcd109f7b10d08597))
+- FeaTures - ([6372af0](https://github.com/kristof-mattei/docker-dns-rs/commit/6372af04da9b9ce338e2ec2d12e00f3fedbb2ec5))
+- Missing read permissions in test and report - ([3f8f6a5](https://github.com/kristof-mattei/docker-dns-rs/commit/3f8f6a51b3ce1be82b2c165f75353c4e9b222ae4))
+- Use the github token to ensure we can download - ([f6ecce7](https://github.com/kristof-mattei/docker-dns-rs/commit/f6ecce72871eba2bd3d8386da8afc525f803942d))
+- Set full version - ([5535b81](https://github.com/kristof-mattei/docker-dns-rs/commit/5535b81f32546a474b3efcc5a96158bf47311133))
+- Build multi-platform docker images - ([5342da1](https://github.com/kristof-mattei/docker-dns-rs/commit/5342da175081a5dd495b3039e06cea73011ee475))
+- Pre-cache - ([e35eb20](https://github.com/kristof-mattei/docker-dns-rs/commit/e35eb2015728b1f7e1c210e89bacbbc18ff96c2e))
+- Copilot instructions - ([a494929](https://github.com/kristof-mattei/docker-dns-rs/commit/a4949293d72a56254fd14699807855ee539a787e))
+- Fetch per arch, locked, and explicit import - ([399084a](https://github.com/kristof-mattei/docker-dns-rs/commit/399084afecc27cbc36fe204c6804d036d4a98834))
+- Src in registry should not be cached - ([5c4d96c](https://github.com/kristof-mattei/docker-dns-rs/commit/5c4d96cd47b47d95fce5e7bdf614c73ccb193f05))
+- Lock fetch - ([d7ac9da](https://github.com/kristof-mattei/docker-dns-rs/commit/d7ac9da6eba1e8c34be075a95a107496f24f7181))
+- Bring ARG together - ([cc62162](https://github.com/kristof-mattei/docker-dns-rs/commit/cc621629fd8c447546f8bb2391bda7cf1ff7e858))
+- Disable cache dependencies for docker build, the downloading of ./target takes up too much space, and we're not building anyway - ([a6b9b6f](https://github.com/kristof-mattei/docker-dns-rs/commit/a6b9b6fd4afc687635b0c2dd4f2be81c19476344))
+- Shrink what we cache - ([a71972a](https://github.com/kristof-mattei/docker-dns-rs/commit/a71972a001a23b800efb383affc9bc0c5356da7c))
+- Fmt doesn't need target - ([0d9005c](https://github.com/kristof-mattei/docker-dns-rs/commit/0d9005c5f324e604141694007df0b24bfc2cff61))
+- Download binstall based on runner arch - ([1307db8](https://github.com/kristof-mattei/docker-dns-rs/commit/1307db8f053679f68b0ace029d056730980eedda))
+- Dependencies was split in cargo and target - ([f2e3f88](https://github.com/kristof-mattei/docker-dns-rs/commit/f2e3f881aae3dd95b4b0370efee869de8cedabb5))
+- We lost the pr-<number>-latest tag - ([78eb251](https://github.com/kristof-mattei/docker-dns-rs/commit/78eb2517abc67f51409de808583dcacf75544dd8))
+- Restore missed raw tag - ([cc2ea20](https://github.com/kristof-mattei/docker-dns-rs/commit/cc2ea20087e8ec53794c650a0c330b23f69fb589))
+- Separate cache package - ([b14d54a](https://github.com/kristof-mattei/docker-dns-rs/commit/b14d54ac88e7ff177857235b4d0067b86aa7b202))
+- Use semver version. - ([f7fa495](https://github.com/kristof-mattei/docker-dns-rs/commit/f7fa495682e4910b99bf39850988cecd6eb6e7c2))
+- Set sha for pnpm - ([eb3e312](https://github.com/kristof-mattei/docker-dns-rs/commit/eb3e3126b017db2a4482f00cb5097f53cd852a1e))
+- Admin can bypass - ([872a8bf](https://github.com/kristof-mattei/docker-dns-rs/commit/872a8bf3a220c13f61cfaed5fc72862363e033ce))
+- Clippy 1.90 fixes - ([40788db](https://github.com/kristof-mattei/docker-dns-rs/commit/40788db7f085dd4849883a1e3d4d3f7df02d0745))
+- Macro to await linux-only signals - ([c6da567](https://github.com/kristof-mattei/docker-dns-rs/commit/c6da5673eab1896d69928748397d0b8fa0fcec40))
+- Image as well because renovate is slow - ([b2a2c2d](https://github.com/kristof-mattei/docker-dns-rs/commit/b2a2c2d675d902775baa61a96ee7c47e9ab0106c))
+- Use git-cliff to get next version - ([0be0460](https://github.com/kristof-mattei/docker-dns-rs/commit/0be04606cccbb69b08ba47233de310b0fb290469))
+- Ignore .git - ([8293ae3](https://github.com/kristof-mattei/docker-dns-rs/commit/8293ae364ac6a820b9745564ba83b206b2f969a5))
 
-Changelog generated by [cocogitto](https://github.com/cocogitto/cocogitto).
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v1.5.0 - ([5504d10](https://github.com/kristof-mattei/docker-dns-rs/commit/5504d10df91b765fac320a1ae903bc761017728c))
+- *(release)* Release v0.3.0 - ([](https://github.com/kristof-mattei/docker-dns-rs/commit/))
+- *(version)* V1.3.0 - ([bee1b83](https://github.com/kristof-mattei/docker-dns-rs/commit/bee1b83e6cfe1afd6286073fc1bb38787c0ba48e))
+- *(version)* V1.3.1 - ([096c422](https://github.com/kristof-mattei/docker-dns-rs/commit/096c4229799cecace867a1de699a7f65eefe59bb))
+- *(version)* V1.4.0 - ([d2b999b](https://github.com/kristof-mattei/docker-dns-rs/commit/d2b999b17175f8686884477736fc1412eb32928f))
+- Change wording - ([34fb4cf](https://github.com/kristof-mattei/docker-dns-rs/commit/34fb4cf3eda6724b074e3ce877a733dfaf8780cf))
+- Formatting - ([f3dde64](https://github.com/kristof-mattei/docker-dns-rs/commit/f3dde6447ec7fc4eadd646da761b872e21fdd6a2))
+- I686 is 32-bit, we need 64-bit - ([e57dbf8](https://github.com/kristof-mattei/docker-dns-rs/commit/e57dbf819b37fe82bab231af7c693a8bb32cc04c))
+- Remove need for build & targetplatform in scripts - ([13b8275](https://github.com/kristof-mattei/docker-dns-rs/commit/13b827509a357046309726f116cdfb611753d266))
+- More precise coverage, don't include test/** - ([83002c7](https://github.com/kristof-mattei/docker-dns-rs/commit/83002c72807cf5ffe0b77fcc16f7353eeefe46fe))
+- Make wget more robust - ([a7e1e60](https://github.com/kristof-mattei/docker-dns-rs/commit/a7e1e60645a975d9787f1681273af3b8b22326fc))
+- Remove customization, packages now work oob with binstall - ([c85dd07](https://github.com/kristof-mattei/docker-dns-rs/commit/c85dd0741ff01084504eb2d18c53efcb57a5f37b))
+- Convention: bash variable names are lowercase - ([dc27ba1](https://github.com/kristof-mattei/docker-dns-rs/commit/dc27ba1dc0d30acc3765a6369749891823bf5a70))
+- Consolidation of scripts - ([0a075f6](https://github.com/kristof-mattei/docker-dns-rs/commit/0a075f6204c8e468fa8027314dc89ed552b5d839))
+- Move away from env, use output - ([a6a7b2c](https://github.com/kristof-mattei/docker-dns-rs/commit/a6a7b2c240dfc8f005740d3b15b9a1e5473f7a4d))
+- Even more variables - ([64866e5](https://github.com/kristof-mattei/docker-dns-rs/commit/64866e5bc5547d3b4ef13329f07708f59a0c1c6b))
+- Fix output - ([39aecb7](https://github.com/kristof-mattei/docker-dns-rs/commit/39aecb7f88547541cb73a0daea054cba7bafc37f))
+- Group variables in single step - ([793b007](https://github.com/kristof-mattei/docker-dns-rs/commit/793b0079596c261547767c8e939b31d12345e336))
+- Set revision explicitely - ([1ca21b9](https://github.com/kristof-mattei/docker-dns-rs/commit/1ca21b9c350223869f42f51e85cf6311b2ca7307))
+- Fix strip-components, it caused nothing to be placed - ([b88f13c](https://github.com/kristof-mattei/docker-dns-rs/commit/b88f13c48b7a68493819786d1c7e3ddf70e81526))
+- Move scripts - ([242ce77](https://github.com/kristof-mattei/docker-dns-rs/commit/242ce77b6b07062f09cecc116df82720af27fb2f))
+- Fix typo - ([0ac7ffb](https://github.com/kristof-mattei/docker-dns-rs/commit/0ac7ffb096832c33b15a2369f9a101849c342ffb))
+- Use `CARGO_CRATE_NAME` which always has `-` replaced by `_` - ([8a3037c](https://github.com/kristof-mattei/docker-dns-rs/commit/8a3037c99e0379814858ef28a57616edb766875d))
+- Upgrade before installing - ([8887b23](https://github.com/kristof-mattei/docker-dns-rs/commit/8887b2380320aaf84268ac9f199b6b453b47c893))
+- Fix deprecation warning - ([837157b](https://github.com/kristof-mattei/docker-dns-rs/commit/837157b57a19dfefa416576f38b7d597030d9d83))
+- Don't prompt to accept commit when no conflicts - ([e0677f8](https://github.com/kristof-mattei/docker-dns-rs/commit/e0677f83c9c49b189b96f5136b327f722de0e85c))
+- Caching doesn't need the runner's OS - ([f6c6e07](https://github.com/kristof-mattei/docker-dns-rs/commit/f6c6e07f96ef39a9927b6959976115a69d1a4c88))
+- Disable telemetry, use oidc - ([0b862de](https://github.com/kristof-mattei/docker-dns-rs/commit/0b862dea6cb59aa90c377cdf2a622c68a4a1e57a))
+- Add coveralls - ([e9fe37b](https://github.com/kristof-mattei/docker-dns-rs/commit/e9fe37b857938501c790abd7c63eb99633a73b8e))
+- Split command, remove prefix - ([61fb123](https://github.com/kristof-mattei/docker-dns-rs/commit/61fb1236d3451146507548f0efab8e5a4eb590c5))
+- Testing - ([3de7372](https://github.com/kristof-mattei/docker-dns-rs/commit/3de73727c81184cd5f2f492d27a6664d4519a314))
+- Cargo binstall defaults to cargo install when not found - ([61cf619](https://github.com/kristof-mattei/docker-dns-rs/commit/61cf6192a81156d3e81026058d4f4e8c0cdf54b8))
+- Alphabet - ([e6d1bef](https://github.com/kristof-mattei/docker-dns-rs/commit/e6d1beffdac232a3f25358804bd22539db56cca5))
+- Formatting - ([6fb033f](https://github.com/kristof-mattei/docker-dns-rs/commit/6fb033fbb4458100673639f29835a6af0496b5a0))
+- Shuffle stuff around - ([cd283f4](https://github.com/kristof-mattei/docker-dns-rs/commit/cd283f4470b10eb7509b6c4634e20548b4d74f43))
+- Disable multiple_crate_versions, it's just noise - ([c9dee4b](https://github.com/kristof-mattei/docker-dns-rs/commit/c9dee4bc1e7e8d99750843b3883ed8b327062655))
+- Update comment - ([0ddb54f](https://github.com/kristof-mattei/docker-dns-rs/commit/0ddb54f6ec28a11d5839f9d47f7cb0732b4b16b7))
+- Cleanup - ([f113c99](https://github.com/kristof-mattei/docker-dns-rs/commit/f113c99f22a429bf6f743289129a5d0a3ea69f15))
+- Don't push image cargo build/test/... failed - ([bbc21d0](https://github.com/kristof-mattei/docker-dns-rs/commit/bbc21d076d767fe5fa393f782b7dcc43b63d831d))
+- Fix dockerfile instruction order - ([6013577](https://github.com/kristof-mattei/docker-dns-rs/commit/6013577f1f0615e0cf8d1c861c5b3bcc0d421df9))
+- Cleanup - ([1135c86](https://github.com/kristof-mattei/docker-dns-rs/commit/1135c86230b38095743a9cb189064872fcb3a51a))
+- Rust doesn't support manual mode, no need to pre-build - ([e932a61](https://github.com/kristof-mattei/docker-dns-rs/commit/e932a6182bc42113faf8ff9aecc9a3c551897236))
+- Remove glob from path - ([faf30f8](https://github.com/kristof-mattei/docker-dns-rs/commit/faf30f8f10ecc0d43c0d07f1fed5883694f5ef2d))
+- Settings update - ([be03d72](https://github.com/kristof-mattei/docker-dns-rs/commit/be03d72b4def3a601986845cd063edd915e71daa))
+- Enable clone_on_ref_ptr - ([1afa75c](https://github.com/kristof-mattei/docker-dns-rs/commit/1afa75c15ffd8409cacab55724fbdeb171bef55e))
+- Cleanup - ([146c27d](https://github.com/kristof-mattei/docker-dns-rs/commit/146c27dc94d80bb1a3dfc3fa2a3459c3ea29d7cd))
+- Fmt - ([e28e2d9](https://github.com/kristof-mattei/docker-dns-rs/commit/e28e2d9467de13ed7431bbcd0bed16f960057b69))
+- Also format toml - ([aebaeae](https://github.com/kristof-mattei/docker-dns-rs/commit/aebaeae7a9cd79ead5a4bd64e7c5f5633bca43a8))
+- Simplify prettierconfig - ([15da060](https://github.com/kristof-mattei/docker-dns-rs/commit/15da060278add228c90f65f822279a0f93e43ed2))
+- Fmt - ([81105ff](https://github.com/kristof-mattei/docker-dns-rs/commit/81105ff0ade0d0cb186821b390976b49ae1cd237))
+- Move deps, disable as_conversions, too broad - ([4a48efe](https://github.com/kristof-mattei/docker-dns-rs/commit/4a48efeafbb4224b6ef154e50a203e5696263c6d))
+- Don't cache in lint-configs - ([ab37d2f](https://github.com/kristof-mattei/docker-dns-rs/commit/ab37d2fb61fef6b4a462c1686faa77fbdcccb6f9))
+- Disable codecov, fails too often - ([252a089](https://github.com/kristof-mattei/docker-dns-rs/commit/252a089765ee5872923b20f2d3b26f8e6b5dc41c))
+- Remove unneeded newline - ([66e19b3](https://github.com/kristof-mattei/docker-dns-rs/commit/66e19b3bfb7a4371b072ac7c8dc51db797bfa730))
+- More robust downloading of crane - ([c306637](https://github.com/kristof-mattei/docker-dns-rs/commit/c3066375bd8abf949146bc69e873acd4c4ca99a5))
+- Pass download format to binstall for cocogitto - ([2e173f6](https://github.com/kristof-mattei/docker-dns-rs/commit/2e173f61f09b1b338bff01edee10e1fed0f63540))
+- Disable oldstyle branch protection - ([a6a851a](https://github.com/kristof-mattei/docker-dns-rs/commit/a6a851a1f84c80ee58e3294c132601bb4f330892))
+- Delete old-style protection - ([a754f7d](https://github.com/kristof-mattei/docker-dns-rs/commit/a754f7dce43b3d534a364df25fcec53df3196f96))
+- Try to fix compiler - ([0de04d5](https://github.com/kristof-mattei/docker-dns-rs/commit/0de04d558f710e326ad3f0c1f43f2bc9c25342bf))
+- Musl tools per arch - ([328c478](https://github.com/kristof-mattei/docker-dns-rs/commit/328c47873d78dfa18c67bf0a903dbb858b177c23))
+- Use musl all the way - ([828d679](https://github.com/kristof-mattei/docker-dns-rs/commit/828d67953e2be358e3565197feb91ec127cb2da2))
+- Remove lldb-prettifier built as part of repo, use shared config - ([8a7e110](https://github.com/kristof-mattei/docker-dns-rs/commit/8a7e110376c9a57b26a0a3ab9540b466394a8290))
+- Fmt - ([3d4e946](https://github.com/kristof-mattei/docker-dns-rs/commit/3d4e9462ada1800d8c22b210ba56ce28758770ec))
+- Remove submodule folder - ([f6e5d3a](https://github.com/kristof-mattei/docker-dns-rs/commit/f6e5d3a28c8efe2dcae9575945860a54e710d410))
+- Sort - ([c757c8d](https://github.com/kristof-mattei/docker-dns-rs/commit/c757c8de56467f6c8f45b8825684605c4435da47))
+- Typo - ([cded012](https://github.com/kristof-mattei/docker-dns-rs/commit/cded012f14f816d0e1878e4abf0225bbc22b5925))
+## [0.2.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.1.0..v0.2.0) - 2025-05-04
+
+### 🚀 Features
+
+- [**breaking**] Remove support for records and network blacklists - ([1738f54](https://github.com/kristof-mattei/docker-dns-rs/commit/1738f54d893c7234d07f6cb4447b1106ecc4baa7))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* V0.2.0 - ([ad1249c](https://github.com/kristof-mattei/docker-dns-rs/commit/ad1249cd41fb73e0d3907691c0c6e3705b696141))
+## [0.1.0] - 2025-05-03
+
+### 🚀 Features
+
+- Initial commit - ([7af0684](https://github.com/kristof-mattei/docker-dns-rs/commit/7af0684c86b197699123cc67d0d87ec66fbd1e2e))
+- Added Quz and test - ([07ee173](https://github.com/kristof-mattei/docker-dns-rs/commit/07ee173edd9983669abfac91aa60245c7347d911))
+- Use crane as tool instead of elaborate docker setup - ([a5bc70b](https://github.com/kristof-mattei/docker-dns-rs/commit/a5bc70b9231c9fe16b4594e6349d75f5c0986932))
+- Allowed for concurrent building of docker container - ([7a99b3b](https://github.com/kristof-mattei/docker-dns-rs/commit/7a99b3b303846cb1a98e80f54f5950faee7fc28a))
+- Grcov -> tarpaulin - ([a37fa30](https://github.com/kristof-mattei/docker-dns-rs/commit/a37fa307247860f4071f31a569506b1bc8544045))
+- Use cog - ([146fdca](https://github.com/kristof-mattei/docker-dns-rs/commit/146fdca905e0a1d268eb9750934e3204803be68b))
+- Use shell - ([2a266e9](https://github.com/kristof-mattei/docker-dns-rs/commit/2a266e93167b8a39c482a8a615e12ecd5ddc4c21))
+- Rust 1.58.0 - ([3ac03e8](https://github.com/kristof-mattei/docker-dns-rs/commit/3ac03e829ae931369967728de3326294446a53e5))
+- Rust 1.60.0 - ([0180532](https://github.com/kristof-mattei/docker-dns-rs/commit/0180532b1e432662ccb7908ebc98d39ad501a227))
+- Rust 1.61.0 - ([c130478](https://github.com/kristof-mattei/docker-dns-rs/commit/c130478ad91eaf6b1cea04a2cfe57f6e926efa92))
+- Upgrade semgrep to latest version - ([c7dc4f5](https://github.com/kristof-mattei/docker-dns-rs/commit/c7dc4f5bf96c15784a6b6b5c7ff260a15f244dcd))
+- Devcontainer - ([1d77ed5](https://github.com/kristof-mattei/docker-dns-rs/commit/1d77ed59fbf4915e3b1393867d56ec36a22f9b42))
+- More rust 1.62 - ([628756b](https://github.com/kristof-mattei/docker-dns-rs/commit/628756bf8790f9ffe84ac5cb3ff37baac70c7fcc))
+- Sync-repo-settings first pass - ([0d88baa](https://github.com/kristof-mattei/docker-dns-rs/commit/0d88baa34a3d7b167028941aafdf32e5c464b9c2))
+- Generalize dockerfile - ([be4e9a5](https://github.com/kristof-mattei/docker-dns-rs/commit/be4e9a5fe9cc34bcd239080845ace4c6a631ba97))
+- Multi-platform images - ([45196bd](https://github.com/kristof-mattei/docker-dns-rs/commit/45196bd6bd8801472a6db0b76278fbeaa54c1ca1))
+- Codecov - ([fac48b6](https://github.com/kristof-mattei/docker-dns-rs/commit/fac48b684db19cf74aae4afbf77783a9d31cacc2))
+- Arm64 build - ([26ca7f4](https://github.com/kristof-mattei/docker-dns-rs/commit/26ca7f461753abf523e4e1ed0e2232b826416b50))
+- Docker multiplatform - ([c1f9221](https://github.com/kristof-mattei/docker-dns-rs/commit/c1f922116dd2e78d149247667a514f3bb4724aa1))
+- Support for releasing crates - ([6da4854](https://github.com/kristof-mattei/docker-dns-rs/commit/6da485494a7d16767c01b0255eae49fff6cb6dcf))
+- Get rid of semantic release, use cocogitto - ([a4b5e8c](https://github.com/kristof-mattei/docker-dns-rs/commit/a4b5e8cf58786d438cccee5678dcad0bc1fdcdb2))
+- Hickory dns 0.25.1 - ([23fdbd9](https://github.com/kristof-mattei/docker-dns-rs/commit/23fdbd921e010a25e14d5dca60b9d052482e0867))
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate clap to 4.4.9 - ([75749bc](https://github.com/kristof-mattei/docker-dns-rs/commit/75749bcc227acaa48cb43147a2a1cd67800c2018))
+- *(deps)* Update rust crate clap to 4.4.10 - ([c9aa4d5](https://github.com/kristof-mattei/docker-dns-rs/commit/c9aa4d5d047f4f0bea55736186aec48738ae4084))
+- *(deps)* Update rust crate clap to 4.4.11 - ([df80a7d](https://github.com/kristof-mattei/docker-dns-rs/commit/df80a7d297f29c39e1cdc39db8ecff4dbbb05f79))
+- *(deps)* Update rust crate once_cell to 1.19.0 - ([37cc41a](https://github.com/kristof-mattei/docker-dns-rs/commit/37cc41ae075080f88e705c0eccebb000387228a8))
+- *(deps)* Update rust crate tokio to 1.35.0 - ([65b1d60](https://github.com/kristof-mattei/docker-dns-rs/commit/65b1d604148522e22a00f08e8f091cba04fa9d57))
+- *(deps)* Update rust crate hyper to 1.1.0 - ([b891488](https://github.com/kristof-mattei/docker-dns-rs/commit/b891488b40a5793b5605650d28de091ba9b09498))
+- *(deps)* Update rust crate tokio to 1.35.1 - ([ea5fbc7](https://github.com/kristof-mattei/docker-dns-rs/commit/ea5fbc733c57f4ea198f3914951eea2553ff9b6e))
+- *(deps)* Update rust crate hyper-util to 0.1.2 - ([f4e2498](https://github.com/kristof-mattei/docker-dns-rs/commit/f4e2498a829c1aa98cc504c268f1b7461671573d))
+- *(deps)* Update rust crate clap to 4.4.12 - ([0487ffd](https://github.com/kristof-mattei/docker-dns-rs/commit/0487ffd373f9f577ae0f4179b332af39c6311e82))
+- *(deps)* Update rust crate serde_json to 1.0.109 - ([9ba94c7](https://github.com/kristof-mattei/docker-dns-rs/commit/9ba94c78b335d9f218b037deb7cc47e50102aa18))
+- *(deps)* Update rust crate serde_json to 1.0.110 - ([a9b8f5e](https://github.com/kristof-mattei/docker-dns-rs/commit/a9b8f5ef9373eae472663dbcb25552c2e705be51))
+- *(deps)* Update rust crate serde to 1.0.194 - ([6f3f06e](https://github.com/kristof-mattei/docker-dns-rs/commit/6f3f06e6aa4ef71fa366f35d127f76c6303d23d2))
+- *(deps)* Update rust crate serde_json to 1.0.111 - ([da8c5f0](https://github.com/kristof-mattei/docker-dns-rs/commit/da8c5f0aa54ee9ac662f077a91fc6c9deb0a4f09))
+- *(deps)* Update rust crate clap to 4.4.13 - ([b44b774](https://github.com/kristof-mattei/docker-dns-rs/commit/b44b7742b0bc2835aae7743faca240db9016d9f6))
+- *(deps)* Update rust crate serde to 1.0.195 - ([8c7bd41](https://github.com/kristof-mattei/docker-dns-rs/commit/8c7bd41622869a3f9a8950358248c40646f6ffaf))
+- *(deps)* Update rust crate clap to 4.4.14 - ([3edf6c2](https://github.com/kristof-mattei/docker-dns-rs/commit/3edf6c2e891a6c168e309ac24d44101a28e44b15))
+- *(deps)* Update rust crate clap to 4.4.15 - ([16292c9](https://github.com/kristof-mattei/docker-dns-rs/commit/16292c9927f3da7f7ff4833597246ee535126f23))
+- *(deps)* Update rust crate clap to 4.4.16 - ([16c9d7c](https://github.com/kristof-mattei/docker-dns-rs/commit/16c9d7c885ff1a6c19f7849ba5bed6c7a15aad65))
+- *(deps)* Update rust crate clap to 4.4.17 - ([f51a8d5](https://github.com/kristof-mattei/docker-dns-rs/commit/f51a8d58e6bb633c09c6f016e3314d1168e6774c))
+- *(deps)* Update rust crate clap to 4.4.18 - ([13fd0aa](https://github.com/kristof-mattei/docker-dns-rs/commit/13fd0aad217654f76d976f444978eb711b444630))
+- *(deps)* Update rust crate regex to 1.10.3 - ([9647a39](https://github.com/kristof-mattei/docker-dns-rs/commit/9647a396f8dce65229193f511e1160d3ec0ccf68))
+- *(deps)* Update rust crate serde to 1.0.196 - ([f2ce5e1](https://github.com/kristof-mattei/docker-dns-rs/commit/f2ce5e11ded52e020c4bc6c19849bc73eb7b03c1))
+- *(deps)* Update rust crate serde_json to 1.0.112 - ([2cc3c77](https://github.com/kristof-mattei/docker-dns-rs/commit/2cc3c77508e738d76d1f84b87a105538bc1e91a5))
+- *(deps)* Update rust crate serde_json to 1.0.113 - ([bd79d43](https://github.com/kristof-mattei/docker-dns-rs/commit/bd79d4382de8695696e1448cc038e3d30bab57f1))
+- *(deps)* Update rust crate hyper-util to 0.1.3 - ([a4e5999](https://github.com/kristof-mattei/docker-dns-rs/commit/a4e5999899c8984777d1c1c2ca4b71b9161f59d5))
+- *(deps)* Update rust crate tokio to 1.36.0 - ([1d17b4d](https://github.com/kristof-mattei/docker-dns-rs/commit/1d17b4dee8bb4502ba1b21a1217cb45c0f2170b1))
+- *(deps)* Update rust crate clap to 4.5.0 - ([d18738f](https://github.com/kristof-mattei/docker-dns-rs/commit/d18738ff94dddbb8f86b17538e629de5bc79e80c))
+- *(deps)* Update rust crate clap to 4.5.1 - ([de4e8f4](https://github.com/kristof-mattei/docker-dns-rs/commit/de4e8f4be022fca652d0590989697b4280108304))
+- *(deps)* Update rust crate serde_json to 1.0.114 - ([70537b9](https://github.com/kristof-mattei/docker-dns-rs/commit/70537b9eced948fbd36be9748ffcfb90d563a1bb))
+- *(deps)* Update rust crate serde to 1.0.197 - ([2591c31](https://github.com/kristof-mattei/docker-dns-rs/commit/2591c3125adc4effcdd29eb23f60fdce5e2b9f50))
+- *(deps)* Update rust crate hyper to 1.2.0 - ([af50c09](https://github.com/kristof-mattei/docker-dns-rs/commit/af50c09cafa680f2cb6684a5c9944fdf144b62fb))
+- *(deps)* Update rust crate http to 1.1.0 - ([f9a4b72](https://github.com/kristof-mattei/docker-dns-rs/commit/f9a4b729acdca60e87cf100b8f1dec83243c03fe))
+- *(deps)* Update rust crate clap to 4.5.2 - ([c510156](https://github.com/kristof-mattei/docker-dns-rs/commit/c5101568188fe33fad61992b36ac6a98a7daf438))
+- *(deps)* Update rust crate http-body-util to 0.1.1 - ([36c199d](https://github.com/kristof-mattei/docker-dns-rs/commit/36c199dc2e97be0a3c95543d34e0419a31666df3))
+- *(deps)* Update rust crate color-eyre to 0.6.3 - ([3c5d752](https://github.com/kristof-mattei/docker-dns-rs/commit/3c5d752e683fb2340878685e75f62fa935f7d344))
+- *(deps)* Update rust crate clap to 4.5.3 - ([cc085ba](https://github.com/kristof-mattei/docker-dns-rs/commit/cc085ba84f9b9dd3c678c59b8d5d0f6c3018b90f))
+- *(deps)* Update rust crate color-eyre to 0.6.3 - ([baf1dc7](https://github.com/kristof-mattei/docker-dns-rs/commit/baf1dc7b4352679914415662a2b16ec8f036d409))
+- *(deps)* Update rust crate bytes to 1.6.0 - ([3950bbf](https://github.com/kristof-mattei/docker-dns-rs/commit/3950bbfd2121a54582f28bd3ac8f3f1add086852))
+- *(deps)* Update rust crate regex to 1.10.4 - ([53a75d7](https://github.com/kristof-mattei/docker-dns-rs/commit/53a75d7f1d89021c2092ee07efec169609413707))
+- *(deps)* Update rust crate clap to 4.5.4 - ([e6cc1bd](https://github.com/kristof-mattei/docker-dns-rs/commit/e6cc1bdbe747cf02376b47d7c5927cea98aae1d7))
+- *(deps)* Update rust crate serde_json to 1.0.115 - ([0d18f54](https://github.com/kristof-mattei/docker-dns-rs/commit/0d18f544585b14c0dd016df3363844f946f0edae))
+- *(deps)* Update rust crate tokio to 1.37.0 - ([371554b](https://github.com/kristof-mattei/docker-dns-rs/commit/371554b76a2b343c061728860bbd44f9c4f9a6a6))
+- *(deps)* Update rust crate hyper to 1.3.0 - ([00e9f0a](https://github.com/kristof-mattei/docker-dns-rs/commit/00e9f0a3dbe25d34488f47e831a78d0ded0c8461))
+- *(deps)* Update rust crate serde_json to 1.0.116 - ([14a68ef](https://github.com/kristof-mattei/docker-dns-rs/commit/14a68ef72dfedfeb9715960100c8d5843c93ad74))
+- *(deps)* Update rust crate hyper to 1.3.1 - ([f7b19d3](https://github.com/kristof-mattei/docker-dns-rs/commit/f7b19d39a7ab03ac67874da19123fc6e22a4e744))
+- *(deps)* Update rust crate serde to 1.0.198 - ([677d207](https://github.com/kristof-mattei/docker-dns-rs/commit/677d207790562c96b97e5609dd48fb85d7a8ddd2))
+- *(deps)* Update rust crate hickory-server to 0.24.1 - ([23d6fca](https://github.com/kristof-mattei/docker-dns-rs/commit/23d6fca5666a62ad0fa226b36695a0e7f4f2c0f3))
+- *(deps)* Update rust crate serde to 1.0.199 - ([59a0074](https://github.com/kristof-mattei/docker-dns-rs/commit/59a00749cfc8e40e6facf6e7707fc39becaa9cfd))
+- *(deps)* Update rust crate serde to 1.0.200 - ([23bca75](https://github.com/kristof-mattei/docker-dns-rs/commit/23bca750b0e87b68b7d0001ae6e71a88915d7f88))
+- *(deps)* Update rust crate tokio-util to 0.7.11 - ([c9d33f2](https://github.com/kristof-mattei/docker-dns-rs/commit/c9d33f2ddc86732542521e849c5071bfa1c3ae1b))
+- *(deps)* Update rust crate serde to 1.0.201 - ([ffc6824](https://github.com/kristof-mattei/docker-dns-rs/commit/ffc6824e8c292e8ab6a9b0b7397f76a0766a5169))
+- *(deps)* Update rust crate serde_json to 1.0.117 - ([cbd3a16](https://github.com/kristof-mattei/docker-dns-rs/commit/cbd3a16ab1889daa4f1e7aca377d2649d0bb14f4))
+- *(deps)* Update rust crate serde to 1.0.202 - ([04ba4f7](https://github.com/kristof-mattei/docker-dns-rs/commit/04ba4f7b5bbdd31f2f99c8a83eaf5f8e223da59e))
+- *(deps)* Update rust crate hyper-util to 0.1.4 - ([086df24](https://github.com/kristof-mattei/docker-dns-rs/commit/086df24f61c00a5374f2094bbec7a1ad537f0519))
+- *(deps)* Update rust crate serde to 1.0.203 - ([b14ed2a](https://github.com/kristof-mattei/docker-dns-rs/commit/b14ed2a085f2e8acafdf588d53138d6c00dca175))
+- *(deps)* Update rust crate hyper-util to 0.1.5 - ([fbf0009](https://github.com/kristof-mattei/docker-dns-rs/commit/fbf00094cd966acdb5dd365293bfeddbe1e460d3))
+- *(deps)* Update rust crate tokio to 1.38.0 - ([42dbef5](https://github.com/kristof-mattei/docker-dns-rs/commit/42dbef508ea6d3c186bcb7b44145351303e207a8))
+- *(deps)* Update rust crate clap to 4.5.5 - ([2eeb314](https://github.com/kristof-mattei/docker-dns-rs/commit/2eeb314150dc23414f9b0bca772312900ed33585))
+- *(deps)* Update rust crate clap to 4.5.6 - ([b3703ad](https://github.com/kristof-mattei/docker-dns-rs/commit/b3703ada718c1dc480b2785fbf9eff0f715944fb))
+- *(deps)* Update rust crate regex to 1.10.5 - ([0f675bb](https://github.com/kristof-mattei/docker-dns-rs/commit/0f675bb29d79aaf7d31b6eab029e37aa1e04a813))
+- *(deps)* Update rust crate clap to 4.5.7 - ([309e235](https://github.com/kristof-mattei/docker-dns-rs/commit/309e2351f30cb8b3dbe590013f59eabb5d898331))
+- *(deps)* Update rust crate url to 2.5.1 - ([805188e](https://github.com/kristof-mattei/docker-dns-rs/commit/805188eaa10adfa07bf51c0c14d6e31bf514caa1))
+- *(deps)* Update rust crate http-body-util to 0.1.2 - ([0bb9f79](https://github.com/kristof-mattei/docker-dns-rs/commit/0bb9f79b63dd2c68d14d2222b445cbbfbe8b5fb5))
+- *(deps)* Update rust crate url to 2.5.2 - ([546f482](https://github.com/kristof-mattei/docker-dns-rs/commit/546f4823805cb47cb6425f3b05d491413a1b1d21))
+- *(deps)* Update rust crate serde_json to 1.0.118 - ([8a5fe4b](https://github.com/kristof-mattei/docker-dns-rs/commit/8a5fe4bf7529ce44d6f4f12fb4691203da926ae0))
+- *(deps)* Update rust crate clap to 4.5.8 - ([4e4f8c9](https://github.com/kristof-mattei/docker-dns-rs/commit/4e4f8c91fa50276fbabc03714764d8f48d4959af))
+- *(deps)* Update rust crate serde_json to 1.0.119 - ([2301f1c](https://github.com/kristof-mattei/docker-dns-rs/commit/2301f1ced27aef87366fbaaebca5155fd750cd83))
+- *(deps)* Update rust crate hyper to 1.4.0 - ([dd750c7](https://github.com/kristof-mattei/docker-dns-rs/commit/dd750c7c05fc172514a4345feccdd692b9aece58))
+- *(deps)* Update rust crate hyper-util to 0.1.6 - ([6819569](https://github.com/kristof-mattei/docker-dns-rs/commit/681956943fa149c036869b467f0e5436358dcc3f))
+- *(deps)* Update rust crate serde_json to 1.0.120 - ([ebe67d9](https://github.com/kristof-mattei/docker-dns-rs/commit/ebe67d989d7dd3331632b2262dd89018b6b77fba))
+- *(deps)* Update rust crate serde to 1.0.204 - ([610c62e](https://github.com/kristof-mattei/docker-dns-rs/commit/610c62e59b70804fcc152a9b57a46d0d08c77461))
+- *(deps)* Update rust crate clap to 4.5.9 - ([0c4f892](https://github.com/kristof-mattei/docker-dns-rs/commit/0c4f89255a7697c783c4940a718ae97b20ce25d9))
+- *(deps)* Update rust crate hyper to 1.4.1 - ([ebd1d66](https://github.com/kristof-mattei/docker-dns-rs/commit/ebd1d6687ba87fa297c89046405bc39f7b7f7e78))
+- *(deps)* Update rust crate tokio to 1.38.1 - ([5ea45d6](https://github.com/kristof-mattei/docker-dns-rs/commit/5ea45d6acd8547c8cd0598790a5c5ca4e1e99a0f))
+- *(deps)* Update rust crate openssl to 0.10.65 - ([dd173f5](https://github.com/kristof-mattei/docker-dns-rs/commit/dd173f5ce36d8b6cbebd93ec8567a7c8c6883b11))
+- *(deps)* Update rust crate openssl to 0.10.66 - ([bc39df5](https://github.com/kristof-mattei/docker-dns-rs/commit/bc39df5a67321cadcfe09c7132f345b6482754c1))
+- *(deps)* Update rust crate clap to 4.5.10 - ([6c25c92](https://github.com/kristof-mattei/docker-dns-rs/commit/6c25c9231a8db9c6610aee863754363fdbb3faf7))
+- *(deps)* Update rust crate tokio to 1.39.1 - ([6d92f86](https://github.com/kristof-mattei/docker-dns-rs/commit/6d92f8653048b1ca6b1ea1e80af2da0be9425cea))
+- *(deps)* Update rust crate clap to 4.5.11 - ([ac72671](https://github.com/kristof-mattei/docker-dns-rs/commit/ac726717626ca1b090bb5713d9c27102b6859585))
+- *(deps)* Update rust crate tokio to 1.39.2 - ([f55a34e](https://github.com/kristof-mattei/docker-dns-rs/commit/f55a34e9225ae99b891e547ec02c2911c1371291))
+- *(deps)* Update rust crate serde_json to 1.0.121 - ([6ce7566](https://github.com/kristof-mattei/docker-dns-rs/commit/6ce75668c130740a74829da2d10aa0f11e237d78))
+- *(deps)* Update rust crate bytes to 1.7.0 - ([c393308](https://github.com/kristof-mattei/docker-dns-rs/commit/c393308306318208f3022a6f02538051d5b5f3a4))
+- *(deps)* Update rust crate clap to 4.5.13 - ([c7ce2ff](https://github.com/kristof-mattei/docker-dns-rs/commit/c7ce2ff9b08e12929b0979352e1c54f867c13b47))
+- *(deps)* Update rust crate bytes to 1.7.1 - ([d54e6c1](https://github.com/kristof-mattei/docker-dns-rs/commit/d54e6c120fde4ea48510adab756482145b37c30c))
+- *(deps)* Update rust crate serde_json to 1.0.122 - ([085f5b9](https://github.com/kristof-mattei/docker-dns-rs/commit/085f5b939a084c65750c73408f6e9962e4f30aef))
+- *(deps)* Update rust crate regex to 1.10.6 - ([ebd42b4](https://github.com/kristof-mattei/docker-dns-rs/commit/ebd42b4450756195a3bbddb8f1234f520f55effc))
+- *(deps)* Update rust crate hyper-util to 0.1.7 - ([46cb0e5](https://github.com/kristof-mattei/docker-dns-rs/commit/46cb0e5cd6923340d609b246050cf5d066fa49c4))
+- *(deps)* Update rust crate serde to 1.0.205 - ([19605ec](https://github.com/kristof-mattei/docker-dns-rs/commit/19605ec94d7b83e143335dce031af4706ecf040e))
+- *(deps)* Update rust crate clap to 4.5.14 - ([feffc00](https://github.com/kristof-mattei/docker-dns-rs/commit/feffc003a087ec7a2a2d7128f4297191a2ae4e30))
+- *(deps)* Update rust crate clap to 4.5.15 - ([5019d22](https://github.com/kristof-mattei/docker-dns-rs/commit/5019d22652487947d287d777ebed7423c02a175d))
+- *(deps)* Update rust crate serde to 1.0.206 - ([4d79394](https://github.com/kristof-mattei/docker-dns-rs/commit/4d79394c056e9eeb18acb9bcd8c0d51ad7853d61))
+- *(deps)* Update rust crate serde_json to 1.0.123 - ([fb38778](https://github.com/kristof-mattei/docker-dns-rs/commit/fb3877888d85d8321d68f4dc19647da760d6c568))
+- *(deps)* Update rust crate serde_json to 1.0.124 - ([57e8414](https://github.com/kristof-mattei/docker-dns-rs/commit/57e841431741ffb6ae70aa933cc31cd0a845e81f))
+- *(deps)* Update rust crate serde to 1.0.207 - ([9e06f72](https://github.com/kristof-mattei/docker-dns-rs/commit/9e06f7264efc53affdd0acafee8197371c0c0610))
+- *(deps)* Update rust crate serde_json to 1.0.125 - ([f579a4e](https://github.com/kristof-mattei/docker-dns-rs/commit/f579a4e11ea32614e960245e9151661464650f5c))
+- *(deps)* Update rust crate serde to 1.0.208 - ([160ea02](https://github.com/kristof-mattei/docker-dns-rs/commit/160ea02dcad6a8780c77d094b21ca19e694610b0))
+- *(deps)* Update rust crate clap to 4.5.16 - ([2d1354a](https://github.com/kristof-mattei/docker-dns-rs/commit/2d1354aba987246c9595c9d5b836ac18e68f47f2))
+- *(deps)* Update rust crate tokio to 1.39.3 - ([69cbf22](https://github.com/kristof-mattei/docker-dns-rs/commit/69cbf220bdecbd934e0a3a81a18b3477a6a83fee))
+- *(deps)* Update rust crate serde_json to 1.0.127 - ([c508814](https://github.com/kristof-mattei/docker-dns-rs/commit/c508814abaa30d4c3d87d00a05340a59eb056fbf))
+- *(deps)* Update rust crate serde to 1.0.209 - ([e747c9f](https://github.com/kristof-mattei/docker-dns-rs/commit/e747c9fcb4d3650542f232b8fd82a422a89fe2fc))
+- *(deps)* Update rust crate tokio to 1.40.0 - ([77178a4](https://github.com/kristof-mattei/docker-dns-rs/commit/77178a434f24b8e425be40db7e89aafbdafdc3e3))
+- *(deps)* Update rust crate clap to 4.5.17 - ([67c84e5](https://github.com/kristof-mattei/docker-dns-rs/commit/67c84e508713f79994754c9cd3283134899a2486))
+- *(deps)* Update rust crate serde_json to 1.0.128 - ([f37aa61](https://github.com/kristof-mattei/docker-dns-rs/commit/f37aa6183c776963250b5e4107b0530606fbad7b))
+- *(deps)* Update rust crate tokio-util to 0.7.12 - ([870e2ab](https://github.com/kristof-mattei/docker-dns-rs/commit/870e2abfade8f77096c19a11d0425ae0e74c7a7d))
+- *(deps)* Update rust crate serde to 1.0.210 - ([f609697](https://github.com/kristof-mattei/docker-dns-rs/commit/f6096978ed0b17252b54f58b0157a81f80c592d5))
+- *(deps)* Update rust crate ipnet to 2.10.0 - ([e7957fd](https://github.com/kristof-mattei/docker-dns-rs/commit/e7957fd874daef9818852e5d4ad2bb821e89c86c))
+- *(deps)* Update rust crate hyper-util to 0.1.8 - ([4e8cd54](https://github.com/kristof-mattei/docker-dns-rs/commit/4e8cd54d4bbea1e6b91d7b5da101606b47651e2c))
+- *(deps)* Update rust crate once_cell to 1.20.0 - ([f03f244](https://github.com/kristof-mattei/docker-dns-rs/commit/f03f2441c555d830bd091d0a6e55660d7405bb87))
+- *(deps)* Update rust crate bytes to 1.7.2 - ([980646f](https://github.com/kristof-mattei/docker-dns-rs/commit/980646f11aea40f1393496a88eb93e479a9ae61e))
+- *(deps)* Update rust crate clap to 4.5.18 - ([217eae6](https://github.com/kristof-mattei/docker-dns-rs/commit/217eae6894819c10419f73a256adcbed09ccb399))
+- *(deps)* Update rust crate hyper-util to 0.1.9 - ([94a03fe](https://github.com/kristof-mattei/docker-dns-rs/commit/94a03fed5eba17223ce85085de293fd75da05d1a))
+- *(deps)* Update rust crate once_cell to 1.20.1 - ([96a0415](https://github.com/kristof-mattei/docker-dns-rs/commit/96a0415ad325cb68c72a6e11c0cfd7fb2e1b08b5))
+- *(deps)* Update rust crate regex to 1.11.0 - ([92ad0d8](https://github.com/kristof-mattei/docker-dns-rs/commit/92ad0d86a6fb937f953f65eff8e00cd6b0556e3b))
+- *(deps)* Update rust crate clap to 4.5.19 - ([850c21b](https://github.com/kristof-mattei/docker-dns-rs/commit/850c21bfeb8a453af6e4b1c143c7bcee80b7864c))
+- *(deps)* Update rust crate ipnet to 2.10.1 - ([00daa10](https://github.com/kristof-mattei/docker-dns-rs/commit/00daa10905b8f928ee08ebf30e55f685fff36ab6))
+- *(deps)* Update rust crate once_cell to 1.20.2 - ([7a89caa](https://github.com/kristof-mattei/docker-dns-rs/commit/7a89caae38e171453fcc0b76e00328564252fe6b))
+- *(deps)* Update rust crate clap to 4.5.20 - ([0e18e5f](https://github.com/kristof-mattei/docker-dns-rs/commit/0e18e5f18fa0675020043eda728e8ccce9e8f10d))
+- *(deps)* Update rust crate hyper to 1.5.0 - ([c4a0310](https://github.com/kristof-mattei/docker-dns-rs/commit/c4a0310f29f48b338ae336d78d44ed4f86a8cfe1))
+- *(deps)* Update rust crate openssl to 0.10.67 - ([ad8cf69](https://github.com/kristof-mattei/docker-dns-rs/commit/ad8cf696b70ed8e45f2ecaa7a6b7e5b9a6c77246))
+- *(deps)* Update rust crate openssl to 0.10.68 - ([a70ae26](https://github.com/kristof-mattei/docker-dns-rs/commit/a70ae2607f3596ae28f75070e49fa2dca577806f))
+- *(deps)* Update rust crate serde_json to 1.0.129 - ([2326602](https://github.com/kristof-mattei/docker-dns-rs/commit/2326602c79c9dfccb92bb0279ddab7750c4c7e77))
+- *(deps)* Update rust crate serde_json to 1.0.130 - ([98d798b](https://github.com/kristof-mattei/docker-dns-rs/commit/98d798bd2bfa5f7630e5462daef558fe54bae6bb))
+- *(deps)* Update rust crate serde_json to 1.0.131 - ([d258358](https://github.com/kristof-mattei/docker-dns-rs/commit/d258358bcf9ce689bdd3ff5f19e85f3e8a9a5c23))
+- *(deps)* Update rust crate serde_json to 1.0.132 - ([eb86cdb](https://github.com/kristof-mattei/docker-dns-rs/commit/eb86cdb852724c921dc30e13ffc1104e24b8262e))
+- *(deps)* Update rust crate bytes to 1.8.0 - ([93310eb](https://github.com/kristof-mattei/docker-dns-rs/commit/93310eb3cf6d0508bf1f94be83089ced0fe94ed4))
+- *(deps)* Update rust crate serde to 1.0.211 - ([d36d7f4](https://github.com/kristof-mattei/docker-dns-rs/commit/d36d7f40cb6c845c422a735c47c66cde9a715aea))
+- *(deps)* Update rust crate tokio to 1.41.0 - ([eaf0f14](https://github.com/kristof-mattei/docker-dns-rs/commit/eaf0f1422ffa00a3ab28961f29cdcb3b1b642df0))
+- *(deps)* Update rust crate serde to 1.0.213 - ([e003a0f](https://github.com/kristof-mattei/docker-dns-rs/commit/e003a0f09aed8fb0cfe0b2281a656bc3944019c2))
+- *(deps)* Update rust crate regex to 1.11.1 - ([53a1807](https://github.com/kristof-mattei/docker-dns-rs/commit/53a1807ae77bd651abd57c2cc8e07e225a382fe1))
+- *(deps)* Update rust crate serde to 1.0.214 - ([c2c9d65](https://github.com/kristof-mattei/docker-dns-rs/commit/c2c9d656357524959574e72231e69376b58e86ee))
+- *(deps)* Update rust crate hyper-util to 0.1.10 - ([8847f3f](https://github.com/kristof-mattei/docker-dns-rs/commit/8847f3fd4d54035bb8b4aa4a15c25729bc852de8))
+- *(deps)* Update rust crate url to 2.5.3 - ([dcb5744](https://github.com/kristof-mattei/docker-dns-rs/commit/dcb574497ca06a3372dc0bab7166a4d5b7f7a259))
+- *(deps)* Update rust crate tokio to 1.41.1 - ([811d258](https://github.com/kristof-mattei/docker-dns-rs/commit/811d258af6032b5f88aec6e47f770f031291e356))
+- *(deps)* Update rust crate serde to 1.0.215 - ([684160f](https://github.com/kristof-mattei/docker-dns-rs/commit/684160f92e1c9d17efaa0f8ab2c0881ba68b3da2))
+- *(deps)* Update rust crate clap to 4.5.21 - ([f6e45ad](https://github.com/kristof-mattei/docker-dns-rs/commit/f6e45adfc92fa95b4680f78215bfbcd7007c5206))
+- *(deps)* Update rust crate serde_json to 1.0.133 - ([cb9e400](https://github.com/kristof-mattei/docker-dns-rs/commit/cb9e400ec26ab21061137c5331a239bc2fded1be))
+- *(deps)* Update rust crate hyper to 1.5.1 - ([909c754](https://github.com/kristof-mattei/docker-dns-rs/commit/909c754fc90f8eb34d015a1e29216c8fdf22576d))
+- *(deps)* Update rust crate tracing to 0.1.41 - ([1683413](https://github.com/kristof-mattei/docker-dns-rs/commit/1683413ac5cd2f5bca79367c989e82043c28b8c9))
+- *(deps)* Update rust crate bytes to 1.9.0 - ([d5e0fda](https://github.com/kristof-mattei/docker-dns-rs/commit/d5e0fda26eeca45dedb707d0f5c0f8003e9363d0))
+- *(deps)* Update rust crate tracing-subscriber to 0.3.19 - ([7332ae0](https://github.com/kristof-mattei/docker-dns-rs/commit/7332ae0d7fef237d1b513a5661f1646df1ef16a0))
+- *(deps)* Update rust crate tracing-error to 0.2.1 - ([73da5c4](https://github.com/kristof-mattei/docker-dns-rs/commit/73da5c4d22d30673339285215f33a670a471183c))
+- *(deps)* Update rust crate tokio to 1.42.0 - ([6411bb4](https://github.com/kristof-mattei/docker-dns-rs/commit/6411bb4c5eb611a68a7ab3114c1f768dbf0ced72))
+- *(deps)* Update rust crate http to 1.2.0 - ([f07373c](https://github.com/kristof-mattei/docker-dns-rs/commit/f07373c13768435839aee8ed42846d8da15cf621))
+- *(deps)* Update rust crate clap to 4.5.22 - ([7739373](https://github.com/kristof-mattei/docker-dns-rs/commit/7739373a18e9f3070bfccf06c5bf95069fdf6947))
+- *(deps)* Update rust crate tokio-util to 0.7.13 - ([f9febc9](https://github.com/kristof-mattei/docker-dns-rs/commit/f9febc9905b0b1d7c64fe372b347a22686c34980))
+- *(deps)* Update rust crate clap to 4.5.23 - ([cf361e4](https://github.com/kristof-mattei/docker-dns-rs/commit/cf361e4d2ffb38eaa7f19d9d5e74ab7108cb4675))
+- *(deps)* Update rust crate hickory-server to 0.24.2 - ([b1bafc1](https://github.com/kristof-mattei/docker-dns-rs/commit/b1bafc1a631a5bec965dd7d2f2f851ca2ebbf1b0))
+- *(deps)* Update rust crate serde to 1.0.216 - ([6a56857](https://github.com/kristof-mattei/docker-dns-rs/commit/6a568575063e55f083ad0566adb08949bc1945ee))
+- *(deps)* Update rust crate hyper to 1.5.2 - ([9ee9648](https://github.com/kristof-mattei/docker-dns-rs/commit/9ee9648e046b2a9fd189a196fb9683715725aa8d))
+- *(deps)* Update rust crate serde_json to 1.0.134 - ([3670bc4](https://github.com/kristof-mattei/docker-dns-rs/commit/3670bc4e0583f2ce3ba53eebfce1b51db0b6c8bc))
+- *(deps)* Update rust crate hyper-unix-socket to 0.3.0 - ([22f8113](https://github.com/kristof-mattei/docker-dns-rs/commit/22f811395b3215ec5218826f94b1c7ddf469bb15))
+- *(deps)* Update rust crate serde to 1.0.217 - ([fd7fb00](https://github.com/kristof-mattei/docker-dns-rs/commit/fd7fb00b6c4f5c3ccb94de563cee940475d47019))
+- *(deps)* Update rust crate serde_json to 1.0.135 - ([142a0e3](https://github.com/kristof-mattei/docker-dns-rs/commit/142a0e316eb4563f676ed30959061c12063fcd4b))
+- *(deps)* Update rust crate clap to 4.5.24 - ([dd7a568](https://github.com/kristof-mattei/docker-dns-rs/commit/dd7a5689ffed8963d47166ccdf0b1160cb64e979))
+- *(deps)* Update rust crate tokio to 1.43.0 - ([ac9281d](https://github.com/kristof-mattei/docker-dns-rs/commit/ac9281ddc0e4f9fbe21222910f4f4d2148d56383))
+- *(deps)* Update rust crate clap to 4.5.25 - ([7b2055c](https://github.com/kristof-mattei/docker-dns-rs/commit/7b2055c93da132d0c8b1809b5918505b4d048804))
+- *(deps)* Update rust crate clap to 4.5.26 - ([9b06553](https://github.com/kristof-mattei/docker-dns-rs/commit/9b06553c1d5305bdb2d2923bd7adb1528ed8cecb))
+- *(deps)* Update rust crate serde_json to 1.0.136 - ([54d4fd9](https://github.com/kristof-mattei/docker-dns-rs/commit/54d4fd94ce32ae4a5068b625ede2797a04120169))
+- *(deps)* Update rust crate ipnet to 2.11.0 - ([c213792](https://github.com/kristof-mattei/docker-dns-rs/commit/c2137920a89cdbc477bb6532e9f5bef06414a07a))
+- *(deps)* Update rust crate serde_json to 1.0.137 - ([e5ae10f](https://github.com/kristof-mattei/docker-dns-rs/commit/e5ae10f3e258c6a6d337eeb6fa8e7ba29ebcfe5f))
+- *(deps)* Update rust crate clap to 4.5.27 - ([0c02b67](https://github.com/kristof-mattei/docker-dns-rs/commit/0c02b6738cf4135265a6ec3efb7d6dd2e41c0dad))
+- *(deps)* Update rust crate openssl to 0.10.69 - ([d77d9b0](https://github.com/kristof-mattei/docker-dns-rs/commit/d77d9b04b7aefa5d9f23b1e24190bfac5a3716a9))
+- *(deps)* Update rust crate hyper to 1.6.0 - ([39eff4e](https://github.com/kristof-mattei/docker-dns-rs/commit/39eff4e58f97db672281bfef80c15d61756ba236))
+- *(deps)* Update rust crate serde_json to 1.0.138 - ([d840531](https://github.com/kristof-mattei/docker-dns-rs/commit/d840531dec00d0f85ac2687b7e1dd2c0ffedeca7))
+- *(deps)* Update rust crate openssl to 0.10.70 - ([0d7bce3](https://github.com/kristof-mattei/docker-dns-rs/commit/0d7bce34447cb92efda48ced7a37bfbd7fe93f19))
+- *(deps)* Update rust crate bytes to 1.10.0 - ([3809401](https://github.com/kristof-mattei/docker-dns-rs/commit/3809401fb835a7f10c7eada8d84e74d542a88814))
+- *(deps)* Update rust crate clap to 4.5.28 - ([ad52bef](https://github.com/kristof-mattei/docker-dns-rs/commit/ad52bef95b23877c81631225b8d2a68e38b392f5))
+- *(deps)* Update rust crate hickory-server to 0.24.3 - ([374d5db](https://github.com/kristof-mattei/docker-dns-rs/commit/374d5dbd0c6504aeacead4b01d93bce146afa8a4))
+- *(deps)* Update rust crate clap to 4.5.29 - ([852f509](https://github.com/kristof-mattei/docker-dns-rs/commit/852f509a5b10595c8be158a9558ec90272902036))
+- *(deps)* Update rust crate openssl to 0.10.71 - ([9b71f78](https://github.com/kristof-mattei/docker-dns-rs/commit/9b71f78fce9f571067e78ff743cec51643fe3610))
+- *(deps)* Update rust crate clap to 4.5.30 - ([d0d7092](https://github.com/kristof-mattei/docker-dns-rs/commit/d0d7092189c7d4ff4803d46ec1e4a4679827ce3f))
+- *(deps)* Update rust crate hickory-server to 0.24.4 - ([0493ab1](https://github.com/kristof-mattei/docker-dns-rs/commit/0493ab1d70468975cde71f4e4526918db27532fc))
+- *(deps)* Update rust crate serde_json to 1.0.139 - ([9da209b](https://github.com/kristof-mattei/docker-dns-rs/commit/9da209bb248158b8328e7cb7eaa45214280cac6f))
+- *(deps)* Update rust crate serde to 1.0.218 - ([78ebea6](https://github.com/kristof-mattei/docker-dns-rs/commit/78ebea6db9b04af43a7be619083afaaccbb0b5e6))
+- *(deps)* Update rust crate clap to 4.5.31 - ([d3f0d01](https://github.com/kristof-mattei/docker-dns-rs/commit/d3f0d018725457e0ab90e21e765bf596ac9a10a6))
+- *(deps)* Update rust crate serde_json to 1.0.140 - ([5307873](https://github.com/kristof-mattei/docker-dns-rs/commit/5307873351c3146abb6c8117ff35df7cb9adbb52))
+- *(deps)* Update rust crate tokio to 1.44.0 - ([3af734c](https://github.com/kristof-mattei/docker-dns-rs/commit/3af734cec8cbbe295cc64628af8acbf6a7cc637e))
+- *(deps)* Update rust crate serde to 1.0.219 - ([e9636be](https://github.com/kristof-mattei/docker-dns-rs/commit/e9636be6ba49a9803bfd9017751c2174b80ef744))
+- *(deps)* Update rust crate clap to 4.5.32 - ([3cd786c](https://github.com/kristof-mattei/docker-dns-rs/commit/3cd786c25b822e1d2d671dca39fbebcfd9805114))
+- *(deps)* Update rust crate http-body-util to 0.1.3 - ([d792275](https://github.com/kristof-mattei/docker-dns-rs/commit/d79227566982b2878e35b5c4ea0801ac2f4fc716))
+- *(deps)* Update rust crate http to 1.3.1 - ([4fd2c37](https://github.com/kristof-mattei/docker-dns-rs/commit/4fd2c3716e442fd9dfc9cbebff4850155a0e95b9))
+- *(deps)* Update rust crate tokio to 1.44.1 - ([865e512](https://github.com/kristof-mattei/docker-dns-rs/commit/865e5128484bdb87649f3767c35543737320ea22))
+- *(deps)* Update rust crate tokio-util to 0.7.14 - ([36d41ba](https://github.com/kristof-mattei/docker-dns-rs/commit/36d41ba7f1987ec4673a60cdaa286c6bf16b64c8))
+- *(deps)* Update rust crate hickory-server to 0.25.1 - ([f711c8e](https://github.com/kristof-mattei/docker-dns-rs/commit/f711c8ed08e52601f6e0c8a0133d6af6a76479e3))
+- *(deps)* Update rust crate clap to 4.5.33 - ([8485056](https://github.com/kristof-mattei/docker-dns-rs/commit/8485056a8c2e0e0e562c7b84ff9906356fbb70d0))
+- *(deps)* Update rust crate clap to 4.5.34 - ([8d90bdd](https://github.com/kristof-mattei/docker-dns-rs/commit/8d90bddc3e2bc8bcb468ac4577ba9e04f2183bcf))
+- *(deps)* Update rust crate hyper-util to 0.1.11 - ([2997d65](https://github.com/kristof-mattei/docker-dns-rs/commit/2997d65a7819c94deb3dba4b927d630c8954d5a6))
+- *(deps)* Update rust crate clap to 4.5.35 - ([f0ba04a](https://github.com/kristof-mattei/docker-dns-rs/commit/f0ba04a545c1c25ee3273ddcc60d5389a4b931b2))
+- *(deps)* Update rust crate openssl to 0.10.72 - ([f2a067e](https://github.com/kristof-mattei/docker-dns-rs/commit/f2a067e716a7134111b98fdeaf47b058c290c329))
+- *(deps)* Update rust crate tokio to 1.44.2 - ([57d1681](https://github.com/kristof-mattei/docker-dns-rs/commit/57d1681e9c2241dfa6d9362f82d24a054877d3fb))
+- *(deps)* Update rust crate clap to 4.5.36 - ([451c3b8](https://github.com/kristof-mattei/docker-dns-rs/commit/451c3b8f3eaaf34aa7a5a6bdf9ba4ad5ddddaf83))
+- *(deps)* Update rust crate clap to 4.5.37 - ([7569df5](https://github.com/kristof-mattei/docker-dns-rs/commit/7569df58f9d4e29cdaac5e99bee762e4e98dcb14))
+- *(deps)* Update rust crate tokio-util to 0.7.15 - ([55fafa8](https://github.com/kristof-mattei/docker-dns-rs/commit/55fafa81c68871efc5ea881de1076107537b6bc0))
+- *(deps)* Update rust crate hickory-server to 0.25.2 - ([21db345](https://github.com/kristof-mattei/docker-dns-rs/commit/21db345ee62f40cda79d980b5d20bc9aaccfaf8e))
+- Enabled codecov - ([70a7b60](https://github.com/kristof-mattei/docker-dns-rs/commit/70a7b60de32c66a3c0315f67d0f8278d91fc797a))
+- Codecov - ([1f6458f](https://github.com/kristof-mattei/docker-dns-rs/commit/1f6458f7eeb0ba5dd85d02ebcd67734c4dbd5623))
+- Bumped cargo version - ([f47f7d0](https://github.com/kristof-mattei/docker-dns-rs/commit/f47f7d0d5f7c6ba227002ba705a58f2fdf05aa2b))
+- Username.toLowerCase() - ([3c41052](https://github.com/kristof-mattei/docker-dns-rs/commit/3c410523e2c154652a3564511bbc90fde0710bb3))
+- Make sure husky doesn't install on CI servers - ([6908d84](https://github.com/kristof-mattei/docker-dns-rs/commit/6908d84e175ffab99bd18227bcbd515e0020c778))
+- Download grcov from releases, WAY faster - ([9a8c19b](https://github.com/kristof-mattei/docker-dns-rs/commit/9a8c19b538ae5c3cff200aa2460d03055ee1d14b))
+- Don't try extract bz2 as gzip - ([edd13c8](https://github.com/kristof-mattei/docker-dns-rs/commit/edd13c85f1f11c38e7bd1be2a1e8a4210346797a))
+- Arguments go into an array - ([9c6ff93](https://github.com/kristof-mattei/docker-dns-rs/commit/9c6ff93cb599504352c601e3e9f34790859a86d5))
+- 2nd param is dest, not flags, null to infer destination though - ([6db1ca8](https://github.com/kristof-mattei/docker-dns-rs/commit/6db1ca87785155c6e124dd99782acd5d9967778f))
+- Remove duplicated login - ([03eeddf](https://github.com/kristof-mattei/docker-dns-rs/commit/03eeddf662f5ebafb049c945d052340c8ee0d7e6))
+- Split build and push for faster overall times - ([83d504e](https://github.com/kristof-mattei/docker-dns-rs/commit/83d504eb164a50cdd52f850b144a71b467c3cf04))
+- Reduced parent^2 detection complexity - ([2fab698](https://github.com/kristof-mattei/docker-dns-rs/commit/2fab698158059e4ad8f2c9cc44a553beba68f826))
+- Forgot to put back line to add SHA to $env - ([5e2a12a](https://github.com/kristof-mattei/docker-dns-rs/commit/5e2a12a1eea0baa55a445077396f9468a1a16e3e))
+- --quiet isn't quiet - ([764ef0a](https://github.com/kristof-mattei/docker-dns-rs/commit/764ef0ab2140b0b80cf53b476ba6525b3a873b4e))
+- Initialize otherwise EXITCODE is not set on success, and then it still fails 😅 - ([6658ea7](https://github.com/kristof-mattei/docker-dns-rs/commit/6658ea7799a523b54b122ff6c8d5a33a18e2c7c6))
+- Fake commit - ([80eec6e](https://github.com/kristof-mattei/docker-dns-rs/commit/80eec6ed5bdf245ca071780face928adf95848f4))
+- Centralized names - ([2e2345b](https://github.com/kristof-mattei/docker-dns-rs/commit/2e2345b2f1337ed5c99dea090d94de2b4b932949))
+- Removed submodules, going direct - ([2e2a71c](https://github.com/kristof-mattei/docker-dns-rs/commit/2e2a71c68a23764369cf67dfc485c9a76372dad2))
+- Switched to fixed commits for actions - ([2bd59a8](https://github.com/kristof-mattei/docker-dns-rs/commit/2bd59a85d847c6cbe5ce39038e25666c99086674))
+- Fix for too much action... - ([8256387](https://github.com/kristof-mattei/docker-dns-rs/commit/8256387796424f2cd5066452cf17a32f0cbe8f35))
+- Removed needs for docker-build to allow parallel operation - ([64986f6](https://github.com/kristof-mattei/docker-dns-rs/commit/64986f67e074439c1433011d5b27eafc725c35e4))
+- Remove be - ([21d027b](https://github.com/kristof-mattei/docker-dns-rs/commit/21d027bdf904697f96c9fe4adfe91fd2cf081d4f))
+- Reduce docker tag complexity - ([d187184](https://github.com/kristof-mattei/docker-dns-rs/commit/d187184277fadc66b6c7027624ecb9340c1e2fd9))
+- Aspiring comments - ([791bbed](https://github.com/kristof-mattei/docker-dns-rs/commit/791bbedad194c189fb9e35389f1c265c94df29da))
+- ToUpper() - ([81ba43c](https://github.com/kristof-mattei/docker-dns-rs/commit/81ba43cd7ba41aad25165e5e2232dad00476b3a7))
+- Added skip-tags to prevent it from pushing tags - ([3806f32](https://github.com/kristof-mattei/docker-dns-rs/commit/3806f32e8b0e56462a525744feb93954a15e562e))
+- Dry run still verifies push permissions - ([57b2cde](https://github.com/kristof-mattei/docker-dns-rs/commit/57b2cde87e49ce10c0e9b9b082eb0174409a2b0f))
+- Even dry-run wants a token - ([a1349fc](https://github.com/kristof-mattei/docker-dns-rs/commit/a1349fc215d87c4f5220496ae841c56776c9067f))
+- Handle script dependency - ([54be1b9](https://github.com/kristof-mattei/docker-dns-rs/commit/54be1b982120c880256a061895f15784d11752d9))
+- Corrected library usage - ([ed8e289](https://github.com/kristof-mattei/docker-dns-rs/commit/ed8e289589a490b61dc229021fc860d1d52fbb89))
+- Forgot .rest - ([2cb78e7](https://github.com/kristof-mattei/docker-dns-rs/commit/2cb78e791ee76ef95925e61a4f7988fc427bdde2))
+- Variable correction - ([7e0baaa](https://github.com/kristof-mattei/docker-dns-rs/commit/7e0baaa911c814c430ee69d43edfe3433c189aec))
+- Create reports directory, otherwise tool complains - ([15ef2e8](https://github.com/kristof-mattei/docker-dns-rs/commit/15ef2e83b9aff72e8986656d457e9439c2d1b7ba))
+- Capture the rest, not the value called 'rest' - ([222ef7c](https://github.com/kristof-mattei/docker-dns-rs/commit/222ef7c6edd6c3011d8d70cb0af0ae6319899842))
+- Renamed for clarity - ([319817f](https://github.com/kristof-mattei/docker-dns-rs/commit/319817fac4290114976eab8c87102278c8b87440))
+- Locked node version - ([5a7acea](https://github.com/kristof-mattei/docker-dns-rs/commit/5a7aceafe7488f93450bbeb494f400e5ef60193f))
+- Reran npm install with npm 8 to update package-lock - ([2f51f25](https://github.com/kristof-mattei/docker-dns-rs/commit/2f51f25cf9aec79943511b87b12d57e40224b6c3))
+- Added npm to dependabot - ([f99a1cb](https://github.com/kristof-mattei/docker-dns-rs/commit/f99a1cbce03151e38279c081b2becd4478a5f87b))
+- A change in build scripts should cause a full rebuild - ([4e3da47](https://github.com/kristof-mattei/docker-dns-rs/commit/4e3da4743be7b4043d46cd10c2f9a05c60c4fc1b))
+- Use environment variable to get cargo location - ([c57b6db](https://github.com/kristof-mattei/docker-dns-rs/commit/c57b6dbcf20fabf1cbbc3cb946e656855acf992d))
+- Corrected environment variable - ([40527e4](https://github.com/kristof-mattei/docker-dns-rs/commit/40527e48765c4a99008d3207173de249c1de0b81))
+- Updated cargo cache to use tilde again - ([e650509](https://github.com/kristof-mattei/docker-dns-rs/commit/e650509c93198c1ca654b7ad46bf0f672b6f101a))
+- See if we can cache the whole .cargo directory - ([54d824f](https://github.com/kristof-mattei/docker-dns-rs/commit/54d824f82fd2e12457feaeb08ed259d15960f33f))
+- Updated concurrency key - ([eda182b](https://github.com/kristof-mattei/docker-dns-rs/commit/eda182b9fd074b2f515ad546d2ac15ef450c9141))
+- Leverage setup-node's ability to read from .nvmrc - ([f78dc4c](https://github.com/kristof-mattei/docker-dns-rs/commit/f78dc4ce7a4008e34e43a367be283327926f8581))
+- Added missing data - ([230c651](https://github.com/kristof-mattei/docker-dns-rs/commit/230c651afffa59e575e6d231d3334314df9179f3))
+- Alltargets for tarpaulin - ([3ba7006](https://github.com/kristof-mattei/docker-dns-rs/commit/3ba7006cd3bf3d027a0485aced51810837f41333))
+- Install tarpaulin from source - ([9f1966c](https://github.com/kristof-mattei/docker-dns-rs/commit/9f1966ce22f42e508d223a35ee4b651768fc2786))
+- Synced tool invocation parameters - ([8417c23](https://github.com/kristof-mattei/docker-dns-rs/commit/8417c23b540cd56be8123b85a0796b12ada21740))
+- Bumped rust version - ([c84b022](https://github.com/kristof-mattei/docker-dns-rs/commit/c84b02218ea3256f0138944b6939860a48236d7f))
+- Added rust-toolchain, symlinked to rust-toolchain.toml - ([cac0b9a](https://github.com/kristof-mattei/docker-dns-rs/commit/cac0b9aac7d25396a442e45dc3279ad9dd183eee))
+- Getting toolchain file to work - ([15ae1ab](https://github.com/kristof-mattei/docker-dns-rs/commit/15ae1abfbcc6472cd29039c4ef13c720966b5520))
+- Try with profile and toolchain specified here - ([05991b7](https://github.com/kristof-mattei/docker-dns-rs/commit/05991b716bed23ab70dfc1c6d8cdbfc83489e408))
+- Infer components from rust-toolchain.toml - ([e8aa97d](https://github.com/kristof-mattei/docker-dns-rs/commit/e8aa97da616b81fc8fbdfff829f6b820cac90513))
+- Corrected build dependencies, all-done work be a success if docker-build failed - ([ee3789d](https://github.com/kristof-mattei/docker-dns-rs/commit/ee3789db3225903b09255799f34df000d4b79462))
+- The world is ok - ([b9c1196](https://github.com/kristof-mattei/docker-dns-rs/commit/b9c119625d8f140e0e249ff5fcdafa55db969c0b))
+- Fixed wrong needs name - ([977e159](https://github.com/kristof-mattei/docker-dns-rs/commit/977e1592730e0ac018d1d6e1c7dfcc3a41ff4bfb))
+- Set up toolchain manually - ([f5f92d6](https://github.com/kristof-mattei/docker-dns-rs/commit/f5f92d6794df30cf70f7ad9963cd00c2367f1591))
+- -y to accept defaults - ([9280bfc](https://github.com/kristof-mattei/docker-dns-rs/commit/9280bfc01863ebac2baa024c28a447e2cc52098d))
+- Don't fail tarpaulin when a test fails - ([b065efa](https://github.com/kristof-mattei/docker-dns-rs/commit/b065efadf1e005dcc2c4c4ed8a7ddc74627bcf1b))
+- Rebuild when NPM packages change - ([43b4a7f](https://github.com/kristof-mattei/docker-dns-rs/commit/43b4a7fcce073b3ab19ea9d44d2cc8a3189dc285))
+- Add commit linting - ([141820a](https://github.com/kristof-mattei/docker-dns-rs/commit/141820aabf5b6a5823bb6c1080304797884187c5))
+- Npm cleanup - ([12b30b3](https://github.com/kristof-mattei/docker-dns-rs/commit/12b30b3877504b61ec1157e9fc3350ad1f219830))
+- Reduced complexity tied to semantic release because cog doesn't need it - ([21ed988](https://github.com/kristof-mattei/docker-dns-rs/commit/21ed98844785b0addf90a083e624e26aa92e08d8))
+- Set git user and email so that cog bump works - ([01efb04](https://github.com/kristof-mattei/docker-dns-rs/commit/01efb04af74d945bd368152b9281f4ab2d551209))
+- Set the right variable - ([18978f8](https://github.com/kristof-mattei/docker-dns-rs/commit/18978f8e875aec0a31553f3ab5dd6d6d998b44f8))
+- Ensure we're logged in to use the registry cache - ([994a73c](https://github.com/kristof-mattei/docker-dns-rs/commit/994a73c7c3d49280a7f5b7f6110859bafb7ba1c2))
+- Reordered cache restore and toolchain setup - ([5f08e37](https://github.com/kristof-mattei/docker-dns-rs/commit/5f08e374bcb75cc7d1eccd519884f069d05ce758))
+- Try coveralls - ([2e06476](https://github.com/kristof-mattei/docker-dns-rs/commit/2e06476d20cb459d068c9b6daf1f4e2725559835))
+- Try coveralls - ([d7196c5](https://github.com/kristof-mattei/docker-dns-rs/commit/d7196c57c7fa793db927c58dadf8cf6c28bd7a67))
+- Renamed step name - ([a7044ff](https://github.com/kristof-mattei/docker-dns-rs/commit/a7044ff77cf15d48660acb46621237e2aad81c82))
+- Remove cache exclusion - ([baee94e](https://github.com/kristof-mattei/docker-dns-rs/commit/baee94e4f6a90a8696c1e62b43c3d187083ab477))
+- Use built-in rustup - ([1b2d13b](https://github.com/kristof-mattei/docker-dns-rs/commit/1b2d13b9889b833b3616e825e49714bdfcde2cc8))
+- Removed unneeded linting file - ([7a6b3ed](https://github.com/kristof-mattei/docker-dns-rs/commit/7a6b3ed5d44dad4c4eb1360a73016200e4b10834))
+- Merged configuration into 1 - ([db6004a](https://github.com/kristof-mattei/docker-dns-rs/commit/db6004ac753af69521dbb529916b5c9f0fdc293e))
+- Updated to 2021 edition - ([cee0bd0](https://github.com/kristof-mattei/docker-dns-rs/commit/cee0bd0a17664f00947cc0d4bfe56fc178bcf9fe))
+- Restored packages configuration - ([506eac8](https://github.com/kristof-mattei/docker-dns-rs/commit/506eac86ff59359bf45758ca4182eeea3069fdbf))
+- Missing package - ([a20bc10](https://github.com/kristof-mattei/docker-dns-rs/commit/a20bc107500b531f2e1b23d45ab86063ab125225))
+- Lock down sha256 of docker images - ([659aadd](https://github.com/kristof-mattei/docker-dns-rs/commit/659aadd292af52bade19aeebc00747c8ee3c808d))
+- Grcov intstead of tarpaulin - ([d8f1fe1](https://github.com/kristof-mattei/docker-dns-rs/commit/d8f1fe173d6fe3efaa5aa2bb77ae0d988296c51b))
+- Filename was wrong + comment update + rust-version bump - ([4371418](https://github.com/kristof-mattei/docker-dns-rs/commit/4371418d7fd70cd8faaee6d77b98c932905339b5))
+- Corrected title - ([b3b0cb6](https://github.com/kristof-mattei/docker-dns-rs/commit/b3b0cb62e4b96f95daef20bc0d1ec6143e5d2e97))
+- Merge steps for testbased coverage - ([a7b74e1](https://github.com/kristof-mattei/docker-dns-rs/commit/a7b74e1637ac50f4165507f491278386cb986244))
+- Install llvm tools - ([3d5b63b](https://github.com/kristof-mattei/docker-dns-rs/commit/3d5b63b77c7c0b431c4f547c7b429a5266703637))
+- Typo in env variable - ([d4e47fa](https://github.com/kristof-mattei/docker-dns-rs/commit/d4e47faa41b598137d3e60418a7f4d9d8f8a0921))
+- Code climate test reporter - ([9c58b72](https://github.com/kristof-mattei/docker-dns-rs/commit/9c58b72f8b04698b8ef901e4e19ae642f3c99e8e))
+- Use correct subcommand - ([96fa7aa](https://github.com/kristof-mattei/docker-dns-rs/commit/96fa7aa0d712a2d8feb188ad28587b5f0e697de1))
+- Remove dependency on build to run on main - ([0a6b0c6](https://github.com/kristof-mattei/docker-dns-rs/commit/0a6b0c66405b44a17ba512cb8f56f64ee4420c9f))
+- Tag -> sha - ([7be092d](https://github.com/kristof-mattei/docker-dns-rs/commit/7be092dfdf25244113b8695cf94e7edae3a4ec23))
+- Filter out lcov - ([60e9e4e](https://github.com/kristof-mattei/docker-dns-rs/commit/60e9e4eb97e40080a4c4ec563c27675404e370a9))
+- Also keep tests - ([a746b08](https://github.com/kristof-mattei/docker-dns-rs/commit/a746b08a460aafa5b984303dc4527ef0046dcbe8))
+- Add linebreak - ([4712a1f](https://github.com/kristof-mattei/docker-dns-rs/commit/4712a1f6df2e3005b70e49cc4d6a097d0645a455))
+- Set code climate filter - ([e171505](https://github.com/kristof-mattei/docker-dns-rs/commit/e17150556571145f9295d3f6ed46eb372485b262))
+- No need to bring in action just for this - ([faa92dc](https://github.com/kristof-mattei/docker-dns-rs/commit/faa92dc31731b248339b30e9c2c583164f37afce))
+- Removed spaces - ([15a0f18](https://github.com/kristof-mattei/docker-dns-rs/commit/15a0f18752a64ce109f269bd8eb362334982b327))
+- Auto dependabot merge - ([cdc772a](https://github.com/kristof-mattei/docker-dns-rs/commit/cdc772a475f030e5135f22ced30af4a74129b8b2))
+- Ignore merge commit linting - ([314180a](https://github.com/kristof-mattei/docker-dns-rs/commit/314180a6a826335dfab4d4425fc29b474871ab33))
+- Instrument coverage is stable! - ([cd2a8e6](https://github.com/kristof-mattei/docker-dns-rs/commit/cd2a8e618131056b33df7711cac1da6d7e267e9c))
+- Switch to auto config - ([71ec2d9](https://github.com/kristof-mattei/docker-dns-rs/commit/71ec2d96c2778dc3c8c9359840b7c43f18323f44))
+- Remove fixes - ([e90953e](https://github.com/kristof-mattei/docker-dns-rs/commit/e90953e4eba7037818de69e8067faa244f6259a0))
+- Add user - ([4e414de](https://github.com/kristof-mattei/docker-dns-rs/commit/4e414de196055df363eb355b100ba5d6e7cb4a06))
+- Set the right user - ([c82af71](https://github.com/kristof-mattei/docker-dns-rs/commit/c82af712a81c84e773764916c281274377d150e0))
+- Set permissions - ([d3c9dcf](https://github.com/kristof-mattei/docker-dns-rs/commit/d3c9dcfea41224b596e87672338c66bf5f98f78e))
+- Try centralized renovate config - ([973829b](https://github.com/kristof-mattei/docker-dns-rs/commit/973829b723a20cdd4b5c5f9d0bf3477cc8d421e2))
+- Download binstall to /tmp to avoid additional untracked files - ([eb3d325](https://github.com/kristof-mattei/docker-dns-rs/commit/eb3d3252dabeeb48c960995a46bb13b4df71796d))
+- Binstall now wants stuff with a capital - ([4e862db](https://github.com/kristof-mattei/docker-dns-rs/commit/4e862dbb4fcd5577e2ab36ebf2ba3ceb755eb122))
+- Don't copy paste - ([d9ed65e](https://github.com/kristof-mattei/docker-dns-rs/commit/d9ed65e9c1ac8e3ffd77a33f5f0956637ee90302))
+- Lowercase package fmt - ([d464837](https://github.com/kristof-mattei/docker-dns-rs/commit/d4648375d819651c86216d8b2d3f511622f91d82))
+- Fix schema - ([2363092](https://github.com/kristof-mattei/docker-dns-rs/commit/23630924a373ca06ffed352f8574516afb7e0cda))
+- Don't require reviews - ([921c419](https://github.com/kristof-mattei/docker-dns-rs/commit/921c4193b6dd2b37af2487072117c7586bbc37c3))
+- Force signed commits - ([9c408fd](https://github.com/kristof-mattei/docker-dns-rs/commit/9c408fdef65a9dbe2599402b5654de69ed9cfbcc))
+- Update rules - ([db556a8](https://github.com/kristof-mattei/docker-dns-rs/commit/db556a800db25f534302a594a120632d709b8a2f))
+- Set the correct tag - ([273291f](https://github.com/kristof-mattei/docker-dns-rs/commit/273291fe484addf894f8ddc3c13889b140389103))
+- Deny stuff, nobody reads warnings - ([20a9980](https://github.com/kristof-mattei/docker-dns-rs/commit/20a998015fee19324cf08f8893bb260c69aff3a3))
+- Semgrep from container - ([de3c82d](https://github.com/kristof-mattei/docker-dns-rs/commit/de3c82ddb3ec7fc91b63376ab3db0dfcbd6cfd48))
+- Set tag & sha256 - ([7b6e267](https://github.com/kristof-mattei/docker-dns-rs/commit/7b6e267179f85e2615185826d42f1ac74b1cb14d))
+- Group imports - ([a561eab](https://github.com/kristof-mattei/docker-dns-rs/commit/a561eabca180fbdebe301f830f2bcd3139887134))
+- Quotes - ([91c129c](https://github.com/kristof-mattei/docker-dns-rs/commit/91c129c1d09e29453c37024514cfdda0b3407c87))
+- Comment out nightly function, add match | - ([d0c9366](https://github.com/kristof-mattei/docker-dns-rs/commit/d0c936698945e3733e598e229ba117b44557d822))
+- No leading pipes - ([1010233](https://github.com/kristof-mattei/docker-dns-rs/commit/101023383a45998b4e0ed2a1dbd86f5681f7a73f))
+- Correct cocogitto again with binstall - ([6d58aa7](https://github.com/kristof-mattei/docker-dns-rs/commit/6d58aa766b57ca79248ddfffaa2e405efda60fb2))
+- Google -> probot - ([23ac95c](https://github.com/kristof-mattei/docker-dns-rs/commit/23ac95cd6c81f0b0f32accf434f4a50d5c48e65b))
+- Allow overrides - ([33769f0](https://github.com/kristof-mattei/docker-dns-rs/commit/33769f0d2f9451e5411470dc2dfc3b278b036229))
+- Add other settings - ([f520994](https://github.com/kristof-mattei/docker-dns-rs/commit/f520994518d0f5e13e59ec7c593c76da65062b02))
+- Set-output is deprecated - ([8b69dd4](https://github.com/kristof-mattei/docker-dns-rs/commit/8b69dd437a5cec1f3dd7e256be22658338bcbb03))
+- Set correct nextest config - ([2447503](https://github.com/kristof-mattei/docker-dns-rs/commit/2447503724f960fb66a723705e52810e169ae2aa))
+- Use up to date action - ([47190c9](https://github.com/kristof-mattei/docker-dns-rs/commit/47190c9524d3029fe2a3dedc570e1b88d2f63105))
+- Separate before and after cache - ([82f9775](https://github.com/kristof-mattei/docker-dns-rs/commit/82f97756352773948e9a4572f2740831d5bf9f2c))
+- Settings - ([769ba7d](https://github.com/kristof-mattei/docker-dns-rs/commit/769ba7d6fab0e5833e503b669531a1c9018c15a6))
+- Formatting - ([a6c47ee](https://github.com/kristof-mattei/docker-dns-rs/commit/a6c47ee700414a12bb6ee60a8a3d9bcdd28b7194))
+- Formatting - ([f71fbed](https://github.com/kristof-mattei/docker-dns-rs/commit/f71fbed5f1ac288c4d25462fbcd013dcca7a9ba0))
+- Snake in comments is causing parsing failures - ([69d278d](https://github.com/kristof-mattei/docker-dns-rs/commit/69d278dee797be71e67582b6ac0275853d1f5898))
+- Use cocogitto bump, and support no new version generated - ([68a37df](https://github.com/kristof-mattei/docker-dns-rs/commit/68a37dfdadd533d41497cdfed2cdff70716df06e))
+- Prevent cog throwing an error which causes script termination - ([a0e6468](https://github.com/kristof-mattei/docker-dns-rs/commit/a0e6468e9491beccaed2ac227f9f6c93bec69bc4))
+- Set latest tag - ([1870e1d](https://github.com/kristof-mattei/docker-dns-rs/commit/1870e1da3545c8fee6f6026ba6cece373316c1c4))
+- Switch to editorconfig - ([02402b7](https://github.com/kristof-mattei/docker-dns-rs/commit/02402b75b91fc52f36a1140d67f95460670a5f11))
+- Allow uninlined format args - ([203df05](https://github.com/kristof-mattei/docker-dns-rs/commit/203df05f519b8fa8d6f0f89044320194726ed5ca))
+- Add update script - ([bb08a31](https://github.com/kristof-mattei/docker-dns-rs/commit/bb08a315ab8b2269cc5d848c821a75b1ad79e97d))
+- Make clippy more annoying - ([af9bc12](https://github.com/kristof-mattei/docker-dns-rs/commit/af9bc12597c1236c3a642570c3c4fb526f5668b1))
+- Hack version (?) - ([58ff338](https://github.com/kristof-mattei/docker-dns-rs/commit/58ff338a043dc581440936114e8e0005a00a938c))
+- Remove version, doesn't work for container > image - ([2ef1e88](https://github.com/kristof-mattei/docker-dns-rs/commit/2ef1e883d0411aeaad4d0ea9e4a925bcd73a4ac1))
+- Set rangeStrategy - ([752da2c](https://github.com/kristof-mattei/docker-dns-rs/commit/752da2c3898fddaa537083430da3d0fd31d5a5cd))
+- Unset rangeStrategy, move to the renovate base config - ([2dae343](https://github.com/kristof-mattei/docker-dns-rs/commit/2dae3431cfeda8a8ef5c6b78a69f0e32b02db894))
+- Editorconfig settings for shell files - ([72d74b7](https://github.com/kristof-mattei/docker-dns-rs/commit/72d74b755522d30b07a00202ddf6e23138a9b1cb))
+- Pin clippy - ([bd33a24](https://github.com/kristof-mattei/docker-dns-rs/commit/bd33a2469072c2430b02694ebfe406f956de3862))
+- Yeet code climate - ([0ff8087](https://github.com/kristof-mattei/docker-dns-rs/commit/0ff8087a8aca74832292d787329cb2c30d3cddb7))
+- Lock down with version and digest - ([ea6cda5](https://github.com/kristof-mattei/docker-dns-rs/commit/ea6cda5aff2e89af491654668c95edef6231898c))
+- More formatting enforcement - ([4825d45](https://github.com/kristof-mattei/docker-dns-rs/commit/4825d45eac04d98c8b20870657fb8346ef5636a3))
+- Allow for building / not building docker container - ([9a91217](https://github.com/kristof-mattei/docker-dns-rs/commit/9a91217a67620dcae3d4a9dbe5f71712c97aa03c))
+- Ascii idents only to prevent idents starting with characters my keyboard can't handle - ([0b7f646](https://github.com/kristof-mattei/docker-dns-rs/commit/0b7f6469dbd30ad44508f836277282860cad6cbd))
+- Allow disable container retagging - ([8e39b39](https://github.com/kristof-mattei/docker-dns-rs/commit/8e39b39694931df1716d2b79dafcfd7348de04f0))
+- Updated cache ids - ([75f6e51](https://github.com/kristof-mattei/docker-dns-rs/commit/75f6e51d56f491eabd2038688a4348f421eaad34))
+- Comment indent - ([aff7168](https://github.com/kristof-mattei/docker-dns-rs/commit/aff7168b45600424fed73fb582001cf55c2e2cd3))
+- Don't retag when we don't build a container - ([fe1a006](https://github.com/kristof-mattei/docker-dns-rs/commit/fe1a006c3d9e9d95f0d8cef01555d3a4c303e92a))
+- Set maximum backtrace - ([cd44fe2](https://github.com/kristof-mattei/docker-dns-rs/commit/cd44fe2ab070d930dea9b1040a5e57ec9276ed34))
+- Also do RUST_BACKTRACE=full for debugging - ([fde9619](https://github.com/kristof-mattei/docker-dns-rs/commit/fde9619668b4eb33ad41e0265c8ff5cae164001e))
+- Build all with tests too - ([2fdf062](https://github.com/kristof-mattei/docker-dns-rs/commit/2fdf062917c86c9ffebbd81b3b9bb8720aa841ef))
+- Trace for all, not just the app - ([e92d8c0](https://github.com/kristof-mattei/docker-dns-rs/commit/e92d8c04661c0a06a6932a701ba7fc4e0f731fc2))
+- Default is to use color-eyre - ([9ec7951](https://github.com/kristof-mattei/docker-dns-rs/commit/9ec795182352fc168b18cd5a9fd623b1930494f3))
+- Trace for run and test - ([57bb0f1](https://github.com/kristof-mattei/docker-dns-rs/commit/57bb0f18bcf3c360eca25ee5aeeb61ac37000d46))
+- Add update-name script - ([57e5023](https://github.com/kristof-mattei/docker-dns-rs/commit/57e502335d9e4f409054ed5ecfb7d1ad8ab1d2d9))
+- Coveralls as CodeCov keeps on failing - ([fab1710](https://github.com/kristof-mattei/docker-dns-rs/commit/fab171080b3de6c51c4bc7531699841534366f8a))
+- Specify version, Renovate will pin it - ([2a44ecb](https://github.com/kristof-mattei/docker-dns-rs/commit/2a44ecbc3cbca50f1fddaf65ec4633b762384ef1))
+- Make BUILD_DOCKER_CONTAINER configurable from variables - ([5ab39f5](https://github.com/kristof-mattei/docker-dns-rs/commit/5ab39f5f95c94aec0291d15c83e10f466fa659e4))
+- Env -> vars - ([a4ef4d5](https://github.com/kristof-mattei/docker-dns-rs/commit/a4ef4d59898bea126c2531a76799c0ba557ff2c7))
+- Get application name automatically - ([5f71149](https://github.com/kristof-mattei/docker-dns-rs/commit/5f71149c9c86a79155fe7180c8fc7e154febbca3))
+- Remove unneeded newline - ([4a3fe57](https://github.com/kristof-mattei/docker-dns-rs/commit/4a3fe575e0eb6d3a254a5041ccba662ddcbcbdcd))
+- We don't use .idea config - ([4d22e96](https://github.com/kristof-mattei/docker-dns-rs/commit/4d22e96241230cf0406dfc2cb3199b38acd2bad3))
+- Better defaults - ([0c8b4a7](https://github.com/kristof-mattei/docker-dns-rs/commit/0c8b4a74b7e969af7b5b696ba9300b0b6cd31a85))
+- Consolidate clippy & rust config on top of main, all the rest causes duplication - ([e158e41](https://github.com/kristof-mattei/docker-dns-rs/commit/e158e41a05171aadc4a36bed4f40685e9f15a8fc))
+- Don't show progress - ([2be0887](https://github.com/kristof-mattei/docker-dns-rs/commit/2be088747fc874dad816ed60d0e49dbf3390e0bb))
+- Workflow_dispatch does not take a branch - ([7cb9b28](https://github.com/kristof-mattei/docker-dns-rs/commit/7cb9b2833bc904c936e96cb57d091262d3246933))
+- Fix new version - ([ef697ab](https://github.com/kristof-mattei/docker-dns-rs/commit/ef697abfef681fa7d69f7baa93c9c76b77b3548c))
+- Add placeholder for env variable - ([4bb5340](https://github.com/kristof-mattei/docker-dns-rs/commit/4bb534066cf1c3471e352cc5c8eb80ea3af113d5))
+- Docker-dns-rs initial commit - ([c954bca](https://github.com/kristof-mattei/docker-dns-rs/commit/c954bca9d86e21fd8698fe4d99cea5fd557da4c0))
+- Use Name instead of string, only need to parse once - ([40aa4da](https://github.com/kristof-mattei/docker-dns-rs/commit/40aa4da5ce3226f21ff636587af5da20f7d11b6a))
+- Move semantic-release config file as per https://github.com/semantic-release/semantic-release/releases/tag/v23.0.0 - ([e77b9d1](https://github.com/kristof-mattei/docker-dns-rs/commit/e77b9d10a3019ff3c00f28ed49eb6cf4faeb5f1c))
+- Mixed up config name order - ([6976f89](https://github.com/kristof-mattei/docker-dns-rs/commit/6976f89fbd6f5774047fa42c1dff717e2a37e0e5))
+- Simplified tags - ([5c2e4f9](https://github.com/kristof-mattei/docker-dns-rs/commit/5c2e4f911c20a994d2c70cbb9105e1ebb156c6ae))
+- Cleanup - ([80a9dda](https://github.com/kristof-mattei/docker-dns-rs/commit/80a9dda3495b1f1142304906a9246b8f6072c0ec))
+- Don't set shell, not needed in semgrep container - ([de4ab4c](https://github.com/kristof-mattei/docker-dns-rs/commit/de4ab4c42e490e7e5a5ce2a6af342659f9ef3a49))
+- Separate scan and fixup, as the scan container doesn't have bash / jq anymore - ([4e59581](https://github.com/kristof-mattei/docker-dns-rs/commit/4e595812651951b3e762d8abe0ef7dac61ff6156))
+- Only upload sarif file itself - ([0629d45](https://github.com/kristof-mattei/docker-dns-rs/commit/0629d45d07730960d087feed26c941ee1d7fa0a6))
+- Set unpack folder, not filepath - ([3612966](https://github.com/kristof-mattei/docker-dns-rs/commit/36129662df205055eedb8fd73e62a4dbeb08e323))
+- Platform name - ([d8cf974](https://github.com/kristof-mattei/docker-dns-rs/commit/d8cf9747ae7b1c14fa7f70b1f7f612d342d1e31a))
+- Filepaths were wrong - ([6d1f131](https://github.com/kristof-mattei/docker-dns-rs/commit/6d1f131d50f29b4e9f58a3ab29cc83da7dd3c0e2))
+- Use artifact v4 settings - ([d8c091d](https://github.com/kristof-mattei/docker-dns-rs/commit/d8c091de62781eac1789ad4a11889e3fa4559414))
+- Correctly build musl - ([c712945](https://github.com/kristof-mattei/docker-dns-rs/commit/c7129451d3a7618b0304bcf78471f5fd14811bf2))
+- Try something else - ([0efe974](https://github.com/kristof-mattei/docker-dns-rs/commit/0efe9741d77cf9f7ca93f38255aa91e7dcf670af))
+- Report tests to codecov for tracking - ([cc1ccdd](https://github.com/kristof-mattei/docker-dns-rs/commit/cc1ccdd729170ab4f8fddc1660911caf587fc3ad))
+- Revert once_cell 1.20.0 to 1.19.0 as it was yanked, renovate SHOULD do this, but it doesn't work - ([a29b303](https://github.com/kristof-mattei/docker-dns-rs/commit/a29b30386dbba5e4b6df3c09e730aa87f3fba98b))
+- Allow multiple versions of wasi - ([7183d97](https://github.com/kristof-mattei/docker-dns-rs/commit/7183d9758d5ca0cea6d4be61440977d01fd161b4))
+- Prettier 3.41.0 - ([64aa76c](https://github.com/kristof-mattei/docker-dns-rs/commit/64aa76cc522d7ee28a38bfffee53dc789abe4c12))
+- Restore needed workflows - ([72180e8](https://github.com/kristof-mattei/docker-dns-rs/commit/72180e8239e1a85a892f7713d8986bb9ad34f55c))
+- Build container from scratch - ([250217a](https://github.com/kristof-mattei/docker-dns-rs/commit/250217a80fa10d152f21f31c6031ce45039b32ce))
+- Remove unneeded conversion - ([9767df7](https://github.com/kristof-mattei/docker-dns-rs/commit/9767df7942575ac09ea1381966682b2f96931616))
+- Remove @actions/tool-cache - ([3889143](https://github.com/kristof-mattei/docker-dns-rs/commit/3889143b5e053e5d63835407138decb395314a13))
+- Set fqdn for base domain, reduced logging - ([b1dd37d](https://github.com/kristof-mattei/docker-dns-rs/commit/b1dd37df5b9aff60b449159f583a22d0eb59356b))
+- Start tracking lldb debug helper - ([b662ffa](https://github.com/kristof-mattei/docker-dns-rs/commit/b662ffa8c38b08c5f3d276e6e58646013a051efd))
+- Rename functionality now rebuilds recordset, so the returned value is correct - ([15cbe46](https://github.com/kristof-mattei/docker-dns-rs/commit/15cbe46381e4e3252f6398fe714c28d35dcfa9ed))
+
+### 🧪 Testing
+
+- Sign with GPG signature - ([979cd32](https://github.com/kristof-mattei/docker-dns-rs/commit/979cd322c6433c7f9200ed36c0deb84ab02b0706))
+- Sign with GPG signature - ([63d0aa2](https://github.com/kristof-mattei/docker-dns-rs/commit/63d0aa281c26653cb62b1e7416fc047fe72c589a))
+- Flow - ([9e940fb](https://github.com/kristof-mattei/docker-dns-rs/commit/9e940fbe55fa07e3b24358b023720ba2d73d8c86))
+- Print changelog.md - ([ce90089](https://github.com/kristof-mattei/docker-dns-rs/commit/ce900894ee712c58c14955ec4bfa9b90b0c050e8))
+- Failure test - ([fc23c01](https://github.com/kristof-mattei/docker-dns-rs/commit/fc23c01aee19e787bf952f9ce9b2205e62ff15cc))
+- Trigger build - ([8ea2267](https://github.com/kristof-mattei/docker-dns-rs/commit/8ea226738eb615fce0abdffc37ef8cd01c6fabe6))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(version)* V1.2.0 - ([1dbbec6](https://github.com/kristof-mattei/docker-dns-rs/commit/1dbbec608864c5cb559a90d8904996011daef52c))
+- *(version)* V0.1.0 - ([0584d46](https://github.com/kristof-mattei/docker-dns-rs/commit/0584d467b25129a86181c8579d96fadf50d4e98f))
+- Copy tags with docker tags again - ([8ffcf1e](https://github.com/kristof-mattei/docker-dns-rs/commit/8ffcf1ed1de7a080abcea97328b049bf909a1dba))
+- Spelling correction - ([78e52a8](https://github.com/kristof-mattei/docker-dns-rs/commit/78e52a882d3cc7e22e17e4457e870f9b3b7534d2))
+- Removed unneeded print - ([045ea6c](https://github.com/kristof-mattei/docker-dns-rs/commit/045ea6c8ecceed3918dd2c5307cbae9e56ff1864))
+- Added comment for future me <insert 88mph joke> - ([1c4c032](https://github.com/kristof-mattei/docker-dns-rs/commit/1c4c0321a161d6719796b0724a13eb754b2125c8))
+- Renamed files - ([e34981a](https://github.com/kristof-mattei/docker-dns-rs/commit/e34981a3a8506a261ad818f45ea726e3d2e20e7c))
+- Debugging changelog printing issues - ([cf9a3de](https://github.com/kristof-mattei/docker-dns-rs/commit/cf9a3de23bf33ea746cd56d0c50b15b3825aca52))
+- Fix linebreaks - ([25900e3](https://github.com/kristof-mattei/docker-dns-rs/commit/25900e3490df1800b89ed40ad727f64a74ef8252))
+- Forgot dependency - ([24064f8](https://github.com/kristof-mattei/docker-dns-rs/commit/24064f83d4cb48e7b908485d1a1c0104e6b07bc4))
+- Fix space - ([023334b](https://github.com/kristof-mattei/docker-dns-rs/commit/023334b405aabed437cbb00a6f9152f259f30830))
+- Added final step - ([ea08b74](https://github.com/kristof-mattei/docker-dns-rs/commit/ea08b74d52466ba5ae07af106737e036b27ce0b1))
+- Update README.md - ([f043d40](https://github.com/kristof-mattei/docker-dns-rs/commit/f043d40421a8e5836e2b18711e751965e67103ae))
+- Updated name everywhere - ([e0da1df](https://github.com/kristof-mattei/docker-dns-rs/commit/e0da1dfbaab56c5bfe15145abab04ddfbd05539c))
+- Bumped rust numbers everywhere - ([a0577b5](https://github.com/kristof-mattei/docker-dns-rs/commit/a0577b5c76c2c590f7ec371dab5669b648b31bf9))
+- Fixed name - ([eb13981](https://github.com/kristof-mattei/docker-dns-rs/commit/eb13981ac036fa28dfe7f8df5665d28ef071aab2))
+- Consolidated npm usage - ([146c18f](https://github.com/kristof-mattei/docker-dns-rs/commit/146c18fa3ddc6c63cd2fa1e32a9cfefaf346ffa2))
+- Cleanup un-used script - ([e8ab324](https://github.com/kristof-mattei/docker-dns-rs/commit/e8ab3245bc3ac74a7bd96844047c68ee789f18b4))
+- Foundation for correct version numbers - ([82fe6c5](https://github.com/kristof-mattei/docker-dns-rs/commit/82fe6c562db8fcc81eed9ff614346e1dcb6ca8e3))
+- Set version number of Rust binary at build time - ([5746431](https://github.com/kristof-mattei/docker-dns-rs/commit/57464314eadd600e6ceb395041d8ba6f33c3afb5))
+- Reduce unneeded builds - ([ed49297](https://github.com/kristof-mattei/docker-dns-rs/commit/ed49297faf6c0300cbfe42ae5b4b5d7fcfbbf091))
+- Add dry-run to make sure we don't publish preemptively - ([5285cee](https://github.com/kristof-mattei/docker-dns-rs/commit/5285cee32977ef1ada378dc306c20b9c5f08ccb5))
+- Ensure checkout so that we have a package-lock - ([4eeb52e](https://github.com/kristof-mattei/docker-dns-rs/commit/4eeb52e02e4eb3c18f39edadbdafe4ed3b47b2fb))
+- Remove spurious ) - ([5a81c7e](https://github.com/kristof-mattei/docker-dns-rs/commit/5a81c7e34b0dbe620524c8399eb6a4f56083084c))
+- I used the wrong script - ([7dcc44d](https://github.com/kristof-mattei/docker-dns-rs/commit/7dcc44d2c43e506d4b436c1fdf43bd9cabf3da33))
+- Flip aroud switches until we find the right combination - ([1c225f6](https://github.com/kristof-mattei/docker-dns-rs/commit/1c225f6c17d71594ab8fbb751d5de52df0d821d1))
+- Hack the semantic-release - ([65bd2eb](https://github.com/kristof-mattei/docker-dns-rs/commit/65bd2ebb3aeea525700fab234db4499581e11fa8))
+- Semantic-release doesn't like refs/pulls/12/merge, surrounding with quotes to test - ([c3acbf5](https://github.com/kristof-mattei/docker-dns-rs/commit/c3acbf55e23ecd55e4d280efdfc3bb1d7ccfa834))
+- Just trying to get  this to work - ([b5478dd](https://github.com/kristof-mattei/docker-dns-rs/commit/b5478dd32304377204c6d7b8960ac877f5af19f4))
+- Can't go without --no-ci - ([29fbe92](https://github.com/kristof-mattei/docker-dns-rs/commit/29fbe92afa714985de7f0c6fc8c779a8caaeca04))
+- Try get last tag - ([a37253e](https://github.com/kristof-mattei/docker-dns-rs/commit/a37253eb904612f60e0a6e4ea2a891cf7a76e051))
+- Removed duplicate version id - ([97ee09a](https://github.com/kristof-mattei/docker-dns-rs/commit/97ee09a29da6ccedb4591b9cd91d1520506cad58))
+- Better way to check out the head? - ([04c1587](https://github.com/kristof-mattei/docker-dns-rs/commit/04c1587aea423444d50b9b63ebd78a74b5ec895c))
+- Work around semantic-release restrictions - ([63a6315](https://github.com/kristof-mattei/docker-dns-rs/commit/63a63159018ab9b7806dd669768fcfdc06f6c6b1))
+- Hack around semantic-release some more - ([3bd1a9c](https://github.com/kristof-mattei/docker-dns-rs/commit/3bd1a9c0f70f33abdc0f51b68ddb6b02cfa298af))
+- Wrong script name - ([517cb82](https://github.com/kristof-mattei/docker-dns-rs/commit/517cb822538623679fcd57d5aaba79317038ee97))
+- Skip tag, we don't want to give this one rights to push - ([278546c](https://github.com/kristof-mattei/docker-dns-rs/commit/278546c990fc0937d60403b661ac555cee8a966d))
+- Give more permissions for dry-run - ([1d5cbf0](https://github.com/kristof-mattei/docker-dns-rs/commit/1d5cbf0ba44ead2afaa0e94bf967155758e8577d))
+- Testing new flow - ([8d9c25a](https://github.com/kristof-mattei/docker-dns-rs/commit/8d9c25a2ff7b97357fd5f385eaf5cf801995d2f4))
+- Fix publish script - ([68bb738](https://github.com/kristof-mattei/docker-dns-rs/commit/68bb738d6d2f86e71f91588e1c5fe2f4ccc45a62))
+- Check for changes - ([39f071c](https://github.com/kristof-mattei/docker-dns-rs/commit/39f071cd709181ee79f9e42869332af34a142da1))
+- Restructure, remove unneeded submodule pull - ([cfebd29](https://github.com/kristof-mattei/docker-dns-rs/commit/cfebd2921b7e87dec2003216c88e2e0efb58dcd7))
+- Fix condition - ([02df130](https://github.com/kristof-mattei/docker-dns-rs/commit/02df1304baa8a2b096b8e0f29b93eaf6faa552e6))
+- Split steps - ([95bf3b6](https://github.com/kristof-mattei/docker-dns-rs/commit/95bf3b6a5c85f11cfb08c9594369d58bd7a9188c))
+- Reduced complexity of filter - ([20f398c](https://github.com/kristof-mattei/docker-dns-rs/commit/20f398c8adbd47f93754d42298ca2a59c808bf6b))
+- Beautified titles - ([00b5d37](https://github.com/kristof-mattei/docker-dns-rs/commit/00b5d37f9dde952c90c8684fe7d2dec900d1e341))
+- Updated task name - ([10882f2](https://github.com/kristof-mattei/docker-dns-rs/commit/10882f2f181ae6d5e441dc8327c37ac729671261))
+- Prevent clippy from running twice - ([5db45b9](https://github.com/kristof-mattei/docker-dns-rs/commit/5db45b9964d66de7d9d5377748158bdd624b5bbf))
+- Aligned commandline parameters - ([fd9d518](https://github.com/kristof-mattei/docker-dns-rs/commit/fd9d51865bd14d729d49d15a6de25fb53a42c869))
+- Expanded clippy warnings - ([01272f6](https://github.com/kristof-mattei/docker-dns-rs/commit/01272f622b1a588f3fb064c82203222da3f29252))
+- Also run pedantic and cargo test on push - ([23ba6db](https://github.com/kristof-mattei/docker-dns-rs/commit/23ba6db09d220e17608aa43ab4ffe903507f2ada))
+- Also run test-and-report on main to update 'main' coverage - ([07cab02](https://github.com/kristof-mattei/docker-dns-rs/commit/07cab02c61478f168aa0fc7984a2dc5e79265ef1))
+- Also run clippy when merged to main to track progress - ([bccc597](https://github.com/kristof-mattei/docker-dns-rs/commit/bccc59739a8d274a06f093a2b625b09195d03ce0))
+- Create LICENSE - ([9662fd0](https://github.com/kristof-mattei/docker-dns-rs/commit/9662fd0bc59b52956cd6b30e26e6c5d4854ead9a))
+- Respect cargo.lock when doing cargo install - ([20b7f38](https://github.com/kristof-mattei/docker-dns-rs/commit/20b7f38541eb2641b99ede169a18b4323deae8b2))
+- Fixed the name - ([7166635](https://github.com/kristof-mattei/docker-dns-rs/commit/716663523d3c1e3d10b86a6b477298fa70196312))
+- Remove outdated comment - ([88369f7](https://github.com/kristof-mattei/docker-dns-rs/commit/88369f7ade36328e1b5156841a8127358c4a69a3))
+- Switch to cog - ([d9dc537](https://github.com/kristof-mattei/docker-dns-rs/commit/d9dc537936181daea34d14a6958064ff9c507eea))
+- Switch to cog wip - ([70bc0fe](https://github.com/kristof-mattei/docker-dns-rs/commit/70bc0fee3bec0b60d2eabd27999c80b43018bd92))
+- Use registry cache - ([6e66668](https://github.com/kristof-mattei/docker-dns-rs/commit/6e66668788e41a33e2efa36edf74297e83e58a13))
+- Typo, docker -> Docker - ([8571cd7](https://github.com/kristof-mattei/docker-dns-rs/commit/8571cd7fd8d6153eb75bef254aaa2e7ae8a1dc0f))
+- Use built-in rustup - ([e3a791a](https://github.com/kristof-mattei/docker-dns-rs/commit/e3a791a527a9f0e5b8a7696dd310d08f394ca4ce))
+- Set the checkout name - ([a8a45b4](https://github.com/kristof-mattei/docker-dns-rs/commit/a8a45b4f6ff2ef4783a60d0ddf99a519069e9f0a))
+- Fixed rustup update warning about rustfmt and cargo-fmt - ([bb187f3](https://github.com/kristof-mattei/docker-dns-rs/commit/bb187f384fb1042f363b9d756afc7aa64f5c852b))
+- No need to run clippy on push to main - ([44890f7](https://github.com/kristof-mattei/docker-dns-rs/commit/44890f764e814f9d99b92f43fd720cb2ab3998f3))
+- Updated generated cache name - ([4aa7084](https://github.com/kristof-mattei/docker-dns-rs/commit/4aa7084bddacb70518081f6a5872d4896f3bfd81))
+- Removed todo that's not gonna happen - ([5205794](https://github.com/kristof-mattei/docker-dns-rs/commit/5205794394c05e1f65333e4936def18162a8db0d))
+- Set nice name - ([22f0bca](https://github.com/kristof-mattei/docker-dns-rs/commit/22f0bcaf26b62359c2afd18cfad6fb280baf3d85))
+- Removed unneeded comments - ([dca69dc](https://github.com/kristof-mattei/docker-dns-rs/commit/dca69dc3ea2cbacb0a490e011c8c5a385ebf7c51))
+- Exclude rustfmt and cargo-fmt from the cache as rustup doesn't like that - ([d95f77f](https://github.com/kristof-mattei/docker-dns-rs/commit/d95f77ffd16ffa56db736e564928aa4726a7c224))
+- Use built-in rustup - ([5a98432](https://github.com/kristof-mattei/docker-dns-rs/commit/5a9843252f358198ac7b43bb06825052e7be3fa7))
+- Exclude rustfmt and cargo-fmt from the cache as rustup doesn't like that - ([2c04592](https://github.com/kristof-mattei/docker-dns-rs/commit/2c04592da28a24dc92b3f1025345654ed51d84cb))
+- Run prettier - ([46ff0fb](https://github.com/kristof-mattei/docker-dns-rs/commit/46ff0fb4c6b3f3509f42798b1b9adbd59617f0b4))
+- Don't clean before clippy, not needed - ([253afc2](https://github.com/kristof-mattei/docker-dns-rs/commit/253afc287d6ce9aafd9d906066a54410270ef80e))
+- Don't consider it 'all-done' when anything is cancelled - ([4fdc19d](https://github.com/kristof-mattei/docker-dns-rs/commit/4fdc19df0990801ebaf40f25fa955eb22f3f1946))
+- Also rebuild on cargo.lock changes - ([b196ad4](https://github.com/kristof-mattei/docker-dns-rs/commit/b196ad45b3b648f7588091e083df970f896b8185))
+- Updated npm packages - ([79e5129](https://github.com/kristof-mattei/docker-dns-rs/commit/79e5129e640c62201cc72d4807e3ff44a8ad2033))
+- Also bump rust-toolchain to rust 1.58.1 - ([1f91934](https://github.com/kristof-mattei/docker-dns-rs/commit/1f919341edc6d1538f96ae02ec832424ea0a9395))
+- Cleaned up rustfmt, added 2 settings - ([b484519](https://github.com/kristof-mattei/docker-dns-rs/commit/b484519b041b4336e93bbc556d202f70f68bf73e))
+- Set test comment mode - ([137affd](https://github.com/kristof-mattei/docker-dns-rs/commit/137affd7ddec571febf32f235fa26ac8702da2eb))
+- Formatting! - ([f2ab063](https://github.com/kristof-mattei/docker-dns-rs/commit/f2ab06359a1a980404bf2aebd013e43aef804662))
+- Don't create new comment, recycle! - ([c3a7cb4](https://github.com/kristof-mattei/docker-dns-rs/commit/c3a7cb4dd9fa46c893969e84e42c5b673e7adb8b))
+- Fixed title - ([14bdc49](https://github.com/kristof-mattei/docker-dns-rs/commit/14bdc49a2c8135972be93fef36a425bd9b094c80))
+- Correctly report test failure - ([6250142](https://github.com/kristof-mattei/docker-dns-rs/commit/6250142008a5f74fad09c6088fa64ec87d5c49a5))
+- Also update cargo & toolchain - ([291be2a](https://github.com/kristof-mattei/docker-dns-rs/commit/291be2aa3dd1d15c726686b0dd71ff2e35bff341))
+- Also update cargo & toolchain - ([52e4649](https://github.com/kristof-mattei/docker-dns-rs/commit/52e46491946ebb62922e3f120ec4d9b5c33f8d81))
+- Fail done properly - ([9a420bf](https://github.com/kristof-mattei/docker-dns-rs/commit/9a420bf23ae315b64a7a0d20734de30db6ac01df))
+- Made task file rust-analyzer compliant - ([6f244be](https://github.com/kristof-mattei/docker-dns-rs/commit/6f244beea8c5c8232b66f51bb1dcd0d42759d223))
+- Spacing and remove verbose - ([abceeeb](https://github.com/kristof-mattei/docker-dns-rs/commit/abceeeb0e023cd1629df3540fe5f9d310b8dbd36))
+- Add release test script - ([0918c90](https://github.com/kristof-mattei/docker-dns-rs/commit/0918c90afafcb26396983767979f08dc46d5d7c0))
+- Consolidated extensions - ([7ebc90c](https://github.com/kristof-mattei/docker-dns-rs/commit/7ebc90c506e2570c0ec92145c4b4a6d23270c2cf))
+- Add title (name) to step - ([8f4396d](https://github.com/kristof-mattei/docker-dns-rs/commit/8f4396d247c865897e0088c6af23a54a0affef7c))
+- Docker images names should always be lowercase - ([9932b72](https://github.com/kristof-mattei/docker-dns-rs/commit/9932b72ad08d8a5eeacc0946b1fc367320c9e19f))
+- Add shell name and consolidated format - ([00ca5d7](https://github.com/kristof-mattei/docker-dns-rs/commit/00ca5d7c67d31eed62556cdcf12b0a77318a0be4))
+- Delete unneeded file - ([4734616](https://github.com/kristof-mattei/docker-dns-rs/commit/4734616fc8be237c5ee89130cd942fa971ad767f))
+- Update packages - ([c39ff7e](https://github.com/kristof-mattei/docker-dns-rs/commit/c39ff7e8cc8032f91fa8d765d600a1acce21e3de))
+- Clean up semgrep file, update package-lock - ([df7e1e4](https://github.com/kristof-mattei/docker-dns-rs/commit/df7e1e4d3942aa0f3b703de1c14005093ef41dec))
+- Crlf to lf - ([fdca795](https://github.com/kristof-mattei/docker-dns-rs/commit/fdca795c627dbed981e6ed02fe4287c37b29d169))
+- Install latest semgrep - ([b720d30](https://github.com/kristof-mattei/docker-dns-rs/commit/b720d30449d174b74e1ed3fa184d4c1e9e69f255))
+- Use token to get more rules - ([342529b](https://github.com/kristof-mattei/docker-dns-rs/commit/342529ba015edca81583186343b7d93949f5ac76))
+- Try to speed up by using binstall - ([ddf6fc7](https://github.com/kristof-mattei/docker-dns-rs/commit/ddf6fc7bb52110b4da4d67c3e380ed915442d848))
+- And more 1.62 - ([f048ac0](https://github.com/kristof-mattei/docker-dns-rs/commit/f048ac05a5aaed0f6a39ae632d7595c352acfaf1))
+- Fix the binary names - ([e700aaa](https://github.com/kristof-mattei/docker-dns-rs/commit/e700aaaae4cd095ab196892fb19e86cac143b8bf))
+- Spacing, made lint-commits also use binstall - ([c4daf59](https://github.com/kristof-mattei/docker-dns-rs/commit/c4daf591677669b2603f25019f5176dc850bbbe8))
+- Updated file property to junit_files as per https://github.com/EnricoMi/publish-unit-test-result-action/pull/285 - ([73a0ad7](https://github.com/kristof-mattei/docker-dns-rs/commit/73a0ad75fdb21be7081eb628fc2d8da728355629))
+- Remove duplicate `USER`, not needed - ([2bc87f5](https://github.com/kristof-mattei/docker-dns-rs/commit/2bc87f5cdc946847eef2f215f9316a45ec840f3b))
+- Enable renovate - ([741b4bd](https://github.com/kristof-mattei/docker-dns-rs/commit/741b4bd48ce77da72268caddf460cba3fe7ea75e))
+- Explicitly set token to avoid failed uploads - ([45e6bcf](https://github.com/kristof-mattei/docker-dns-rs/commit/45e6bcfbb31f1e1219db97bf65da1c33fdc64961))
+- Disable coveralls, it's acting up - ([e8ff3d3](https://github.com/kristof-mattei/docker-dns-rs/commit/e8ff3d3eca52fc746ef5ad8120071d9619f0b17e))
+- Also include rust-specific configs - ([0888cb2](https://github.com/kristof-mattei/docker-dns-rs/commit/0888cb2abb68acd808d532186220ebabe986de36))
+- Fixed double update typo - ([bc15a92](https://github.com/kristof-mattei/docker-dns-rs/commit/bc15a92e9c4eb0910f44a9368bbae281c5a4eb91))
+- Testing renovate's custom file updater - ([7918b9c](https://github.com/kristof-mattei/docker-dns-rs/commit/7918b9c204a40bd5b5ce19c8d3ad6abb61f2e148))
+- Restored codecov, remove executable modifier - ([b45eb0f](https://github.com/kristof-mattei/docker-dns-rs/commit/b45eb0f353f1928990d23fd54996ed97b70e1c61))
+- Disable coveralls & codecov - ([c43c49a](https://github.com/kristof-mattei/docker-dns-rs/commit/c43c49a500d053d5c1d2a5861a8ffa8d44281093))
+- Put versions so that renovate can tag correctly - ([dce5fd5](https://github.com/kristof-mattei/docker-dns-rs/commit/dce5fd57af8aa1a1a7722f4bfedc42e7be29a306))
+- Remove variable from dockerfile - ([1a47885](https://github.com/kristof-mattei/docker-dns-rs/commit/1a478854622fd3426534ebceac142ac2b633eaf5))
+- Try codecov again - ([f53b8db](https://github.com/kristof-mattei/docker-dns-rs/commit/f53b8dbce2882cfdbff917b4ee2261bc7fa47ad2))
+- Node v18 - ([33b78ea](https://github.com/kristof-mattei/docker-dns-rs/commit/33b78ea423dedd7d25bfc96395aa1f532347afa3))
+- Bump package-lock.json - ([1e0d6eb](https://github.com/kristof-mattei/docker-dns-rs/commit/1e0d6eb569c0928fc17eba447bf64a4fe6e4f809))
+- Ensure we take the longest tag, v1.0.0 instead of v1 - ([f9d106a](https://github.com/kristof-mattei/docker-dns-rs/commit/f9d106a78779f14e61abea3416341a0801268a3b))
+- Updated devcontainer config - ([fd84775](https://github.com/kristof-mattei/docker-dns-rs/commit/fd84775429513a4be51795a717b780eb303fcfdc))
+- Move to node 20, make backtrace always compile release as we don't care about their internals - ([47ce350](https://github.com/kristof-mattei/docker-dns-rs/commit/47ce350ee2b385ddb05e0f04271950fa344b11a1))
+- Use lints - ([3f9d4ef](https://github.com/kristof-mattei/docker-dns-rs/commit/3f9d4ef710834eb82812c2cba60986df58494117))
+- DENY uninlined format args - ([9a8e100](https://github.com/kristof-mattei/docker-dns-rs/commit/9a8e1007eba0101c9aa5cbefb1e1edcfb2bb5f2c))
+- ALLOW uninlined format args - ([73e964d](https://github.com/kristof-mattei/docker-dns-rs/commit/73e964d65776a2eed8c71af0ab734b9ef517f2ea))
+- Remove redundant quotes - ([50c419b](https://github.com/kristof-mattei/docker-dns-rs/commit/50c419b558e160a602b69911a6356fb2f875ced9))
+- Bump uninlined format args priority - ([61e818b](https://github.com/kristof-mattei/docker-dns-rs/commit/61e818b5e0f6f209e8f28d601e99ff98d3b922ea))
+- Add mold, use lints - ([7a06c47](https://github.com/kristof-mattei/docker-dns-rs/commit/7a06c474c0b4fcb9df8099bd46a933872d017b8c))
+- Restore backtrace always optimize - ([9f2d778](https://github.com/kristof-mattei/docker-dns-rs/commit/9f2d77895397e064a3b86e0e75624318181d3f27))
+- Fix typo - ([3bc4758](https://github.com/kristof-mattei/docker-dns-rs/commit/3bc4758d422559eab53724774bda44684c585eb3))
+- Pin mold - ([6222e7a](https://github.com/kristof-mattei/docker-dns-rs/commit/6222e7a5d096509d7b714b152c1dbfc4a5f32692))
+- Clean up unused deps - ([64564c3](https://github.com/kristof-mattei/docker-dns-rs/commit/64564c38bb096c7d6d478280a90449927dbf5fe3))
+- Add TODO - ([b6fb2d2](https://github.com/kristof-mattei/docker-dns-rs/commit/b6fb2d2884d787db33723bba0efa7022b02d2f53))
+- Slight refactor - ([18a7dfe](https://github.com/kristof-mattei/docker-dns-rs/commit/18a7dfee6ab02db2a379b91e273adc0e7311bded))
+- From scratch - ([e9686ab](https://github.com/kristof-mattei/docker-dns-rs/commit/e9686abc974af11cc44436068b1550098dc6f510))
+- Disable function-next-line formatting, it looks weird - ([1eb4dd2](https://github.com/kristof-mattei/docker-dns-rs/commit/1eb4dd2f28f2e6955ba36f09e464e6891b6d4c2c))
+- Rename nextversion to next_version - ([4821da4](https://github.com/kristof-mattei/docker-dns-rs/commit/4821da4b016aa974cffaf974c43165b504c1f125))
+- Start the update for capturing incomplete frames - ([dfe6b4a](https://github.com/kristof-mattei/docker-dns-rs/commit/dfe6b4abcde63fce3cdd6030a00bb27ac98cd219))
+- Ensure run and debug from main add the right LOG settings - ([d271883](https://github.com/kristof-mattei/docker-dns-rs/commit/d27188314fa89fdcac88034f612d5bce6a13bcb4))
+- Console isn't useful, updated casing of levels - ([0cb31d5](https://github.com/kristof-mattei/docker-dns-rs/commit/0cb31d5840aaf7672d71398a96e119fbc9d9a722))
+- No trailing commas in json - ([a7b01be](https://github.com/kristof-mattei/docker-dns-rs/commit/a7b01be89742c69a3a671fba6f674d7895cec524))
+- Use internal console, not the terminal for debugging - ([33e467c](https://github.com/kristof-mattei/docker-dns-rs/commit/33e467c0afbef21f88e46190f86ad01431cb41aa))
+- Fix startColumn/endColumn being 0. Is invalid. Normalize json file for diffing, ignore output. Diff is expected - ([d37020f](https://github.com/kristof-mattei/docker-dns-rs/commit/d37020fdd19bd9f2d7348fd7b9553dd0921afa6f))
+- Ignore warning certain packages pulling in same crate with different version, and moved hyper-tls to crates.io version - ([6ba4884](https://github.com/kristof-mattei/docker-dns-rs/commit/6ba4884b508700ca5d7a5515213a432132bb10f1))
+- Explicitely set prettierrc's path - ([3787f7f](https://github.com/kristof-mattei/docker-dns-rs/commit/3787f7f1842f1b72aad3ad93a86af660c438f138))
+- Align title - ([0a560bf](https://github.com/kristof-mattei/docker-dns-rs/commit/0a560bf62205abac716b75abe3a54d1776fbca81))
+- Checkout to satisfy the codeql tool - ([d6f858a](https://github.com/kristof-mattei/docker-dns-rs/commit/d6f858a3a1f026bb0c219e0dfdc199f3b3676af6))
+- Rename semgrep job to make it register with semgrep - ([9720764](https://github.com/kristof-mattei/docker-dns-rs/commit/9720764f82f17f202c8886bd638cf0faa36c4897))
+- Use semgrep action, not container - ([738b8de](https://github.com/kristof-mattei/docker-dns-rs/commit/738b8deb1606266e1106577b3f61231efe5b2d4c))
+- Back to container, the action is outdated - ([dc2bd52](https://github.com/kristof-mattei/docker-dns-rs/commit/dc2bd5258b484556d1600145067aa2a1fdb20d56))
+- Add category - ([df3df77](https://github.com/kristof-mattei/docker-dns-rs/commit/df3df77ba61c070a904f3d2f721cb245a0ac6ad9))
+- Semgrep 1 job - ([5c6c2ee](https://github.com/kristof-mattei/docker-dns-rs/commit/5c6c2ee8527a899ec058e6194fea015c957e23a9))
+- Fix filename - ([3802280](https://github.com/kristof-mattei/docker-dns-rs/commit/3802280c2239d9a4174a315ccd172cfe8fc7f181))
+- Allow warnings in test - ([83d3bb2](https://github.com/kristof-mattei/docker-dns-rs/commit/83d3bb205342485cf9f3ff8f87c20cd1a9df616e))
+- Allow warnings in test - ([e49075f](https://github.com/kristof-mattei/docker-dns-rs/commit/e49075f2c6d6ab5b98e0d81304a2a6acad966c8a))
+- Set checks with new API - ([8361952](https://github.com/kristof-mattei/docker-dns-rs/commit/83619524f171939a235a921255eea4f52c4e9e07))
+- Fix ] typo - ([3648333](https://github.com/kristof-mattei/docker-dns-rs/commit/3648333faa3377507bef44aa89fdbc06882293d3))
+- Try codecov - ([e1dd293](https://github.com/kristof-mattei/docker-dns-rs/commit/e1dd29358d55d597f95fa4053b76a7a99b1154f7))
+- Support for ARM64 - ([8658748](https://github.com/kristof-mattei/docker-dns-rs/commit/865874837be48194e825e92178951bdd7859d744))
+- Try OCI - ([d40e4f7](https://github.com/kristof-mattei/docker-dns-rs/commit/d40e4f7901c299a5429579c484e5fbc3c24716dc))
+- Build with matrix - ([87566ad](https://github.com/kristof-mattei/docker-dns-rs/commit/87566adcc016b050b52b7749ce47183f7d78e791))
+- Also add rust target to name - ([fa11cb5](https://github.com/kristof-mattei/docker-dns-rs/commit/fa11cb5b76646809cd5de6451a07818bec922b93))
+- Correct params - ([3b4513c](https://github.com/kristof-mattei/docker-dns-rs/commit/3b4513c6dfd7d46a21b41594173de731f9139ece))
+- Debugging - ([89153e2](https://github.com/kristof-mattei/docker-dns-rs/commit/89153e203b481aa34552ffdb093e608138b5bc10))
+- Export docker - ([5cff099](https://github.com/kristof-mattei/docker-dns-rs/commit/5cff0993fca0e1a278b63e91059474efe6853486))
+- Prettier - ([abe1135](https://github.com/kristof-mattei/docker-dns-rs/commit/abe113575b1383bb35be5849d65ced7b7bf7b240))
+- Use vendored openssl - ([d0224da](https://github.com/kristof-mattei/docker-dns-rs/commit/d0224daf46fd7adafca5c2359843ccf9a042dbb4))
+- Disable arm64 - musl - ([c017958](https://github.com/kristof-mattei/docker-dns-rs/commit/c017958ad330362bc4524d51005003c0bd6fd28b))
+- Linker for aarch64 - ([112a197](https://github.com/kristof-mattei/docker-dns-rs/commit/112a19734f542c4ce61a93e1e1d365dbc4b0619d))
+- Copy in linker into docker container - ([57ff932](https://github.com/kristof-mattei/docker-dns-rs/commit/57ff9320ee1aa210641ea66041351a3d308cd9a0))
+- Arm64 - ([9510d6d](https://github.com/kristof-mattei/docker-dns-rs/commit/9510d6d00bbb8b67a8317f3e452fc5fda93b0036))
+- Minor build changes, formatting - ([8b1e9f8](https://github.com/kristof-mattei/docker-dns-rs/commit/8b1e9f8aa2e6a37c268dd7587d0912d251afdea4))
+- Fix typo - ([3a3e968](https://github.com/kristof-mattei/docker-dns-rs/commit/3a3e96855b5eadc81a2d0704a1c4de6569d721a5))
+- Also rebuild when .nvmrc changes - ([6155455](https://github.com/kristof-mattei/docker-dns-rs/commit/61554551d015d07fb230e09d8d5e33da2cfd1e54))
+- Added readme - ([e81d635](https://github.com/kristof-mattei/docker-dns-rs/commit/e81d635bebca2c93dda247b1dbae64bc0afa9f1a))
+- More readme - ([2e2e2e1](https://github.com/kristof-mattei/docker-dns-rs/commit/2e2e2e114ef815ef98f2915f8ed2d65ac3512967))
+- Always run reporting, even when no changes as reports are mandatory - ([c86f535](https://github.com/kristof-mattei/docker-dns-rs/commit/c86f5353d6813262e0bf327dbe2db641f87d363c))
+- Disable codecov running plugins, disable codecov searching - ([c946f90](https://github.com/kristof-mattei/docker-dns-rs/commit/c946f90a1a119f7f97f1e2830c2c55eef3050c6a))
+- Add linebreaks in the if statements, otherwise the vscode parser gets upset - ([79ecc87](https://github.com/kristof-mattei/docker-dns-rs/commit/79ecc8745e7629e60c75b1990aae2850543eb4d0))
+- Remove unneeded id - ([81b3536](https://github.com/kristof-mattei/docker-dns-rs/commit/81b35367789ed5722e391766ed52dd73b02ac259))
+- Change name - ([7bcbcb6](https://github.com/kristof-mattei/docker-dns-rs/commit/7bcbcb6b9a667327f8b239b4f49743efc6e55130))
+- Separate the name so the rename script doesn't update it - ([db3de07](https://github.com/kristof-mattei/docker-dns-rs/commit/db3de077fe7c68dfd00b94332eb776c889abc19b))
+- Enforce_admins should be null if you want to disable it... - ([97a3c84](https://github.com/kristof-mattei/docker-dns-rs/commit/97a3c846ebfaa2489bb7af87f4149ec7b9276efc))
+- Formatting - ([451c5de](https://github.com/kristof-mattei/docker-dns-rs/commit/451c5deb4f0905a77d670ff76aa528197f81804e))
+- Syntax consistency, as -> AS - ([ba8d334](https://github.com/kristof-mattei/docker-dns-rs/commit/ba8d3344466d98c4ddd2260291cecbe946c7c9ec))
+- Formatting - ([773e45a](https://github.com/kristof-mattei/docker-dns-rs/commit/773e45a7839624fef2056ed1e7f4e37339860f23))
+- Clean up duplicate crates - ([a7cd55f](https://github.com/kristof-mattei/docker-dns-rs/commit/a7cd55fd65cc333213220df0f983cef04f2f5992))
+- Remove unneeded .ci - ([3be9c19](https://github.com/kristof-mattei/docker-dns-rs/commit/3be9c19e347578b89a0c2e9b3448e5df3e9aeaee))
+- Formatting - ([978f4b2](https://github.com/kristof-mattei/docker-dns-rs/commit/978f4b2a669b1d2f6ab3d9e7d738ab2b87516be4))
+- Enable more lints - ([4cb6bb7](https://github.com/kristof-mattei/docker-dns-rs/commit/4cb6bb7967f130408917be3a75e19421c5fedb86))
+- Ensure we have oras - ([adb17dd](https://github.com/kristof-mattei/docker-dns-rs/commit/adb17dd3071a0f100b7f9b25d5ee79b2af0594da))
+- Fix title - ([1ecfb70](https://github.com/kristof-mattei/docker-dns-rs/commit/1ecfb70f8778f65098b117403bbc1574a2f6a017))
+- Install cargo-binstall from updated url - ([8172e7f](https://github.com/kristof-mattei/docker-dns-rs/commit/8172e7fe5a8996eb4b499ccd4ee443f7e5ee2cca))
+- Rust 1.85.0 - ([d876c00](https://github.com/kristof-mattei/docker-dns-rs/commit/d876c00796252ef81adf85ea6ae8fc25b9d5e0d8))
+- Format dockerfile - ([edb1f30](https://github.com/kristof-mattei/docker-dns-rs/commit/edb1f309e3326acbad14b3b83aea65b53e12e506))
+- Fmt also 1.85.0 - ([c9488e3](https://github.com/kristof-mattei/docker-dns-rs/commit/c9488e384c6ac0816b2a02574f18e0e54eff3b12))
+- Remove oras - ([8eceae9](https://github.com/kristof-mattei/docker-dns-rs/commit/8eceae99297f4f5900549ef08f6105df530069cb))
+- Forgot `push` - ([6842ab4](https://github.com/kristof-mattei/docker-dns-rs/commit/6842ab4e26a3417520d3334da6fd542d1d240871))
+- Push by tag, not filepath... - ([cb03a00](https://github.com/kristof-mattei/docker-dns-rs/commit/cb03a00f208e2e3116f048bc6dcd42615933d90d))
+- Add logging, try remove unneeded (?) buildx - ([baafce6](https://github.com/kristof-mattei/docker-dns-rs/commit/baafce66428bb303013f3dbc2760556cbbeca150))
+- Fix for rustup 1.28.0 not installing needed toolchain by default - ([9f283b7](https://github.com/kristof-mattei/docker-dns-rs/commit/9f283b736f6e0f03ac8c2afaa2fda5cbbb86896d))
+- Install rust-fmt - ([234465e](https://github.com/kristof-mattei/docker-dns-rs/commit/234465e358cc52c0fead88af8f2116bac0f632b7))
+- Use working-directory - ([e7e90d5](https://github.com/kristof-mattei/docker-dns-rs/commit/e7e90d51a297e56a3fabc95ee2ade32c4150bb57))
+- Set working-directory - ([f657766](https://github.com/kristof-mattei/docker-dns-rs/commit/f657766fd5b75716fa316bd1ad90c5d7c32e975b))
+- Ensure we restore symlinks - ([ceede20](https://github.com/kristof-mattei/docker-dns-rs/commit/ceede20c91e783b56d32c109e7e989834ea38cfe))
+- Restore comment - ([1ad010d](https://github.com/kristof-mattei/docker-dns-rs/commit/1ad010db62e6c9d0d3536710459bfcbcd0af73ee))
+- Add template clippy.toml - ([307cbdb](https://github.com/kristof-mattei/docker-dns-rs/commit/307cbdb563c89194cf50119410509e4f4030659b))
+- Remove incorrect comment - ([82a8d6d](https://github.com/kristof-mattei/docker-dns-rs/commit/82a8d6d47279919c074137571d5901367e9826d3))
+- Ignore generated changelog - ([9084f3f](https://github.com/kristof-mattei/docker-dns-rs/commit/9084f3fe60d2794d98ca6fff47428c169a8f3f80))
+- Clippy 1.86 fixes - ([57cfae2](https://github.com/kristof-mattei/docker-dns-rs/commit/57cfae214fc53fe7b42b75a1bcb3c76a038ae050))
+- Clippy 1.86 fixes - ([1ba9e82](https://github.com/kristof-mattei/docker-dns-rs/commit/1ba9e82c8de2d8fd2ba93018639ec3683e95c9e6))
+- Disable required signatures - ([445e425](https://github.com/kristof-mattei/docker-dns-rs/commit/445e4253a7dcbe8fac577cdcaff328466590abe1))
+- Fmt - ([cfe1ce0](https://github.com/kristof-mattei/docker-dns-rs/commit/cfe1ce02e4450600606029e285518b1290394469))
+- Set default debug visualizer - ([6941793](https://github.com/kristof-mattei/docker-dns-rs/commit/69417931ad3e2506dbee9732bef5b1ef9649c885))
+- Update debug setup - ([59756b7](https://github.com/kristof-mattei/docker-dns-rs/commit/59756b712762276d2032290b7d24f3a9e900d059))
+<!-- generated by git-cliff -->
