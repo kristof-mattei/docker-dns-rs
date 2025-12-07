@@ -1,10 +1,11 @@
-use std::collections::HashMap;
+use hashbrown::HashMap;
+use serde::Deserialize;
 
 pub mod config;
 pub mod daemon;
 pub mod monitor;
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(Deserialize, Debug)]
 #[expect(unused, reason = "Unused, for now")]
 pub struct Event {
     #[serde(rename(deserialize = "Type"))]
@@ -19,7 +20,7 @@ pub struct Event {
     time_nano: u64,
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(Deserialize, Debug)]
 enum EventType {
     #[serde(rename(deserialize = "builder"))]
     Builder,
@@ -47,7 +48,7 @@ enum EventType {
 
 type EventAction = String;
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(Deserialize, Debug)]
 struct EventActor {
     #[serde(rename(deserialize = "ID"))]
     id: String,
@@ -55,7 +56,7 @@ struct EventActor {
     attributes: HashMap<String, String>,
 }
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(Deserialize, Debug)]
 enum EventScope {
     #[serde(rename(deserialize = "local"))]
     Local,

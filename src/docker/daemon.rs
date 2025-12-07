@@ -11,7 +11,6 @@ use hyper_rustls::HttpsConnectorBuilder;
 #[cfg(not(target_os = "windows"))]
 use hyper_unix_socket::UnixSocketConnector;
 use tokio::time::timeout;
-use tokio_util::bytes::Buf as _;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
@@ -90,8 +89,8 @@ impl Daemon {
 
         let response = self.send_request(&path_and_query, Method::GET).await?;
 
-        let reader = response.collect().await?.aggregate().reader();
-        let result = serde_json::from_reader::<_, ContainerInspect>(reader)?;
+        let bytes = response.collect().await?.to_bytes();
+        let result = serde_json::from_slice::<ContainerInspect>(&bytes)?;
 
         Ok(result)
     }

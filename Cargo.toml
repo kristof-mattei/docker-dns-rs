@@ -20,6 +20,12 @@ tokio-console = ["dep:console-subscriber"]
 clap = { version = "4.5.53", features = ["derive"] }
 color-eyre = "0.6.5"
 console-subscriber = { version = "0.5.0", optional = true }
+hashbrown = { version = "0.16.1", default-features = false, features = [
+    "default-hasher",
+    "equivalent",
+    "inline-more",
+    "serde",
+] }
 hickory-server = "0.25.2"
 http = "1.4.0"
 http-body-util = "0.1.3"

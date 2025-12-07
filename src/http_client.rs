@@ -1,7 +1,7 @@
-use std::collections::HashMap;
 use std::convert::Into;
 use std::str::FromStr as _;
 
+use hashbrown::HashMap;
 use http_body_util::Empty;
 use hyper::body::{Body, Bytes};
 use hyper::header::{HeaderName, IntoHeaderName};
@@ -88,10 +88,6 @@ where
 
     let request_headers = request.headers_mut();
 
-    #[expect(
-        clippy::iter_over_hash_type,
-        reason = "We're moving, don't care about sort order"
-    )]
     for (k, v) in headers {
         request_headers.insert(k, v);
     }
