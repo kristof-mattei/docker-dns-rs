@@ -1,9 +1,3 @@
-8
-DNS
-io
-PRs
-sigint
-sigterm
-TODO
+2
+dns
 tokio
-untagged
