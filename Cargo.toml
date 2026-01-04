@@ -63,6 +63,9 @@ hyper-unix-socket = "0.3.0"
 [package.metadata.cargo-machete]
 ignored = ["tokio-console"]
 
+[package.metadata.spellcheck]
+config = "spellcheck.toml"
+
 [lints.clippy]
 # don't stop from compiling / running
 all = "warn"
