@@ -10,7 +10,7 @@ pub mod env;
 /// trigger the `tokio::try_join!`. This function flattens the 2:
 /// `Result::Ok(T)` when both the join-handle AND
 /// the result of the inner function are `Result::Ok`, and `Result::Err`
-/// when either the join failed, or the inner task failed
+/// when either the join failed, or the inner task failed.
 #[expect(unused, reason = "Library Code")]
 pub(crate) async fn flatten_handle<T, E>(
     handle: JoinHandle<Result<T, E>>,
