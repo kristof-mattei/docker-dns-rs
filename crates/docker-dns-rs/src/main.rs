@@ -129,8 +129,8 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         tasks.spawn(async move {
             let _guard = token.clone().drop_guard();
 
-            if let Err(e) = docker.produce_events(sender, &token).await {
-                event!(Level::ERROR, ?e, "Event producer Handler failed");
+            if let Err(error) = docker.produce_events(sender, &token).await {
+                event!(Level::ERROR, ?error, "Event producer Handler failed");
             } else {
                 event!(Level::INFO, "Event producer stopped");
             }

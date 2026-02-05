@@ -13,8 +13,8 @@ where
     match std::env::var(env_variable_name).map(|s| str::parse::<T>(&s)) {
         Ok(Ok(ct)) => Ok(Some(ct)),
         Err(std::env::VarError::NotPresent) => Ok(None),
-        Ok(Err(err)) => Err(eyre::Report::wrap_err(
-            err.into(),
+        Ok(Err(error)) => Err(eyre::Report::wrap_err(
+            error.into(),
             format!(
                 "Env variable `{}` could not be parsed to requested type",
                 env_variable_name
@@ -49,7 +49,7 @@ where
             event!(Level::INFO, "{} not set", env_variable_name);
             Ok(None)
         },
-        Err(e) => Err(e),
+        Err(error) => Err(error),
     }
 }
 
@@ -80,7 +80,7 @@ where
             );
             Ok(default)
         },
-        Err(e) => Err(e),
+        Err(error) => Err(error),
     }
 }
 
