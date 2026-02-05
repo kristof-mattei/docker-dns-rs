@@ -87,10 +87,10 @@ impl Monitor {
             (None, Some(n)) => event!(Level::WARN, "Rename event without oldName (? -> {})", n),
             (Some(o), None) => event!(Level::WARN, "Rename event without name ({} -> ?)", o),
             (Some(o), Some(n)) => {
-                if let Err(e) = self.authority_wrapper.rename(&o, &n).await {
+                if let Err(error) = self.authority_wrapper.rename(&o, &n).await {
                     event!(
                         Level::WARN,
-                        ?e,
+                        ?error,
                         ?event,
                         "Failure to rename container {} ({} -> {})",
                         event.actor.id,
@@ -106,14 +106,14 @@ impl Monitor {
         let all_names = get_all_names(event);
 
         for name in &all_names {
-            if let Err(e) = self
+            if let Err(error) = self
                 .authority_wrapper
                 .remove(&format!("{}.{}", name, self.domain))
                 .await
             {
                 event!(
                     Level::ERROR,
-                    ?e,
+                    ?error,
                     "Something went wrong removing {}'s name {}.{}",
                     event.actor.id,
                     name,
@@ -135,15 +135,16 @@ impl Monitor {
                     .map(|cn| &cn.ip_address)
                 {
                     let parsed_address: IpAddr = match address.parse() {
-                        Ok(o) => o,
-                        Err(e) => {
+                        Ok(ip_addr) => ip_addr,
+                        Err(error) => {
                             event!(
                                 Level::ERROR,
-                                "Failed to parse address {} to an IP address for container {}: {:?}",
                                 address,
-                                event.actor.id,
-                                e
+                                container_id = event.actor.id,
+                                ?error,
+                                "Failed to parse address to an IP address for container",
                             );
+
                             continue;
                         },
                     };
@@ -152,12 +153,12 @@ impl Monitor {
                         let name: Name = name.parse().unwrap();
                         let name = name.append_domain(&self.domain).unwrap();
 
-                        if let Err((name, err)) =
+                        if let Err((name, error)) =
                             self.authority_wrapper.add(name, parsed_address).await
                         {
                             event!(
                                 Level::ERROR,
-                                ?err,
+                                ?error,
                                 "Something went wrong adding {} -> {}",
                                 name,
                                 parsed_address
@@ -174,10 +175,10 @@ impl Monitor {
                     event.actor.id,
                 );
             },
-            Err(e) => {
+            Err(error) => {
                 event!(
                     Level::WARN,
-                    ?e,
+                    ?error,
                     "Got start event with container id {} but couldn't find it",
                     event.actor.id,
                 );

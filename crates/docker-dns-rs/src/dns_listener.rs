@@ -72,10 +72,10 @@ pub fn set_up_catalog<I: Into<LowerName>>(domain: I, authority: Arc<InMemoryAuth
 }
 
 fn handle_server_shutdown(server_shutdown_result: Result<(), ProtoError>) {
-    if let Err(e) = server_shutdown_result {
+    if let Err(error) = server_shutdown_result {
         event!(
             Level::ERROR,
-            ?e,
+            ?error,
             "Requested graceful shutdown, did not happen"
         );
     } else {

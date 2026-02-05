@@ -49,9 +49,9 @@ impl Daemon {
                 let response = execute_request(connector, request);
 
                 match timeout(Duration::from_millis(timeout_milliseconds), response).await {
-                    Ok(Ok(o)) => Ok(o),
-                    Ok(Err(e)) => Err(e),
-                    Err(e) => Err(e.into()),
+                    Ok(Ok(response)) => Ok(response),
+                    Ok(Err(error)) => Err(error),
+                    Err(error) => Err(error.into()),
                 }
             },
             #[cfg(not(target_os = "windows"))]
@@ -117,8 +117,8 @@ impl Daemon {
 
             let frame = match frame {
                 Some(Ok(frame)) => frame,
-                Some(Err(err)) => {
-                    event!(Level::ERROR, ?err, "Failed to read frame");
+                Some(Err(error)) => {
+                    event!(Level::ERROR, ?error, "Failed to read frame");
                     continue;
                 },
                 None => {
@@ -157,10 +157,10 @@ impl Daemon {
         sender: &tokio::sync::mpsc::Sender<Event>,
     ) -> Result<(), Report> {
         let decoded = match serde_json::from_slice(data) {
-            Ok(o) => o,
-            Err(e) => {
+            Ok(event) => event,
+            Err(error) => {
                 let decoded_data = String::from_utf8_lossy(data);
-                event!(Level::ERROR, err= ?e, ?decoded_data, "Failed to parse json to struct");
+                event!(Level::ERROR, err= ?error, ?decoded_data, "Failed to parse json to struct");
 
                 return Ok(());
             },
@@ -169,6 +169,6 @@ impl Daemon {
         sender
             .send(decoded)
             .await
-            .map_err(|err| color_eyre::Report::msg("Channel closed").error(err))
+            .map_err(|error| color_eyre::Report::msg("Channel closed").error(error))
     }
 }
