@@ -483,7 +483,7 @@ jobs:
       - cargo-test-and-report
       - cargo-test-and-report-windows
     if: |
-      always()
+      !cancelled()
     steps:
       - name: Fail!
         shell: bash
