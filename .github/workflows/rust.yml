@@ -274,20 +274,33 @@ jobs:
             --binary-path ./target/debug/ \
             --branch \
             --ignore-not-existing \
-            --keep-only "crates/**/src/**" \
+            --keep-only "crates/**" \
             --llvm \
             --output-path ./reports/lcov.info \
             --output-type lcov \
             --source-dir .
+
+      - name: Record Rust version
+        shell: bash
+        run: |
+          echo "RUST=$(rustc --version)" >> "$GITHUB_ENV"
 
       - name: Upload coverage results (to Codecov.io)
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
           disable_search: true
           disable_telem: true
+          env_vars: OS,RUST
           fail_ci_if_error: true
+<<<<<<< HEAD
           flags: ${{ github.job }}-linux
+||||||| 63df4a01
+          flags: ${{ github.job }}
+=======
+          # flags: tests
+>>>>>>> upstream/main
           files: reports/lcov.info
+          name: code-coverage
           plugins: ""
           report_type: "coverage"
           use_oidc: true
@@ -297,9 +310,17 @@ jobs:
         with:
           disable_search: true
           disable_telem: true
+          env_vars: OS,RUST
           fail_ci_if_error: true
+<<<<<<< HEAD
           flags: ${{ github.job }}-linux
+||||||| 63df4a01
+          flags: ${{ github.job }}
+=======
+          # flags: tests
+>>>>>>> upstream/main
           files: reports/results.xml
+          name: test-results
           plugins: ""
           report_type: "test_results"
           use_oidc: true
@@ -487,6 +508,7 @@ jobs:
     # combination of upstream skip and success: success
     runs-on: ubuntu-slim
     needs:
+      - changes
       - cargo-build
       - cargo-build-windows
       - cargo-clippy-and-report
