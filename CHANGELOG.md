@@ -1,5 +1,10 @@
 <!-- header goes here -->
-## [0.5.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.4.0..v0.5.0) - 2026-02-18
+## [0.5.0-rc.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.5.0-rc.1..v0.5.0-rc.2) - 2026-02-18
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.5.0  ([``](https://github.com/kristof-mattei/docker-dns-rs/commit/))
+## [0.5.0-rc.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.4.0..v0.5.0-rc.1) - 2026-02-18
 
 ### 🚀 Features
 
@@ -37,7 +42,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.5.0-rc.1  ([``](https://github.com/kristof-mattei/docker-dns-rs/commit/))
+- *(release)* Release v0.5.0-rc.1  by @github-actions[bot] ([`5a7bae9`](https://github.com/kristof-mattei/docker-dns-rs/commit/5a7bae92a126db1daac923e335da094bdbd48538))
 - Bump packages  by @kristof-mattei ([`a140b6d`](https://github.com/kristof-mattei/docker-dns-rs/commit/a140b6def975c1696cb36fa6c3f41ef0ac2b5fe9))
 ## [0.4.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.3.0..v0.4.0) - 2026-02-09
 
