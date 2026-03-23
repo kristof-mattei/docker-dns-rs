@@ -25,8 +25,9 @@
             "type": "lldb",
             "request": "launch",
             "cargo": {
-                "args": ["test", "--bin=docker-dns-rs"]
+                "args": ["test", "--no-run", "--bin=docker-dns-rs"]
             },
+            "args": [],
             "env": {
                 "RUST_BACKTRACE": "1",
                 "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
@@ -39,8 +40,9 @@
             "type": "lldb",
             "request": "launch",
             "cargo": {
-                "args": ["test", "--test=integration_tests"]
+                "args": ["test", "--no-run", "--test=integration_tests"]
             },
+            "args": [],
             "env": {
                 "RUST_BACKTRACE": "1",
                 "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
