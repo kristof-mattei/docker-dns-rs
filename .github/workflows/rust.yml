@@ -145,6 +145,8 @@ jobs:
     if: |
       github.event_name == 'pull_request' &&
       fromJSON(needs.changes.outputs.rust) == true
+    env:
+      RUSTC_WRAPPER: ""
     steps:
       - &disable_autocrlf
         name: Disable autocrlf
@@ -154,8 +156,6 @@ jobs:
           git config --global core.eol lf
 
       - *checkout
-
-      - *cache_cargo
 
       - *set_up_mold
 
@@ -173,10 +173,6 @@ jobs:
           rustup show
 
           cargo --version
-
-      - *cache_target
-
-      - *set_up_sccache
 
       - name: Build
         shell: pwsh
@@ -344,6 +340,8 @@ jobs:
       checks: write
       id-token: write
       pull-requests: write
+    env:
+      RUSTC_WRAPPER: ""
     steps:
       - *disable_autocrlf
 
@@ -482,10 +480,13 @@ jobs:
     if: |
       github.event_name == 'pull_request' &&
       fromJSON(needs.changes.outputs.rust) == true
+    env:
+      RUSTC_WRAPPER: ""
     steps:
       - *disable_autocrlf
 
       - *checkout
+
       - *set_up_mold
 
       - *set_up_toolchain_windows
