@@ -139,7 +139,7 @@ jobs:
 
   cargo-build-windows:
     name: Cargo build Windows
-    runs-on: windows-latest
+    runs-on: windows-11-arm
     needs:
       - changes
     if: |
@@ -339,7 +339,7 @@ jobs:
 
   cargo-test-and-report-windows:
     name: Cargo test (and report) Windows
-    runs-on: windows-latest
+    runs-on: windows-11-arm
     permissions:
       checks: write
       id-token: write
@@ -488,7 +488,7 @@ jobs:
 
   cargo-clippy-and-report-windows:
     name: Cargo clippy (and report) Windows
-    runs-on: windows-latest
+    runs-on: windows-11-arm
     needs:
       - changes
     if: |
