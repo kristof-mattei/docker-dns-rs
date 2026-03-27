@@ -186,10 +186,14 @@ impl Monitor {
         }
     }
 
-    pub async fn consume_events(&self, mut receiver: Receiver<Event>, token: &CancellationToken) {
+    pub async fn consume_events(
+        &self,
+        mut receiver: Receiver<Event>,
+        cancellation_token: &CancellationToken,
+    ) {
         loop {
             let event = tokio::select! {
-                () = token.cancelled() => {
+                () = cancellation_token.cancelled() => {
                     event!(Level::INFO, "Listener cancelled");
                     break;
                 },

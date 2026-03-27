@@ -98,7 +98,7 @@ impl Daemon {
     pub async fn produce_events(
         &self,
         sender: tokio::sync::mpsc::Sender<Event>,
-        token: &CancellationToken,
+        cancellation_token: &CancellationToken,
     ) -> Result<(), color_eyre::Report> {
         let path_and_query = format!("/events{}", "");
 
@@ -110,7 +110,7 @@ impl Daemon {
         loop {
             let frame = tokio::select! {
                 frame = response.frame() => frame,
-                () = token.cancelled() => {
+                () = cancellation_token.cancelled() => {
                     return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
                 },
             };

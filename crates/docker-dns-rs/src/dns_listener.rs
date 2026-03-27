@@ -16,7 +16,7 @@ pub async fn set_up_dns_server(
     tcp_listener: TcpListener,
     udp_socket: UdpSocket,
     catalog: Catalog,
-    token: CancellationToken,
+    cancellation_token: CancellationToken,
 ) {
     let mut dns_listener = ServerFuture::new(catalog);
 
@@ -29,7 +29,7 @@ pub async fn set_up_dns_server(
 
                handle_server_shutdown(r);
            },
-           () = token.cancelled() => {
+           () = cancellation_token.cancelled() => {
                event!(Level::INFO, "DNS Server cancelled externally");
 
                handle_server_shutdown(dns_listener.shutdown_gracefully().await);
