@@ -105,7 +105,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     let docker = Arc::new(Daemon::new(docker_config));
     let docker_monitor = Monitor::new(Arc::clone(&docker), authority_wrapper, args.domain.clone());
 
-    let token = CancellationToken::new();
+    let cancellation_token = CancellationToken::new();
 
     let (sender, receiver) = tokio::sync::mpsc::channel(50);
 
@@ -113,11 +113,13 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
 
     // event handler
     {
-        let token = token.clone();
+        let cancellation_token = cancellation_token.clone();
         tasks.spawn(async move {
-            let _guard = token.clone().drop_guard();
+            let _guard = cancellation_token.clone().drop_guard();
 
-            docker_monitor.consume_events(receiver, &token).await;
+            docker_monitor
+                .consume_events(receiver, &cancellation_token)
+                .await;
 
             event!(Level::INFO, "Event handler stopped");
         });
@@ -125,11 +127,11 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
 
     // pump messages from Docker to the DockerMonitor
     {
-        let token = token.clone();
+        let cancellation_token = cancellation_token.clone();
         tasks.spawn(async move {
-            let _guard = token.clone().drop_guard();
+            let _guard = cancellation_token.clone().drop_guard();
 
-            if let Err(error) = docker.produce_events(sender, &token).await {
+            if let Err(error) = docker.produce_events(sender, &cancellation_token).await {
                 event!(Level::ERROR, ?error, "Event producer Handler failed");
             } else {
                 event!(Level::INFO, "Event producer stopped");
@@ -138,15 +140,15 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     }
 
     {
-        let token = token.clone();
+        let cancellation_token = cancellation_token.clone();
         let socket = UdpSocket::bind("0.0.0.0:54000").await?;
         let listener = TcpListener::bind("0.0.0.0:54000").await?;
 
         tasks.spawn(async move {
-            let _guard = token.clone().drop_guard();
+            let _guard = cancellation_token.clone().drop_guard();
 
             let catalog = set_up_catalog(args.domain, authority);
-            set_up_dns_server(listener, socket, catalog, token).await;
+            set_up_dns_server(listener, socket, catalog, cancellation_token).await;
 
             event!(Level::INFO, "DNS Server stopped");
         });
@@ -174,13 +176,13 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
                 event!(Level::WARN, "CTRL+C detected, stopping all tasks");
             }
         },
-        () = token.cancelled() => {
+        () = cancellation_token.cancelled() => {
             event!(Level::WARN, "Underlying task stopped, stopping all others tasks");
         },
     }
 
-    // catch all cancel in case we got here via something else than a cancel token
-    token.cancel();
+    // catch all cancel in case we got here via something else than a cancellation token
+    cancellation_token.cancel();
 
     tasks.close();
 
