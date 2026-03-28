@@ -231,7 +231,7 @@ impl Monitor {
                 let name: Name = name.parse().unwrap();
                 let name = name.append_domain(&self.domain).unwrap();
 
-                self.authority_wrapper.add(name, parsed_address).await;
+                self.authority_wrapper.add(&name, parsed_address).await;
             }
         }
     }
