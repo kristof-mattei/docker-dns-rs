@@ -62,11 +62,10 @@ impl AuthorityWrapper {
         );
     }
 
-    pub async fn add(&self, name: Name, address: IpAddr) -> Result<(), (Name, Report)> {
+    pub async fn add(&self, name: Name, address: IpAddr) {
         self.upsert(name.clone(), address).await;
 
-        event!(Level::INFO, "table.add {} -> {}", name, address);
-        Ok(())
+        event!(Level::INFO, %name, %address, "table.add");
 
         // // TODO using `name` as value here seems weird
         // // AuthorityWrapper::upsert(&mut l, ptr_key, name.clone());

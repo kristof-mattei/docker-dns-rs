@@ -231,15 +231,7 @@ impl Monitor {
                 let name: Name = name.parse().unwrap();
                 let name = name.append_domain(&self.domain).unwrap();
 
-                if let Err((name, error)) = self.authority_wrapper.add(name, parsed_address).await {
-                    event!(
-                        Level::ERROR,
-                        ?error,
-                        "Something went wrong adding {} -> {}",
-                        name,
-                        parsed_address
-                    );
-                }
+                self.authority_wrapper.add(name, parsed_address).await;
             }
         }
     }
