@@ -180,8 +180,8 @@ impl AuthorityWrapper {
         Ok(())
     }
 
-    pub async fn remove(&self, name: &str) -> Result<(), Report> {
-        let parsed_name: LowerName = name.parse()?;
+    pub async fn remove(&self, name: &Name) -> Result<(), Report> {
+        let parsed_name: LowerName = LowerName::new(name);
 
         let rrkey_a = RrKey::new(parsed_name.clone(), RecordType::A);
         let a_result = self.remove_records(&rrkey_a).await;
