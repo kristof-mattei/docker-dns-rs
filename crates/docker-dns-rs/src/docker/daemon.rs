@@ -71,7 +71,9 @@ impl Daemon {
 
         let bytes = response.collect().await?.to_bytes();
 
-        let result = serde_json::from_slice::<Vec<Container>>(&bytes)?;
+        let result = serde_json::from_slice::<Vec<Container>>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
 
         Ok(result)
     }
@@ -82,7 +84,10 @@ impl Daemon {
         let response = self.send_request(&path_and_query, Method::GET).await?;
 
         let bytes = response.collect().await?.to_bytes();
-        let result = serde_json::from_slice::<ContainerInspect>(&bytes)?;
+
+        let result = serde_json::from_slice::<ContainerInspect>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
 
         Ok(result)
     }
@@ -146,14 +151,15 @@ impl Daemon {
         data: &[u8],
         sender: &tokio::sync::mpsc::Sender<Event>,
     ) -> Result<(), eyre::Report> {
+        event!(Level::TRACE, data = %String::from_utf8_lossy(data), "New event");
+
         let decoded = match serde_json::from_slice(data) {
             Ok(event) => event,
             Err(error) => {
-                let decoded_data = String::from_utf8_lossy(data);
                 event!(
                     Level::ERROR,
                     ?error,
-                    ?decoded_data,
+                    data = %String::from_utf8_lossy(data),
                     "Failed to parse json to struct"
                 );
 
