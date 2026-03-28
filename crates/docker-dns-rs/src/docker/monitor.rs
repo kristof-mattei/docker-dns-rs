@@ -1,4 +1,5 @@
 use std::net::IpAddr;
+use std::str::FromStr as _;
 use std::sync::{Arc, LazyLock};
 
 use color_eyre::eyre;
@@ -28,7 +29,7 @@ fn get_all_names(docker_event: &Event) -> Vec<Box<str>> {
         .actor
         .attributes
         .get("name")
-        .map(|name| RE_VALIDNAME.replace_all(name.as_str(), "").to_string())
+        .map(|name| RE_VALIDNAME.replace_all(name, "").to_string())
     {
         names.push(sanitized_name.into_boxed_str());
     }
@@ -110,7 +111,7 @@ impl Monitor {
         for name in &all_names {
             if let Err(error) = self
                 .authority_wrapper
-                .remove(&format!("{}.{}", name, self.domain))
+                .remove(&Name::from_str(&format!("{}.{}", name, self.domain)).unwrap())
                 .await
             {
                 event!(
@@ -128,7 +129,7 @@ impl Monitor {
     async fn handle_start(&self, event: &Event) {
         let all_names = get_all_names(event);
 
-        match self.docker.inspect_container(event.actor.id.as_str()).await {
+        match self.docker.inspect_container(&event.actor.id).await {
             Ok(container) if container.state.running => {
                 self.add_container_addresses(
                     &container.id,
@@ -178,7 +179,7 @@ impl Monitor {
             };
 
             if let EventType::Container = event.r#type {
-                match event.action.as_str() {
+                match &*event.action {
                     "start" => self.handle_start(&event).await,
                     "rename" => self.handle_rename(&event).await,
                     "die" => self.handle_die(&event).await,
