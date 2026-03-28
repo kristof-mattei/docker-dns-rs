@@ -1,6 +1,7 @@
 use std::net::IpAddr;
 use std::sync::{Arc, LazyLock};
 
+use color_eyre::eyre;
 use hickory_server::proto::rr::Name;
 use regex::Regex;
 use tokio::sync::mpsc::Receiver;
@@ -9,6 +10,7 @@ use tracing::{Level, event};
 
 use crate::docker::daemon::Daemon;
 use crate::docker::{Event, EventType};
+use crate::models::container_inspect::ContainerNetworkSettings;
 use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
@@ -19,7 +21,7 @@ pub struct Monitor {
     domain: Name,
 }
 
-fn get_all_names(docker_event: &Event) -> Vec<String> {
+fn get_all_names(docker_event: &Event) -> Vec<Box<str>> {
     let mut names = vec![];
 
     if let Some(sanitized_name) = docker_event
@@ -28,7 +30,7 @@ fn get_all_names(docker_event: &Event) -> Vec<String> {
         .get("name")
         .map(|name| RE_VALIDNAME.replace_all(name.as_str(), "").to_string())
     {
-        names.push(sanitized_name);
+        names.push(sanitized_name.into_boxed_str());
     }
 
     let instance = docker_event
@@ -47,10 +49,10 @@ fn get_all_names(docker_event: &Event) -> Vec<String> {
         .get("com.docker.compose.project");
 
     if let (Some(service), Some(project)) = (service, project) {
-        names.push(format!("{}.{}.{}", instance, service, project));
+        names.push(format!("{}.{}.{}", instance, service, project).into_boxed_str());
 
         if instance == 1 {
-            names.push(format!("{}.{}", service, project));
+            names.push(format!("{}.{}", service, project).into_boxed_str());
         }
     }
 
@@ -128,44 +130,12 @@ impl Monitor {
 
         match self.docker.inspect_container(event.actor.id.as_str()).await {
             Ok(container) if container.state.running => {
-                for address in container
-                    .network_settings
-                    .networks
-                    .values()
-                    .map(|cn| &cn.ip_address)
-                {
-                    let parsed_address: IpAddr = match address.parse() {
-                        Ok(ip_addr) => ip_addr,
-                        Err(error) => {
-                            event!(
-                                Level::ERROR,
-                                address,
-                                container_id = event.actor.id,
-                                ?error,
-                                "Failed to parse address to an IP address for container",
-                            );
-
-                            continue;
-                        },
-                    };
-
-                    for name in &all_names {
-                        let name: Name = name.parse().unwrap();
-                        let name = name.append_domain(&self.domain).unwrap();
-
-                        if let Err((name, error)) =
-                            self.authority_wrapper.add(name, parsed_address).await
-                        {
-                            event!(
-                                Level::ERROR,
-                                ?error,
-                                "Something went wrong adding {} -> {}",
-                                name,
-                                parsed_address
-                            );
-                        }
-                    }
-                }
+                self.add_container_addresses(
+                    &container.id,
+                    &all_names,
+                    &container.network_settings,
+                )
+                .await;
             },
             Ok(container) => {
                 event!(
@@ -215,6 +185,60 @@ impl Monitor {
                     rest => {
                         event!(Level::TRACE, event = rest, "ignoring event");
                     },
+                }
+            }
+        }
+    }
+
+    pub async fn start(&self) -> Result<(), eyre::Report> {
+        for container in self.docker.get_containers().await? {
+            if &*container.state == "running" {
+                self.add_container_addresses(
+                    &container.id,
+                    &container.names,
+                    &container.network_settings,
+                )
+                .await;
+            }
+        }
+
+        Ok(())
+    }
+
+    async fn add_container_addresses(
+        &self,
+        container_id: &str,
+        all_names: &[Box<str>],
+        network_settings: &ContainerNetworkSettings,
+    ) {
+        for address in network_settings.networks.values().map(|cn| &cn.ip_address) {
+            let parsed_address: IpAddr = match address.parse() {
+                Ok(ip_addr) => ip_addr,
+                Err(error) => {
+                    event!(
+                        Level::ERROR,
+                        address,
+                        container_id = container_id,
+                        ?error,
+                        "Failed to parse address to an IP address for container",
+                    );
+
+                    continue;
+                },
+            };
+
+            for name in all_names {
+                let name: Name = name.parse().unwrap();
+                let name = name.append_domain(&self.domain).unwrap();
+
+                if let Err((name, error)) = self.authority_wrapper.add(name, parsed_address).await {
+                    event!(
+                        Level::ERROR,
+                        ?error,
+                        "Something went wrong adding {} -> {}",
+                        name,
+                        parsed_address
+                    );
                 }
             }
         }
