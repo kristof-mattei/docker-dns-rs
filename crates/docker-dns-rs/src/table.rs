@@ -11,16 +11,6 @@ pub struct AuthorityWrapper {
     authority: Arc<InMemoryAuthority>,
 }
 
-fn pretty_print_vec<T: std::fmt::Display>(iterable: impl Iterator<Item = T>) -> String {
-    iterable.fold(String::new(), |acc, curr| {
-        if acc.is_empty() {
-            format!("{}", curr)
-        } else {
-            format!("{}, {}", acc, curr)
-        }
-    })
-}
-
 impl AuthorityWrapper {
     pub fn new(authority: Arc<InMemoryAuthority>) -> Self {
         Self { authority }
@@ -133,7 +123,6 @@ impl AuthorityWrapper {
                 "table.rename",
             );
         }
-
         Ok(())
     }
 
@@ -171,14 +160,23 @@ impl AuthorityWrapper {
 
         drop(records);
 
-        let records = record_set
-            .records_without_rrsigs()
-            .filter_map(|record| record.data().ip_addr())
-            .collect::<Vec<_>>();
-
         event!(
             Level::INFO,
-            ip_addresses = %pretty_print_vec(records.iter()),
+            ip_addresses = %std::fmt::from_fn(|f| {
+                let mut records = record_set
+                    .records_without_rrsigs()
+                    .filter_map(|record| record.data().ip_addr());
+
+                if let Some(first) = records.next() {
+                    write!(f, "{}", first)?;
+                }
+
+                for record in records {
+                    write!(f, ", {}", record)?;
+                }
+
+                Ok(())
+            }),
             "table.remove",
         );
 
