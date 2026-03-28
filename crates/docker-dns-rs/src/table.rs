@@ -26,7 +26,7 @@ impl AuthorityWrapper {
         Self { authority }
     }
 
-    async fn upsert(&self, name: Name, address: IpAddr) {
+    async fn upsert(&self, name: &Name, address: IpAddr) {
         // reverse map for PTR records
         let reverse: Name = address.into();
 
@@ -63,7 +63,7 @@ impl AuthorityWrapper {
     }
 
     pub async fn add(&self, name: Name, address: IpAddr) {
-        self.upsert(name.clone(), address).await;
+        self.upsert(&name, address).await;
 
         event!(Level::INFO, %name, %address, "table.add");
 
@@ -125,7 +125,7 @@ impl AuthorityWrapper {
         }
 
         for ip in ips {
-            self.upsert(new_name.clone(), ip).await;
+            self.upsert(new_name, ip).await;
 
             event!(
                 Level::INFO,
