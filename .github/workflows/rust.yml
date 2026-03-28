@@ -139,7 +139,7 @@ jobs:
 
   cargo-build-windows:
     name: Cargo build Windows
-    runs-on: windows-11
+    runs-on: windows-latest
     needs:
       - changes
     if: |
@@ -335,7 +335,7 @@ jobs:
 
   cargo-test-and-report-windows:
     name: Cargo test (and report) Windows
-    runs-on: windows-11
+    runs-on: windows-latest
     permissions:
       checks: write
       id-token: write
@@ -384,7 +384,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload test results
-        uses: EnricoMi/publish-unit-test-result-action/windows@c950f6fb443cb5af20a377fd0dfaa78838901040 # v2.23.0
+        uses: EnricoMi/publish-unit-test-result-action@c950f6fb443cb5af20a377fd0dfaa78838901040 # v2.23.0
         with:
           check_name: Test results Windows
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -474,7 +474,7 @@ jobs:
 
   cargo-clippy-and-report-windows:
     name: Cargo clippy (and report) Windows
-    runs-on: windows-11
+    runs-on: windows-latest
     needs:
       - changes
     if: |
