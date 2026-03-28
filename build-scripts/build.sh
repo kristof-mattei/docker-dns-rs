@@ -25,7 +25,7 @@ case $TARGET in
         ;;
 esac
 
-rustflags="-Clink-self-contained=yes -Clinker=rust-lld ${target_cpu}"
+rustflags="-Clink-self-contained=yes -Clinker=rust-lld --cfg tokio_unstable ${target_cpu}"
 
 # replace - with _ in the Rust target
 target_lower=${TARGET//-/_}
