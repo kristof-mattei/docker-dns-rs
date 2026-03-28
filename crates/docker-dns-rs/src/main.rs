@@ -117,6 +117,11 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         tasks.spawn(async move {
             let _guard = cancellation_token.clone().drop_guard();
 
+            if let Err(error) = docker_monitor.start().await {
+                event!(Level::ERROR, ?error, "Failed to fetch containers");
+                return;
+            }
+
             docker_monitor
                 .consume_events(receiver, &cancellation_token)
                 .await;

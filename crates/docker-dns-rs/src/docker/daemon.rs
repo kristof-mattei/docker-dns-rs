@@ -1,5 +1,4 @@
-use color_eyre::Section as _;
-use color_eyre::eyre::Report;
+use color_eyre::{Section as _, eyre};
 #[cfg(not(target_os = "windows"))]
 use http::Uri;
 use http_body_util::BodyExt as _;
@@ -15,6 +14,7 @@ use tracing::{Level, event};
 use crate::docker::Event;
 use crate::docker::config::{Config, Endpoint};
 use crate::http_client::{build_request, execute_request};
+use crate::models::container::Container;
 use crate::models::container_inspect::ContainerInspect;
 
 pub struct Daemon {
@@ -30,7 +30,7 @@ impl Daemon {
         &self,
         path_and_query: &str,
         method: Method,
-    ) -> Result<Response<Incoming>, color_eyre::Report> {
+    ) -> Result<Response<Incoming>, eyre::Report> {
         match self.config.endpoint {
             Endpoint::Direct {
                 ref url,
@@ -64,25 +64,19 @@ impl Daemon {
         }
     }
 
-    // pub async fn get_containers(&self) -> Result<Vec<Container>, color_eyre::Report> {
-    //     let path_and_query = format!(
-    //         "/containers/json?filters={}",
-    //         "" /* self.encoded_filters */
-    //     );
+    pub async fn get_containers(&self) -> Result<Vec<Container>, eyre::Report> {
+        let path_and_query = format!("/containers/json?filters={}", "");
 
-    //     let response = self.send_request(&path_and_query, Method::GET).await?;
+        let response = self.send_request(&path_and_query, Method::GET).await?;
 
-    //     let reader = response.collect().await?.aggregate().reader();
+        let bytes = response.collect().await?.to_bytes();
 
-    //     let result = serde_json::from_reader::<_, Vec<Container>>(reader)?;
+        let result = serde_json::from_slice::<Vec<Container>>(&bytes)?;
 
-    //     Ok(result)
-    // }
+        Ok(result)
+    }
 
-    pub async fn inspect_container(
-        &self,
-        id: &str,
-    ) -> Result<ContainerInspect, color_eyre::Report> {
+    pub async fn inspect_container(&self, id: &str) -> Result<ContainerInspect, eyre::Report> {
         let path_and_query = format!("/containers/{id}/json");
 
         let response = self.send_request(&path_and_query, Method::GET).await?;
@@ -97,7 +91,7 @@ impl Daemon {
         &self,
         sender: tokio::sync::mpsc::Sender<Event>,
         cancellation_token: &CancellationToken,
-    ) -> Result<(), color_eyre::Report> {
+    ) -> Result<(), eyre::Report> {
         let path_and_query = format!("/events{}", "");
 
         let mut response = self.send_request(&path_and_query, Method::GET).await?;
@@ -120,9 +114,7 @@ impl Daemon {
                     continue;
                 },
                 None => {
-                    return Err(color_eyre::Report::msg(
-                        "No more next frame, other side gone",
-                    ));
+                    return Err(eyre::Report::msg("No more next frame, other side gone"));
                 },
             };
 
@@ -153,7 +145,7 @@ impl Daemon {
     async fn decode_send(
         data: &[u8],
         sender: &tokio::sync::mpsc::Sender<Event>,
-    ) -> Result<(), Report> {
+    ) -> Result<(), eyre::Report> {
         let decoded = match serde_json::from_slice(data) {
             Ok(event) => event,
             Err(error) => {
@@ -167,6 +159,6 @@ impl Daemon {
         sender
             .send(decoded)
             .await
-            .map_err(|error| color_eyre::Report::msg("Channel closed").error(error))
+            .map_err(|error| eyre::Report::msg("Channel closed").error(error))
     }
 }
