@@ -1,8 +1,8 @@
-use std::ffi::OsString;
+#[cfg(not(target_os = "windows"))]
+use std::path::PathBuf;
+use std::time::Duration;
 
-use color_eyre::eyre;
-
-use crate::utils::env::try_parse_env_variable_with_default;
+use crate::args::RawEndpoint;
 
 pub struct Config {
     pub endpoint: Endpoint,
@@ -11,58 +11,20 @@ pub struct Config {
 pub enum Endpoint {
     Direct {
         url: http::Uri,
-        timeout_milliseconds: u64,
+        timeout: Duration,
     },
     #[cfg(not(target_os = "windows"))]
-    Socket(String),
+    Socket(PathBuf),
 }
 
 impl Config {
-    pub fn build() -> Result<Config, eyre::Report> {
-        const TCP_START: &str = "tcp://";
-
-        let mut docker_socket_or_uri = std::env::var_os("DOCKER_SOCK")
-            .map_or_else(
-                || Ok(String::from("/var/run/docker.sock")),
-                OsString::into_string,
-            )
-            .map_err(|docker_sock_value| {
-                eyre::Report::msg(format!(
-                    "Could not convert \"{}\" to String",
-                    docker_sock_value.display()
-                ))
-            })?;
-
-        let timeout_milliseconds = try_parse_env_variable_with_default("CURL_TIMEOUT", 30)?;
-
-        let endpoint = if docker_socket_or_uri.starts_with(TCP_START) {
-            docker_socket_or_uri.replace_range(..TCP_START.len(), "http://");
-
-            Endpoint::Direct {
-                url: docker_socket_or_uri.parse().unwrap(),
-                timeout_milliseconds,
-            }
-        } else {
-            #[cfg(target_os = "windows")]
-            return Err(eyre::Report::msg(format!(
-                "On Windows, you can connect to docker with tcp. You tried to connect with \"{}\"",
-                docker_socket_or_uri
-            )));
-
-            // we're connecting over a socket, so the uri is localhost
+    pub fn build(raw_endpoint: RawEndpoint, timeout: Duration) -> Config {
+        let endpoint = match raw_endpoint {
+            RawEndpoint::Direct(uri) => Endpoint::Direct { url: uri, timeout },
             #[cfg(not(target_os = "windows"))]
-            Endpoint::Socket(docker_socket_or_uri)
+            RawEndpoint::Socket(path_buf) => Endpoint::Socket(path_buf),
         };
 
-        Ok(Config { endpoint })
+        Config { endpoint }
     }
-
-    // fn curl_options(&self) -> String {
-    //     match self {
-    //         ApiConfig::Tcp(_) => String::from(
-    //             "--cacert /certs/ca.pem --key /certs/client-key.pem --cert /certs/client-cert.pem",
-    //         ),
-    //         ApiConfig::Socket(s) => format!("--unix-socket {}", s),
-    //     }
-    // }
 }
