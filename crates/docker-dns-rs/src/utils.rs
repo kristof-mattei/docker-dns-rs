@@ -1,8 +1,6 @@
 use color_eyre::eyre;
 use tokio::task::JoinHandle;
 
-pub mod env;
-
 /// Use this when you have a `JoinHandle<Result<T, E>>`
 /// and you want to use it with `tokio::try_join!`
 /// when the task completes with an `Result::Err`

@@ -1,5 +1,3 @@
-use std::time::Duration;
-
 use color_eyre::Section as _;
 use color_eyre::eyre::Report;
 #[cfg(not(target_os = "windows"))]
@@ -36,7 +34,7 @@ impl Daemon {
         match self.config.endpoint {
             Endpoint::Direct {
                 ref url,
-                timeout_milliseconds,
+                timeout: query_timeout,
             } => {
                 let connector = HttpsConnectorBuilder::new()
                     .with_native_roots()?
@@ -48,7 +46,7 @@ impl Daemon {
 
                 let response = execute_request(connector, request);
 
-                match timeout(Duration::from_millis(timeout_milliseconds), response).await {
+                match timeout(query_timeout, response).await {
                     Ok(Ok(response)) => Ok(response),
                     Ok(Err(error)) => Err(error),
                     Err(error) => Err(error.into()),
@@ -111,7 +109,7 @@ impl Daemon {
             let frame = tokio::select! {
                 frame = response.frame() => frame,
                 () = cancellation_token.cancelled() => {
-                    return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
+                    return Ok(());
                 },
             };
 

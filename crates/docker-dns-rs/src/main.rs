@@ -18,7 +18,7 @@ use tracing_subscriber::util::SubscriberInitExt as _;
 
 use crate::build_env::get_build_env;
 use crate::dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server};
-use crate::docker::config::Config;
+use crate::docker::config::Config as DockerConfig;
 use crate::docker::daemon::Daemon;
 use crate::docker::monitor::Monitor;
 use crate::table::AuthorityWrapper;
@@ -92,7 +92,7 @@ fn print_header() {
 }
 
 async fn start_tasks() -> Result<(), color_eyre::Report> {
-    let args = args::Args::parse();
+    let args = args::RawConfig::parse();
 
     print_header();
 
@@ -101,7 +101,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&authority));
 
     // docker
-    let docker_config = Config::build()?;
+    let docker_config = DockerConfig::build(args.docker_host, args.timeout);
     let docker = Arc::new(Daemon::new(docker_config));
     let docker_monitor = Monitor::new(Arc::clone(&docker), authority_wrapper, args.domain.clone());
 
@@ -141,8 +141,8 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
 
     {
         let cancellation_token = cancellation_token.clone();
-        let socket = UdpSocket::bind("0.0.0.0:54000").await?;
-        let listener = TcpListener::bind("0.0.0.0:54000").await?;
+        let socket = UdpSocket::bind(args.dns_bind).await?;
+        let listener = TcpListener::bind(args.dns_bind).await?;
 
         tasks.spawn(async move {
             let _guard = cancellation_token.clone().drop_guard();
