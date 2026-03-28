@@ -7,6 +7,8 @@ use hickory_server::proto::rr::{LowerName, Name, RData, RecordSet, RecordType, R
 use hickory_server::store::in_memory::InMemoryAuthority;
 use tracing::{Level, event, instrument};
 
+use crate::utils::pretty_print_iter;
+
 pub struct AuthorityWrapper {
     authority: Arc<InMemoryAuthority>,
 }
@@ -52,8 +54,8 @@ impl AuthorityWrapper {
         );
     }
 
-    pub async fn add(&self, name: Name, address: IpAddr) {
-        self.upsert(&name, address).await;
+    pub async fn add(&self, name: &Name, address: IpAddr) {
+        self.upsert(name, address).await;
 
         event!(Level::INFO, %name, %address, "table.add");
 
@@ -153,79 +155,27 @@ impl AuthorityWrapper {
     async fn remove_records(&self, rrkey: &RrKey) -> Result<(), ()> {
         let mut records = self.authority.records_mut().await;
 
-        // we delete the incoming name -> ip from our storage
         let Some(record_set) = records.remove(rrkey) else {
             return Err(());
         };
+
+        let ips: Vec<IpAddr> = record_set
+            .records_without_rrsigs()
+            .filter_map(|record| record.data().ip_addr())
+            .collect();
+
+        for &ip in &ips {
+            let ptr_key = RrKey::new(Name::from(ip).into(), RecordType::PTR);
+            records.remove(&ptr_key);
+        }
 
         drop(records);
 
         event!(
             Level::INFO,
-            ip_addresses = %std::fmt::from_fn(|f| {
-                let mut records = record_set
-                    .records_without_rrsigs()
-                    .filter_map(|record| record.data().ip_addr());
-
-                if let Some(first) = records.next() {
-                    write!(f, "{}", first)?;
-                }
-
-                for record in records {
-                    write!(f, ", {}", record)?;
-                }
-
-                Ok(())
-            }),
+            ip_addresses = %pretty_print_iter(ips.iter().copied()),
             "table.remove",
         );
-
-        // and for each ip in name -> ip we delete the PTR record
-        // for address in addresses {
-        //     let ptr_address = AuthorityWrapper::build_reversed(
-        //         &address.parse().expect("Expected IP Address"),
-        //     );
-        //     let ptr_key = self.key(&ptr_address);
-
-        // let raw_entry_builder = storage.raw_entry_mut();
-
-        // match raw_entry_builder.from_key(&ptr_key) {
-        //     RawEntryMut::Occupied(mut o) => {
-        //         let targets = o.get_mut();
-        //         targets.remove(name);
-
-        //         event!(Level::INFO, "table.remove {} -> {}", ptr_key, name);
-
-        //         if targets.is_empty() {
-        //             o.remove();
-
-        //             event!(Level::INFO, "table.remove {} as it is empty", ptr_key);
-        //         }
-        //     },
-        //     RawEntryMut::Vacant(_) => {
-        //         event!(
-        //             Level::WARN,
-        //             "table.remove {} -> {} failed, PTR record not found",
-        //             ptr_key,
-        //             name
-        //         );
-        //     },
-        // }
-
-        // match storage.raw_entry_mut(ptr_key) {
-        //     Entry::Occupied(mut o) => {
-        //         o.get_mut().remove(name);
-        //     },
-        //     Entry::Vacant(_) => {
-        //     },
-        // }
-
-        // if let Some(v) = storage.get_mut(&ptr_key) {
-        //     if v.remove(name) {
-        //         event!(Level::INFO, "table.remove {} -> {}", ptr_key, name);
-        //     } else {
-        //     }
-        // }
 
         Ok(())
     }

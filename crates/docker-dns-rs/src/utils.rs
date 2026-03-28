@@ -24,13 +24,25 @@ where
     }
 }
 
-#[expect(unused, reason = "might come in handy")]
-fn pretty_print_slice<T: std::fmt::Display>(iterable: impl Iterator<Item = T>) -> String {
-    iterable.fold(String::new(), |acc, curr| {
-        if acc.is_empty() {
-            format!("{}", curr)
-        } else {
-            format!("{}, {}", acc, curr)
+pub fn pretty_print_iter<T, I>(mut iterable: I) -> String
+where
+    I: Iterator<Item = T>,
+    T: std::fmt::Display,
+{
+    use std::fmt::Write as _;
+
+    let mut result = String::new();
+
+    if let Some(first) = iterable.next() {
+        // write the first element without a leading separator
+        write!(&mut result, "{}", first).expect("writing to String cannot fail");
+
+        // for each subsequent element, prepend ", " before writing it
+        for item in iterable {
+            result.push_str(", ");
+            write!(&mut result, "{}", item).expect("writing to String cannot fail");
         }
-    })
+    }
+
+    result
 }
