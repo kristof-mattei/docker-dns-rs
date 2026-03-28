@@ -1,4 +1,53 @@
 <!-- header goes here -->
+## [0.6.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.5.1..v0.6.0) - 2026-03-28
+
+### 🚀 Features
+
+- Remove crane by @kristof-mattei ([`073ba68`](https://github.com/kristof-mattei/docker-dns-rs/commit/073ba68f70d54c2adebaa489958e9527f20b6c9f))
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate clap to 4.5.61 by @renovate[bot] ([`178bb8e`](https://github.com/kristof-mattei/docker-dns-rs/commit/178bb8ec85a3d369cc1d7dd40f390aa45d1d6dbe))
+- *(deps)* Update rust crate clap to 4.6.0 by @renovate[bot] ([`d003db5`](https://github.com/kristof-mattei/docker-dns-rs/commit/d003db5c2367f1bea7229c6f06c78945e5da8bb2))
+- *(deps)* Update rust crate tracing-subscriber to 0.3.23 by @renovate[bot] ([`528ade7`](https://github.com/kristof-mattei/docker-dns-rs/commit/528ade76d9fb84085c65275e4b5f6b612fb5acbc))
+- Use wildcard by @kristof-mattei ([`3cc4efe`](https://github.com/kristof-mattei/docker-dns-rs/commit/3cc4efefaa8d6b3363f8ebbf0c677c82933571bb))
+- Embed the calculated version in the image label, not the PR it came from by @kristof-mattei ([`654a96c`](https://github.com/kristof-mattei/docker-dns-rs/commit/654a96c34a4b33e89f2b6eecc443d8097b5cd1c2))
+- Use skopeo to copy the image, as buildx wrapped the image in an OCI image index by @kristof-mattei ([`7c179a2`](https://github.com/kristof-mattei/docker-dns-rs/commit/7c179a2ac1aeda46e08cb54383d904aed5dc5c8b))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Allow empty by @kristof-mattei ([`e6ce7fb`](https://github.com/kristof-mattei/docker-dns-rs/commit/e6ce7fbb2a3ceb423c1c822dca92049f70f43ea2))
+- *(ci)* Comment cleanup by @kristof-mattei ([`4fa99d9`](https://github.com/kristof-mattei/docker-dns-rs/commit/4fa99d9cace57656b0c725fa995cbf85cedd07b4))
+- *(release)* Release v0.6.0
+- Clean up ignore by @kristof-mattei ([`404a01e`](https://github.com/kristof-mattei/docker-dns-rs/commit/404a01e12c18e72240ce1f85a49ee6aa8fc9e403))
+- Rust 1.94.0 Docker by @kristof-mattei ([`9427eb1`](https://github.com/kristof-mattei/docker-dns-rs/commit/9427eb18b46bf01da1357e3d83312f0846aa42ae))
+- Pin sha for Rust image by @kristof-mattei ([`e2986db`](https://github.com/kristof-mattei/docker-dns-rs/commit/e2986db43914999be69f279056fd5be0908f7216))
+- Use trixie as dev image by @kristof-mattei ([`caa35f4`](https://github.com/kristof-mattei/docker-dns-rs/commit/caa35f407f67a6bf86e45f83735ec9a5d31df207))
+- Devcontainer mold by @kristof-mattei ([`d4a14c0`](https://github.com/kristof-mattei/docker-dns-rs/commit/d4a14c05f92ed61bad93d07ce0ab095b282d0111))
+- Skip more when releasing by @kristof-mattei ([`762a3bc`](https://github.com/kristof-mattei/docker-dns-rs/commit/762a3bcfe9b2c625e41b5020939e9bcdb3fb8815))
+- Lowercase variables by @kristof-mattei ([`dff26ac`](https://github.com/kristof-mattei/docker-dns-rs/commit/dff26ac37a1826cf3b57c9c848aba1a9de9e5d67))
+- Lowercase variables & path hygiene by @kristof-mattei ([`668015d`](https://github.com/kristof-mattei/docker-dns-rs/commit/668015dbabaf3cf2f2480896ed7737e4b8f7490c))
+- Disable formatting on push to main, different array syntax by @kristof-mattei ([`c1d61b0`](https://github.com/kristof-mattei/docker-dns-rs/commit/c1d61b06948c3bde697272a21bd27c66d0cb5fd8))
+- Use same [] syntax everywhere for yaml by @kristof-mattei ([`a90eeff`](https://github.com/kristof-mattei/docker-dns-rs/commit/a90eefffd10960f09c14efb2200161ef2663f6d2))
+- Move / add mold by @kristof-mattei ([`639f3a5`](https://github.com/kristof-mattei/docker-dns-rs/commit/639f3a50a697763fc25b8e0c4934a16ad8e83cd6))
+- Improve caching by @kristof-mattei ([`6841817`](https://github.com/kristof-mattei/docker-dns-rs/commit/6841817ca0e5927b21745c8608c9e2a972ea92fc))
+- Test by @kristof-mattei ([`222103f`](https://github.com/kristof-mattei/docker-dns-rs/commit/222103f074c48ae8645cb5ae37c4fed4fcea447d))
+- Remove test by @kristof-mattei ([`c73b6d6`](https://github.com/kristof-mattei/docker-dns-rs/commit/c73b6d6d7181b52e65b4e94f37bbde8ddeabac74))
+- Not needed by @kristof-mattei ([`e92df85`](https://github.com/kristof-mattei/docker-dns-rs/commit/e92df85de4a37e42e9774e6f983c27ebdf09b3c2))
+- Remove suprious newline by @kristof-mattei ([`be7faa7`](https://github.com/kristof-mattei/docker-dns-rs/commit/be7faa7228268d8f0b97fdb7348ac2a552e3c6c6))
+- Sort by @kristof-mattei ([`a8b16ab`](https://github.com/kristof-mattei/docker-dns-rs/commit/a8b16abc3b307557d1728ff6a5d6f8f217498382))
+- Move build cache by @kristof-mattei ([`0ab1328`](https://github.com/kristof-mattei/docker-dns-rs/commit/0ab1328687c12bf15ae3e21bb031a2d38632c4c8))
+- Rename by @kristof-mattei ([`6544b67`](https://github.com/kristof-mattei/docker-dns-rs/commit/6544b67f89b757a1a86986291fd1efef42f07445))
+- Stop skopeo from trying to infer type by @kristof-mattei ([`66ca282`](https://github.com/kristof-mattei/docker-dns-rs/commit/66ca282f0a4adcd2a4ee63f8ad69c9c822ac88ac))
+- Ensure we copy all layers by @kristof-mattei ([`6428eb8`](https://github.com/kristof-mattei/docker-dns-rs/commit/6428eb84930a25d7c8d4fda31d0f32dc4ad55f9f))
+- Also run build & spellcheck once merged, this warms up the cache for subsequent builds by @kristof-mattei ([`e6db1ca`](https://github.com/kristof-mattei/docker-dns-rs/commit/e6db1ca9fa9b6353c81e9c3870a31fdde32303ce))
+- Speed up spellcheck compilation with sccache by @kristof-mattei ([`5e53dcd`](https://github.com/kristof-mattei/docker-dns-rs/commit/5e53dcd877309fafb5cf123c5a39697ccd2f47d7))
+- Enable sccache for spellcheck by @kristof-mattei ([`d99fa01`](https://github.com/kristof-mattei/docker-dns-rs/commit/d99fa01ce7d28befefea7882be13557a9d9ffc24))
+- Remove cache cargo for spellcheck, as it doesn't do anything by @kristof-mattei ([`565017e`](https://github.com/kristof-mattei/docker-dns-rs/commit/565017e04b68ad7de0efad32f98ba111041d773a))
+- Use a spellcheck fork for quicker installation by @kristof-mattei ([`93bfd69`](https://github.com/kristof-mattei/docker-dns-rs/commit/93bfd695bd0a871fbdb10a269b4d266194303729))
+- No need to do spellcheck on push anymore, as we use pre-built binaries by @kristof-mattei ([`afa2005`](https://github.com/kristof-mattei/docker-dns-rs/commit/afa2005227a8ac9fb078efe5abf6f9cad8f52c37))
+- Rename variable by @kristof-mattei ([`6df48ae`](https://github.com/kristof-mattei/docker-dns-rs/commit/6df48aec948a406fecd5c0dfbf285623279d4a3f))
+- Fix container build not having tokio_unstable by @kristof-mattei ([`35b8add`](https://github.com/kristof-mattei/docker-dns-rs/commit/35b8add80ab0512853c2dc9fe8b6dc15142d0b10))
 ## [0.5.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.5.0..v0.5.1) - 2026-03-03
 
 ### 🚀 Features
@@ -23,7 +72,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.5.1
+- *(release)* Release v0.5.1 by @github-actions[bot] ([`21357c5`](https://github.com/kristof-mattei/docker-dns-rs/commit/21357c5543a6d7564815d00f7c75c9f8b1478a95))
 - Remove colon by @kristof-mattei ([`635bd83`](https://github.com/kristof-mattei/docker-dns-rs/commit/635bd8386a4c2e47f7cace63f54341234c80218f))
 - Decrease verbosity by @kristof-mattei ([`64c0473`](https://github.com/kristof-mattei/docker-dns-rs/commit/64c04739ca3f7bb5711c2adc38a690f6413f48e7))
 - `attest-build-provenance` is deprecated by @kristof-mattei ([`26fa46a`](https://github.com/kristof-mattei/docker-dns-rs/commit/26fa46a6ed449dddd256e1817aa81300cd374346))
