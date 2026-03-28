@@ -94,10 +94,10 @@ impl Monitor {
                         Level::WARN,
                         ?error,
                         ?event,
-                        "Failure to rename container {} ({} -> {})",
-                        event.actor.id,
-                        o,
-                        n
+                        container_id = %event.actor.id,
+                        old_name = %o,
+                        new_name = %n,
+                        "Failure to rename container",
                     );
                 }
             },
@@ -141,16 +141,16 @@ impl Monitor {
                 event!(
                     Level::WARN,
                     ?container,
-                    "Got start event with container id {} but the container is not running",
-                    event.actor.id,
+                    container_id = %event.actor.id,
+                    "Got start event, but container was not running",
                 );
             },
             Err(error) => {
                 event!(
                     Level::WARN,
                     ?error,
-                    "Got start event with container id {} but couldn't find it",
-                    event.actor.id,
+                    container_id = %event.actor.id,
+                    "Got start event, but could not find container",
                 );
             },
         }
@@ -217,9 +217,9 @@ impl Monitor {
                 Err(error) => {
                     event!(
                         Level::ERROR,
-                        address,
-                        container_id = container_id,
                         ?error,
+                        %container_id,
+                        %address,
                         "Failed to parse address to an IP address for container",
                     );
 

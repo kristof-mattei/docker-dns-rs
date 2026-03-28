@@ -150,7 +150,12 @@ impl Daemon {
             Ok(event) => event,
             Err(error) => {
                 let decoded_data = String::from_utf8_lossy(data);
-                event!(Level::ERROR, err= ?error, ?decoded_data, "Failed to parse json to struct");
+                event!(
+                    Level::ERROR,
+                    ?error,
+                    ?decoded_data,
+                    "Failed to parse json to struct"
+                );
 
                 return Ok(());
             },

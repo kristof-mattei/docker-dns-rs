@@ -23,3 +23,14 @@ where
         Err(error) => Err(error.into()),
     }
 }
+
+#[expect(unused, reason = "might come in handy")]
+fn pretty_print_slice<T: std::fmt::Display>(iterable: impl Iterator<Item = T>) -> String {
+    iterable.fold(String::new(), |acc, curr| {
+        if acc.is_empty() {
+            format!("{}", curr)
+        } else {
+            format!("{}, {}", acc, curr)
+        }
+    })
+}
