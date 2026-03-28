@@ -26,7 +26,7 @@ impl AuthorityWrapper {
         Self { authority }
     }
 
-    async fn upsert(&self, name: Name, address: IpAddr) {
+    async fn upsert(&self, name: &Name, address: IpAddr) {
         // reverse map for PTR records
         let reverse: Name = address.into();
 
@@ -62,11 +62,10 @@ impl AuthorityWrapper {
         );
     }
 
-    pub async fn add(&self, name: Name, address: IpAddr) -> Result<(), (Name, Report)> {
-        self.upsert(name.clone(), address).await;
+    pub async fn add(&self, name: Name, address: IpAddr) {
+        self.upsert(&name, address).await;
 
-        event!(Level::INFO, "table.add {} -> {}", name, address);
-        Ok(())
+        event!(Level::INFO, %name, %address, "table.add");
 
         // // TODO using `name` as value here seems weird
         // // AuthorityWrapper::upsert(&mut l, ptr_key, name.clone());
@@ -126,7 +125,7 @@ impl AuthorityWrapper {
         }
 
         for ip in ips {
-            self.upsert(new_name.clone(), ip).await;
+            self.upsert(new_name, ip).await;
 
             event!(
                 Level::INFO,
