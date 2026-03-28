@@ -1,4 +1,17 @@
 <!-- header goes here -->
+## [0.7.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.6.0..v0.7.0) - 2026-03-28
+
+### 🚀 Features
+
+- Initialize with existing containers on startup by @kristof-mattei ([`edd52e4`](https://github.com/kristof-mattei/docker-dns-rs/commit/edd52e4cbd23c1b76e85e836af93d5c2b867dfa4))
+
+### 🐛 Bug Fixes
+
+- Reo cli reading, arg parsing by @kristof-mattei ([`13bc53b`](https://github.com/kristof-mattei/docker-dns-rs/commit/13bc53b8d72d4523498bfd4a2014548c6815cdef))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.7.0
 ## [0.6.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.5.1..v0.6.0) - 2026-03-28
 
 ### 🚀 Features
@@ -18,7 +31,7 @@
 
 - *(ci)* Allow empty by @kristof-mattei ([`e6ce7fb`](https://github.com/kristof-mattei/docker-dns-rs/commit/e6ce7fbb2a3ceb423c1c822dca92049f70f43ea2))
 - *(ci)* Comment cleanup by @kristof-mattei ([`4fa99d9`](https://github.com/kristof-mattei/docker-dns-rs/commit/4fa99d9cace57656b0c725fa995cbf85cedd07b4))
-- *(release)* Release v0.6.0
+- *(release)* Release v0.6.0 by @github-actions[bot] ([`dfb97e4`](https://github.com/kristof-mattei/docker-dns-rs/commit/dfb97e49677b576f4484649644893d325f14e299))
 - Clean up ignore by @kristof-mattei ([`404a01e`](https://github.com/kristof-mattei/docker-dns-rs/commit/404a01e12c18e72240ce1f85a49ee6aa8fc9e403))
 - Rust 1.94.0 Docker by @kristof-mattei ([`9427eb1`](https://github.com/kristof-mattei/docker-dns-rs/commit/9427eb18b46bf01da1357e3d83312f0846aa42ae))
 - Pin sha for Rust image by @kristof-mattei ([`e2986db`](https://github.com/kristof-mattei/docker-dns-rs/commit/e2986db43914999be69f279056fd5be0908f7216))
