@@ -2,7 +2,7 @@ use std::net::IpAddr;
 use std::sync::{Arc, LazyLock};
 
 use color_eyre::eyre;
-use hashbrown::{Equivalent, HashMap};
+use hashbrown::HashMap;
 use hickory_server::proto::rr::Name;
 use regex::Regex;
 use tokio::sync::Mutex;
@@ -17,27 +17,20 @@ use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
-#[derive(Hash, PartialEq, Eq)]
-struct Query<'a>(&'a str, &'a str);
-
-type NetworkKey = (Arc<str>, Box<str>);
-
-impl Equivalent<NetworkKey> for Query<'_> {
-    fn equivalent(&self, key: &NetworkKey) -> bool {
-        self.0 == &*key.0 && self.1 == &*key.1
-    }
+struct ContainerState {
+    names: Arc<[Name]>,
+    /// `network_name` to `ip`.
+    networks: HashMap<Box<str>, IpAddr>,
 }
 
 pub struct Monitor {
     authority_wrapper: AuthorityWrapper,
     docker: Arc<Daemon>,
     domain: Name,
-    /// `container_id` to list of names.
-    /// Populated on container `start`, removed on container `die`.
-    names: Mutex<HashMap<Arc<str>, Arc<[Name]>>>,
-    /// (`container_id`, `network_name`) to `ip_address mapping`.
-    /// Populated on network `connect`, removed on network `disconnect`.
-    networks: Mutex<HashMap<NetworkKey, IpAddr>>,
+    /// `container_id` to `ContainerState`.
+    /// Invariant: names and network entries are always co-located, you cannot have
+    /// a network entry without its accompanying names.
+    containers: Mutex<HashMap<Arc<str>, ContainerState>>,
 }
 
 fn append_compose_names(
@@ -125,8 +118,7 @@ impl Monitor {
             authority_wrapper,
             docker,
             domain,
-            names: Mutex::new(HashMap::new()),
-            networks: Mutex::new(HashMap::new()),
+            containers: Mutex::new(HashMap::new()),
         }
     }
 
@@ -168,10 +160,9 @@ impl Monitor {
                     );
                 } else {
                     let new_names = to_full_names(get_all_names_from_event(&event), &self.domain);
-                    self.names
-                        .lock()
-                        .await
-                        .insert(Arc::from(&*event.actor.id), new_names);
+                    if let Some(state) = self.containers.lock().await.get_mut(&*event.actor.id) {
+                        state.names = new_names;
+                    }
                 }
             },
         }
@@ -180,31 +171,26 @@ impl Monitor {
     async fn handle_start(&self, event: Event) {
         let full_names = to_full_names(get_all_names_from_event(&event), &self.domain);
 
-        self.names
+        // Only insert if no entry yet, handle_connect may have already populated names
+        // from inspect (Docker fires network:connect before container:start).
+        self.containers
             .lock()
             .await
-            .insert(Arc::from(&*event.actor.id), full_names);
+            .entry(Arc::from(&*event.actor.id))
+            .or_insert_with(|| ContainerState {
+                names: full_names,
+                networks: HashMap::new(),
+            });
     }
 
     async fn handle_die(&self, event: Event) {
-        let container_id = &*event.actor.id;
+        let Some(state) = self.containers.lock().await.remove(&*event.actor.id) else {
+            return;
+        };
 
-        let names = self.names.lock().await.remove(container_id);
-
-        // drain any network entries not already removed by disconnect events
-        let dangling_ips: Vec<_> = self
-            .networks
-            .lock()
-            .await
-            .extract_if(|&(ref id, _), _| &**id == container_id)
-            .map(|(_, ip)| ip)
-            .collect();
-
-        if let Some(names) = names {
-            for ip in dangling_ips {
-                for name in &*names {
-                    self.authority_wrapper.remove_address(name, ip).await;
-                }
+        for (_, ip) in state.networks {
+            for name in &*state.names {
+                self.authority_wrapper.remove_address(name, ip).await;
             }
         }
     }
@@ -228,8 +214,13 @@ impl Monitor {
             return;
         };
 
-        // read cached names before inspecting, don't hold the lock across an await
-        let cached_names = self.names.lock().await.get(&**container_id).cloned();
+        // read cached names before inspecting, release the lock before the async call.
+        let cached_names = self
+            .containers
+            .lock()
+            .await
+            .get(&**container_id)
+            .map(|s| Arc::clone(&s.names));
 
         match self.docker.inspect_container(container_id).await {
             Ok(container) if container.state.running => {
@@ -257,39 +248,44 @@ impl Monitor {
                     },
                 };
 
-                // Use cached names if available. Docker fires network:connect before container:start, so the names cache is typically not populated yet when this runs.
-                // Fall back to inspect, which also covers containers that were already running when the monitor started (no start event seen for them).
-                let full_names = if let Some(names) = cached_names {
-                    names
-                } else {
-                    let names = to_full_names(get_all_names_from_inspect(&container), &self.domain);
-                    self.names
-                        .lock()
-                        .await
-                        .insert(Arc::from(&**container_id), Arc::clone(&names));
-                    names
+                // Use cached names if available, fall back to inspect.
+                // Docker fires network:connect before container:start, so the cache is
+                // typically empty when this runs for a new container.
+                let full_names = cached_names.unwrap_or_else(|| {
+                    to_full_names(get_all_names_from_inspect(&container), &self.domain)
+                });
+
+                // Record the network entry atomically with the startup-race check.
+                // Record the network entry. Returns the previously registered IP, if any.
+                // Also ensures names are present whenever network entries exist.
+                let replaced_ip = {
+                    let mut containers = self.containers.lock().await;
+                    let state = containers
+                        .entry(Arc::from(&**container_id))
+                        .or_insert_with(|| ContainerState {
+                            names: Arc::clone(&full_names),
+                            networks: HashMap::new(),
+                        });
+
+                    if state.networks.get(&**network_name).copied() == Some(ip) {
+                        return; // startup race: start() already registered this exact IP
+                    }
+
+                    state.networks.insert(network_name.clone(), ip)
                 };
 
-                // startup race: connect event buffered while start() was running
-                if self
-                    .networks
-                    .lock()
-                    .await
-                    .get(&Query(container_id, network_name))
-                    .copied()
-                    == Some(ip)
-                {
-                    return;
+                // If a different IP was previously registered for this network (e.g. Docker
+                // reassigned the IP between start()'s container list and this event),
+                // remove the stale DNS records before adding the new ones.
+                if let Some(old_ip) = replaced_ip {
+                    for name in &*full_names {
+                        self.authority_wrapper.remove_address(name, old_ip).await;
+                    }
                 }
 
                 for name in &*full_names {
                     self.authority_wrapper.add(name, ip).await;
                 }
-
-                self.networks
-                    .lock()
-                    .await
-                    .insert((Arc::from(&**container_id), network_name.clone()), ip);
             },
             Ok(container) => {
                 event!(
@@ -329,31 +325,30 @@ impl Monitor {
             return;
         };
 
-        let ip = self
-            .networks
-            .lock()
-            .await
-            .remove(&Query(container_id, network_name));
+        let (ip, names) = {
+            let mut containers = self.containers.lock().await;
 
-        let Some(ip) = ip else {
-            event!(
-                Level::WARN,
-                %container_id,
-                %network_name,
-                "Got disconnect event but no network cache entry found",
-            );
-            return;
-        };
+            let Some(state) = containers.get_mut(&**container_id) else {
+                event!(
+                    Level::WARN,
+                    %container_id,
+                    %network_name,
+                    "Got disconnect event but no container cache entry found",
+                );
+                return;
+            };
 
-        let names = self.names.lock().await.get(&**container_id).cloned();
+            let Some(ip) = state.networks.remove(&**network_name) else {
+                event!(
+                    Level::WARN,
+                    %container_id,
+                    %network_name,
+                    "Got disconnect event but no network cache entry found",
+                );
+                return;
+            };
 
-        let Some(names) = names else {
-            event!(
-                Level::WARN,
-                %container_id,
-                "Got disconnect event but no names cache entry found",
-            );
-            return;
+            (ip, Arc::clone(&state.names))
         };
 
         for name in &*names {
@@ -422,10 +417,16 @@ impl Monitor {
             let container_id = Arc::from(container.id);
             let full_names = to_full_names(Vec::from(container.names), &self.domain);
 
-            self.names
+            // Insert names upfront so any handle_connect events racing with start()
+            // can find them in the cache.
+            self.containers
                 .lock()
                 .await
-                .insert(Arc::clone(&container_id), Arc::clone(&full_names));
+                .entry(Arc::clone(&container_id))
+                .or_insert_with(|| ContainerState {
+                    names: Arc::clone(&full_names),
+                    networks: HashMap::new(),
+                });
 
             for (network_name, network) in container.network_settings.networks {
                 let ip: IpAddr = match network.ip_address.parse() {
@@ -447,10 +448,9 @@ impl Monitor {
                     self.authority_wrapper.add(name, ip).await;
                 }
 
-                self.networks
-                    .lock()
-                    .await
-                    .insert((Arc::clone(&container_id), network_name), ip);
+                if let Some(state) = self.containers.lock().await.get_mut(&*container_id) {
+                    state.networks.insert(network_name, ip);
+                }
             }
         }
 

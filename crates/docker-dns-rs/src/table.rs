@@ -39,35 +39,33 @@ fn remove_from_ptr_set(
     ip: IpAddr,
     name: &LowerName,
 ) {
-    let ptr_key = RrKey::new(Name::from(ip).into(), RecordType::PTR);
+    let reverse = Name::from(ip);
+    let ptr_key = RrKey::new(LowerName::new(&reverse), RecordType::PTR);
 
     let Entry::Occupied(mut entry) = records.entry(ptr_key) else {
         return;
     };
 
-    let remaining: Vec<&RData> = entry
+    // Check existence under the same lock before paying the clone cost.
+    let exists = entry
         .get()
         .records_without_rrsigs()
-        .map(Record::data)
-        .filter(|d| {
-            if let &RData::PTR(PTR(ref n)) = *d {
-                &LowerName::new(n) != name
-            } else {
-                true
-            }
-        })
-        .collect();
+        .any(|r| matches!(r.data(), RData::PTR(PTR(n)) if &LowerName::new(n) == name));
 
-    if remaining.is_empty() {
+    if !exists {
+        return;
+    }
+
+    let record_to_remove = Record::from_rdata(reverse, 0, RData::PTR(PTR(Name::from(name))));
+
+    let is_empty = {
+        let set = Arc::make_mut(entry.get_mut());
+        set.remove(&record_to_remove, 0);
+        set.is_empty()
+    };
+
+    if is_empty {
         entry.remove();
-    } else {
-        let mut new_set = RecordSet::with_ttl(Name::from(ip), RecordType::PTR, 5);
-
-        for rdata in remaining {
-            new_set.add_rdata(rdata.clone());
-        }
-
-        *entry.get_mut() = Arc::new(new_set);
     }
 }
 
@@ -159,8 +157,7 @@ impl AuthorityWrapper {
     }
 
     async fn remove_record(&self, name: &Name, ip: IpAddr) -> Result<(), ()> {
-        let rdata = RData::from(ip);
-        let record_type = rdata.record_type();
+        let record_type = RData::from(ip).record_type();
         let key = RrKey::new(LowerName::new(name), record_type);
 
         let mut records = self.authority.records_mut().await;
@@ -170,23 +167,26 @@ impl AuthorityWrapper {
                 return Err(());
             };
 
-            let remaining: Vec<&RData> = entry
+            // Check existence under the same lock before paying the clone cost.
+            let exists = entry
                 .get()
                 .records_without_rrsigs()
-                .map(Record::data)
-                .filter(|d| d.ip_addr() != Some(ip))
-                .collect();
+                .any(|r| r.data().ip_addr() == Some(ip));
 
-            if remaining.is_empty() {
+            if !exists {
+                return Err(());
+            }
+
+            let record_to_remove = Record::from_rdata(name.clone(), 0, RData::from(ip));
+
+            let is_empty = {
+                let set = Arc::make_mut(entry.get_mut());
+                set.remove(&record_to_remove, 0);
+                set.is_empty()
+            };
+
+            if is_empty {
                 entry.remove();
-            } else {
-                let mut new_set = RecordSet::with_ttl(name.clone(), record_type, 5);
-
-                for remaining in remaining {
-                    new_set.add_rdata(remaining.clone());
-                }
-
-                *entry.get_mut() = Arc::new(new_set);
             }
         }
 
