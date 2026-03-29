@@ -4,10 +4,9 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct ContainerInspect {
-    #[expect(unused, reason = "Library Code")]
     pub name: Box<str>,
-    pub id: Box<str>,
     #[expect(unused, reason = "Library Code")]
+    pub id: Box<str>,
     pub config: ContainerConfig,
     pub state: ContainerState,
     pub network_settings: ContainerNetworkSettings,
@@ -18,7 +17,6 @@ pub struct ContainerInspect {
 pub struct ContainerConfig {
     #[expect(unused, reason = "Library Code")]
     pub hostname: Box<str>,
-    #[expect(unused, reason = "Library Code")]
     pub labels: HashMap<Box<str>, Box<str>>,
 }
 
