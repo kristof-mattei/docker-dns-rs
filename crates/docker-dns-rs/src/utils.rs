@@ -23,26 +23,3 @@ where
         Err(error) => Err(error.into()),
     }
 }
-
-pub fn pretty_print_iter<T, I>(mut iterable: I) -> String
-where
-    I: Iterator<Item = T>,
-    T: std::fmt::Display,
-{
-    use std::fmt::Write as _;
-
-    let mut result = String::new();
-
-    if let Some(first) = iterable.next() {
-        // write the first element without a leading separator
-        write!(&mut result, "{}", first).expect("writing to String cannot fail");
-
-        // for each subsequent element, prepend ", " before writing it
-        for item in iterable {
-            result.push_str(", ");
-            write!(&mut result, "{}", item).expect("writing to String cannot fail");
-        }
-    }
-
-    result
-}

@@ -20,7 +20,7 @@ pub struct Event {
     time_nano: u64,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone, Copy)]
 enum EventType {
     #[serde(rename(deserialize = "builder"))]
     Builder,
@@ -44,6 +44,26 @@ enum EventType {
     Service,
     #[serde(rename(deserialize = "volume"))]
     Volume,
+}
+
+impl std::fmt::Display for EventType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let s = match *self {
+            EventType::Builder => "builder",
+            EventType::Config => "config",
+            EventType::Container => "container",
+            EventType::Daemon => "daemon",
+            EventType::Image => "image",
+            EventType::Network => "network",
+            EventType::Node => "node",
+            EventType::Plugin => "plugin",
+            EventType::Secret => "secret",
+            EventType::Service => "service",
+            EventType::Volume => "volume",
+        };
+
+        f.write_str(s)
+    }
 }
 
 type EventAction = Box<str>;
