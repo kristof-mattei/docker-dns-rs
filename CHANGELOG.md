@@ -1,4 +1,26 @@
 <!-- header goes here -->
+## [0.7.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.7.0..v0.7.1) - 2026-03-29
+
+### 🐛 Bug Fixes
+
+- Rename and remove now handle a & aaaa by @kristof-mattei ([`9c5aec2`](https://github.com/kristof-mattei/docker-dns-rs/commit/9c5aec2fb5f7356cb08c59ccf76b2c616571e45e))
+- Add is infallible, no need for Result by @kristof-mattei ([`77bb17b`](https://github.com/kristof-mattei/docker-dns-rs/commit/77bb17b5e86747cdfab2e0893dba2e4110bba77b))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(build)* Switch to annotations by @kristof-mattei ([`c041c69`](https://github.com/kristof-mattei/docker-dns-rs/commit/c041c6948bd7f7318ad320659d8233d416bcbd6a))
+- *(release)* Release v0.7.1
+- Remove needless clone by @kristof-mattei ([`064708f`](https://github.com/kristof-mattei/docker-dns-rs/commit/064708fa887f37daca58f5c503a7e4e912f00416))
+- Improve log messages by @kristof-mattei ([`39a5427`](https://github.com/kristof-mattei/docker-dns-rs/commit/39a5427e1dbb8a53961460ceb0f4f2dda06ffa1c))
+- Add more logging in the failure cases, and when tracing by @kristof-mattei ([`11bba48`](https://github.com/kristof-mattei/docker-dns-rs/commit/11bba48d939216d73143f8571b8f330778952aef))
+- Update pretty-print to not allocate strings needlessly by @kristof-mattei ([`766cbe7`](https://github.com/kristof-mattei/docker-dns-rs/commit/766cbe71042ed002f2b6d3d274741206ffbc2c92))
+- Use Box<str> by @kristof-mattei ([`608e2f9`](https://github.com/kristof-mattei/docker-dns-rs/commit/608e2f98db1da01bdd52fd81d9aecb6a96e2baeb))
+- Convert manifest to index annotations by @kristof-mattei ([`affcb0a`](https://github.com/kristof-mattei/docker-dns-rs/commit/affcb0a26c6f809ad3d355a997a62075ed22b827))
+- Don't run machete on push by @kristof-mattei ([`f6bdbd8`](https://github.com/kristof-mattei/docker-dns-rs/commit/f6bdbd887606edbc9ed3a52615afe69de39ed220))
+- If no component bumps, bump patch by @kristof-mattei ([`fd4eca7`](https://github.com/kristof-mattei/docker-dns-rs/commit/fd4eca7deceb7d644a16cb69879411090ed9e599))
+- Add labels to the image too by @kristof-mattei ([`ba1cd05`](https://github.com/kristof-mattei/docker-dns-rs/commit/ba1cd0507337529bdf19dbd8da2bd78014f79ced))
+- Ability to publish to docker hub as well by @kristof-mattei ([`99103ff`](https://github.com/kristof-mattei/docker-dns-rs/commit/99103ffedc5d4a2322609d3ce9f7e11af58bb1cd))
+- Clarify name by @kristof-mattei ([`4ea320e`](https://github.com/kristof-mattei/docker-dns-rs/commit/4ea320e830a0c69560e9ebc67fcdcca0f4687605))
 ## [0.7.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.6.0..v0.7.0) - 2026-03-28
 
 ### 🚀 Features
@@ -11,7 +33,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.7.0
+- *(release)* Release v0.7.0 by @github-actions[bot] ([`648217e`](https://github.com/kristof-mattei/docker-dns-rs/commit/648217e593ad05a9d63d01995cbd95e0e24150a1))
 ## [0.6.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.5.1..v0.6.0) - 2026-03-28
 
 ### 🚀 Features
