@@ -56,41 +56,7 @@ impl AuthorityWrapper {
         self.upsert(name, address).await;
 
         event!(Level::INFO, %name, %address, "table.add");
-
-        // // TODO using `name` as value here seems weird
-        // // AuthorityWrapper::upsert(&mut l, ptr_key, name.clone());
-        // event!(Level::INFO, "table.add {} -> {}", ptr_address, name);
     }
-
-    // fn get(self, name: &str) -> Result<HashSet<String>, color_eyre::Report> {
-    //     let key = self.key(name);
-
-    //     let guard = self.get_guard()?;
-
-    //     if let Some(result) = guard.get(&key) {
-    //         event!(Level::INFO, "table.get {} with {}", name, foobar(result));
-
-    //         return Ok(result.clone());
-    //     }
-
-    //     let wild = Regex::new(r"^[\.]+")
-    //         .unwrap()
-    //         .replace_all(name, "")
-    //         .to_string();
-
-    //     let wild_key = self.key(&wild);
-
-    //     if let Some(result) = guard.get(&wild_key) {
-    //         event!(Level::INFO, "table.get {} with {}", name, foobar(result));
-
-    //         return Ok(result.clone());
-    //     }
-
-    //     event!(Level::INFO, "table.get {} with no results", name);
-
-    //     // TODO should this be None?
-    //     Ok(HashSet::new())
-    // }
 
     #[instrument(skip_all, fields(old_name = %old_key.name, %new_name, r#type = %old_key.record_type))]
     async fn rename_records(&self, old_key: &RrKey, new_name: &Name) -> Result<(), ()> {
