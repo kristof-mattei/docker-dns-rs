@@ -1,9 +1,21 @@
 <!-- header goes here -->
+## [0.8.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.7.2..v0.8.0) - 2026-03-30
+
+### 🚀 Features
+
+- Support for IPv6 by @kristof-mattei ([`10ea8c6`](https://github.com/kristof-mattei/docker-dns-rs/commit/10ea8c63fccd51ed5117e97217dd2d43a629954a))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.8.0
+- Add network name in logs by @kristof-mattei ([`d31f6b9`](https://github.com/kristof-mattei/docker-dns-rs/commit/d31f6b9a968f6802f0c1f319eda1cc4d2d91c981))
+- Prepare doesn't need the cache & toolchain by @kristof-mattei ([`a255daf`](https://github.com/kristof-mattei/docker-dns-rs/commit/a255daf9066d8a79c834e73fee97a89c7d32b1a2))
+- Tests for ipv4/ipv6 by @kristof-mattei ([`12cbea8`](https://github.com/kristof-mattei/docker-dns-rs/commit/12cbea8bdaa939b6692599b07e2e636696e2d121))
 ## [0.7.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.7.1..v0.7.2) - 2026-03-30
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.7.2
+- *(release)* Release v0.7.2 by @github-actions[bot] ([`10b55c7`](https://github.com/kristof-mattei/docker-dns-rs/commit/10b55c7ae3f659e46d579ca932d9eca5fae2aa1e))
 - Update oldname / name parsing by @kristof-mattei ([`e85c886`](https://github.com/kristof-mattei/docker-dns-rs/commit/e85c886d957577a016429b86de68a9d316302cf8))
 - Remove pretty_print_iter by @kristof-mattei ([`1cebc05`](https://github.com/kristof-mattei/docker-dns-rs/commit/1cebc05c87f971e54ba47fa29ba4b3340deb4206))
 - Clean up comments by @kristof-mattei ([`841d1f7`](https://github.com/kristof-mattei/docker-dns-rs/commit/841d1f7f41ac6cc307d71195d3b8ab47ed792210))
