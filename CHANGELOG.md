@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [0.7.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.7.1..v0.7.2) - 2026-03-30
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.7.2
+- Update oldname / name parsing by @kristof-mattei ([`e85c886`](https://github.com/kristof-mattei/docker-dns-rs/commit/e85c886d957577a016429b86de68a9d316302cf8))
+- Remove pretty_print_iter by @kristof-mattei ([`1cebc05`](https://github.com/kristof-mattei/docker-dns-rs/commit/1cebc05c87f971e54ba47fa29ba4b3340deb4206))
+- Clean up comments by @kristof-mattei ([`841d1f7`](https://github.com/kristof-mattei/docker-dns-rs/commit/841d1f7f41ac6cc307d71195d3b8ab47ed792210))
+- Use internal cache by @kristof-mattei ([`f10ea74`](https://github.com/kristof-mattei/docker-dns-rs/commit/f10ea746fd2fbe6bf59d88f5235e872e43998d4f))
 ## [0.7.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.7.0..v0.7.1) - 2026-03-29
 
 ### 🐛 Bug Fixes
@@ -9,7 +18,7 @@
 ### ⚙️ Miscellaneous Tasks
 
 - *(build)* Switch to annotations by @kristof-mattei ([`c041c69`](https://github.com/kristof-mattei/docker-dns-rs/commit/c041c6948bd7f7318ad320659d8233d416bcbd6a))
-- *(release)* Release v0.7.1
+- *(release)* Release v0.7.1 by @github-actions[bot] ([`c584bb1`](https://github.com/kristof-mattei/docker-dns-rs/commit/c584bb1ac2ec21d53fa0474f06199760b39e6d27))
 - Remove needless clone by @kristof-mattei ([`064708f`](https://github.com/kristof-mattei/docker-dns-rs/commit/064708fa887f37daca58f5c503a7e4e912f00416))
 - Improve log messages by @kristof-mattei ([`39a5427`](https://github.com/kristof-mattei/docker-dns-rs/commit/39a5427e1dbb8a53961460ceb0f4f2dda06ffa1c))
 - Add more logging in the failure cases, and when tracing by @kristof-mattei ([`11bba48`](https://github.com/kristof-mattei/docker-dns-rs/commit/11bba48d939216d73143f8571b8f330778952aef))
