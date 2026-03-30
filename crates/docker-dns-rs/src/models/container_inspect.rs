@@ -67,3 +67,73 @@ where
         Some(s) => T::from_str(s).map(Some).map_err(Error::custom),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use std::net::{Ipv4Addr, Ipv6Addr};
+
+    use pretty_assertions::assert_eq;
+
+    use super::ContainerNetwork;
+
+    fn parse(json: &str) -> Result<ContainerNetwork, serde_json::Error> {
+        serde_json::from_str(json)
+    }
+
+    #[test]
+    fn ipv4_only() {
+        let container_network =
+            parse(r#"{"IPAddress":"192.168.1.1","GlobalIPv6Address":""}"#).unwrap();
+
+        assert_eq!(
+            container_network.ip_address,
+            Some(Ipv4Addr::new(192, 168, 1, 1))
+        );
+        assert_eq!(container_network.global_ipv6_address, None);
+    }
+
+    #[test]
+    fn ipv6_only() {
+        let container_network =
+            parse(r#"{"IPAddress":"","GlobalIPv6Address":"2001:db8::1"}"#).unwrap();
+
+        assert_eq!(container_network.ip_address, None);
+        assert_eq!(
+            container_network.global_ipv6_address,
+            Some(Ipv6Addr::new(0x2001, 0x0db8, 0, 0, 0, 0, 0, 1))
+        );
+    }
+
+    #[test]
+    fn both_ipv4_and_ipv6() {
+        let container_network =
+            parse(r#"{"IPAddress":"10.0.0.2","GlobalIPv6Address":"fe80::1"}"#).unwrap();
+
+        assert_eq!(
+            container_network.ip_address,
+            Some(Ipv4Addr::new(10, 0, 0, 2))
+        );
+        assert_eq!(
+            container_network.global_ipv6_address,
+            Some(Ipv6Addr::new(0xfe80, 0, 0, 0, 0, 0, 0, 1))
+        );
+    }
+
+    #[test]
+    fn both_empty_strings() {
+        let container_network = parse(r#"{"IPAddress":"","GlobalIPv6Address":""}"#).unwrap();
+
+        assert_eq!(container_network.ip_address, None);
+        assert_eq!(container_network.global_ipv6_address, None);
+    }
+
+    #[test]
+    fn invalid_ipv4_is_error() {
+        parse(r#"{"IPAddress":"not-an-ip","GlobalIPv6Address":""}"#).unwrap_err();
+    }
+
+    #[test]
+    fn invalid_ipv6_is_error() {
+        parse(r#"{"IPAddress":"","GlobalIPv6Address":"not-an-ipv6"}"#).unwrap_err();
+    }
+}
