@@ -302,6 +302,7 @@ impl Monitor {
                     event!(
                         Level::WARN,
                         %container_id,
+                        %network_name,
                         "Network connect event: network has no IP addresses",
                     );
                     return;
