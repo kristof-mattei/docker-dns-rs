@@ -1,4 +1,4 @@
-use std::net::IpAddr;
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use std::sync::{Arc, LazyLock};
 
 use color_eyre::eyre;
@@ -12,15 +12,45 @@ use tracing::{Level, event};
 
 use crate::docker::daemon::Daemon;
 use crate::docker::{Event, EventType};
-use crate::models::container_inspect::{ContainerInspect, ContainerNetworkSettings};
+use crate::models::container_inspect::{
+    ContainerInspect, ContainerNetwork, ContainerNetworkSettings,
+};
 use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum NetworkIps {
+    V4Only(Ipv4Addr),
+    V6Only(Ipv6Addr),
+    Both(Ipv4Addr, Ipv6Addr),
+}
+
+impl NetworkIps {
+    fn from_network(network: &ContainerNetwork) -> Option<Self> {
+        match (network.ip_address, network.global_ipv6_address) {
+            (Some(v4), Some(v6)) => Some(Self::Both(v4, v6)),
+            (Some(v4), None) => Some(Self::V4Only(v4)),
+            (None, Some(v6)) => Some(Self::V6Only(v6)),
+            (None, None) => None,
+        }
+    }
+
+    fn ips(self) -> impl Iterator<Item = IpAddr> {
+        match self {
+            Self::V4Only(v4) => [Some(IpAddr::V4(v4)), None],
+            Self::V6Only(v6) => [None, Some(IpAddr::V6(v6))],
+            Self::Both(v4, v6) => [Some(IpAddr::V4(v4)), Some(IpAddr::V6(v6))],
+        }
+        .into_iter()
+        .flatten()
+    }
+}
+
 struct ContainerState {
     names: Arc<[Name]>,
-    /// `network_name` to `ip`.
-    networks: HashMap<Box<str>, IpAddr>,
+    /// `network_name` to IPs.
+    networks: HashMap<Box<str>, NetworkIps>,
 }
 
 pub struct Monitor {
@@ -139,26 +169,17 @@ impl Monitor {
                 });
 
         for (network_name, network) in network_settings.networks {
-            let ip: IpAddr = match network.ip_address.parse() {
-                Ok(ip) => ip,
-                Err(error) => {
-                    event!(
-                        Level::ERROR,
-                        ?error,
-                        %container_id,
-                        %network_name,
-                        address = %network.ip_address,
-                        "Failed to parse IP address for container",
-                    );
-                    continue;
-                },
+            let Some(network_ips) = NetworkIps::from_network(&network) else {
+                continue;
             };
 
-            for name in &*container_state.names {
-                self.authority_wrapper.add(name, ip).await;
+            for ip in network_ips.ips() {
+                for name in &*container_state.names {
+                    self.authority_wrapper.add(name, ip).await;
+                }
             }
 
-            container_state.networks.insert(network_name, ip);
+            container_state.networks.insert(network_name, network_ips);
         }
     }
 
@@ -237,9 +258,11 @@ impl Monitor {
             return;
         };
 
-        for (_, ip) in state.networks {
-            for name in &*state.names {
-                self.authority_wrapper.remove_address(name, ip).await;
+        for (_, network_ips) in state.networks {
+            for ip in network_ips.ips() {
+                for name in &*state.names {
+                    self.authority_wrapper.remove_address(name, ip).await;
+                }
             }
         }
     }
@@ -275,18 +298,13 @@ impl Monitor {
                     return;
                 };
 
-                let ip: IpAddr = match network.ip_address.parse() {
-                    Ok(ip) => ip,
-                    Err(error) => {
-                        event!(
-                            Level::ERROR,
-                            ?error,
-                            %container_id,
-                            address = %network.ip_address,
-                            "Failed to parse IP address for container on network",
-                        );
-                        return;
-                    },
+                let Some(network_ips) = NetworkIps::from_network(network) else {
+                    event!(
+                        Level::WARN,
+                        %container_id,
+                        "Network connect event: network has no IP addresses",
+                    );
+                    return;
                 };
 
                 let mut containers = self.containers.lock().await;
@@ -302,21 +320,24 @@ impl Monitor {
                             networks: HashMap::new(),
                         });
 
-                // If a different IP was previously registered for this network (e.g. Docker
-                // reassigned the IP between start()'s container list and this event),
-                // remove the stale DNS records before adding the new ones.
-                match state.networks.insert(network_name.clone(), ip) {
-                    Some(old_ip) if old_ip == ip => return, // startup race: already registered
-                    Some(old_ip) => {
-                        for name in &*state.names {
-                            self.authority_wrapper.remove_address(name, old_ip).await;
+                // If the same IPs were previously registered for this network (e.g. startup race between start()'s container list and this event), skip.
+                // If different IPs were registered, remove the stale DNS records first.
+                match state.networks.insert(network_name.clone(), network_ips) {
+                    Some(old_ips) if old_ips == network_ips => return,
+                    Some(old_ips) => {
+                        for ip in old_ips.ips() {
+                            for name in &*state.names {
+                                self.authority_wrapper.remove_address(name, ip).await;
+                            }
                         }
                     },
                     None => {},
                 }
 
-                for name in &*state.names {
-                    self.authority_wrapper.add(name, ip).await;
+                for ip in network_ips.ips() {
+                    for name in &*state.names {
+                        self.authority_wrapper.add(name, ip).await;
+                    }
                 }
             },
             Err(error) => {
@@ -361,7 +382,7 @@ impl Monitor {
             return;
         };
 
-        let Some(ip) = state.networks.remove(&**network_name) else {
+        let Some(network_ips) = state.networks.remove(&**network_name) else {
             event!(
                 Level::WARN,
                 %container_id,
@@ -371,8 +392,10 @@ impl Monitor {
             return;
         };
 
-        for name in &*state.names {
-            self.authority_wrapper.remove_address(name, ip).await;
+        for ip in network_ips.ips() {
+            for name in &*state.names {
+                self.authority_wrapper.remove_address(name, ip).await;
+            }
         }
     }
 
