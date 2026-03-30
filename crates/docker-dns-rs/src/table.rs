@@ -7,8 +7,6 @@ use hickory_server::proto::rr::{LowerName, Name, RData, RecordSet, RecordType, R
 use hickory_server::store::in_memory::InMemoryAuthority;
 use tracing::{Level, event, instrument};
 
-use crate::utils::pretty_print_iter;
-
 pub struct AuthorityWrapper {
     authority: Arc<InMemoryAuthority>,
 }
@@ -173,7 +171,7 @@ impl AuthorityWrapper {
 
         event!(
             Level::INFO,
-            ip_addresses = %pretty_print_iter(ips.iter().copied()),
+            ip_addresses = ?ips.clone(),
             "table.remove",
         );
 
