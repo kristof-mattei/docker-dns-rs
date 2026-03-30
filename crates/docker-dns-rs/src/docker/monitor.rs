@@ -72,18 +72,23 @@ impl Monitor {
     async fn handle_rename(&self, event: &Event) {
         // for some reason the old name needs to be sanitized (starts with `/`).
         // the new one doesn't
-        let old_name = event
-            .actor
-            .attributes
-            .get("oldName")
-            .map(|n| RE_VALIDNAME.replace_all(n, "").to_string())
-            .map(|n| format!("{}.{}", n, self.domain));
+        let old_name = event.actor.attributes.get("oldName").map(|name| {
+            use std::fmt::Write as _;
 
-        let new_name = event
-            .actor
-            .attributes
-            .get("name")
-            .map(|n| format!("{}.{}", n, self.domain));
+            let mut replaced = RE_VALIDNAME.replace_all(name, "").into_owned();
+            write!(&mut replaced, ".{}", self.domain).expect("Writing to string never fails");
+
+            replaced
+        });
+
+        let new_name = event.actor.attributes.get("name").map(|name| {
+            use std::fmt::Write as _;
+
+            let mut name = name.to_string();
+            write!(&mut name, ".{}", self.domain).expect("Writing to string never fails");
+
+            name
+        });
 
         match (old_name, new_name) {
             (None, None) => event!(Level::WARN, "Rename event without oldName & without name"),
