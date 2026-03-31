@@ -1,4 +1,16 @@
 <!-- header goes here -->
+## [0.8.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.8.0..v0.8.1) - 2026-03-31
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate hyper to 1.9.0 by @renovate[bot] ([`5447109`](https://github.com/kristof-mattei/docker-dns-rs/commit/544710907901c3852cb053db9960a3ecf3ad43c9))
+- Properly handle ip6.arpa. and in-addr.arpa. by @kristof-mattei ([`8236262`](https://github.com/kristof-mattei/docker-dns-rs/commit/8236262dcda97e72dc8258445eefc9f41e696086))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.8.1
+- Foundational code for listing and inspecting networks by @kristof-mattei ([`80e7383`](https://github.com/kristof-mattei/docker-dns-rs/commit/80e738390aa8288fe52b7069b6db6bb63c384268))
+- Add foundational code to parse subnets into zones by @kristof-mattei ([`133c791`](https://github.com/kristof-mattei/docker-dns-rs/commit/133c791581f393d3d615c7d008911a005738bf5b))
 ## [0.8.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.7.2..v0.8.0) - 2026-03-30
 
 ### 🚀 Features
@@ -7,7 +19,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.8.0
+- *(release)* Release v0.8.0 by @github-actions[bot] ([`b33074b`](https://github.com/kristof-mattei/docker-dns-rs/commit/b33074bdf5caa44499bdedbc93271875cccf150c))
 - Add network name in logs by @kristof-mattei ([`d31f6b9`](https://github.com/kristof-mattei/docker-dns-rs/commit/d31f6b9a968f6802f0c1f319eda1cc4d2d91c981))
 - Prepare doesn't need the cache & toolchain by @kristof-mattei ([`a255daf`](https://github.com/kristof-mattei/docker-dns-rs/commit/a255daf9066d8a79c834e73fee97a89c7d32b1a2))
 - Tests for ipv4/ipv6 by @kristof-mattei ([`12cbea8`](https://github.com/kristof-mattei/docker-dns-rs/commit/12cbea8bdaa939b6692599b07e2e636696e2d121))
