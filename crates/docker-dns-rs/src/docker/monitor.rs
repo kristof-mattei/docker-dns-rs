@@ -1,17 +1,20 @@
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
+use std::string::ToString as _;
 use std::sync::{Arc, LazyLock};
 
 use color_eyre::eyre;
 use hashbrown::HashMap;
-use hickory_server::proto::rr::Name;
+use hickory_server::authority::Catalog;
+use hickory_server::proto::rr::{LowerName, Name};
 use ipnet::{IpNet, Ipv4Net, Ipv6Net};
 use itertools::Either;
 use regex::Regex;
-use tokio::sync::Mutex;
 use tokio::sync::mpsc::Receiver;
+use tokio::sync::{Mutex, RwLock};
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
+use crate::dns_listener::set_up_authority;
 use crate::docker::daemon::Daemon;
 use crate::docker::{Event, EventType};
 use crate::models::container_inspect::{
@@ -57,12 +60,15 @@ struct ContainerState {
 
 pub struct Monitor {
     authority_wrapper: AuthorityWrapper,
+    catalog: Arc<RwLock<Catalog>>,
     docker: Arc<Daemon>,
     domain: Name,
     /// `container_id` to `ContainerState`.
     /// Invariant: names and network entries are always co-located, you cannot have
     /// a network entry without its accompanying names.
     containers: Mutex<HashMap<Box<str>, ContainerState>>,
+    /// `network_id` to the reverse zones registered for it.
+    networks: Mutex<HashMap<Box<str>, Vec<IpNet>>>,
 }
 
 fn append_compose_names(
@@ -209,10 +215,8 @@ fn zone_name(network: IpNet) -> Option<Name> {
 ///
 /// E.g. `172.16.66.123/18` becomes `172.16.64.0/24..=172.16.127.0/24` = 64 new subnets.
 ///
-///
 /// ## IPv6:
 /// Zones are at the /4 nibble boundary with the same rounding logic as IPv4.
-#[cfg_attr(not(test), expect(unused, reason = "Library Code"))]
 fn parse_subnet(network: IpNet) -> impl Iterator<Item = (IpNet, Name)> {
     let iter = match network {
         IpNet::V4(net) => Either::Left(parse_subnet_ipv4(net)),
@@ -231,12 +235,19 @@ fn parse_subnet(network: IpNet) -> impl Iterator<Item = (IpNet, Name)> {
 }
 
 impl Monitor {
-    pub fn new(docker: Arc<Daemon>, authority_wrapper: AuthorityWrapper, domain: Name) -> Self {
+    pub fn new(
+        docker: Arc<Daemon>,
+        authority_wrapper: AuthorityWrapper,
+        catalog: Arc<RwLock<Catalog>>,
+        domain: Name,
+    ) -> Self {
         Self {
             authority_wrapper,
+            catalog,
             docker,
             domain,
             containers: Mutex::new(HashMap::new()),
+            networks: Mutex::new(HashMap::new()),
         }
     }
 
@@ -488,6 +499,85 @@ impl Monitor {
         }
     }
 
+    async fn register_network(&self, network_id: &str) {
+        let inspect = match self.docker.inspect_network(network_id).await {
+            Ok(n) => n,
+            Err(error) => {
+                event!(Level::WARN, ?error, %network_id, "Failed to inspect network");
+                return;
+            },
+        };
+
+        let mut registered = Vec::new();
+
+        for config in &inspect.ipam.config {
+            let Some(subnet) = config.subnet else {
+                continue;
+            };
+
+            for (ip_network, zone_name) in parse_subnet(subnet) {
+                let authority = match set_up_authority(zone_name.clone()).await {
+                    Ok(a) => Arc::new(a),
+                    Err(error) => {
+                        event!(Level::WARN, ?error, %zone_name, "Failed to create reverse zone authority");
+                        continue;
+                    },
+                };
+
+                self.authority_wrapper
+                    .add_reverse_zone(ip_network, Arc::clone(&authority))
+                    .await;
+
+                self.catalog
+                    .write()
+                    .await
+                    .upsert(LowerName::new(&zone_name), vec![authority]);
+
+                event!(Level::INFO, %zone_name, "Registered reverse zone");
+                registered.push(ip_network);
+            }
+        }
+
+        self.networks
+            .lock()
+            .await
+            .insert(network_id.into(), registered);
+    }
+
+    async fn deregister_network(&self, network_id: &str) {
+        let Some(zones) = self.networks.lock().await.remove(network_id) else {
+            event!(Level::WARN, %network_id, "Got network destroy event but no zones were registered for it");
+            return;
+        };
+
+        for ip_network in zones {
+            self.authority_wrapper
+                .remove_reverse_zone(&ip_network)
+                .await;
+
+            if let Some(zone_name) = zone_name(ip_network) {
+                self.catalog
+                    .write()
+                    .await
+                    .remove(&LowerName::new(&zone_name));
+
+                event!(Level::INFO, %zone_name, "Deregistered reverse zone");
+            }
+        }
+    }
+
+    async fn handle_network_create(&self, event: Event) {
+        if self.networks.lock().await.contains_key(&event.actor.id) {
+            return;
+        }
+
+        self.register_network(&event.actor.id).await;
+    }
+
+    async fn handle_network_destroy(&self, event: Event) {
+        self.deregister_network(&event.actor.id).await;
+    }
+
     pub async fn consume_events(
         &self,
         mut receiver: Receiver<Event>,
@@ -521,6 +611,8 @@ impl Monitor {
                 EventType::Network => match &*event.action {
                     "connect" => self.handle_network_connect(event).await,
                     "disconnect" => self.handle_network_disconnect(event).await,
+                    "create" => self.handle_network_create(event).await,
+                    "destroy" => self.handle_network_destroy(event).await,
                     rest => {
                         event!(Level::TRACE, r#type = ?event.r#type, event = rest, "ignoring event");
                     },
@@ -541,6 +633,13 @@ impl Monitor {
     }
 
     pub async fn start(&self) -> Result<(), eyre::Report> {
+        // Register reverse zones for all existing networks first,
+        // so PTR records are in place before containers are processed.
+        let networks = self.docker.list_networks().await?;
+        for network in networks {
+            self.register_network(&network.id).await;
+        }
+
         for container in self.docker.get_containers().await? {
             if &*container.state != "running" {
                 continue;

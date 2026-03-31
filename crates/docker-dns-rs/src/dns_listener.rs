@@ -2,23 +2,53 @@ use std::collections::BTreeMap;
 use std::sync::Arc;
 use std::time::Duration;
 
+use async_trait::async_trait;
 use hickory_server::ServerFuture;
 use hickory_server::authority::Catalog;
 use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::rdata::SOA;
 use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RrKey};
+use hickory_server::server::{Request, RequestHandler, ResponseHandler, ResponseInfo};
 use hickory_server::store::in_memory::InMemoryAuthority;
 use tokio::net::{TcpListener, UdpSocket};
+use tokio::sync::RwLock;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
-pub async fn set_up_dns_server(
+pub struct DnsRequestHandler {
+    catalog: Arc<RwLock<Catalog>>,
+}
+
+impl DnsRequestHandler {
+    pub fn new(catalog: Arc<RwLock<Catalog>>) -> Self {
+        Self { catalog }
+    }
+}
+
+#[async_trait]
+impl RequestHandler for DnsRequestHandler {
+    async fn handle_request<R: ResponseHandler>(
+        &self,
+        request: &Request,
+        response_handle: R,
+    ) -> ResponseInfo {
+        self.catalog
+            .read()
+            .await
+            .handle_request(request, response_handle)
+            .await
+    }
+}
+
+pub async fn set_up_dns_server<H>(
     tcp_listener: TcpListener,
     udp_socket: UdpSocket,
-    catalog: Catalog,
+    handler: H,
     cancellation_token: CancellationToken,
-) {
-    let mut dns_listener = ServerFuture::new(catalog);
+) where
+    H: RequestHandler,
+{
+    let mut dns_listener = ServerFuture::new(handler);
 
     dns_listener.register_socket(udp_socket);
     dns_listener.register_listener(tcp_listener, Duration::from_secs(1));

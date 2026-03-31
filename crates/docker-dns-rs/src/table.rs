@@ -5,13 +5,17 @@ use std::net::IpAddr;
 use std::sync::Arc;
 
 use color_eyre::eyre::Report;
+use hashbrown::HashMap;
 use hickory_server::proto::rr::rdata::PTR;
 use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RecordType, RrKey};
 use hickory_server::store::in_memory::InMemoryAuthority;
+use ipnet::IpNet;
+use tokio::sync::RwLock;
 use tracing::{Level, event, instrument};
 
 pub struct AuthorityWrapper {
-    authority: Arc<InMemoryAuthority>,
+    forward: Arc<InMemoryAuthority>,
+    reverse_zones: RwLock<HashMap<IpNet, Arc<InMemoryAuthority>>>,
 }
 
 fn append_to_record_set(
@@ -63,8 +67,32 @@ fn remove_from_ptr_set(
 }
 
 impl AuthorityWrapper {
-    pub fn new(authority: Arc<InMemoryAuthority>) -> Self {
-        Self { authority }
+    pub fn new(forward: Arc<InMemoryAuthority>) -> Self {
+        Self {
+            forward,
+            reverse_zones: RwLock::new(HashMap::new()),
+        }
+    }
+
+    pub async fn add_reverse_zone(&self, network: IpNet, authority: Arc<InMemoryAuthority>) {
+        self.reverse_zones.write().await.insert(network, authority);
+    }
+
+    pub async fn remove_reverse_zone(&self, network: &IpNet) {
+        self.reverse_zones.write().await.remove(network);
+    }
+
+    async fn find_reverse_authority(&self, ip: IpAddr) -> Option<Arc<InMemoryAuthority>> {
+        // Docker's IPAM rejects overlapping subnets, so at most one registered
+        // reverse zone can contain any given IP. HashMap iteration order is
+        // nondeterministic, but that doesn't matter here: there is never more
+        // than one match.
+        self.reverse_zones
+            .read()
+            .await
+            .iter()
+            .find(|&(network, _)| network.contains(&ip))
+            .map(|(_, authority)| Arc::clone(authority))
     }
 
     async fn upsert(&self, name: &Name, address: IpAddr) {
@@ -72,15 +100,28 @@ impl AuthorityWrapper {
         let record_type = rdata.record_type();
         let reverse: Name = address.into();
 
-        let mut lock = self.authority.records_mut().await;
+        {
+            let mut lock = self.forward.records_mut().await;
 
-        append_to_record_set(
-            &mut lock,
-            RrKey::new(LowerName::new(name), record_type),
-            Cow::Borrowed(name),
-            record_type,
-            rdata,
-        );
+            append_to_record_set(
+                &mut lock,
+                RrKey::new(LowerName::new(name), record_type),
+                Cow::Borrowed(name),
+                record_type,
+                rdata,
+            );
+        }
+
+        let Some(reverse_authority) = self.find_reverse_authority(address).await else {
+            event!(
+                Level::WARN,
+                %address,
+                "No reverse zone registered for address, PTR record not added"
+            );
+            return;
+        };
+
+        let mut lock = reverse_authority.records_mut().await;
 
         append_to_record_set(
             &mut lock,
@@ -99,26 +140,30 @@ impl AuthorityWrapper {
 
     #[instrument(skip_all, fields(old_name = %old_key.name, %new_name, r#type = %old_key.record_type))]
     async fn rename_records(&self, old_key: &RrKey, new_name: &Name) -> Result<(), ()> {
-        let ips = {
-            let mut records = self.authority.records_mut().await;
+        let ips: Vec<IpAddr> = {
+            let mut records = self.forward.records_mut().await;
 
             let Some(record_set) = records.remove(old_key) else {
                 return Err(());
             };
 
-            let ips: Vec<IpAddr> = record_set
+            record_set
                 .records_without_rrsigs()
                 .filter_map(|r| r.data().ip_addr())
-                .collect();
+                .collect()
 
-            for &ip in &ips {
-                remove_from_ptr_set(&mut records, ip, &old_key.name);
-            }
-
-            ips
+            // forward lock released before touching reverse zones
         };
 
         for ip in ips {
+            if let Some(reverse_authority) = self.find_reverse_authority(ip).await {
+                remove_from_ptr_set(
+                    &mut *reverse_authority.records_mut().await,
+                    ip,
+                    &old_key.name,
+                );
+            }
+
             self.upsert(new_name, ip).await;
 
             event!(Level::INFO, %ip, "table.rename");
@@ -153,9 +198,8 @@ impl AuthorityWrapper {
         let record_type = RData::from(ip).record_type();
         let key = RrKey::new(LowerName::new(name), record_type);
 
-        let mut records = self.authority.records_mut().await;
-
         {
+            let mut records = self.forward.records_mut().await;
             let Entry::Occupied(mut entry) = records.entry(key) else {
                 return Err(());
             };
@@ -175,7 +219,13 @@ impl AuthorityWrapper {
             }
         }
 
-        remove_from_ptr_set(&mut records, ip, &LowerName::new(name));
+        if let Some(reverse_authority) = self.find_reverse_authority(ip).await {
+            remove_from_ptr_set(
+                &mut *reverse_authority.records_mut().await,
+                ip,
+                &LowerName::new(name),
+            );
+        }
 
         event!(Level::INFO, %name, %ip, "table.remove");
 
