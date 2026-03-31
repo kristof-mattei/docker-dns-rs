@@ -4,6 +4,8 @@ use std::sync::{Arc, LazyLock};
 use color_eyre::eyre;
 use hashbrown::HashMap;
 use hickory_server::proto::rr::Name;
+use ipnet::{IpNet, Ipv4Net, Ipv6Net};
+use itertools::Either;
 use regex::Regex;
 use tokio::sync::Mutex;
 use tokio::sync::mpsc::Receiver;
@@ -140,6 +142,92 @@ fn to_full_names(raw: Vec<Box<str>>, domain: &Name) -> Arc<[Name]> {
             }
         })
         .collect()
+}
+
+fn parse_subnet_ipv4(net: Ipv4Net) -> impl Iterator<Item = IpNet> {
+    const OCTET_BOUNDARY: u8 = 8;
+
+    // Round prefix up to the next octet boundary (min /8).
+    let boundary = net.prefix_len().max(1).div_ceil(OCTET_BOUNDARY) * OCTET_BOUNDARY;
+    net.subnets(boundary).into_iter().flatten().map(IpNet::V4)
+}
+
+fn parse_subnet_ipv6(net: Ipv6Net) -> impl Iterator<Item = IpNet> {
+    const NIBBLE_BOUNDARY: u8 = 4;
+
+    // Round prefix up to the next nibble boundary (min /4).
+    let boundary = net.prefix_len().max(1).div_ceil(NIBBLE_BOUNDARY) * NIBBLE_BOUNDARY;
+    net.subnets(boundary).into_iter().flatten().map(IpNet::V6)
+}
+
+fn zone_name(network: IpNet) -> Option<Name> {
+    match network {
+        IpNet::V4(net) => {
+            static DOMAIN: LazyLock<Name> =
+                LazyLock::new(|| Name::from_str_relaxed("in-addr.arpa").unwrap());
+
+            let byte_count = usize::from(net.prefix_len()) / 8;
+
+            let labels = net
+                .addr()
+                .octets()
+                .into_iter()
+                .take(byte_count)
+                .rev()
+                .map(|n| n.to_string());
+
+            Name::from_labels(labels).ok()?.append_domain(&DOMAIN).ok()
+        },
+        IpNet::V6(net) => {
+            static DOMAIN: LazyLock<Name> =
+                LazyLock::new(|| Name::from_str_relaxed("ip6.arpa").unwrap());
+
+            let nibble_count = usize::from(net.prefix_len()) / 4;
+            let octets = net.addr().octets();
+            let labels = (0..nibble_count).rev().map(move |i| {
+                let nibble = if i % 2 == 0 {
+                    octets[i / 2] >> 4
+                } else {
+                    octets[i / 2] & 0x0f
+                };
+                format!("{nibble:x}")
+            });
+
+            Name::from_labels(labels).ok()?.append_domain(&DOMAIN).ok()
+        },
+    }
+}
+
+/// Expand an `IpNet` into `(IpNet, Name)` pairs, one per reverse zone.
+///
+/// ## IPv4:
+/// Zones are aligned to /8 octet boundaries: a /8, /16, or /24 prefix produces 1 zone.
+///
+/// Any prefix length that is not cleanly divisible by 8 is rounded up to the next octet boundary and then unrolled.
+///
+/// More generally speaking: a /12 (between /8 and /16) is rounded up to /16 and produces 2^(16-12) = 16 zones.
+///
+/// E.g. `172.16.66.123/18` becomes `172.16.64.0/24..=172.16.127.0/24` = 64 new subnets.
+///
+///
+/// ## IPv6:
+/// Zones are at the /4 nibble boundary with the same rounding logic as IPv4.
+#[cfg_attr(not(test), expect(unused, reason = "Library Code"))]
+fn parse_subnet(network: IpNet) -> impl Iterator<Item = (IpNet, Name)> {
+    let iter = match network {
+        IpNet::V4(net) => Either::Left(parse_subnet_ipv4(net)),
+        IpNet::V6(net) => Either::Right(parse_subnet_ipv6(net)),
+    };
+
+    iter.filter_map(|n| {
+        let Some(name) = zone_name(n) else {
+            event!(Level::WARN, %n, "Failed to compute reverse zone name for subnet, skipping");
+
+            return None;
+        };
+
+        Some((n, name))
+    })
 }
 
 impl Monitor {
@@ -459,10 +547,100 @@ impl Monitor {
             }
 
             let full_names = to_full_names(Vec::from(container.names), &self.domain);
+
             self.register_container_networks(&container.id, full_names, container.network_settings)
                 .await;
         }
 
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::str::FromStr as _;
+
+    use hickory_server::proto::rr::Name;
+    use ipnet::IpNet;
+    use pretty_assertions::assert_eq;
+
+    use crate::docker::monitor::parse_subnet;
+
+    fn subnet(s: &str) -> IpNet {
+        s.parse().unwrap()
+    }
+
+    #[test]
+    fn parse_subnet_ipv4() {
+        let ranges = parse_subnet(subnet("172.16.66.123/18")).collect::<Vec<_>>();
+
+        let expected = (64..=127)
+            .map(|octet| {
+                (
+                    IpNet::from_str(&format!("172.16.{}.0/24", octet)).unwrap(),
+                    Name::from_str(&format!("{}.16.172.in-addr.arpa.", octet)).unwrap(),
+                )
+            })
+            .collect::<Vec<_>>();
+
+        assert_eq!(ranges, expected);
+    }
+
+    #[test]
+    fn parse_subnet_ipv6_aligned() {
+        let input = subnet("fd00::/64");
+        let ranges = parse_subnet(input).collect::<Vec<_>>();
+
+        let expected = vec![(
+            IpNet::from_str("fd00::/64").unwrap(),
+            Name::from_str("0.0.0.0.0.0.0.0.0.0.0.0.0.0.d.f.ip6.arpa.").unwrap(),
+        )];
+
+        assert_eq!(ranges, expected);
+    }
+
+    #[test]
+    fn parse_subnet_ipv6_non_aligned() {
+        let input = subnet("fd00::/62");
+        let ranges = parse_subnet(input).collect::<Vec<_>>();
+
+        let expected = (0_u16..4)
+            .map(|i| {
+                (
+                    IpNet::from_str(&format!("fd00:0:0:{i}::/64")).unwrap(),
+                    Name::from_str(&format!("{i}.0.0.0.0.0.0.0.0.0.0.0.0.0.d.f.ip6.arpa."))
+                        .unwrap(),
+                )
+            })
+            .collect::<Vec<_>>();
+
+        assert_eq!(ranges, expected);
+    }
+
+    #[test]
+    fn parse_subnet_ipv6_odd_nibble_count() {
+        // /52 = 13 nibbles — odd count, so the last nibble lands on the high nibble of a byte
+        let input = subnet("fd00::/52");
+        let ranges = parse_subnet(input).collect::<Vec<_>>();
+
+        let expected = vec![(
+            IpNet::from_str("fd00::/52").unwrap(),
+            Name::from_str("0.0.0.0.0.0.0.0.0.0.0.d.f.ip6.arpa.").unwrap(),
+        )];
+
+        assert_eq!(ranges, expected);
+    }
+
+    #[test]
+    fn parse_subnet_ipv6_doc_prefix() {
+        let input = subnet("2001:db8::/48");
+        let ranges = parse_subnet(input).collect::<Vec<_>>();
+
+        let expected = vec![(
+            IpNet::from_str("2001:db8::/48").unwrap(),
+            Name::from_str("0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.").unwrap(),
+        )];
+
+        assert_eq!(ranges, expected);
     }
 }
