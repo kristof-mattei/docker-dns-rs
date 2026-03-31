@@ -437,6 +437,7 @@ dependencies = [
 name = "docker-dns-rs"
 version = "0.0.0-development"
 dependencies = [
+ "async-trait",
  "clap",
  "color-eyre",
  "console-subscriber",
@@ -448,6 +449,8 @@ dependencies = [
  "hyper-rustls",
  "hyper-unix-socket",
  "hyper-util",
+ "ipnet",
+ "itertools",
  "mimalloc",
  "percent-encoding",
  "pretty_assertions",

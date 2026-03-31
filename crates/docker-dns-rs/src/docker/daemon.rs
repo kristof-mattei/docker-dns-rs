@@ -16,6 +16,7 @@ use crate::docker::config::{Config, Endpoint};
 use crate::http_client::{build_request, execute_request};
 use crate::models::container::Container;
 use crate::models::container_inspect::ContainerInspect;
+use crate::models::network::{NetworkInspect, NetworkSummary};
 
 pub struct Daemon {
     config: Config,
@@ -86,6 +87,34 @@ impl Daemon {
         let bytes = response.collect().await?.to_bytes();
 
         let result = serde_json::from_slice::<ContainerInspect>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
+
+        Ok(result)
+    }
+
+    #[expect(unused, reason = "Library Code")]
+    pub async fn list_networks(&self) -> Result<Vec<NetworkSummary>, eyre::Report> {
+        let response = self.send_request("/networks", Method::GET).await?;
+
+        let bytes = response.collect().await?.to_bytes();
+
+        let result = serde_json::from_slice::<Vec<NetworkSummary>>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
+
+        Ok(result)
+    }
+
+    #[expect(unused, reason = "Library Code")]
+    pub async fn inspect_network(&self, id: &str) -> Result<NetworkInspect, eyre::Report> {
+        let path_and_query = format!("/networks/{id}");
+
+        let response = self.send_request(&path_and_query, Method::GET).await?;
+
+        let bytes = response.collect().await?.to_bytes();
+
+        let result = serde_json::from_slice::<NetworkInspect>(&bytes).inspect_err(|error| {
             event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
         })?;
 
