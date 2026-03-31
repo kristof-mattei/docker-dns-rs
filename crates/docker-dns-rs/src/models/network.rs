@@ -13,21 +13,18 @@ pub struct NetworkInspect {
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
-#[cfg_attr(not(test), expect(unused, reason = "Library Code"))]
 pub struct NetworkIpam {
     pub config: Vec<NetworkIpamConfig>,
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
-#[cfg_attr(not(test), expect(unused, reason = "Library Code"))]
 pub struct NetworkIpamConfig {
     pub subnet: Option<IpNet>,
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
-#[expect(unused, reason = "Library Code")]
 pub struct NetworkSummary {
     pub id: Box<str>,
 }

@@ -17,7 +17,7 @@ use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 
 use crate::build_env::get_build_env;
-use crate::dns_listener::{set_up_authority, set_up_catalog, set_up_dns_server};
+use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::config::Config as DockerConfig;
 use crate::docker::daemon::Daemon;
 use crate::docker::monitor::Monitor;
@@ -97,13 +97,22 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     print_header();
 
     // DNS
-    let authority = Arc::new(set_up_authority(args.domain.clone()).await?);
-    let authority_wrapper = AuthorityWrapper::new(Arc::clone(&authority));
+    let forward_authority = Arc::new(set_up_authority(args.domain.clone()).await?);
+    let catalog = Arc::new(tokio::sync::RwLock::new(set_up_catalog(
+        args.domain.clone(),
+        Arc::clone(&forward_authority),
+    )));
+    let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
     let docker_config = DockerConfig::build(args.docker_host, args.timeout);
     let docker = Arc::new(Daemon::new(docker_config));
-    let docker_monitor = Monitor::new(Arc::clone(&docker), authority_wrapper, args.domain.clone());
+    let docker_monitor = Monitor::new(
+        Arc::clone(&docker),
+        authority_wrapper,
+        Arc::clone(&catalog),
+        args.domain.clone(),
+    );
 
     let cancellation_token = CancellationToken::new();
 
@@ -152,8 +161,8 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
         tasks.spawn(async move {
             let _guard = cancellation_token.clone().drop_guard();
 
-            let catalog = set_up_catalog(args.domain, authority);
-            set_up_dns_server(listener, socket, catalog, cancellation_token).await;
+            let handler = DnsRequestHandler::new(Arc::clone(&catalog));
+            set_up_dns_server(listener, socket, handler, cancellation_token).await;
 
             event!(Level::INFO, "DNS Server stopped");
         });

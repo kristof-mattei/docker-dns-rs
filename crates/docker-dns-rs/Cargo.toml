@@ -68,7 +68,7 @@ hyper-unix-socket = "0.3.0"
 pretty_assertions = "=1.4.1"
 
 [package.metadata.cargo-machete]
-ignored = ["async-trait", "itertools", "tokio-console"]
+ignored = ["tokio-console"]
 
 [lints]
 workspace = true

@@ -93,7 +93,6 @@ impl Daemon {
         Ok(result)
     }
 
-    #[expect(unused, reason = "Library Code")]
     pub async fn list_networks(&self) -> Result<Vec<NetworkSummary>, eyre::Report> {
         let response = self.send_request("/networks", Method::GET).await?;
 
@@ -106,7 +105,6 @@ impl Daemon {
         Ok(result)
     }
 
-    #[expect(unused, reason = "Library Code")]
     pub async fn inspect_network(&self, id: &str) -> Result<NetworkInspect, eyre::Report> {
         let path_and_query = format!("/networks/{id}");
 
