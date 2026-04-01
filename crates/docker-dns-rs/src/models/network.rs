@@ -1,5 +1,13 @@
 use ipnet::IpNet;
-use serde::Deserialize;
+use serde::{Deserialize, Deserializer};
+
+fn null_as_empty_vec<'de, D, T>(deserializer: D) -> Result<Vec<T>, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    Ok(Option::<Vec<T>>::deserialize(deserializer)?.unwrap_or_default())
+}
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
@@ -14,6 +22,7 @@ pub struct NetworkInspect {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct NetworkIpam {
+    #[serde(default, deserialize_with = "null_as_empty_vec")]
     pub config: Vec<NetworkIpamConfig>,
 }
 
@@ -118,6 +127,34 @@ mod tests {
         )
         .unwrap();
 
+        assert_eq!(inspect.ipam.config.len(), 0);
+    }
+
+    #[test]
+    fn network_inspect_null_ipam_config() {
+        // Docker returns null Config for networks like "none"
+        let inspect = parse_inspect(
+            r#"{
+                "Id": "789b90d0",
+                "Name": "none",
+                "IPAM": {"Driver": "default", "Options": null, "Config": null}
+            }"#,
+        )
+        .unwrap();
+
+        assert_eq!(inspect.ipam.config.len(), 0);
+    }
+
+    #[test]
+    fn network_inspect_none_network_full_response() {
+        // Full Docker response for the built-in "none" network, which has null IPAM config
+        let inspect = parse_inspect(r#"{"Name":"none","Id":"789b90d02ff7f8705ae644eb3d3aa0a9ca5b3b1acb5cf2a8b2f4343072359026","Created":"2025-11-28T00:26:17.88395535-07:00","Scope":"local","Driver":"null","EnableIPv4":true,"EnableIPv6":false,"IPAM":{"Driver":"default","Options":null,"Config":null},"Internal":false,"Attachable":false,"Ingress":false,"ConfigFrom":{"Network":""},"ConfigOnly":false,"Options":{},"Labels":{},"Containers":{},"Status":{"IPAM":{}}}"#).unwrap();
+
+        assert_eq!(inspect.name.as_ref(), "none");
+        assert_eq!(
+            inspect.id.as_ref(),
+            "789b90d02ff7f8705ae644eb3d3aa0a9ca5b3b1acb5cf2a8b2f4343072359026"
+        );
         assert_eq!(inspect.ipam.config.len(), 0);
     }
 }
