@@ -46,14 +46,14 @@ enum EventType {
     Volume,
 }
 
-type EventAction = String;
+type EventAction = Box<str>;
 
 #[derive(Deserialize, Debug)]
 struct EventActor {
     #[serde(rename(deserialize = "ID"))]
-    id: String,
+    id: Box<str>,
     #[serde(rename(deserialize = "Attributes"))]
-    attributes: HashMap<String, String>,
+    attributes: HashMap<Box<str>, Box<str>>,
 }
 
 #[derive(Deserialize, Debug)]

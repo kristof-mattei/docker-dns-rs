@@ -1,7 +1,4 @@
-use std::time::Duration;
-
-use color_eyre::Section as _;
-use color_eyre::eyre::Report;
+use color_eyre::{Section as _, eyre};
 #[cfg(not(target_os = "windows"))]
 use http::Uri;
 use http_body_util::BodyExt as _;
@@ -17,7 +14,9 @@ use tracing::{Level, event};
 use crate::docker::Event;
 use crate::docker::config::{Config, Endpoint};
 use crate::http_client::{build_request, execute_request};
+use crate::models::container::Container;
 use crate::models::container_inspect::ContainerInspect;
+use crate::models::network::{NetworkInspect, NetworkSummary};
 
 pub struct Daemon {
     config: Config,
@@ -32,11 +31,11 @@ impl Daemon {
         &self,
         path_and_query: &str,
         method: Method,
-    ) -> Result<Response<Incoming>, color_eyre::Report> {
+    ) -> Result<Response<Incoming>, eyre::Report> {
         match self.config.endpoint {
             Endpoint::Direct {
                 ref url,
-                timeout_milliseconds,
+                timeout: query_timeout,
             } => {
                 let connector = HttpsConnectorBuilder::new()
                     .with_native_roots()?
@@ -48,7 +47,7 @@ impl Daemon {
 
                 let response = execute_request(connector, request);
 
-                match timeout(Duration::from_millis(timeout_milliseconds), response).await {
+                match timeout(query_timeout, response).await {
                     Ok(Ok(response)) => Ok(response),
                     Ok(Err(error)) => Err(error),
                     Err(error) => Err(error.into()),
@@ -66,31 +65,56 @@ impl Daemon {
         }
     }
 
-    // pub async fn get_containers(&self) -> Result<Vec<Container>, color_eyre::Report> {
-    //     let path_and_query = format!(
-    //         "/containers/json?filters={}",
-    //         "" /* self.encoded_filters */
-    //     );
+    pub async fn get_containers(&self) -> Result<Vec<Container>, eyre::Report> {
+        let path_and_query = format!("/containers/json?filters={}", "");
 
-    //     let response = self.send_request(&path_and_query, Method::GET).await?;
+        let response = self.send_request(&path_and_query, Method::GET).await?;
 
-    //     let reader = response.collect().await?.aggregate().reader();
+        let bytes = response.collect().await?.to_bytes();
 
-    //     let result = serde_json::from_reader::<_, Vec<Container>>(reader)?;
+        let result = serde_json::from_slice::<Vec<Container>>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
 
-    //     Ok(result)
-    // }
+        Ok(result)
+    }
 
-    pub async fn inspect_container(
-        &self,
-        id: &str,
-    ) -> Result<ContainerInspect, color_eyre::Report> {
+    pub async fn inspect_container(&self, id: &str) -> Result<ContainerInspect, eyre::Report> {
         let path_and_query = format!("/containers/{id}/json");
 
         let response = self.send_request(&path_and_query, Method::GET).await?;
 
         let bytes = response.collect().await?.to_bytes();
-        let result = serde_json::from_slice::<ContainerInspect>(&bytes)?;
+
+        let result = serde_json::from_slice::<ContainerInspect>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
+
+        Ok(result)
+    }
+
+    pub async fn list_networks(&self) -> Result<Vec<NetworkSummary>, eyre::Report> {
+        let response = self.send_request("/networks", Method::GET).await?;
+
+        let bytes = response.collect().await?.to_bytes();
+
+        let result = serde_json::from_slice::<Vec<NetworkSummary>>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
+
+        Ok(result)
+    }
+
+    pub async fn inspect_network(&self, id: &str) -> Result<NetworkInspect, eyre::Report> {
+        let path_and_query = format!("/networks/{id}");
+
+        let response = self.send_request(&path_and_query, Method::GET).await?;
+
+        let bytes = response.collect().await?.to_bytes();
+
+        let result = serde_json::from_slice::<NetworkInspect>(&bytes).inspect_err(|error| {
+            event!(Level::ERROR, ?error, message = %String::from_utf8_lossy(&bytes), "Failed to deserialize response");
+        })?;
 
         Ok(result)
     }
@@ -99,7 +123,7 @@ impl Daemon {
         &self,
         sender: tokio::sync::mpsc::Sender<Event>,
         cancellation_token: &CancellationToken,
-    ) -> Result<(), color_eyre::Report> {
+    ) -> Result<(), eyre::Report> {
         let path_and_query = format!("/events{}", "");
 
         let mut response = self.send_request(&path_and_query, Method::GET).await?;
@@ -111,7 +135,7 @@ impl Daemon {
             let frame = tokio::select! {
                 frame = response.frame() => frame,
                 () = cancellation_token.cancelled() => {
-                    return Err(color_eyre::Report::msg("Got cancellation event, stopping"));
+                    return Ok(());
                 },
             };
 
@@ -122,9 +146,7 @@ impl Daemon {
                     continue;
                 },
                 None => {
-                    return Err(color_eyre::Report::msg(
-                        "No more next frame, other side gone",
-                    ));
+                    return Err(eyre::Report::msg("No more next frame, other side gone"));
                 },
             };
 
@@ -155,12 +177,18 @@ impl Daemon {
     async fn decode_send(
         data: &[u8],
         sender: &tokio::sync::mpsc::Sender<Event>,
-    ) -> Result<(), Report> {
+    ) -> Result<(), eyre::Report> {
+        event!(Level::TRACE, data = %String::from_utf8_lossy(data), "New event");
+
         let decoded = match serde_json::from_slice(data) {
             Ok(event) => event,
             Err(error) => {
-                let decoded_data = String::from_utf8_lossy(data);
-                event!(Level::ERROR, err= ?error, ?decoded_data, "Failed to parse json to struct");
+                event!(
+                    Level::ERROR,
+                    ?error,
+                    data = %String::from_utf8_lossy(data),
+                    "Failed to parse json to struct"
+                );
 
                 return Ok(());
             },
@@ -169,6 +197,6 @@ impl Daemon {
         sender
             .send(decoded)
             .await
-            .map_err(|error| color_eyre::Report::msg("Channel closed").error(error))
+            .map_err(|error| eyre::Report::msg("Channel closed").error(error))
     }
 }
