@@ -3,11 +3,13 @@ use std::sync::Arc;
 use std::time::Duration;
 
 use async_trait::async_trait;
+use hashbrown::HashMap;
 use hickory_server::ServerFuture;
-use hickory_server::authority::Catalog;
+use hickory_server::authority::{Catalog, MessageResponseBuilder};
 use hickory_server::proto::ProtoError;
-use hickory_server::proto::rr::rdata::SOA;
-use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RrKey};
+use hickory_server::proto::op::{Header, ResponseCode};
+use hickory_server::proto::rr::rdata::{PTR, SOA};
+use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RecordType, RrKey};
 use hickory_server::server::{Request, RequestHandler, ResponseHandler, ResponseInfo};
 use hickory_server::store::in_memory::InMemoryAuthority;
 use tokio::net::{TcpListener, UdpSocket};
@@ -15,13 +17,33 @@ use tokio::sync::RwLock;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
+use crate::args::RawDomainIntercept;
+
 pub struct DnsRequestHandler {
     catalog: Arc<RwLock<Catalog>>,
+    intercepts: HashMap<LowerName, Vec<RData>>,
 }
 
 impl DnsRequestHandler {
-    pub fn new(catalog: Arc<RwLock<Catalog>>) -> Self {
-        Self { catalog }
+    pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<RawDomainIntercept>) -> Self {
+        let mut map: HashMap<LowerName, Vec<RData>> = HashMap::new();
+
+        for intercept in intercepts {
+            // Forward: A or AAAA
+            map.entry(LowerName::from(&intercept.name))
+                .or_default()
+                .push(RData::from(intercept.addr));
+
+            // Reverse: PTR
+            let ptr_name = Name::from(intercept.addr);
+            map.entry(LowerName::from(&ptr_name))
+                .or_default()
+                .push(RData::PTR(PTR(intercept.name)));
+        }
+        Self {
+            catalog,
+            intercepts: map,
+        }
     }
 }
 
@@ -30,8 +52,50 @@ impl RequestHandler for DnsRequestHandler {
     async fn handle_request<R: ResponseHandler>(
         &self,
         request: &Request,
-        response_handle: R,
+        mut response_handle: R,
     ) -> ResponseInfo {
+        if let Ok(request_info) = request.request_info() {
+            let qname = request_info.query.name();
+            let qtype = request_info.query.query_type();
+
+            if let Some(rdatas) = self.intercepts.get(qname) {
+                let answers: Vec<Record> = rdatas
+                    .iter()
+                    .filter(|rdata| qtype == rdata.record_type() || qtype == RecordType::ANY)
+                    .map(|rdata| Record::from_rdata(Name::from(qname.clone()), 0, rdata.clone()))
+                    .collect();
+
+                event!(Level::DEBUG, %qname, %qtype, answers = answers.len(), "DNS intercept matched");
+
+                let builder = MessageResponseBuilder::from_message_request(request);
+                let mut header = Header::response_from_request(request_info.header);
+                header.set_authoritative(true);
+
+                let response = builder.build(
+                    header,
+                    answers.iter(),
+                    std::iter::empty(),
+                    std::iter::empty(),
+                    std::iter::empty(),
+                );
+
+                return match response_handle.send_response(response).await {
+                    Ok(info) => info,
+                    Err(error) => {
+                        event!(
+                            Level::ERROR,
+                            ?error,
+                            "failed to send intercept DNS response"
+                        );
+                        let mut error_header = Header::response_from_request(request_info.header);
+                        error_header.set_response_code(ResponseCode::ServFail);
+                        ResponseInfo::from(error_header)
+                    },
+                };
+            }
+        }
+
+        // fall back the catalog which contain the dynamically registered containers
         self.catalog
             .read()
             .await

@@ -1,9 +1,10 @@
-use std::net::{Ipv4Addr, SocketAddr};
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr};
 #[cfg(not(target_os = "windows"))]
 use std::path::PathBuf;
 use std::time::Duration;
 
 use clap::Parser;
+use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::Name;
 
 const DEFAULT_DOCKER_HOST: &str = "/var/run/docker.sock";
@@ -26,6 +27,12 @@ impl std::fmt::Display for RawEndpoint {
     }
 }
 
+#[derive(Clone, Debug)]
+pub struct RawDomainIntercept {
+    pub name: Name,
+    pub addr: IpAddr,
+}
+
 #[derive(Parser, Debug)]
 pub struct RawConfig {
     #[arg(env, default_value = DEFAULT_DOCKER_HOST, value_parser = parse_docker, help = "Path to docker TCP/UNIX socket", long="docker")]
@@ -39,6 +46,17 @@ pub struct RawConfig {
         value_parser = parse_domain
     )]
     pub domain: Name,
+
+    #[arg(
+        env = "RECORDS",
+        help = "Add a static record  as `name:ip` (IPv4) or `name:[ipv6]` (IPv6). May be repeated.",
+        long = "record",
+        name = "RECORD",
+        value_parser = parse_domain_intercepts,
+        value_delimiter = ',',
+        action = clap::ArgAction::Append,
+    )]
+    pub intercepts: Vec<RawDomainIntercept>,
 
     #[arg(
         env,
@@ -103,4 +121,30 @@ fn parse_domain(raw_domain: &str) -> Result<Name, String> {
     domain.set_fqdn(true);
 
     Ok(domain)
+}
+
+fn parse_domain_intercepts(value: &str) -> Result<RawDomainIntercept, String> {
+    let (name_str, addr_str) = value
+        .split_once(':')
+        .ok_or_else(|| format!("expected `name:ip` or `name:[ipv6]`, got `{}`", value))?;
+
+    let addr: IpAddr = if addr_str.starts_with('[') && addr_str.ends_with(']') {
+        #[expect(
+            clippy::string_slice,
+            reason = "We've asserted that the first and last character are non-composite"
+        )]
+        addr_str[1..addr_str.len() - 1]
+            .parse::<Ipv6Addr>()
+            .map(Into::into)
+    } else {
+        (addr_str).parse::<Ipv4Addr>().map(Into::into)
+    }
+    .map_err(|error| error.to_string())?;
+
+    let mut name: Name = name_str
+        .parse()
+        .map_err(|error: ProtoError| error.to_string())?;
+    name.set_fqdn(true);
+
+    Ok(RawDomainIntercept { name, addr })
 }
