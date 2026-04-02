@@ -26,10 +26,15 @@ struct HashedRData(RData);
 impl Hash for HashedRData {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.0.record_type().hash(state);
+
+        #[expect(
+            clippy::wildcard_enum_match_arm,
+            reason = "We're only interested in A, AAAA and PTR"
+        )]
         match &self.0 {
-            RData::A(r) => r.hash(state),
-            RData::AAAA(r) => r.hash(state),
-            RData::PTR(r) => r.hash(state),
+            &RData::A(ref a) => a.hash(state),
+            &RData::AAAA(ref aaaa) => aaaa.hash(state),
+            &RData::PTR(ref ptr) => ptr.hash(state),
             other => unreachable!("unexpected RData variant in intercept map: {:?}", other),
         }
     }
