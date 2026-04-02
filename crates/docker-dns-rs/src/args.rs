@@ -6,6 +6,7 @@ use std::time::Duration;
 use clap::Parser;
 use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::Name;
+use tracing::{Level, event};
 
 const DEFAULT_DOCKER_HOST: &str = "/var/run/docker.sock";
 const DNS_BINDADDR: SocketAddr = SocketAddr::new(std::net::IpAddr::V4(Ipv4Addr::UNSPECIFIED), 53);
@@ -74,6 +75,17 @@ pub struct RawConfig {
         value_parser = parse_duration
     )]
     pub timeout: Duration,
+}
+impl RawConfig {
+    pub fn print(&self) {
+        event!(Level::INFO, docker_host = %self.docker_host, "Daemon");
+        event!(Level::INFO, domain = %self.domain, "Domain");
+        event!(Level::INFO, dns_bind = %self.dns_bind, "DNS Bind Address");
+
+        for r in &self.records {
+            event!(Level::INFO, forward = %r.name, reverse = %r.addr, "Static record");
+        }
+    }
 }
 
 fn parse_duration(value: &str) -> Result<Duration, String> {

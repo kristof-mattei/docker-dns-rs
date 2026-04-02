@@ -135,7 +135,7 @@ impl AuthorityWrapper {
     pub async fn add(&self, name: &Name, address: IpAddr) {
         self.upsert(name, address).await;
 
-        event!(Level::INFO, %name, %address, "table.add");
+        event!(Level::INFO, %name, %address);
     }
 
     #[instrument(skip_all, fields(old_name = %old_key.name, %new_name, r#type = %old_key.record_type))]

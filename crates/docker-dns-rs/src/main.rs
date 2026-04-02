@@ -95,6 +95,7 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     let args = args::RawConfig::parse();
 
     print_header();
+    args.print();
 
     // DNS
     let forward_authority = Arc::new(set_up_authority(args.domain.clone()).await?);
