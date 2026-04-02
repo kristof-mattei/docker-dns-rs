@@ -88,8 +88,7 @@ impl RequestHandler for DnsRequestHandler {
                             "failed to send intercepted DNS response"
                         );
 
-                        let mut error_header =
-                            Header::response_from_request(request_info.header);
+                        let mut error_header = Header::response_from_request(request_info.header);
                         error_header.set_response_code(ResponseCode::ServFail);
 
                         ResponseInfo::from(error_header)
@@ -98,7 +97,7 @@ impl RequestHandler for DnsRequestHandler {
             }
         }
 
-        // fall back to the catalog which contains the dynamically registered containers
+        // fall back to the catalog that contains the dynamically registered containers
         self.catalog
             .read()
             .await
