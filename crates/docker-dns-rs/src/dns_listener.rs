@@ -65,37 +65,42 @@ impl RequestHandler for DnsRequestHandler {
                     .map(|rdata| Record::from_rdata(Name::from(qname.clone()), 5, rdata.clone()))
                     .collect();
 
-                event!(Level::DEBUG, %qname, %qtype, answers = answers.len(), "DNS intercept matched");
+                if !answers.is_empty() {
+                    event!(Level::TRACE, %qname, %qtype, answers = answers.len(), "DNS intercept match");
 
-                let builder = MessageResponseBuilder::from_message_request(request);
-                let mut header = Header::response_from_request(request_info.header);
-                header.set_authoritative(true);
+                    let builder = MessageResponseBuilder::from_message_request(request);
+                    let mut header = Header::response_from_request(request_info.header);
+                    header.set_authoritative(true);
 
-                let response = builder.build(
-                    header,
-                    answers.iter(),
-                    std::iter::empty(),
-                    std::iter::empty(),
-                    std::iter::empty(),
-                );
+                    let response = builder.build(
+                        header,
+                        answers.iter(),
+                        std::iter::empty(),
+                        std::iter::empty(),
+                        std::iter::empty(),
+                    );
 
-                return match response_handle.send_response(response).await {
-                    Ok(info) => info,
-                    Err(error) => {
-                        event!(
-                            Level::ERROR,
-                            ?error,
-                            "failed to send intercept DNS response"
-                        );
-                        let mut error_header = Header::response_from_request(request_info.header);
-                        error_header.set_response_code(ResponseCode::ServFail);
-                        ResponseInfo::from(error_header)
-                    },
-                };
+                    return match response_handle.send_response(response).await {
+                        Ok(info) => info,
+                        Err(error) => {
+                            event!(
+                                Level::ERROR,
+                                ?error,
+                                "failed to send intercepted DNS response"
+                            );
+
+                            let mut error_header =
+                                Header::response_from_request(request_info.header);
+                            error_header.set_response_code(ResponseCode::ServFail);
+
+                            ResponseInfo::from(error_header)
+                        },
+                    };
+                }
             }
         }
 
-        // fall back the catalog which contain the dynamically registered containers
+        // fall back to the catalog which contains the dynamically registered containers
         self.catalog
             .read()
             .await
