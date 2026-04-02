@@ -28,7 +28,7 @@ impl std::fmt::Display for RawEndpoint {
 }
 
 #[derive(Clone, Debug)]
-pub struct RawDomainIntercept {
+pub struct RawRecord {
     pub name: Name,
     pub addr: IpAddr,
 }
@@ -52,11 +52,11 @@ pub struct RawConfig {
         help = "Add a static record as `name:ip` (IPv4) or `name:[ipv6]` (IPv6), separated by commas or repeated flags",
         long = "record",
         name = "RECORD",
-        value_parser = parse_domain_intercepts,
+        value_parser = parse_record,
         value_delimiter = ',',
         action = clap::ArgAction::Append,
     )]
-    pub intercepts: Vec<RawDomainIntercept>,
+    pub records: Vec<RawRecord>,
 
     #[arg(
         env,
@@ -123,7 +123,7 @@ fn parse_domain(raw_domain: &str) -> Result<Name, String> {
     Ok(domain)
 }
 
-fn parse_domain_intercepts(value: &str) -> Result<RawDomainIntercept, String> {
+fn parse_record(value: &str) -> Result<RawRecord, String> {
     let (name_str, addr_str) = value
         .split_once(':')
         .ok_or_else(|| format!("expected `name:ip` or `name:[ipv6]`, got `{}`", value))?;
@@ -146,5 +146,5 @@ fn parse_domain_intercepts(value: &str) -> Result<RawDomainIntercept, String> {
         .map_err(|error: ProtoError| error.to_string())?;
     name.set_fqdn(true);
 
-    Ok(RawDomainIntercept { name, addr })
+    Ok(RawRecord { name, addr })
 }

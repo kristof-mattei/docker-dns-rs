@@ -17,7 +17,7 @@ use tokio::sync::RwLock;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
-use crate::args::RawDomainIntercept;
+use crate::args::RawRecord;
 
 pub struct DnsRequestHandler {
     catalog: Arc<RwLock<Catalog>>,
@@ -25,7 +25,7 @@ pub struct DnsRequestHandler {
 }
 
 impl DnsRequestHandler {
-    pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<RawDomainIntercept>) -> Self {
+    pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<RawRecord>) -> Self {
         let mut map: HashMap<LowerName, Vec<RData>> = HashMap::new();
 
         for intercept in intercepts {
