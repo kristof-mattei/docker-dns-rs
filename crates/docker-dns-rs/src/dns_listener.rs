@@ -62,7 +62,7 @@ impl RequestHandler for DnsRequestHandler {
                 let answers: Vec<Record> = rdatas
                     .iter()
                     .filter(|rdata| qtype == rdata.record_type() || qtype == RecordType::ANY)
-                    .map(|rdata| Record::from_rdata(Name::from(qname.clone()), 0, rdata.clone()))
+                    .map(|rdata| Record::from_rdata(Name::from(qname.clone()), 5, rdata.clone()))
                     .collect();
 
                 event!(Level::DEBUG, %qname, %qtype, answers = answers.len(), "DNS intercept matched");
