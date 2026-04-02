@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [0.10.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.9.0..v0.10.0) - 2026-04-02
+
+### 🚀 Features
+
+- Dump config on startup by [@kristof-mattei](https://github.com/kristof-mattei) ([`e938f2f`](https://github.com/kristof-mattei/docker-dns-rs/commit/e938f2f539f15cf6fef851c257bc741ac5057009))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.10.0
 ## [0.9.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.8.2..v0.9.0) - 2026-04-02
 
 ### 🚀 Features
@@ -13,7 +22,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.9.0
+- *(release)* Release v0.9.0 by [@github-actions[bot]](https://github.com/github-actions[bot]) ([`0a2117f`](https://github.com/kristof-mattei/docker-dns-rs/commit/0a2117fe6ec56646241ed3ac269d1ca757ab3aba))
 - Sort tags by creation time by [@kristof-mattei](https://github.com/kristof-mattei) ([`39ce04b`](https://github.com/kristof-mattei/docker-dns-rs/commit/39ce04bd2b02ef17d869c2828bf3e641854a25b1))
 - Increase ttl by [@kristof-mattei](https://github.com/kristof-mattei) ([`6b7480c`](https://github.com/kristof-mattei/docker-dns-rs/commit/6b7480cf04ea2ab379aa0a3831cd9d0c4c493d29))
 - Remove double space by [@kristof-mattei](https://github.com/kristof-mattei) ([`e2b0a9f`](https://github.com/kristof-mattei/docker-dns-rs/commit/e2b0a9f5ef01fbc390e910d3bc331a47f30999e3))
