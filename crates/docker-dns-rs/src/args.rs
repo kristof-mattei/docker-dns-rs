@@ -52,18 +52,18 @@ pub struct RawConfig {
         env = "timeout",
         default_value = "30",
         long,
-        help = "Docker socket timeout, in milliseconds, only used when connecting over tcp",
+        help = "Docker socket timeout, in seconds, only used when connecting over tcp",
         value_parser = parse_duration
     )]
     pub timeout: Duration,
 }
 
 fn parse_duration(value: &str) -> Result<Duration, String> {
-    let milliseconds = value
+    let seconds = value
         .parse()
         .map_err(|error| format!("Could not parse `{}`: {}", value, error))?;
 
-    Ok(Duration::from_millis(milliseconds))
+    Ok(Duration::from_secs(seconds))
 }
 
 fn parse_docker(value: &str) -> Result<RawEndpoint, String> {
