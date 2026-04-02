@@ -1,4 +1,27 @@
 <!-- header goes here -->
+## [0.9.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.8.2..v0.9.0) - 2026-04-02
+
+### 🚀 Features
+
+- Allow passing in static FQDNs by [@kristof-mattei](https://github.com/kristof-mattei) ([`67c3770`](https://github.com/kristof-mattei/docker-dns-rs/commit/67c37708c03991a45cf62a56b75e6f12971a8df8))
+
+### 🐛 Bug Fixes
+
+- Parameter takes in seconds, no milliseconds by [@kristof-mattei](https://github.com/kristof-mattei) ([`52bdc76`](https://github.com/kristof-mattei/docker-dns-rs/commit/52bdc7672571d47eef21889ad4e3c289423fe39a))
+- Update parameter wording by [@kristof-mattei](https://github.com/kristof-mattei) ([`d02b33d`](https://github.com/kristof-mattei/docker-dns-rs/commit/d02b33db2d33c143b16cd083db8085e36501cfde))
+- Fallthrough by [@kristof-mattei](https://github.com/kristof-mattei) ([`7dc23b7`](https://github.com/kristof-mattei/docker-dns-rs/commit/7dc23b7ec2c98bb595f07501e01ef734e7de959e))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Release v0.9.0
+- Sort tags by creation time by [@kristof-mattei](https://github.com/kristof-mattei) ([`39ce04b`](https://github.com/kristof-mattei/docker-dns-rs/commit/39ce04bd2b02ef17d869c2828bf3e641854a25b1))
+- Increase ttl by [@kristof-mattei](https://github.com/kristof-mattei) ([`6b7480c`](https://github.com/kristof-mattei/docker-dns-rs/commit/6b7480cf04ea2ab379aa0a3831cd9d0c4c493d29))
+- Remove double space by [@kristof-mattei](https://github.com/kristof-mattei) ([`e2b0a9f`](https://github.com/kristof-mattei/docker-dns-rs/commit/e2b0a9f5ef01fbc390e910d3bc331a47f30999e3))
+- Naming by [@kristof-mattei](https://github.com/kristof-mattei) ([`84ed7bd`](https://github.com/kristof-mattei/docker-dns-rs/commit/84ed7bdceead40e553747480b9ffffbe49302ddd))
+- Match is authoritive. No fall-through by [@kristof-mattei](https://github.com/kristof-mattei) ([`56504b5`](https://github.com/kristof-mattei/docker-dns-rs/commit/56504b563ab662d0fd926d16741217baeffe2726))
+- Reword by [@kristof-mattei](https://github.com/kristof-mattei) ([`254cba9`](https://github.com/kristof-mattei/docker-dns-rs/commit/254cba90120f015e88bade9ec5f0df79d4efcdcb))
+- Store records as hash to detect duplicates by [@kristof-mattei](https://github.com/kristof-mattei) ([`4ff2453`](https://github.com/kristof-mattei/docker-dns-rs/commit/4ff245314c82d0698d378197b10072ed163101da))
+- Address clippy warning by [@kristof-mattei](https://github.com/kristof-mattei) ([`4de4856`](https://github.com/kristof-mattei/docker-dns-rs/commit/4de4856a1b92943c9856035a20fcba73b9bb08ba))
 ## [0.8.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.8.1..v0.8.2) - 2026-04-01
 
 ### 🐛 Bug Fixes
@@ -8,7 +31,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.8.2
+- *(release)* Release v0.8.2 by [@github-actions[bot]](https://github.com/github-actions[bot]) ([`8714e09`](https://github.com/kristof-mattei/docker-dns-rs/commit/8714e0974bd79e2d126ae927439a7b1ca9f3ef79))
 - Render username link by [@kristof-mattei](https://github.com/kristof-mattei) ([`19debe7`](https://github.com/kristof-mattei/docker-dns-rs/commit/19debe713ec00dc8f6534a65bab8f1f9ef5dccec))
 ## [0.8.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.8.0..v0.8.1) - 2026-03-31
 
