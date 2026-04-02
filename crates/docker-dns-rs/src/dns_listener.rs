@@ -1,9 +1,10 @@
 use std::collections::BTreeMap;
+use std::hash::{Hash, Hasher};
 use std::sync::Arc;
 use std::time::Duration;
 
 use async_trait::async_trait;
-use hashbrown::HashMap;
+use hashbrown::{HashMap, HashSet};
 use hickory_server::ServerFuture;
 use hickory_server::authority::{Catalog, MessageResponseBuilder};
 use hickory_server::proto::ProtoError;
@@ -19,26 +20,52 @@ use tracing::{Level, event};
 
 use crate::args::RawRecord;
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct HashedRData(RData);
+
+impl Hash for HashedRData {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.0.record_type().hash(state);
+        match &self.0 {
+            RData::A(r) => r.hash(state),
+            RData::AAAA(r) => r.hash(state),
+            RData::PTR(r) => r.hash(state),
+            other => unreachable!("unexpected RData variant in intercept map: {:?}", other),
+        }
+    }
+}
+
 pub struct DnsRequestHandler {
     catalog: Arc<RwLock<Catalog>>,
-    intercepts: HashMap<LowerName, Vec<RData>>,
+    intercepts: HashMap<LowerName, HashSet<HashedRData>>,
 }
 
 impl DnsRequestHandler {
     pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<RawRecord>) -> Self {
-        let mut map: HashMap<LowerName, Vec<RData>> = HashMap::new();
+        let mut map: HashMap<LowerName, HashSet<HashedRData>> = HashMap::new();
 
         for intercept in intercepts {
             // Forward: A or AAAA
-            map.entry(LowerName::from(&intercept.name))
+            let forward = HashedRData(RData::from(intercept.addr));
+            if !map
+                .entry(LowerName::from(&intercept.name))
                 .or_default()
-                .push(RData::from(intercept.addr));
+                .insert(forward)
+            {
+                event!(
+                    Level::WARN,
+                    name = %intercept.name,
+                    addr = %intercept.addr,
+                    "duplicate --record entry ignored"
+                );
+            }
 
             // Reverse: PTR
             let ptr_name = Name::from(intercept.addr);
+            let ptr = HashedRData(RData::PTR(PTR(intercept.name)));
             map.entry(LowerName::from(&ptr_name))
                 .or_default()
-                .push(RData::PTR(PTR(intercept.name)));
+                .insert(ptr);
         }
         Self {
             catalog,
@@ -61,8 +88,8 @@ impl RequestHandler for DnsRequestHandler {
             if let Some(rdatas) = self.intercepts.get(qname) {
                 let answers: Vec<Record> = rdatas
                     .iter()
-                    .filter(|rdata| qtype == rdata.record_type() || qtype == RecordType::ANY)
-                    .map(|rdata| Record::from_rdata(Name::from(qname.clone()), 5, rdata.clone()))
+                    .filter(|r| qtype == r.0.record_type() || qtype == RecordType::ANY)
+                    .map(|r| Record::from_rdata(Name::from(qname.clone()), 5, r.0.clone()))
                     .collect();
 
                 event!(Level::TRACE, %qname, %qtype, answers = answers.len(), "DNS intercept match");
