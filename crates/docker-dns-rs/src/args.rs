@@ -49,7 +49,7 @@ pub struct RawConfig {
 
     #[arg(
         env = "RECORDS",
-        help = "Add a static record as `name:ip` (IPv4) or `name:[ipv6]` (IPv6). May be repeated.",
+        help = "Add a static record as `name:ip` (IPv4) or `name:[ipv6]` (IPv6), separated by commas or repeated flags",
         long = "record",
         name = "RECORD",
         value_parser = parse_domain_intercepts,
