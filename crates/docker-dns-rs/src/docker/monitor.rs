@@ -4,6 +4,7 @@ use std::sync::{Arc, LazyLock};
 
 use color_eyre::eyre;
 use hashbrown::HashMap;
+use hashbrown::hash_map::EntryRef;
 use hickory_server::authority::Catalog;
 use hickory_server::proto::rr::{LowerName, Name};
 use ipnet::{IpNet, Ipv4Net, Ipv6Net};
@@ -259,13 +260,18 @@ impl Monitor {
     ) {
         let mut containers = self.containers.lock().await;
 
-        let container_state =
-            containers
-                .entry_ref(container_id)
-                .or_insert_with(|| ContainerState {
-                    names: full_names,
-                    networks: HashMap::new(),
-                });
+        let container_state = match containers.entry_ref(container_id) {
+            EntryRef::Occupied(occupied_entry) => occupied_entry.into_mut(),
+            EntryRef::Vacant(vacant_entry_ref) => vacant_entry_ref
+                .insert_entry_with_key(
+                    container_id.to_owned().into_boxed_str(),
+                    ContainerState {
+                        names: full_names,
+                        networks: HashMap::new(),
+                    },
+                )
+                .into_mut(),
+        };
 
         for (network_name, network) in network_settings.networks {
             let Some(network_ips) = NetworkIps::from_network(&network) else {
@@ -409,16 +415,21 @@ impl Monitor {
 
                 let mut containers = self.containers.lock().await;
 
-                let state =
-                    containers
-                        .entry_ref(&**container_id)
-                        .or_insert_with(|| ContainerState {
-                            names: to_full_names(
-                                get_all_names_from_inspect(&container),
-                                &self.domain,
-                            ),
-                            networks: HashMap::new(),
-                        });
+                let state = match containers.entry_ref(&**container_id) {
+                    EntryRef::Occupied(occupied_entry) => occupied_entry.into_mut(),
+                    EntryRef::Vacant(vacant_entry_ref) => vacant_entry_ref
+                        .insert_entry_with_key(
+                            container_id.clone(),
+                            ContainerState {
+                                names: to_full_names(
+                                    get_all_names_from_inspect(&container),
+                                    &self.domain,
+                                ),
+                                networks: HashMap::new(),
+                            },
+                        )
+                        .into_mut(),
+                };
 
                 // If the same IPs were previously registered for this network (e.g. startup race between start()'s container list and this event), skip.
                 // If different IPs were registered, remove the stale DNS records first.
