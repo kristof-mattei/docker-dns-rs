@@ -16,8 +16,6 @@ use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
 use crate::dns_listener::set_up_authority;
-use crate::docker::daemon::Daemon;
-use crate::docker::{Event, EventType};
 use crate::models::container_inspect::{
     ContainerInspect, ContainerNetwork, ContainerNetworkSettings,
 };

@@ -18,8 +18,6 @@ use tracing_subscriber::util::SubscriberInitExt as _;
 
 use crate::build_env::get_build_env;
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
-use crate::docker::config::Config as DockerConfig;
-use crate::docker::daemon::Daemon;
 use crate::docker::monitor::Monitor;
 use crate::table::AuthorityWrapper;
 
@@ -27,9 +25,6 @@ mod args;
 mod dns_listener;
 mod docker;
 mod encoding;
-mod filters;
-mod http_client;
-mod models;
 mod table;
 mod utils;
 
