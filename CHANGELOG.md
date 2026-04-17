@@ -1,4 +1,44 @@
 <!-- header goes here -->
+## [0.11.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.10.0..v0.11.0) - 2026-04-17
+
+### 🚀 Features
+
+- Use twistlock for shared docker interactions by [@kristof-mattei](https://github.com/kristof-mattei) ([`4e140a0`](https://github.com/kristof-mattei/docker-dns-rs/commit/4e140a0152cd3ec332aea378e9234dcb09f5b632))
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate tokio to 1.51.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`cb5f88d`](https://github.com/kristof-mattei/docker-dns-rs/commit/cb5f88d7b90551fa7ae6f283c2c54310b001bae8))
+- *(deps)* Update rust crate tokio to 1.51.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`e3f94cd`](https://github.com/kristof-mattei/docker-dns-rs/commit/e3f94cd11e88679659910bfdb352386d276bf8f2))
+- *(deps)* Update rust crate hashbrown to 0.17.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`8d421f3`](https://github.com/kristof-mattei/docker-dns-rs/commit/8d421f3f6eea7cc826dd3ede5278cb1a65f59733))
+- *(deps)* Update rust crate hyper-rustls to 0.27.8 by [@renovate[bot]](https://github.com/renovate[bot]) ([`b310777`](https://github.com/kristof-mattei/docker-dns-rs/commit/b310777318e67faf82668d97f23751685ab53267))
+- *(deps)* Update rust crate hyper-unix-socket to 0.6.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`cb55407`](https://github.com/kristof-mattei/docker-dns-rs/commit/cb554077b48b8ad778cfb8da468455f97894a94d))
+- *(deps)* Update rust crate hyper-rustls to 0.27.9 by [@renovate[bot]](https://github.com/renovate[bot]) ([`bcc07c8`](https://github.com/kristof-mattei/docker-dns-rs/commit/bcc07c8ecc3ff35e2449b0bc43619c6e90bc5dda))
+- *(deps)* Update rust crate tokio to 1.52.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`f95384c`](https://github.com/kristof-mattei/docker-dns-rs/commit/f95384cfd24547e5d179f937ca2faaf4ee676dd7))
+- *(deps)* Update rust crate tokio to 1.52.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`96e9eab`](https://github.com/kristof-mattei/docker-dns-rs/commit/96e9eabfbc804156e71b5210f8d3e6d07c0b7d5e))
+- *(deps)* Update rust crate clap to 4.6.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`4a9ea4f`](https://github.com/kristof-mattei/docker-dns-rs/commit/4a9ea4f276e7b534ad228d426f2d7f72ee02dab1))
+- *(deps)* Update rust crate hickory-server to 0.26.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`449348c`](https://github.com/kristof-mattei/docker-dns-rs/commit/449348c4d692f9b72d896d4860543290701f72c4))
+- We can now release without having ANY tags on the repo by [@kristof-mattei](https://github.com/kristof-mattei) ([`80cbc44`](https://github.com/kristof-mattei/docker-dns-rs/commit/80cbc44189bf721637640dbf7257f852ca82f877))
+- Hashbrown 0.17.0 changed trait restrictions, need to explicitly create key now, see https://github.com/rust-lang/hashbrown/issues/711 by [@kristof-mattei](https://github.com/kristof-mattei) ([`cfea160`](https://github.com/kristof-mattei/docker-dns-rs/commit/cfea160633327656d404b191dccf016916dbdeec))
+- Hickory 0.26.0 by [@kristof-mattei](https://github.com/kristof-mattei) ([`dc4d514`](https://github.com/kristof-mattei/docker-dns-rs/commit/dc4d514dbc85494c444e4d082c8fcecac5d15549))
+- Twistlock is now on crates.io by [@kristof-mattei](https://github.com/kristof-mattei) ([`8b62125`](https://github.com/kristof-mattei/docker-dns-rs/commit/8b62125428e220005fea8f23bde4fd091bcdc61f))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Upload edge to docker.io by [@kristof-mattei](https://github.com/kristof-mattei) ([`f235bac`](https://github.com/kristof-mattei/docker-dns-rs/commit/f235bac7e7bf720a4c42711f12fa57cb361c6adf))
+- *(ci)* Reattest every stage by [@kristof-mattei](https://github.com/kristof-mattei) ([`19c7f04`](https://github.com/kristof-mattei/docker-dns-rs/commit/19c7f048fad6474f798c9d810dbe1d2278731d6d))
+- *(ci)* Use skopeo wherever possible by [@kristof-mattei](https://github.com/kristof-mattei) ([`50a6786`](https://github.com/kristof-mattei/docker-dns-rs/commit/50a678665fd200021293e938c0b493891077a5ef))
+- *(ci)* Scout for visualizing cves etc by [@kristof-mattei](https://github.com/kristof-mattei) ([`2fe6e06`](https://github.com/kristof-mattei/docker-dns-rs/commit/2fe6e06ada42423eeacec95be6a29ccbd3806068))
+- *(ci)* Username is not secret by [@kristof-mattei](https://github.com/kristof-mattei) ([`7d168f4`](https://github.com/kristof-mattei/docker-dns-rs/commit/7d168f446d7bbdabaf2bd58c2818af2a65b07c41))
+- *(ci)* Restore ability to do prerelease versions by [@kristof-mattei](https://github.com/kristof-mattei) ([`7c5b0ea`](https://github.com/kristof-mattei/docker-dns-rs/commit/7c5b0ea895c5e92aa3c69fec62e3a7156f2ca183))
+- *(ci)* Allow re-release pre-release without having to add features by [@kristof-mattei](https://github.com/kristof-mattei) ([`657a7db`](https://github.com/kristof-mattei/docker-dns-rs/commit/657a7db145169f1dd3cd17b587324fae32ec4d04))
+- Fix fmt by [@kristof-mattei](https://github.com/kristof-mattei) ([`1c63af5`](https://github.com/kristof-mattei/docker-dns-rs/commit/1c63af585079ee98e0b241fc6683c31982159106))
+- Wip, moving to twistlock by [@kristof-mattei](https://github.com/kristof-mattei) ([`9f1c881`](https://github.com/kristof-mattei/docker-dns-rs/commit/9f1c881d631404fdf80f999de57f26348cbbcce8))
+- Clean up unused packages by [@kristof-mattei](https://github.com/kristof-mattei) ([`4b6be0b`](https://github.com/kristof-mattei/docker-dns-rs/commit/4b6be0bf0e1b8c761062a148e9c867c6f94a5c1f))
+- Bump twistlock by [@kristof-mattei](https://github.com/kristof-mattei) ([`dbb137c`](https://github.com/kristof-mattei/docker-dns-rs/commit/dbb137cde283f101a0deac73e925bd5ef890d604))
+- From secs by [@kristof-mattei](https://github.com/kristof-mattei) ([`3f9bfbd`](https://github.com/kristof-mattei/docker-dns-rs/commit/3f9bfbd87a3cb96cbdfc419930d098c4a03232f4))
+- Update twistlock to version that works on windows by [@kristof-mattei](https://github.com/kristof-mattei) ([`4313371`](https://github.com/kristof-mattei/docker-dns-rs/commit/43133711d200504b022d1371cb5773d5b907ce81))
+- From secs by [@kristof-mattei](https://github.com/kristof-mattei) ([`b3ed02c`](https://github.com/kristof-mattei/docker-dns-rs/commit/b3ed02cb0231a4500a4e0e0193c5bb711a57d0c8))
+- Update by [@kristof-mattei](https://github.com/kristof-mattei) ([`5452817`](https://github.com/kristof-mattei/docker-dns-rs/commit/5452817677ca0700320d86a5db964e1ccc7a99f1))
 ## [0.10.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.9.0..v0.10.0) - 2026-04-02
 
 ### 🚀 Features
@@ -7,7 +47,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(release)* Release v0.10.0
+- *(release)* Release v0.10.0 by [@github-actions[bot]](https://github.com/github-actions[bot]) ([`8a5a373`](https://github.com/kristof-mattei/docker-dns-rs/commit/8a5a3737ab8b43aeb7b30712adc8e0bcd4ef28f0))
 ## [0.9.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.8.2..v0.9.0) - 2026-04-02
 
 ### 🚀 Features
