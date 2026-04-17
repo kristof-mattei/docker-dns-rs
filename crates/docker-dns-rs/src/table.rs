@@ -8,14 +8,14 @@ use color_eyre::eyre::Report;
 use hashbrown::HashMap;
 use hickory_server::proto::rr::rdata::PTR;
 use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RecordType, RrKey};
-use hickory_server::store::in_memory::InMemoryAuthority;
+use hickory_server::store::in_memory::InMemoryZoneHandler;
 use ipnet::IpNet;
 use tokio::sync::RwLock;
 use tracing::{Level, event, instrument};
 
 pub struct AuthorityWrapper {
-    forward: Arc<InMemoryAuthority>,
-    reverse_zones: RwLock<HashMap<IpNet, Arc<InMemoryAuthority>>>,
+    forward: Arc<InMemoryZoneHandler>,
+    reverse_zones: RwLock<HashMap<IpNet, Arc<InMemoryZoneHandler>>>,
 }
 
 fn append_to_record_set(
@@ -67,14 +67,14 @@ fn remove_from_ptr_set(
 }
 
 impl AuthorityWrapper {
-    pub fn new(forward: Arc<InMemoryAuthority>) -> Self {
+    pub fn new(forward: Arc<InMemoryZoneHandler>) -> Self {
         Self {
             forward,
             reverse_zones: RwLock::new(HashMap::new()),
         }
     }
 
-    pub async fn add_reverse_zone(&self, network: IpNet, authority: Arc<InMemoryAuthority>) {
+    pub async fn add_reverse_zone(&self, network: IpNet, authority: Arc<InMemoryZoneHandler>) {
         self.reverse_zones.write().await.insert(network, authority);
     }
 
@@ -82,7 +82,7 @@ impl AuthorityWrapper {
         self.reverse_zones.write().await.remove(network);
     }
 
-    async fn find_reverse_authority(&self, ip: IpAddr) -> Option<Arc<InMemoryAuthority>> {
+    async fn find_reverse_authority(&self, ip: IpAddr) -> Option<Arc<InMemoryZoneHandler>> {
         // Docker's IPAM rejects overlapping subnets, so at most one registered
         // reverse zone can contain any given IP. HashMap iteration order is
         // nondeterministic, but that doesn't matter here: there is never more
@@ -149,7 +149,7 @@ impl AuthorityWrapper {
 
             record_set
                 .records_without_rrsigs()
-                .filter_map(|r| r.data().ip_addr())
+                .filter_map(|r| r.data.ip_addr())
                 .collect()
 
             // forward lock released before touching reverse zones

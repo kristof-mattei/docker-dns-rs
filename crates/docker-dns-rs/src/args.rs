@@ -84,10 +84,17 @@ fn parse_duration(value: &str) -> Result<Duration, String> {
 }
 
 fn parse_domain(raw_domain: &str) -> Result<Name, String> {
-    let mut domain: Name = raw_domain.parse()?;
-    domain.set_fqdn(true);
+    match raw_domain.parse::<Name>() {
+        Ok(mut domain) => {
+            domain.set_fqdn(true);
 
-    Ok(domain)
+            Ok(domain)
+        },
+        Err(error) => Err(format!(
+            "Failed convert `{}` to a FQDN Domain name, error: {:?}",
+            raw_domain, error
+        )),
+    }
 }
 
 fn parse_record(value: &str) -> Result<RawRecord, String> {
