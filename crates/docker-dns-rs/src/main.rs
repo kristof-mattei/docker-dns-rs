@@ -208,7 +208,7 @@ async fn start_tasks() -> Result<(), eyre::Report> {
     // this is easier to write than x separate timeoouts
     // while we don't know if any of them gets killed
     // this will do for now, and we can always trace back the logs
-    if timeout(Duration::from_millis(10000), tasks.wait())
+    if timeout(Duration::from_secs(10), tasks.wait())
         .await
         .is_err()
     {
