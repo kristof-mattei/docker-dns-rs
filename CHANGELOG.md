@@ -1,4 +1,14 @@
 <!-- header goes here -->
+## [0.11.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.0..v0.11.1) - 2026-04-17
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to 0.1.2 by [@renovate[bot]](https://github.com/renovate[bot]) ([`5453899`](https://github.com/kristof-mattei/docker-dns-rs/commit/545389949b6bf1e2c19bf0fc0a154d8c414036e0))
+- Don't inline in message, clearer for when we do json logging by [@kristof-mattei](https://github.com/kristof-mattei) ([`38ea3b2`](https://github.com/kristof-mattei/docker-dns-rs/commit/38ea3b2079c92ac30f774b7485e18df53fda909f))
+
+### ⚙️ Miscellaneous Tasks
+
+- Twistlock update by [@kristof-mattei](https://github.com/kristof-mattei) ([`91c3d03`](https://github.com/kristof-mattei/docker-dns-rs/commit/91c3d037a54d199ead2de646af6c8a409c4b8415))
 ## [0.11.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.10.0..v0.11.0) - 2026-04-17
 
 ### 🚀 Features
