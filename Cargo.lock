@@ -1941,7 +1941,7 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 [[package]]
 name = "twistlock"
 version = "0.0.0-development"
-source = "git+https://github.com/kristof-mattei/twistlock?branch=main#dcce3315f828c83e53310e16ed90100ee8a9e5a8"
+source = "git+https://github.com/kristof-mattei/twistlock?branch=main#82708042f70f523ffaa7b838f98ed40cba1f542d"
 dependencies = [
  "color-eyre",
  "hashbrown",
