@@ -21,7 +21,7 @@ use tokio::sync::RwLock;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
-use crate::args::RawRecord;
+use crate::config::RawRecord;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct HashedRData(RData);
