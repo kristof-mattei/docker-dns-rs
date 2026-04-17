@@ -1,12 +1,14 @@
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr};
+use std::path::PathBuf;
 use std::str::FromStr as _;
 use std::time::Duration;
 
 use clap::Parser;
+use color_eyre::eyre;
 use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::Name;
 use tracing::{Level, event};
-use twistlock::config::RawEndpoint;
+use twistlock::config::Endpoint;
 
 const DEFAULT_DOCKER_HOST: &str = "/var/run/docker.sock";
 const DNS_BINDADDR: SocketAddr = SocketAddr::new(std::net::IpAddr::V4(Ipv4Addr::UNSPECIFIED), 53);
@@ -17,14 +19,10 @@ pub struct RawRecord {
     pub addr: IpAddr,
 }
 
-fn parse_docker_host(value: &str) -> Result<RawEndpoint, String> {
-    RawEndpoint::from_str(value)
-}
-
 #[derive(Parser, Debug)]
 pub struct RawConfig {
     #[arg(env, default_value = DEFAULT_DOCKER_HOST, value_parser = parse_docker_host, help = "Path to docker TCP/UNIX socket", long="docker")]
-    pub docker_host: RawEndpoint,
+    pub docker_host: Endpoint,
 
     #[arg(
         env,
@@ -54,6 +52,15 @@ pub struct RawConfig {
     )]
     pub dns_bind: SocketAddr,
 
+    #[clap(long, env = "CA")]
+    pub cacert: Option<PathBuf>,
+
+    #[clap(long, env)]
+    pub client_key: Option<PathBuf>,
+
+    #[clap(long, env)]
+    pub client_cert: Option<PathBuf>,
+
     #[arg(
         env = "timeout",
         default_value = "30",
@@ -63,6 +70,7 @@ pub struct RawConfig {
     )]
     pub timeout: Duration,
 }
+
 impl RawConfig {
     pub fn print(&self) {
         event!(Level::INFO, docker_host = %self.docker_host, "Daemon");
@@ -73,6 +81,10 @@ impl RawConfig {
             event!(Level::INFO, forward = %r.name, reverse = %r.addr, "Static record");
         }
     }
+}
+
+fn parse_docker_host(value: &str) -> Result<Endpoint, String> {
+    Endpoint::from_str(value)
 }
 
 fn parse_duration(value: &str) -> Result<Duration, String> {
@@ -121,4 +133,42 @@ fn parse_record(value: &str) -> Result<RawRecord, String> {
     name.set_fqdn(true);
 
     Ok(RawRecord { name, addr })
+}
+
+pub struct DockerConfig {
+    pub docker_host: Endpoint,
+    pub cacert: Option<PathBuf>,
+    pub client_key: Option<PathBuf>,
+    pub client_cert: Option<PathBuf>,
+    pub timeout: Duration,
+}
+
+pub struct AppConfig {
+    pub docker_config: DockerConfig,
+    pub domain: Name,
+    pub dns_bind: SocketAddr,
+    pub records: Vec<RawRecord>,
+}
+
+impl AppConfig {
+    pub fn build() -> Result<AppConfig, eyre::Report> {
+        let raw_config = RawConfig::try_parse()?;
+
+        raw_config.print();
+
+        let docker_config = DockerConfig {
+            docker_host: raw_config.docker_host,
+            cacert: raw_config.cacert,
+            client_key: raw_config.client_key,
+            client_cert: raw_config.client_cert,
+            timeout: raw_config.timeout,
+        };
+
+        Ok(AppConfig {
+            docker_config,
+            domain: raw_config.domain,
+            dns_bind: raw_config.dns_bind,
+            records: raw_config.records,
+        })
+    }
 }

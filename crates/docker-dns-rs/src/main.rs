@@ -3,7 +3,6 @@ use std::env;
 use std::sync::Arc;
 use std::time::Duration;
 
-use clap::Parser as _;
 use color_eyre::eyre;
 mod signal_handlers;
 use tokio::net::{TcpListener, UdpSocket};
@@ -16,8 +15,8 @@ use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 use twistlock::client::Client as Daemon;
-use twistlock::config::Config as DockerConfig;
 
+use crate::args::AppConfig;
 use crate::build_env::get_build_env;
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
@@ -88,34 +87,38 @@ fn print_header() {
 }
 
 async fn start_tasks() -> Result<(), eyre::Report> {
-    let args = args::RawConfig::parse();
-
     print_header();
-    args.print();
+
+    let AppConfig {
+        docker_config,
+        domain,
+        dns_bind,
+        records,
+    } = AppConfig::build()?;
 
     // DNS
-    let forward_authority = Arc::new(set_up_authority(args.domain.clone()).await?);
+    let forward_authority = Arc::new(set_up_authority(domain.clone()).await?);
     let catalog = Arc::new(tokio::sync::RwLock::new(set_up_catalog(
-        args.domain.clone(),
+        domain.clone(),
         Arc::clone(&forward_authority),
     )));
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
-    let docker_config = DockerConfig::build(args.docker_host);
     // TODO certs etc
     let docker = Arc::new(Daemon::build(
-        docker_config,
-        None,
-        None,
-        None,
-        args.timeout,
+        docker_config.docker_host,
+        docker_config.cacert,
+        docker_config.client_key,
+        docker_config.client_cert,
+        docker_config.timeout,
     )?);
+
     let docker_monitor = Monitor::new(
         Arc::clone(&docker),
         authority_wrapper,
         Arc::clone(&catalog),
-        args.domain.clone(),
+        domain.clone(),
     );
 
     let cancellation_token = CancellationToken::new();
@@ -159,13 +162,13 @@ async fn start_tasks() -> Result<(), eyre::Report> {
 
     {
         let cancellation_token = cancellation_token.clone();
-        let socket = UdpSocket::bind(args.dns_bind).await?;
-        let listener = TcpListener::bind(args.dns_bind).await?;
+        let socket = UdpSocket::bind(dns_bind).await?;
+        let listener = TcpListener::bind(dns_bind).await?;
 
         tasks.spawn(async move {
             let _guard = cancellation_token.clone().drop_guard();
 
-            let handler = DnsRequestHandler::new(Arc::clone(&catalog), args.records);
+            let handler = DnsRequestHandler::new(Arc::clone(&catalog), records);
             set_up_dns_server(listener, socket, handler, cancellation_token).await;
 
             event!(Level::INFO, "DNS Server stopped");
