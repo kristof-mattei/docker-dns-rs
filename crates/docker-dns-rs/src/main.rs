@@ -15,8 +15,8 @@ use tracing_subscriber::Layer as _;
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
-use twistlock::docker::client::Client as Daemon;
-use twistlock::docker::config::Config as DockerConfig;
+use twistlock::client::Client as Daemon;
+use twistlock::config::Config as DockerConfig;
 
 use crate::build_env::get_build_env;
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
