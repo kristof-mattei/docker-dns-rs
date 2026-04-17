@@ -311,18 +311,22 @@ impl Monitor {
         });
 
         match (old_name, new_name) {
-            (None, None) => event!(Level::WARN, "Rename event without oldName & without name"),
-            (None, Some(n)) => event!(Level::WARN, "Rename event without oldName (? -> {})", n),
-            (Some(o), None) => event!(Level::WARN, "Rename event without name ({} -> ?)", o),
-            (Some(o), Some(n)) => {
-                if let Err(error) = self.authority_wrapper.rename(&o, &n).await {
+            (None, None) => event!(Level::WARN, "Rename event without oldName and without name"),
+            (None, Some(new_name)) => {
+                event!(Level::WARN, old_name = %"<ABSENT>", %new_name, "Rename event without oldName");
+            },
+            (Some(old_name), None) => {
+                event!(Level::WARN, %old_name, new_name = %"<ABSENT>", "Rename event without name");
+            },
+            (Some(old_name), Some(new_name)) => {
+                if let Err(error) = self.authority_wrapper.rename(&old_name, &new_name).await {
                     event!(
                         Level::WARN,
                         ?error,
                         ?event,
                         container_id = %event.actor.id,
-                        old_name = %o,
-                        new_name = %n,
+                        %old_name,
+                        %new_name,
                         "Failure to rename container",
                     );
                 } else {

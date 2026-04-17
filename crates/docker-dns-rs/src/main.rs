@@ -16,13 +16,13 @@ use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 use twistlock::client::Client as Daemon;
 
-use crate::args::AppConfig;
 use crate::build_env::get_build_env;
+use crate::config::AppConfig;
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
 use crate::table::AuthorityWrapper;
 
-mod args;
+mod config;
 mod dns_listener;
 mod docker;
 mod table;
