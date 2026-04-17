@@ -1,32 +1,15 @@
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr};
-#[cfg(not(target_os = "windows"))]
-use std::path::PathBuf;
+use std::str::FromStr as _;
 use std::time::Duration;
 
 use clap::Parser;
 use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::Name;
 use tracing::{Level, event};
+use twistlock::docker::config::RawEndpoint;
 
 const DEFAULT_DOCKER_HOST: &str = "/var/run/docker.sock";
 const DNS_BINDADDR: SocketAddr = SocketAddr::new(std::net::IpAddr::V4(Ipv4Addr::UNSPECIFIED), 53);
-
-#[derive(Clone, Debug)]
-pub enum RawEndpoint {
-    Direct(http::Uri),
-    #[cfg(not(target_os = "windows"))]
-    Socket(PathBuf),
-}
-
-impl std::fmt::Display for RawEndpoint {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match *self {
-            RawEndpoint::Direct(ref uri) => write!(f, "{}", uri),
-            #[cfg(not(target_os = "windows"))]
-            RawEndpoint::Socket(ref socket) => write!(f, "{}", socket.display()),
-        }
-    }
-}
 
 #[derive(Clone, Debug)]
 pub struct RawRecord {
@@ -34,9 +17,13 @@ pub struct RawRecord {
     pub addr: IpAddr,
 }
 
+fn parse_docker_host(value: &str) -> Result<RawEndpoint, String> {
+    RawEndpoint::from_str(value)
+}
+
 #[derive(Parser, Debug)]
 pub struct RawConfig {
-    #[arg(env, default_value = DEFAULT_DOCKER_HOST, value_parser = parse_docker, help = "Path to docker TCP/UNIX socket", long="docker")]
+    #[arg(env, default_value = DEFAULT_DOCKER_HOST, value_parser = parse_docker_host, help = "Path to docker TCP/UNIX socket", long="docker")]
     pub docker_host: RawEndpoint,
 
     #[arg(
@@ -94,38 +81,6 @@ fn parse_duration(value: &str) -> Result<Duration, String> {
         .map_err(|error| format!("Could not parse `{}`: {}", value, error))?;
 
     Ok(Duration::from_secs(seconds))
-}
-
-fn parse_docker(value: &str) -> Result<RawEndpoint, String> {
-    const TCP_START: &str = "tcp://";
-
-    let endpoint = if let Some(stripped) = value.strip_prefix(TCP_START) {
-        let uri = format!("http://{}", stripped);
-
-        RawEndpoint::Direct(
-            uri.parse()
-                .map_err(|error| format!("Failed to convert `{}` to URL: {}", uri, error))?,
-        )
-    } else {
-        #[cfg(target_os = "windows")]
-        {
-            return Err(format!(
-                "On Windows, you can connect to docker with tcp. You tried to connect with \"{}\"",
-                value
-            ));
-        }
-
-        #[cfg(not(target_os = "windows"))]
-        {
-            if value.is_empty() {
-                return Err("Docker socket cannot be empty".to_owned());
-            }
-
-            RawEndpoint::Socket(PathBuf::from(value))
-        }
-    };
-
-    Ok(endpoint)
 }
 
 fn parse_domain(raw_domain: &str) -> Result<Name, String> {

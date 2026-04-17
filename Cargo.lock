@@ -462,6 +462,7 @@ dependencies = [
  "tracing",
  "tracing-error",
  "tracing-subscriber",
+ "twistlock",
 ]
 
 [[package]]
@@ -847,9 +848,9 @@ dependencies = [
 
 [[package]]
 name = "hyper-unix-socket"
-version = "0.3.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c255628da188a9d9ee218bae99da33a4b684ed63abe140a94d0f6e4b5af9a090"
+checksum = "88978f1d73da0eb87d86555fcc40cbdd87bc86eb6525710b89db8c9278ec6a59"
 dependencies = [
  "bytes",
  "hyper",
@@ -1424,9 +1425,9 @@ checksum = "b50b8869d9fc858ce7266cce0194bd74df58b9d0e3f6df3a9fc8eb470d95c09d"
 
 [[package]]
 name = "rustls"
-version = "0.23.37"
+version = "0.23.38"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "758025cb5fccfd3bc2fd74708fd4682be41d99e5dff73c377c0646c6012c73a4"
+checksum = "69f9466fb2c14ea04357e91413efb882e2a6d4a406e625449bc0a5d360d53a21"
 dependencies = [
  "aws-lc-rs",
  "log",
@@ -1944,6 +1945,31 @@ name = "try-lock"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
+
+[[package]]
+name = "twistlock"
+version = "0.0.0-development"
+source = "git+https://github.com/kristof-mattei/twistlock?branch=main#dcce3315f828c83e53310e16ed90100ee8a9e5a8"
+dependencies = [
+ "color-eyre",
+ "hashbrown",
+ "http",
+ "http-body-util",
+ "hyper",
+ "hyper-rustls",
+ "hyper-unix-socket",
+ "hyper-util",
+ "ipnet",
+ "percent-encoding",
+ "rustls",
+ "rustls-native-certs",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "tokio-util",
+ "tracing",
+]
 
 [[package]]
 name = "unicode-ident"

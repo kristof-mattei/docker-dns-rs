@@ -60,12 +60,13 @@ tracing-subscriber = { version = "0.3.23", features = [
     "time",
     "tracing-log",
 ] }
+twistlock = { git = "https://github.com/kristof-mattei/twistlock", branch = "main" }
 
 [target.'cfg(not(target_os = "windows"))'.dependencies]
-hyper-unix-socket = "0.3.0"
+hyper-unix-socket = "0.6.1"
 
 [dev-dependencies]
-pretty_assertions = "=1.4.1"
+pretty_assertions = "1.4.1"
 
 [package.metadata.cargo-machete]
 ignored = ["tokio-console"]

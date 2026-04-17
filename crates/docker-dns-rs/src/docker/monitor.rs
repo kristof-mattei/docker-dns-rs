@@ -14,13 +14,14 @@ use tokio::sync::mpsc::Receiver;
 use tokio::sync::{Mutex, RwLock};
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
-
-use crate::dns_listener::set_up_authority;
-use crate::docker::daemon::Daemon;
-use crate::docker::{Event, EventType};
-use crate::models::container_inspect::{
+use twistlock::docker::client::Client;
+use twistlock::filters::Filters;
+use twistlock::models::container_inspect::{
     ContainerInspect, ContainerNetwork, ContainerNetworkSettings,
 };
+use twistlock::models::events::{Event, EventType};
+
+use crate::dns_listener::set_up_authority;
 use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
@@ -62,7 +63,7 @@ struct ContainerState {
 pub struct Monitor {
     authority_wrapper: AuthorityWrapper,
     catalog: Arc<RwLock<Catalog>>,
-    docker: Arc<Daemon>,
+    docker: Arc<Client>,
     domain: Name,
     /// `container_id` to `ContainerState`.
     /// Invariant: names and network entries are always co-located, you cannot have
@@ -237,7 +238,7 @@ fn parse_subnet(network: IpNet) -> impl Iterator<Item = (IpNet, Name)> {
 
 impl Monitor {
     pub fn new(
-        docker: Arc<Daemon>,
+        docker: Arc<Client>,
         authority_wrapper: AuthorityWrapper,
         catalog: Arc<RwLock<Catalog>>,
         domain: Name,
@@ -651,7 +652,7 @@ impl Monitor {
             self.register_network(&network.id).await;
         }
 
-        for container in self.docker.get_containers().await? {
+        for container in self.docker.list_containers(&Filters::default()).await? {
             if &*container.state != "running" {
                 continue;
             }
