@@ -49,7 +49,7 @@ tracing-subscriber = { version = "0.3.23", features = [
     "time",
     "tracing-log",
 ] }
-twistlock = "0.1.1"
+twistlock = "0.1.2"
 
 [dev-dependencies]
 pretty_assertions = "=1.4.1"
