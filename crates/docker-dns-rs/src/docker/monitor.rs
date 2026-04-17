@@ -14,7 +14,7 @@ use tokio::sync::mpsc::Receiver;
 use tokio::sync::{Mutex, RwLock};
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
-use twistlock::docker::client::Client;
+use twistlock::client::Client;
 use twistlock::filters::Filters;
 use twistlock::models::container_inspect::{
     ContainerInspect, ContainerNetwork, ContainerNetworkSettings,

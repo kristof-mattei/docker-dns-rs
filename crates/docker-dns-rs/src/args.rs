@@ -6,7 +6,7 @@ use clap::Parser;
 use hickory_server::proto::ProtoError;
 use hickory_server::proto::rr::Name;
 use tracing::{Level, event};
-use twistlock::docker::config::RawEndpoint;
+use twistlock::config::RawEndpoint;
 
 const DEFAULT_DOCKER_HOST: &str = "/var/run/docker.sock";
 const DNS_BINDADDR: SocketAddr = SocketAddr::new(std::net::IpAddr::V4(Ipv4Addr::UNSPECIFIED), 53);
