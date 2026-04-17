@@ -14,11 +14,6 @@ keywords = ["cli", "docker", "dns"]
 repository = "https://github.com/kristof-mattei/docker-dns-rs"
 include = ["crates/**", "/LICENSE", "/LICENSE-*"]
 
-# [patch."https://github.com/kristof-mattei/twistlock"]
-# twistlock = { path = "../twistlock" }
-
-[workspace.dependencies]
-
 [workspace.metadata.spellcheck]
 config = "spellcheck.toml"
 

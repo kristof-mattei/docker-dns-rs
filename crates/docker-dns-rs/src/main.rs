@@ -53,7 +53,7 @@ fn init_tracing() -> Result<(), eyre::Report> {
     Ok(tracing_subscriber::registry().with(layers).try_init()?)
 }
 
-fn main() -> Result<(), color_eyre::Report> {
+fn main() -> Result<(), eyre::Report> {
     // set up .env
     // zenv::zenv!();
 

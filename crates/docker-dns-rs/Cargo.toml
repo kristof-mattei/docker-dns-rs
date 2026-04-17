@@ -27,7 +27,8 @@ hashbrown = { version = "0.17.0", default-features = false, features = [
     "inline-more",
     "serde",
 ] }
-hickory-server = "0.25.2"
+hickory-net = "0.26.0"
+hickory-server = "0.26.0"
 ipnet = { version = "2.12.0", features = ["serde"] }
 itertools = "0.14.0"
 mimalloc = { version = "0.1.48", features = ["v3"] }
