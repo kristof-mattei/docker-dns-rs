@@ -15,21 +15,17 @@ use tracing_subscriber::Layer as _;
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
+use twistlock::docker::client::Client as Daemon;
+use twistlock::docker::config::Config as DockerConfig;
 
 use crate::build_env::get_build_env;
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
-use crate::docker::config::Config as DockerConfig;
-use crate::docker::daemon::Daemon;
 use crate::docker::monitor::Monitor;
 use crate::table::AuthorityWrapper;
 
 mod args;
 mod dns_listener;
 mod docker;
-mod encoding;
-mod filters;
-mod http_client;
-mod models;
 mod table;
 mod utils;
 
@@ -91,7 +87,7 @@ fn print_header() {
     );
 }
 
-async fn start_tasks() -> Result<(), color_eyre::Report> {
+async fn start_tasks() -> Result<(), eyre::Report> {
     let args = args::RawConfig::parse();
 
     print_header();
@@ -106,8 +102,15 @@ async fn start_tasks() -> Result<(), color_eyre::Report> {
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
-    let docker_config = DockerConfig::build(args.docker_host, args.timeout);
-    let docker = Arc::new(Daemon::new(docker_config));
+    let docker_config = DockerConfig::build(args.docker_host);
+    // TODO certs etc
+    let docker = Arc::new(Daemon::build(
+        docker_config,
+        None,
+        None,
+        None,
+        args.timeout,
+    )?);
     let docker_monitor = Monitor::new(
         Arc::clone(&docker),
         authority_wrapper,
