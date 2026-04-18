@@ -105,7 +105,6 @@ async fn start_tasks() -> Result<(), eyre::Report> {
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
-    // TODO certs etc
     let docker = Arc::new(Daemon::build(
         docker_config.docker_host,
         docker_config.cacert,
