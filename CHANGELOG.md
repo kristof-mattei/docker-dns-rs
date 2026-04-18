@@ -1,4 +1,14 @@
 <!-- header goes here -->
+## [0.11.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.1..v0.11.2) - 2026-04-18
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to 0.2.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`645fb18`](https://github.com/kristof-mattei/docker-dns-rs/commit/645fb18272f2dff77cfe869ede67b15067c05115))
+- Disable plugins by [@kristof-mattei](https://github.com/kristof-mattei) ([`3725751`](https://github.com/kristof-mattei/docker-dns-rs/commit/37257510cce405e0426a57c6e76ec53d73454c91))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Link in release proposal now points to sha as tag doesn't exist yet by [@kristof-mattei](https://github.com/kristof-mattei) ([`f2bcfc8`](https://github.com/kristof-mattei/docker-dns-rs/commit/f2bcfc8ed61488c9863b26533432becd6e7267df))
 ## [0.11.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.0..v0.11.1) - 2026-04-17
 
 ### 🐛 Bug Fixes
