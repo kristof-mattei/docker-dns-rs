@@ -5,6 +5,7 @@ absolute-paths-allowed-crates = [
     "std",
     "tracing_subscriber",
     "tokio",
+    "tokio_util",
 ]
 disallowed-macros = [
     { path = "std::assert_ne", reason = "use `pretty_assertions::assert_ne` instead" },
