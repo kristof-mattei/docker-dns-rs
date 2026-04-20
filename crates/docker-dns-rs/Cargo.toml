@@ -31,7 +31,7 @@ hickory-net = "0.26.0"
 hickory-server = "0.26.0"
 ipnet = { version = "2.12.0", features = ["serde"] }
 itertools = "0.14.0"
-mimalloc = { version = "0.1.48", features = ["v3"] }
+mimalloc = "0.1.49"
 pretty_assertions = "1.4.1"
 regex = "1.12.3"
 tokio = { version = "1.52.1", features = [
