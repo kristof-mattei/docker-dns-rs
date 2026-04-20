@@ -1,4 +1,16 @@
 <!-- header goes here -->
+## [0.11.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.2..v0.11.3) - 2026-04-20
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate mimalloc to 0.1.49 by [@renovate[bot]](https://github.com/renovate[bot]) ([`777864a`](https://github.com/kristof-mattei/docker-dns-rs/commit/777864aaed682d6a2edf97bba57d440e4ba46a85))
+- *(deps)* `mimalloc` by default now is v3, removing flag by [@kristof-mattei](https://github.com/kristof-mattei) ([`d5cb301`](https://github.com/kristof-mattei/docker-dns-rs/commit/d5cb301fff45d6c867fc08292984b9114c6e55cc))
+- *(deps)* `mimalloc` by default now is v3, removing flag by [@kristof-mattei](https://github.com/kristof-mattei) ([`c0fdb8a`](https://github.com/kristof-mattei/docker-dns-rs/commit/c0fdb8aa5fae0dd08bcfb2441388bd458dd23a0c))
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove outdated comment by [@kristof-mattei](https://github.com/kristof-mattei) ([`53bdf4a`](https://github.com/kristof-mattei/docker-dns-rs/commit/53bdf4a8a5ff6175a649602f60b9db257dfe1c37))
+- Consolidate with other projects by [@kristof-mattei](https://github.com/kristof-mattei) ([`e80e925`](https://github.com/kristof-mattei/docker-dns-rs/commit/e80e925e33998f6e1e4ec8fc496acb66f873bf49))
 ## [0.11.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.1..v0.11.2) - 2026-04-18
 
 ### 🐛 Bug Fixes
