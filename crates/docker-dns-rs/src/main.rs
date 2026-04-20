@@ -1,11 +1,16 @@
-mod build_env;
-use std::env;
+use std::convert::Infallible;
+use std::env::{self, VarError};
+use std::process::{ExitCode, Termination as _};
 use std::sync::Arc;
 use std::time::Duration;
 
+use color_eyre::config::HookBuilder;
 use color_eyre::eyre;
-mod signal_handlers;
+use dotenvy::dotenv;
+use hickory_server::zone_handler::Catalog;
 use tokio::net::{TcpListener, UdpSocket};
+use tokio::sync::RwLock;
+use tokio::sync::mpsc::Receiver;
 use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
 use tokio_util::task::TaskTracker;
@@ -15,59 +20,99 @@ use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 use twistlock::client::Client as Daemon;
+use twistlock::models::events::Event;
 
 use crate::build_env::get_build_env;
-use crate::config::AppConfig;
+use crate::config::{AppConfig, RawRecord};
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
+use crate::shutdown::Shutdown;
 use crate::table::AuthorityWrapper;
+use crate::task_tracker_ext::TaskTrackerExt as _;
+use crate::utils::flatten_shutdown_handle;
+use crate::utils::task::spawn_with_name;
 
+mod build_env;
 mod config;
 mod dns_listener;
 mod docker;
+mod shutdown;
+mod signal_handlers;
 mod table;
+mod task_tracker_ext;
 mod utils;
 
-#[global_allocator]
+#[cfg_attr(not(miri), global_allocator)]
+#[cfg_attr(miri, expect(unused, reason = "Not supported in Miri"))]
 static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
-fn init_tracing() -> Result<(), eyre::Report> {
-    let main_filter = EnvFilter::builder().parse(
-        env::var(EnvFilter::DEFAULT_ENV)
-            .unwrap_or_else(|_| format!("INFO,{}=TRACE", env!("CARGO_CRATE_NAME"))),
-    )?;
+fn build_filter() -> (EnvFilter, Option<eyre::Report>) {
+    fn build_default_filter() -> EnvFilter {
+        EnvFilter::builder()
+            .parse(format!("INFO,{}=TRACE", env!("CARGO_CRATE_NAME")))
+            .expect("Default filter should always work")
+    }
 
-    let layers = vec![
-        #[cfg(feature = "tokio-console")]
-        console_subscriber::ConsoleLayer::builder()
-            .with_default_env()
-            .spawn()
-            .boxed(),
-        tracing_subscriber::fmt::layer()
-            .with_filter(main_filter)
-            .boxed(),
-        tracing_error::ErrorLayer::default().boxed(),
-    ];
+    let (filter, parsing_error) = match env::var(EnvFilter::DEFAULT_ENV) {
+        Ok(user_directive) => match EnvFilter::builder().parse(user_directive) {
+            Ok(filter) => (filter, None),
+            Err(error) => (build_default_filter(), Some(eyre::Report::new(error))),
+        },
+        Err(VarError::NotPresent) => (build_default_filter(), None),
+        Err(error @ VarError::NotUnicode(_)) => {
+            (build_default_filter(), Some(eyre::Report::new(error)))
+        },
+    };
 
-    Ok(tracing_subscriber::registry().with(layers).try_init()?)
+    (filter, parsing_error)
 }
 
-fn main() -> Result<(), eyre::Report> {
-    // set up .env
-    // zenv::zenv!();
+fn init_tracing(filter: EnvFilter) -> Result<(), eyre::Report> {
+    let registry = tracing_subscriber::registry();
 
-    color_eyre::config::HookBuilder::default()
-        .capture_span_trace_by_default(false)
-        .install()?;
+    #[cfg(feature = "tokio-console")]
+    let registry = registry.with(console_subscriber::ConsoleLayer::builder().spawn());
 
-    // set up logger
-    init_tracing()?;
+    Ok(registry
+        .with(tracing_subscriber::fmt::layer().with_filter(filter))
+        .with(tracing_error::ErrorLayer::default())
+        .try_init()?)
+}
+
+fn main() -> ExitCode {
+    // set up .env, if it fails, user didn't provide any
+    let _r = dotenv();
+
+    HookBuilder::default()
+        .capture_span_trace_by_default(true)
+        .display_env_section(false)
+        .install()
+        .expect("Failed to install panic handler");
+
+    let (env_filter, parsing_error) = build_filter();
+
+    init_tracing(env_filter).expect("Failed to set up tracing");
+
+    // bubble up the parsing error
+    if let Err(error) = parsing_error.map_or(Ok(()), Err) {
+        return Err::<Infallible, _>(error).report();
+    }
 
     // initialize the runtime
-    let rt = tokio::runtime::Runtime::new().unwrap();
+    let shutdown: Shutdown = tokio::runtime::Builder::new_multi_thread()
+        .enable_io()
+        .enable_time()
+        .build()
+        .expect("Failed building the Runtime")
+        .block_on(async {
+            // explicitly launch everything in a spawned task
+            // see https://docs.rs/tokio/latest/tokio/attr.main.html#non-worker-async-function
+            let handle = spawn_with_name("main task runner", start_tasks());
 
-    // start service
-    rt.block_on(start_tasks())
+            flatten_shutdown_handle(handle).await
+        });
+
+    shutdown.report()
 }
 
 fn print_header() {
@@ -86,7 +131,8 @@ fn print_header() {
     );
 }
 
-async fn start_tasks() -> Result<(), eyre::Report> {
+// This function would be shorter if we had `FromResidual`
+async fn start_tasks() -> Shutdown {
     print_header();
 
     let AppConfig {
@@ -94,10 +140,18 @@ async fn start_tasks() -> Result<(), eyre::Report> {
         domain,
         dns_bind,
         records,
-    } = AppConfig::build()?;
+    } = match AppConfig::build() {
+        Ok(config) => config,
+        Err(error) => return Shutdown::from(error),
+    };
 
     // DNS
-    let forward_authority = Arc::new(set_up_authority(domain.clone()).await?);
+    let authority = match set_up_authority(domain.clone()).await {
+        Ok(authority) => authority,
+        Err(error) => return Shutdown::from(error),
+    };
+
+    let forward_authority = Arc::new(authority);
     let catalog = Arc::new(tokio::sync::RwLock::new(set_up_catalog(
         domain.clone(),
         Arc::clone(&forward_authority),
@@ -105,13 +159,18 @@ async fn start_tasks() -> Result<(), eyre::Report> {
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
-    let docker = Arc::new(Daemon::build(
+    let daemon = match Daemon::build(
         docker_config.docker_host,
         docker_config.cacert,
         docker_config.client_key,
         docker_config.client_cert,
         docker_config.timeout,
-    )?);
+    ) {
+        Ok(daemon) => daemon,
+        Err(error) => return Shutdown::from(error),
+    };
+
+    let docker = Arc::new(daemon);
 
     let docker_monitor = Monitor::new(
         Arc::clone(&docker),
@@ -128,78 +187,65 @@ async fn start_tasks() -> Result<(), eyre::Report> {
 
     // event handler
     {
-        let cancellation_token = cancellation_token.clone();
-        tasks.spawn(async move {
-            let _guard = cancellation_token.clone().drop_guard();
-
-            if let Err(error) = docker_monitor.start().await {
-                event!(Level::ERROR, ?error, "Failed to fetch containers");
-                return;
-            }
-
-            docker_monitor
-                .consume_events(receiver, &cancellation_token)
-                .await;
-
-            event!(Level::INFO, "Event handler stopped");
-        });
+        tasks.spawn_with_name(
+            "docker event monitor",
+            docker_event_monitor(docker_monitor, receiver, cancellation_token.clone()),
+        );
     }
 
     // pump messages from Docker to the DockerMonitor
     {
-        let cancellation_token = cancellation_token.clone();
-        tasks.spawn(async move {
-            let _guard = cancellation_token.clone().drop_guard();
-
-            if let Err(error) = docker.produce_events(sender, &cancellation_token).await {
-                event!(Level::ERROR, ?error, "Event producer Handler failed");
-            } else {
-                event!(Level::INFO, "Event producer stopped");
-            }
-        });
+        tasks.spawn_with_name(
+            "docker listener",
+            docker_listener(docker, sender, cancellation_token.clone()),
+        );
     }
 
     {
-        let cancellation_token = cancellation_token.clone();
-        let socket = UdpSocket::bind(dns_bind).await?;
-        let listener = TcpListener::bind(dns_bind).await?;
+        let socket = match UdpSocket::bind(dns_bind).await {
+            Ok(socket) => socket,
+            Err(error) => return Shutdown::from(error),
+        };
 
-        tasks.spawn(async move {
-            let _guard = cancellation_token.clone().drop_guard();
+        let listener = match TcpListener::bind(dns_bind).await {
+            Ok(listener) => listener,
+            Err(error) => return Shutdown::from(error),
+        };
 
-            let handler = DnsRequestHandler::new(Arc::clone(&catalog), records);
-            set_up_dns_server(listener, socket, handler, cancellation_token).await;
-
-            event!(Level::INFO, "DNS Server stopped");
-        });
+        tasks.spawn_with_name(
+            "dns handler",
+            dns_handler(
+                socket,
+                listener,
+                Arc::clone(&catalog),
+                records,
+                cancellation_token.clone(),
+            ),
+        );
     }
 
     // now we wait forever for either
     // * SIGTERM
-    // * ctrl + c (SIGINT)
-    // * a message on the shutdown channel, sent either by the server task or
-    // another task when they complete (which means they failed)
-    tokio::select! {
-        result = signal_handlers::wait_for_sigterm() => {
-            if let Err(error) = result {
-                event!(Level::ERROR, ?error, "Failed to register SIGERM handler, aborting");
-            } else {
-                // we completed because ...
-                event!(Level::WARN, "Sigterm detected, stopping all tasks");
+    // * CTRL+c (SIGINT)
+    // * cancellation of the shutdown token, triggered by another task when it
+    //   completes unexpectedly (which means it failed)
+    let shutdown_reason = tokio::select! {
+        biased;
+        () = cancellation_token.cancelled() => {
+            event!(Level::WARN, "Underlying task stopped, stopping all other tasks");
+
+            Shutdown::OperationalFailure {
+                code: ExitCode::FAILURE,
+                message: "Some task unexpectedly failed which triggered a shutdown."
             }
+        },
+        result = signal_handlers::wait_for_sigterm() => {
+            result
         },
         result = signal_handlers::wait_for_sigint() => {
-            if let Err(error) = result {
-                event!(Level::ERROR, ?error, "Failed to register CTRL+C handler, aborting");
-            } else {
-                // we completed because ...
-                event!(Level::WARN, "CTRL+C detected, stopping all tasks");
-            }
+            result
         },
-        () = cancellation_token.cancelled() => {
-            event!(Level::WARN, "Underlying task stopped, stopping all others tasks");
-        },
-    }
+    };
 
     // catch all cancel in case we got here via something else than a cancellation token
     cancellation_token.cancel();
@@ -217,5 +263,53 @@ async fn start_tasks() -> Result<(), eyre::Report> {
         event!(Level::ERROR, "Task didn't stop within allotted time!");
     }
 
-    Ok(())
+    shutdown_reason
+}
+
+async fn dns_handler(
+    socket: UdpSocket,
+    listener: TcpListener,
+    catalog: Arc<RwLock<Catalog>>,
+    records: Vec<RawRecord>,
+    cancellation_token: CancellationToken,
+) {
+    let _guard = cancellation_token.clone().drop_guard();
+
+    let handler = DnsRequestHandler::new(catalog, records);
+    set_up_dns_server(listener, socket, handler, cancellation_token).await;
+
+    event!(Level::INFO, "DNS Server stopped");
+}
+
+async fn docker_listener(
+    docker: Arc<Daemon>,
+    sender: tokio::sync::mpsc::Sender<Event>,
+    cancellation_token: CancellationToken,
+) {
+    let _guard = cancellation_token.clone().drop_guard();
+
+    if let Err(error) = docker.produce_events(sender, &cancellation_token).await {
+        event!(Level::ERROR, ?error, "Event producer Handler failed");
+    } else {
+        event!(Level::INFO, "Event producer stopped");
+    }
+}
+
+async fn docker_event_monitor(
+    docker_monitor: Monitor,
+    receiver: Receiver<Event>,
+    cancellation_token: CancellationToken,
+) {
+    let _guard = cancellation_token.clone().drop_guard();
+
+    if let Err(error) = docker_monitor.start().await {
+        event!(Level::ERROR, ?error, "Failed to fetch containers");
+        return;
+    }
+
+    docker_monitor
+        .consume_events(receiver, &cancellation_token)
+        .await;
+
+    event!(Level::INFO, "Event handler stopped");
 }
