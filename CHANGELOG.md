@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.11.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.3..v0.11.4) - 2026-04-23
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate mimalloc to 0.1.50 by [@renovate[bot]](https://github.com/renovate[bot]) ([`25511ec`](https://github.com/kristof-mattei/docker-dns-rs/commit/25511ecd3bd3aee2f8e99a0fe107e15639f1ba88))
 ## [0.11.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.2..v0.11.3) - 2026-04-20
 
 ### 🐛 Bug Fixes
