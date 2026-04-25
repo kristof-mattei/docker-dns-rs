@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.11.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.5..v0.11.6) - 2026-04-25
+
+### 🐛 Bug Fixes
+
+- Added / updated log message by [@kristof-mattei](https://github.com/kristof-mattei) ([`60928e3`](https://github.com/kristof-mattei/docker-dns-rs/commit/60928e3b624afb37909189882ca360ea7da6e4da))
 ## [0.11.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.4..v0.11.5) - 2026-04-25
 
 ### 🐛 Bug Fixes
