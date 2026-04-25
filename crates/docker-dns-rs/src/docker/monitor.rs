@@ -601,6 +601,7 @@ impl Monitor {
     ) {
         loop {
             let event = tokio::select! {
+                biased;
                 () = cancellation_token.cancelled() => {
                     event!(Level::INFO, "Listener cancelled");
                     break;
@@ -608,6 +609,7 @@ impl Monitor {
                 r = receiver.recv() => {
                     let Some(event) = r else {
                         event!(Level::INFO, "Channel closed / dropped");
+
                         break;
                     };
 

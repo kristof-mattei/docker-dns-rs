@@ -55,6 +55,7 @@ impl DnsRequestHandler {
         for intercept in intercepts {
             // Forward: A or AAAA
             let forward = HashedRData(RData::from(intercept.addr));
+
             if !map
                 .entry(LowerName::from(&intercept.name))
                 .or_default()
@@ -164,17 +165,17 @@ pub async fn set_up_dns_server<H>(
     dns_listener.register_listener(tcp_listener, Duration::from_secs(1), RESPONSE_BUFFER_SIZE);
 
     tokio::select! {
-           r = dns_listener.block_until_done() => {
-               event!(Level::INFO, "DNS Server ended");
-
-               handle_server_shutdown(r);
-           },
+           biased;
            () = cancellation_token.cancelled() => {
                event!(Level::INFO, "DNS Server cancelled externally");
 
                handle_server_shutdown(dns_listener.shutdown_gracefully().await);
-
            }
+           result = dns_listener.block_until_done() => {
+               event!(Level::INFO, "DNS Server stopped");
+
+               handle_server_shutdown(result);
+           },
     }
 }
 
