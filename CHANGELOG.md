@@ -1,4 +1,10 @@
 <!-- header goes here -->
+## [0.11.7](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.6..v0.11.7) - 2026-04-25
+
+### 🐛 Bug Fixes
+
+- More biased by [@kristof-mattei](https://github.com/kristof-mattei) ([`8d9beb4`](https://github.com/kristof-mattei/docker-dns-rs/commit/8d9beb4db8dbfb0bad0b9ab906430e5bb80d7f73))
+- Improve logging for intercepted queries by [@kristof-mattei](https://github.com/kristof-mattei) ([`07d2218`](https://github.com/kristof-mattei/docker-dns-rs/commit/07d22183246932b6d74a9cf15b9106123da5b9d7))
 ## [0.11.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.5..v0.11.6) - 2026-04-25
 
 ### 🐛 Bug Fixes
