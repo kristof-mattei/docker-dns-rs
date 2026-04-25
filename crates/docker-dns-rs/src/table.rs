@@ -135,7 +135,7 @@ impl AuthorityWrapper {
     pub async fn add(&self, name: &Name, address: IpAddr) {
         self.upsert(name, address).await;
 
-        event!(Level::INFO, %name, %address);
+        event!(Level::INFO, %name, %address, "Added record");
     }
 
     #[instrument(skip_all, fields(old_name = %old_key.name, %new_name, r#type = %old_key.record_type))]
@@ -166,7 +166,7 @@ impl AuthorityWrapper {
 
             self.upsert(new_name, ip).await;
 
-            event!(Level::INFO, %ip, "table.rename");
+            event!(Level::INFO, %ip, "Renamed record");
         }
 
         Ok(())
@@ -227,7 +227,7 @@ impl AuthorityWrapper {
             );
         }
 
-        event!(Level::INFO, %name, %ip, "table.remove");
+        event!(Level::INFO, %name, %ip, "Removed record");
 
         Ok(())
     }
