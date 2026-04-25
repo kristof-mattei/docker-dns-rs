@@ -94,6 +94,8 @@ impl RequestHandler for DnsRequestHandler {
             let qname = request_info.query.name();
             let qtype = request_info.query.query_type();
 
+            event!(Level::TRACE, %qname, %qtype, "DNS lookup");
+
             if let Some(rdatas) = self.intercepts.get(qname) {
                 let answers: Vec<Record> = rdatas
                     .iter()
@@ -101,7 +103,21 @@ impl RequestHandler for DnsRequestHandler {
                     .map(|r| Record::from_rdata(Name::from(qname.clone()), 5, r.0.clone()))
                     .collect();
 
-                event!(Level::TRACE, %qname, %qtype, answers = answers.len(), "DNS intercept match");
+                let answers_fmt = std::fmt::from_fn(|f| {
+                    write!(f, "[")?;
+
+                    for (i, record) in answers.iter().enumerate() {
+                        if i > 0 {
+                            write!(f, ", ")?;
+                        }
+
+                        write!(f, "name: {:?}: data: {:?}", record.name, record.data)?;
+                    }
+
+                    write!(f, "]")
+                });
+
+                event!(Level::DEBUG, %qname, %qtype, answers = %answers_fmt, "DNS lookup intercept match");
 
                 let builder = MessageResponseBuilder::from_message_request(request);
                 let mut metadata = Metadata::response_from_request(request_info.metadata);
@@ -136,6 +152,8 @@ impl RequestHandler for DnsRequestHandler {
                         ResponseInfo::from(header)
                     },
                 };
+            } else {
+                event!(Level::TRACE, %qname, %qtype, "No match in our intercept set");
             }
         }
 
