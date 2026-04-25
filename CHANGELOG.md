@@ -1,4 +1,16 @@
 <!-- header goes here -->
+## [0.11.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.4..v0.11.5) - 2026-04-25
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate mimalloc to 0.1.50 by [@renovate[bot]](https://github.com/renovate[bot]) ([`f488e9c`](https://github.com/kristof-mattei/docker-dns-rs/commit/f488e9c023782304221631029603e77be7779648))
+- *(deps)* Update rust crate libc to 0.2.186 by [@renovate[bot]](https://github.com/renovate[bot]) ([`55f9b51`](https://github.com/kristof-mattei/docker-dns-rs/commit/55f9b519bf8cb352f11dc078149f473dc5944722))
+- *(deps)* Update rust crate twistlock to 0.2.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`aee6259`](https://github.com/kristof-mattei/docker-dns-rs/commit/aee6259f8e32a32ce92fb8fc5d6f0e52e7ae4341))
+
+### ⚙️ Miscellaneous Tasks
+
+- Move to keep track by [@kristof-mattei](https://github.com/kristof-mattei) ([`4f61f4d`](https://github.com/kristof-mattei/docker-dns-rs/commit/4f61f4da5e8d031e0a86a0170176c516dc536ea9))
+- Restore by [@kristof-mattei](https://github.com/kristof-mattei) ([`a85832f`](https://github.com/kristof-mattei/docker-dns-rs/commit/a85832f19cfb956554bc32814d469b6d56a6b35a))
 ## [0.11.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.3..v0.11.4) - 2026-04-23
 
 ### 🐛 Bug Fixes
