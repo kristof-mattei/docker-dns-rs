@@ -28,8 +28,8 @@ hashbrown = { version = "0.17.0", default-features = false, features = [
     "inline-more",
     "serde",
 ] }
-hickory-net = "0.26.0"
-hickory-server = "0.26.0"
+hickory-net = "0.26.1"
+hickory-server = "0.26.1"
 ipnet = { version = "2.12.0", features = ["serde"] }
 itertools = "0.14.0"
 libc = "0.2.186"
