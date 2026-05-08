@@ -36,7 +36,7 @@ libc = "0.2.186"
 mimalloc = "0.1.50"
 pretty_assertions = "1.4.1"
 regex = "1.12.3"
-tokio = { version = "1.52.2", features = [
+tokio = { version = "1.52.3", features = [
     "rt-multi-thread",
     "macros",
     "time",
