@@ -8,12 +8,14 @@ use tracing::{Level, event};
 use crate::shutdown::Shutdown;
 
 #[expect(
+    clippy::as_conversions,
     clippy::cast_possible_truncation,
     reason = "Waiting for `try_into()` to become const"
 )]
 const SIGINT: u8 = libc::SIGINT as u8;
 
 #[expect(
+    clippy::as_conversions,
     clippy::cast_possible_truncation,
     reason = "Waiting for `try_into()` to become const"
 )]
