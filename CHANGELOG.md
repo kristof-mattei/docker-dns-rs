@@ -1,4 +1,36 @@
 <!-- header goes here -->
+## [0.12.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.0..v0.12.1) - 2026-07-01
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update hickory-dns monorepo to 0.26.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`955c2a7`](https://github.com/kristof-mattei/docker-dns-rs/commit/955c2a71bf4b5cbd5873891f85bd364de67f0d02))
+- *(deps)* Update rust crate tokio to 1.52.2 by [@renovate[bot]](https://github.com/renovate[bot]) ([`f1b4891`](https://github.com/kristof-mattei/docker-dns-rs/commit/f1b4891adf48c541dcce7cf6f50029e498a3d7b3))
+- *(deps)* Update rust crate tokio to 1.52.3 by [@renovate[bot]](https://github.com/renovate[bot]) ([`a598ae0`](https://github.com/kristof-mattei/docker-dns-rs/commit/a598ae03b14e7e2a4f5feabf7a9e6bd17023f003))
+- *(deps)* Update rust crate hashbrown to 0.17.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`6da7df0`](https://github.com/kristof-mattei/docker-dns-rs/commit/6da7df03ba646c516cf607ee6b7cbfaf0aa270a1))
+- *(deps)* Update rust crate mimalloc to 0.1.51 by [@renovate[bot]](https://github.com/renovate[bot]) ([`fb49fac`](https://github.com/kristof-mattei/docker-dns-rs/commit/fb49facfaffa82e3ac6aec4e35e685a9f577b382))
+- *(deps)* Update rust crate mimalloc to 0.1.51 (#2016) by [@renovate[bot]](https://github.com/renovate[bot]) in #2016 ([`a1301f3`](https://github.com/kristof-mattei/docker-dns-rs/commit/a1301f31a41e7da47fba76f62feaffa5ffbc0cef))
+- *(deps)* Update rust crate mimalloc to 0.1.51 by [@renovate[bot]](https://github.com/renovate[bot]) ([`297ccb0`](https://github.com/kristof-mattei/docker-dns-rs/commit/297ccb05fd6ab86c94994ef240d04deb57450250))
+- *(deps)* Update rust crate mimalloc to 0.1.51 (#2814) by [@renovate[bot]](https://github.com/renovate[bot]) ([`bdb432d`](https://github.com/kristof-mattei/docker-dns-rs/commit/bdb432da30a587fbec7fa48d6e3c4b94081c9a98))
+- *(deps)* Update rust crate mimalloc to 0.1.52 by [@renovate[bot]](https://github.com/renovate[bot]) ([`bba79ee`](https://github.com/kristof-mattei/docker-dns-rs/commit/bba79ee1c76d8157eb5e0ff17dd7c691f16068d5))
+- *(deps)* Update rust crate mimalloc to 0.1.52 (#2026) by [@renovate[bot]](https://github.com/renovate[bot]) in #2026 ([`42e7952`](https://github.com/kristof-mattei/docker-dns-rs/commit/42e7952ee13d6802ef0028c8e26e4bb368d99671))
+- *(deps)* Update rust crate mimalloc to 0.1.52 by [@renovate[bot]](https://github.com/renovate[bot]) ([`1890f97`](https://github.com/kristof-mattei/docker-dns-rs/commit/1890f97240cf108d41c370179666282ebe343759))
+- *(deps)* Update rust crate mimalloc to 0.1.52 (#2820) by [@renovate[bot]](https://github.com/renovate[bot]) ([`f964185`](https://github.com/kristof-mattei/docker-dns-rs/commit/f964185dff4cee94f1a89e05ca7be9ae0d4f862a))
+- *(deps)* Update rust crate regex to 1.12.4 by [@renovate[bot]](https://github.com/renovate[bot]) ([`015ec25`](https://github.com/kristof-mattei/docker-dns-rs/commit/015ec25e11b0316c48671c2ebf7dccbf4c9184e0))
+- *(deps)* Update rust crate regex to 1.12.4 (#2072) by [@renovate[bot]](https://github.com/renovate[bot]) in #2072 ([`b778d19`](https://github.com/kristof-mattei/docker-dns-rs/commit/b778d19d305e91af0a00535ab00264c03ace1cea))
+- *(deps)* Update rust crate itertools to 0.15.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`f0578b7`](https://github.com/kristof-mattei/docker-dns-rs/commit/f0578b7de92b0089e28be4e430a0235a98dfea93))
+- *(deps)* Update rust crate itertools to 0.15.0 (#2090) by [@renovate[bot]](https://github.com/renovate[bot]) in #2090 ([`98eba8f`](https://github.com/kristof-mattei/docker-dns-rs/commit/98eba8fe4334f86b92fc84ed00347f37aad70420))
+- *(deps)* Pin dependencies by [@renovate[bot]](https://github.com/renovate[bot]) ([`c4df6fe`](https://github.com/kristof-mattei/docker-dns-rs/commit/c4df6fe0b59044b2db09de77d9be0066fc9a1a36))
+- *(deps)* Pin dependencies (#2120) by [@renovate[bot]](https://github.com/renovate[bot]) in #2120 ([`9e2be61`](https://github.com/kristof-mattei/docker-dns-rs/commit/9e2be61bff1b5751c4b55c3ccbc252b8cd158c9a))
+
+### ⚙️ Miscellaneous Tasks
+
+- Node v26 and pnpm 11.2.2 by [@kristof-mattei](https://github.com/kristof-mattei) ([`16139f7`](https://github.com/kristof-mattei/docker-dns-rs/commit/16139f7f5ad75af955e9cb7cce9a5968d478ee04))
+- Enable `as_conversions` lint by [@kristof-mattei](https://github.com/kristof-mattei) ([`3bfb7bb`](https://github.com/kristof-mattei/docker-dns-rs/commit/3bfb7bb6d1a60f11ecfa7c46b7b6f3d5f4e795a0))
+- Re-establish link by [@kristof-mattei](https://github.com/kristof-mattei) ([`77821ca`](https://github.com/kristof-mattei/docker-dns-rs/commit/77821cac69a3d9628e52337ba2ed58c71e2737b2))
+- Re-establish contents by [@kristof-mattei](https://github.com/kristof-mattei) ([`5ed9c5f`](https://github.com/kristof-mattei/docker-dns-rs/commit/5ed9c5f8e0343057cf7b104a2ca480c70d1b21d6))
+- Fix botched merge by [@kristof-mattei](https://github.com/kristof-mattei) ([`6f7a385`](https://github.com/kristof-mattei/docker-dns-rs/commit/6f7a385889f78052f535d8674070f6e7bdb747e5))
+- Address new lint by [@kristof-mattei](https://github.com/kristof-mattei) ([`d93f82d`](https://github.com/kristof-mattei/docker-dns-rs/commit/d93f82de471b35cf8e048f5eaf720052a9ce89ec))
+- Mandate `pretty_assertions::assert_matches` over `std` version by [@kristof-mattei](https://github.com/kristof-mattei) ([`d5e030c`](https://github.com/kristof-mattei/docker-dns-rs/commit/d5e030cf9a767a50b2c10ad5eac80bf2257c49ab))
 ## [0.12.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.11.6..v0.12.0) - 2026-04-25
 
 ### 🚀 Features
