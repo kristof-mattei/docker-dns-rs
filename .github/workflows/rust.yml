@@ -112,7 +112,7 @@ jobs:
       - name: Build
         shell: pwsh
         run: |
-          cargo build --all-features --all-targets --locked --workspace --verbose
+          cargo build ${{ env.CARGO_FEATURES }} --all-targets --locked --workspace --verbose
 
   cargo-fmt:
     name: Cargo fmt
@@ -297,7 +297,7 @@ jobs:
           # build-* ones are not parsed by grcov
           LLVM_PROFILE_FILE: "profiling/build-%p-%m.profraw"
         run: |
-          cargo build --all-features --all-targets --locked --workspace --verbose
+          cargo build ${{ env.CARGO_FEATURES }} --all-targets --locked --workspace --verbose
 
       - name: Run nextest
         shell: pwsh
@@ -306,7 +306,7 @@ jobs:
           RUSTFLAGS: "${{ env.RUSTFLAGS }} --allow=warnings -Cinstrument-coverage"
           LLVM_PROFILE_FILE: "profiling/profile-%p-%m.profraw"
         run: |
-          cargo nextest run --profile ci --no-fail-fast --all-targets --all-features --workspace
+          cargo nextest run --profile ci --no-fail-fast --all-targets ${{ env.CARGO_FEATURES }} --workspace
         continue-on-error: true
 
       - name: Upload test results
@@ -347,7 +347,7 @@ jobs:
           flags: windows
           files: reports/lcov.info
           name: code-coverage
-          plugins: ""
+          plugins: noop
           report_type: "coverage"
           use_oidc: true
 
@@ -361,7 +361,7 @@ jobs:
           flags: windows
           files: reports/results.xml
           name: test-results
-          plugins: ""
+          plugins: noop
           report_type: "test_results"
           use_oidc: true
 
@@ -421,7 +421,7 @@ jobs:
       - name: Run Clippy for GitHub Actions report
         uses: actions-rs-plus/clippy-check@23b52efac3da0e2b197a9ad2e7be0f515502aaaf # v2.5.0
         with:
-          args: --all-features --all-targets --locked --workspace --verbose
+          args: ${{ env.CARGO_FEATURES }} --all-targets --locked --workspace --verbose
 
   all-done:
     name: Rust All done
