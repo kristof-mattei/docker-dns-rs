@@ -9,6 +9,7 @@ permissions:
 
 env:
   CARGO_FEATURES: --all-features
+  CARGO_INCREMENTAL: "0"
   CARGO_TERM_COLOR: always
   RUSTFLAGS: --deny=warnings --cfg tokio_unstable
   RUSTC_WRAPPER: "sccache"
@@ -37,15 +38,11 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-warm-up-cache
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-warm-up-cache
           restore-keys: |
-            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-
-            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
-            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-
-
-      - &set_up_mold
-        name: Set up mold
-        uses: rui314/setup-mold@9c9c13bf4c3f1adef0cc596abc155580bcb04444 # v1
+            ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-
+            ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
+            ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-
 
       - &set_up_toolchain
         name: Set up toolchain
@@ -68,6 +65,61 @@ jobs:
 
       - name: Fetch
         shell: bash
+        run: |
+          cargo fetch --locked
+
+  warm-up-cache-windows:
+    name: Warm up the cache Windows
+    runs-on: windows-latest
+    steps:
+      - &disable_autocrlf
+        name: Disable autocrlf
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
+      - *checkout
+
+      - name: Cache cargo
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        env:
+          CACHE_NAME: cargo
+        with:
+          path: |
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-warm-up-cache
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-
+            ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
+            ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-
+
+      - &set_up_toolchain_windows
+        name: Set up toolchain
+        shell: pwsh
+        run: |
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/cargo-fmt.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rust-analyzer.exe
+          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rustfmt.exe
+
+          rustup self update
+          rustup update
+          rustup show active-toolchain || rustup toolchain install
+          rustup show
+
+          cargo --version
+
+      - &set_up_sccache
+        name: Set up sccache
+        uses: mozilla-actions/sccache-action@9e7fa8a12102821edf02ca5dbea1acd0f89a2696 # v0.0.10
+
+      - name: Fetch
+        shell: pwsh
         run: |
           cargo fetch --locked
 
@@ -99,10 +151,12 @@ jobs:
 
       - &cache_cargo
         name: Cache cargo
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         env:
           CACHE_NAME: cargo
         with:
+          # we want to fail if `warm-up-cache` fails
+          fail-on-cache-miss: true
           path: |
             ~/.cargo/.crates.toml
             ~/.cargo/.crates2.json
@@ -110,25 +164,13 @@ jobs:
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
-          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-warm-up-cache
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-warm-up-cache
 
-      - *set_up_mold
+      - &set_up_mold
+        name: Set up mold
+        uses: rui314/setup-mold@9c9c13bf4c3f1adef0cc596abc155580bcb04444 # v1
 
       - *set_up_toolchain
-
-      - &cache_target
-        name: Cache target
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        env:
-          CACHE_NAME: target
-        with:
-          path: |
-            ./target
-          key: ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-${{ github.job }}
-          restore-keys: |
-            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-
-            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-
-            ${{ runner.os }}-${{ runner.arch }}-build-${{ env.CACHE_NAME }}-
 
       - *set_up_sccache
 
@@ -142,39 +184,35 @@ jobs:
     runs-on: windows-latest
     needs:
       - changes
+      - warm-up-cache-windows
     if: |
       github.event_name == 'pull_request' &&
       fromJSON(needs.changes.outputs.rust) == true
     steps:
-      - &disable_autocrlf
-        name: Disable autocrlf
-        shell: pwsh
-        run: |
-          git config --global core.autocrlf false
-          git config --global core.eol lf
+      - *disable_autocrlf
 
       - *checkout
 
-      - *cache_cargo
+      - &cache_cargo_windows
+        name: Cache cargo
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        env:
+          CACHE_NAME: cargo
+        with:
+          # we want to fail if `warm-up-cache` fails
+          fail-on-cache-miss: true
+          path: |
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.CACHE_NAME }}-${{ hashFiles('Cargo.lock') }}-${{ github.workflow }}-warm-up-cache
 
       - *set_up_mold
 
-      - &set_up_toolchain_windows
-        name: Set up toolchain
-        shell: pwsh
-        run: |
-          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/cargo-fmt.exe
-          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rust-analyzer.exe
-          Remove-Item -ErrorAction SilentlyContinue ${HOME}/.cargo/bin/rustfmt.exe
-
-          rustup self update
-          rustup update
-          rustup show active-toolchain || rustup toolchain install
-          rustup show
-
-          cargo --version
-
-      - *cache_target
+      - *set_up_toolchain_windows
 
       - *set_up_sccache
 
@@ -194,8 +232,6 @@ jobs:
       fromJSON(needs.changes.outputs.rust) == true
     steps:
       - *checkout
-
-      - *cache_cargo
 
       - *set_up_toolchain
 
@@ -230,8 +266,6 @@ jobs:
       - *set_up_mold
 
       - *set_up_toolchain
-
-      - *cache_target
 
       - *set_up_sccache
 
@@ -340,6 +374,8 @@ jobs:
   cargo-test-and-report-windows:
     name: Cargo test (and report) Windows
     runs-on: windows-latest
+    needs:
+      - warm-up-cache-windows
     permissions:
       checks: write
       id-token: write
@@ -349,13 +385,11 @@ jobs:
 
       - *checkout
 
-      - *cache_cargo
+      - *cache_cargo_windows
 
       - *set_up_mold
 
       - *set_up_toolchain_windows
-
-      - *cache_target
 
       - *set_up_sccache
 
@@ -477,8 +511,6 @@ jobs:
 
       - *set_up_toolchain
 
-      - *cache_target
-
       - *set_up_sccache
 
       - name: Run Clippy for GitHub Actions report
@@ -491,6 +523,7 @@ jobs:
     runs-on: windows-latest
     needs:
       - changes
+      - warm-up-cache-windows
     if: |
       github.event_name == 'pull_request' &&
       fromJSON(needs.changes.outputs.rust) == true
@@ -499,13 +532,11 @@ jobs:
 
       - *checkout
 
-      - *cache_cargo
+      - *cache_cargo_windows
 
       - *set_up_mold
 
       - *set_up_toolchain_windows
-
-      - *cache_target
 
       - *set_up_sccache
 
