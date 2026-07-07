@@ -1,4 +1,28 @@
 <!-- header goes here -->
+## [0.12.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.1..v0.12.2) - 2026-07-07
+
+### 🐛 Bug Fixes
+
+- *(ci)* Parallel upload by [@kristof-mattei](https://github.com/kristof-mattei) ([`c690c06`](https://github.com/kristof-mattei/docker-dns-rs/commit/c690c0622b43647b20f2f31e5a2b8fcab6418b3c))
+- *(ci)* Disable caching ./target by [@kristof-mattei](https://github.com/kristof-mattei) ([`b9452ad`](https://github.com/kristof-mattei/docker-dns-rs/commit/b9452adde2041cfb056b250b9dc1fe33ff81347b))
+- *(ci)* `warm-up-cache` does not need mold by [@kristof-mattei](https://github.com/kristof-mattei) ([`b1f29a5`](https://github.com/kristof-mattei/docker-dns-rs/commit/b1f29a5cf0d51fb9b9d5c86f3a437548832b04e9))
+- *(ci)* Don't cache cargo registry by [@kristof-mattei](https://github.com/kristof-mattei) ([`4122327`](https://github.com/kristof-mattei/docker-dns-rs/commit/41223274ed701eafd121660d73c9d77bb073167d))
+- *(ci)* Disable registry caching in crate release by [@kristof-mattei](https://github.com/kristof-mattei) ([`227ac02`](https://github.com/kristof-mattei/docker-dns-rs/commit/227ac0201fe4cf8ad8a6f8d5df08c1c369b11df5))
+- *(ci)* No verbose by [@kristof-mattei](https://github.com/kristof-mattei) ([`9f5c5d2`](https://github.com/kristof-mattei/docker-dns-rs/commit/9f5c5d2d9af8f09f1ecfb29a539d0e9bbfcb2695))
+- *(ci)* Add missing read permissions by [@kristof-mattei](https://github.com/kristof-mattei) ([`0272238`](https://github.com/kristof-mattei/docker-dns-rs/commit/027223880c30bf615630839cf7913ba63549b4fd))
+- *(ci)* Retry installing spellcheck, it's sometimes flaky, also disable compile when the HTTP request fails by [@kristof-mattei](https://github.com/kristof-mattei) ([`1dd49a7`](https://github.com/kristof-mattei/docker-dns-rs/commit/1dd49a7b7cda4f75ec810e29fdea0c7e7357abd5))
+- *(deps)* Pin dependencies by [@renovate[bot]](https://github.com/renovate[bot]) ([`6e3faf5`](https://github.com/kristof-mattei/docker-dns-rs/commit/6e3faf5afa52deaeb3d8539dc6e2f79268559d11))
+- *(deps)* Pin dependencies (#2912) by [@renovate[bot]](https://github.com/renovate[bot]) ([`46f9507`](https://github.com/kristof-mattei/docker-dns-rs/commit/46f9507f444363f354156e26de94617fe0539ade))
+- `cargo-fmt` does not need cache, and shouldn't try to restore it, worse, it could save a broken cache should `warm-up-cache` fail by [@kristof-mattei](https://github.com/kristof-mattei) ([`f30035a`](https://github.com/kristof-mattei/docker-dns-rs/commit/f30035a937be4e0f0ff705beb239c300b7d7c3a4))
+- Remove the `-build` in the cache name by [@kristof-mattei](https://github.com/kristof-mattei) ([`ec0649f`](https://github.com/kristof-mattei/docker-dns-rs/commit/ec0649fb55579105c509cadd533d83e0143eb150))
+- Only restore by [@kristof-mattei](https://github.com/kristof-mattei) ([`cb8f178`](https://github.com/kristof-mattei/docker-dns-rs/commit/cb8f1786ae3b72f919f13b8a73410ba63c0b2b86))
+- Use parameterized CARGO_FEATURES by [@kristof-mattei](https://github.com/kristof-mattei) ([`c6ef9ca`](https://github.com/kristof-mattei/docker-dns-rs/commit/c6ef9ca76047baa97930b091300229e4bf9fd2c6))
+
+### ⚙️ Miscellaneous Tasks
+
+- Tasks.json should not be executable by [@kristof-mattei](https://github.com/kristof-mattei) ([`5527290`](https://github.com/kristof-mattei/docker-dns-rs/commit/552729080cf37c4ef92e90228e73971c42540bd9))
+- Missing codeql.yml permission by [@kristof-mattei](https://github.com/kristof-mattei) ([`760bd59`](https://github.com/kristof-mattei/docker-dns-rs/commit/760bd592b94e4b01b2220f40a96ff8430a312015))
+- Missing attestation permission by [@kristof-mattei](https://github.com/kristof-mattei) ([`babe2a3`](https://github.com/kristof-mattei/docker-dns-rs/commit/babe2a3c30a87c76a47a9429c24330ab8fb09859))
 ## [0.12.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.0..v0.12.1) - 2026-07-01
 
 ### 🐛 Bug Fixes
