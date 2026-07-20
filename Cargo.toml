@@ -14,9 +14,6 @@ keywords = ["cli", "docker", "dns"]
 repository = "https://github.com/kristof-mattei/docker-dns-rs"
 include = ["crates/**", "/LICENSE", "/LICENSE-*"]
 
-[workspace.metadata.spellcheck]
-config = "spellcheck.toml"
-
 [workspace.lints.clippy]
 # don't stop from compiling / running
 all = "warn"
