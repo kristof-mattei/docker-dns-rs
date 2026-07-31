@@ -1,4 +1,60 @@
 <!-- header goes here -->
+## [0.12.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.2..v0.12.3) - 2026-07-31
+
+### 🐛 Bug Fixes
+
+- *(ci)* Disable asking for funds when installing pnpm by [@kristof-mattei](https://github.com/kristof-mattei) ([`b661b33`](https://github.com/kristof-mattei/docker-dns-rs/commit/b661b336aeed70395e1a0a25484b48d88f6d3cb4))
+- *(ci)* Merge the PR based on the branch name, not the url by [@kristof-mattei](https://github.com/kristof-mattei) ([`b0af60a`](https://github.com/kristof-mattei/docker-dns-rs/commit/b0af60a01b2f10665e3d2ffaf658fc5e9f4c1cff))
+- *(ci)* Address actionlint by [@kristof-mattei](https://github.com/kristof-mattei) ([`3d8e464`](https://github.com/kristof-mattei/docker-dns-rs/commit/3d8e4648ec20159a31b930c0a6a6f39fa5b0eb6e))
+- *(deps)* Update rust crate regex to v1.13.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`5df353f`](https://github.com/kristof-mattei/docker-dns-rs/commit/5df353f2095f68398881d3e412002eb945b29c71))
+- *(deps)* Update rust crate regex to v1.13.0 (#2159) by [@renovate[bot]](https://github.com/renovate[bot]) in #2159 ([`90f4217`](https://github.com/kristof-mattei/docker-dns-rs/commit/90f4217cb2be4822609eb09faa1816b0701100b1))
+- *(deps)* Update rust crate regex to v1.13.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`ce3d765`](https://github.com/kristof-mattei/docker-dns-rs/commit/ce3d76559351b3b4a06f55473efb40a144fb575c))
+- *(deps)* Update rust crate regex to v1.13.1 (#2177) by [@renovate[bot]](https://github.com/renovate[bot]) in #2177 ([`8d56cd1`](https://github.com/kristof-mattei/docker-dns-rs/commit/8d56cd1d87d1c72f78ff758eb19202b9e62afb9d))
+- *(deps)* Update rust crate clap to v4.6.2 by [@renovate[bot]](https://github.com/renovate[bot]) ([`f201a3e`](https://github.com/kristof-mattei/docker-dns-rs/commit/f201a3e49202aa7cc28ea9eca290305a7304c370))
+- *(deps)* Update rust crate clap to v4.6.2 (#2176) by [@renovate[bot]](https://github.com/renovate[bot]) in #2176 ([`d399421`](https://github.com/kristof-mattei/docker-dns-rs/commit/d39942192a8d1a706a139ef7dbd431fb7f0ebb9f))
+- *(deps)* Update rust crate tokio to v1.52.4 by [@renovate[bot]](https://github.com/renovate[bot]) ([`95fd52c`](https://github.com/kristof-mattei/docker-dns-rs/commit/95fd52c405ccb2e6e8f04d383268a71571e4d718))
+- *(deps)* Update rust crate tokio to v1.52.4 (#2182) by [@renovate[bot]](https://github.com/renovate[bot]) in #2182 ([`245db81`](https://github.com/kristof-mattei/docker-dns-rs/commit/245db8167467b00284f171731f411c4fdcd9c2ee))
+- *(deps)* Update rust crate tokio to v1.53.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`540f976`](https://github.com/kristof-mattei/docker-dns-rs/commit/540f97630bf6be7cacb9115f9afbadb40a9bbd56))
+- *(deps)* Update rust crate tokio to v1.53.0 (#2186) by [@renovate[bot]](https://github.com/renovate[bot]) in #2186 ([`416bc16`](https://github.com/kristof-mattei/docker-dns-rs/commit/416bc16aefaff6dda31e6413d46caa90b52f8338))
+- *(deps)* Update rust crate async-trait to v0.1.91 by [@renovate[bot]](https://github.com/renovate[bot]) ([`72af37a`](https://github.com/kristof-mattei/docker-dns-rs/commit/72af37a829c920e7510b926ff0af38d9f5248dc7))
+- *(deps)* Update rust crate async-trait to v0.1.91 (#2188) by [@renovate[bot]](https://github.com/renovate[bot]) in #2188 ([`2e4a144`](https://github.com/kristof-mattei/docker-dns-rs/commit/2e4a144efb87fc98281a93f0596abb4119b590ac))
+- *(deps)* Update rust crate clap to v4.6.3 by [@renovate[bot]](https://github.com/renovate[bot]) ([`e1f7c81`](https://github.com/kristof-mattei/docker-dns-rs/commit/e1f7c81d9fae7ac4c85fd9a49fd02bcb445b1c4b))
+- *(deps)* Update rust crate clap to v4.6.3 (#2194) by [@renovate[bot]](https://github.com/renovate[bot]) in #2194 ([`16b08f3`](https://github.com/kristof-mattei/docker-dns-rs/commit/16b08f3b5918c3d18e9bcb4e4a4439b3bc2b2fd2))
+- *(deps)* Update rust crate tokio to v1.53.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`25e2e65`](https://github.com/kristof-mattei/docker-dns-rs/commit/25e2e65ef57861d838828954997b2f683a42e352))
+- *(deps)* Update rust crate tokio to v1.53.1 (#2198) by [@renovate[bot]](https://github.com/renovate[bot]) in #2198 ([`4e00aae`](https://github.com/kristof-mattei/docker-dns-rs/commit/4e00aae71ea30d2b7e3ef83603aaca270726cb5f))
+- *(deps)* Update rust crate libc to v0.2.187 by [@renovate[bot]](https://github.com/renovate[bot]) ([`eb24a15`](https://github.com/kristof-mattei/docker-dns-rs/commit/eb24a156696232c4ed25bcc57769976d3d14b9d8))
+- *(deps)* Update rust crate libc to v0.2.187 (#2200) by [@renovate[bot]](https://github.com/renovate[bot]) in #2200 ([`b8704c2`](https://github.com/kristof-mattei/docker-dns-rs/commit/b8704c2358dad0ee3fa26018dbfce06b1f6c12db))
+- *(deps)* Update rust crate libc to v0.2.188 by [@renovate[bot]](https://github.com/renovate[bot]) ([`39357c7`](https://github.com/kristof-mattei/docker-dns-rs/commit/39357c7d9b969acd4fa2f1badd5ce48766ae9bcb))
+- *(deps)* Update rust crate libc to v0.2.188 (#2202) by [@renovate[bot]](https://github.com/renovate[bot]) in #2202 ([`22d41fc`](https://github.com/kristof-mattei/docker-dns-rs/commit/22d41fcd245301a7f4f3dc138828bbcbfbe05274))
+- *(deps)* Update rust crate tokio-util to v0.7.19 by [@renovate[bot]](https://github.com/renovate[bot]) ([`58b3330`](https://github.com/kristof-mattei/docker-dns-rs/commit/58b333065a85f155341a57775f3a49fde5400f3a))
+- *(deps)* Update rust crate tokio-util to v0.7.19 (#2203) by [@renovate[bot]](https://github.com/renovate[bot]) in #2203 ([`bdb0910`](https://github.com/kristof-mattei/docker-dns-rs/commit/bdb0910a74574e662c9172cb245f4ad61b74ca94))
+- *(deps)* Update rust crate clap to v4.6.4 by [@renovate[bot]](https://github.com/renovate[bot]) ([`fafe676`](https://github.com/kristof-mattei/docker-dns-rs/commit/fafe6764d9ec18c1e39b69b481ed71f15f3d6205))
+- *(deps)* Update rust crate clap to v4.6.4 (#2204) by [@renovate[bot]](https://github.com/renovate[bot]) in #2204 ([`10f03f3`](https://github.com/kristof-mattei/docker-dns-rs/commit/10f03f3a80fb247debbf68a621398b12a3112f19))
+- *(deps)* Update rust crate libc to v0.2.189 by [@renovate[bot]](https://github.com/renovate[bot]) ([`448d488`](https://github.com/kristof-mattei/docker-dns-rs/commit/448d488e46269ff549fb961f26841a9d67aede57))
+- *(deps)* Update rust crate libc to v0.2.189 (#2205) by [@renovate[bot]](https://github.com/renovate[bot]) in #2205 ([`c11f070`](https://github.com/kristof-mattei/docker-dns-rs/commit/c11f070a91c5c663d8b5a0c38b9e571e5ccfa6fb))
+- *(deps)* Update rust crate clap to v4.6.5 by [@renovate[bot]](https://github.com/renovate[bot]) ([`06f595e`](https://github.com/kristof-mattei/docker-dns-rs/commit/06f595e3aa9986f24d85facd5f2856104eddafb3))
+- *(deps)* Update rust crate clap to v4.6.5 (#2241) by [@renovate[bot]](https://github.com/renovate[bot]) in #2241 ([`b54b6c0`](https://github.com/kristof-mattei/docker-dns-rs/commit/b54b6c0c513cb32a2d9ada973d15e24dd658119a))
+- Prettier config typescript version by [@kristof-mattei](https://github.com/kristof-mattei) ([`9a04bc8`](https://github.com/kristof-mattei/docker-dns-rs/commit/9a04bc814c428efb9b1af82b6395e8a08fb69caa))
+- For markdown, decrease tabwidth by [@kristof-mattei](https://github.com/kristof-mattei) ([`775286c`](https://github.com/kristof-mattei/docker-dns-rs/commit/775286c57e10452aa3580f168399f48f50066e40))
+
+### 💼 Other
+
+- Generate SBOM & provenance attestations, embedding the actual crate list via cargo-auditable by [@kristof-mattei](https://github.com/kristof-mattei) ([`7069ac7`](https://github.com/kristof-mattei/docker-dns-rs/commit/7069ac7c50b8a9c3eab63e1b31ebf77164141d7c))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Long-form options by [@kristof-mattei](https://github.com/kristof-mattei) ([`8cc89ce`](https://github.com/kristof-mattei/docker-dns-rs/commit/8cc89ce310fd951216ebb9bf5dad46a9eb5b4cab))
+- *(ci)* Create release commits with the api so they're signed by [@kristof-mattei](https://github.com/kristof-mattei) ([`0cacc4c`](https://github.com/kristof-mattei/docker-dns-rs/commit/0cacc4cfff7e3e44eaaa27a9fcdf0d7006720c8b))
+- *(ci)* Let release runs finish and clean up stranded branches by [@kristof-mattei](https://github.com/kristof-mattei) ([`09c302f`](https://github.com/kristof-mattei/docker-dns-rs/commit/09c302fef81815f523c7a8fa2b849b02222d3bdc))
+- *(ci)* Pass the github token to git-cliff via the environment by [@kristof-mattei](https://github.com/kristof-mattei) ([`73fe1c0`](https://github.com/kristof-mattei/docker-dns-rs/commit/73fe1c0d32e7de5d97b90a7ee7433ef7edb75959))
+- *(ci)* Only mark stable releases as latest by [@kristof-mattei](https://github.com/kristof-mattei) ([`357e974`](https://github.com/kristof-mattei/docker-dns-rs/commit/357e974a1e321345048fc53d805da083c191149e))
+- *(ci)* Update the release PR body via the rest api by [@kristof-mattei](https://github.com/kristof-mattei) ([`0358506`](https://github.com/kristof-mattei/docker-dns-rs/commit/035850687f39ce852128a059f83f596cba9fab40))
+- *(ci)* Upload images sequentially by [@kristof-mattei](https://github.com/kristof-mattei) ([`128f6d4`](https://github.com/kristof-mattei/docker-dns-rs/commit/128f6d4a0436cec8aeba4754262307ff0274b9df))
+- Ban more macros by [@kristof-mattei](https://github.com/kristof-mattei) ([`602457a`](https://github.com/kristof-mattei/docker-dns-rs/commit/602457a4d5bcd65f5214d48e5601836041bebc0f))
+- Cspell by [@kristof-mattei](https://github.com/kristof-mattei) ([`9f5797a`](https://github.com/kristof-mattei/docker-dns-rs/commit/9f5797a16adf5f2880b5bbdea2827ad7cf465688))
+- Remove copilot instructions as copilot is now behind a paywall by [@kristof-mattei](https://github.com/kristof-mattei) ([`8a34ae2`](https://github.com/kristof-mattei/docker-dns-rs/commit/8a34ae290dfdb5ddf5d2b73eeca90a14146f3e9b))
+- Remove unused word by [@kristof-mattei](https://github.com/kristof-mattei) ([`4cf5b2d`](https://github.com/kristof-mattei/docker-dns-rs/commit/4cf5b2dbd13e7d5f8143634ffaa773f10175141c))
+- Update dictionary by [@kristof-mattei](https://github.com/kristof-mattei) ([`e7f3adf`](https://github.com/kristof-mattei/docker-dns-rs/commit/e7f3adf73bd90fcf5c8312052e247aafa3bb5dea))
 ## [0.12.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.1..v0.12.2) - 2026-07-07
 
 ### 🐛 Bug Fixes
