@@ -43,7 +43,6 @@ nargs
 nextest
 nvmrc
 pathbuf
-pids
 postprocessors
 prereleased
 profraw
