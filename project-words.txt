@@ -42,7 +42,6 @@ namedtuple
 nargs
 nextest
 nvmrc
-oneline
 pathbuf
 postprocessors
 prereleased
