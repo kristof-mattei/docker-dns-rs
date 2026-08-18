@@ -1,5 +1,6 @@
 addrs
 argparse
+artipacked
 Axfr
 BINDADDR
 bkeepers
@@ -41,6 +42,7 @@ namedtuple
 nargs
 nextest
 nvmrc
+oneline
 pathbuf
 postprocessors
 prereleased
@@ -75,6 +77,7 @@ trixie
 TRUNC
 twistlock
 uninlined
+uninspectable
 unseparated
 urllib
 urlparse
@@ -83,3 +86,4 @@ vadimcn
 VALIDNAME
 wildkey
 wildres
+zizmor
