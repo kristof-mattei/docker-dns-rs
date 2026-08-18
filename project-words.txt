@@ -1,5 +1,6 @@
 addrs
 argparse
+artipacked
 Axfr
 BINDADDR
 bkeepers
@@ -75,6 +76,7 @@ trixie
 TRUNC
 twistlock
 uninlined
+uninspectable
 unseparated
 urllib
 urlparse
@@ -83,3 +85,4 @@ vadimcn
 VALIDNAME
 wildkey
 wildres
+zizmor
