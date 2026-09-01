@@ -41,7 +41,7 @@ mypy
 namedtuple
 nargs
 nextest
-nvmrc
+nologin
 pathbuf
 postprocessors
 prereleased
@@ -53,6 +53,7 @@ rdata
 rdatas
 retag
 retagging
+rhysd
 rrsigs
 rstrip
 rustflags

@@ -101,19 +101,18 @@ RUN [ ! -s version-bump.patch ] || patch --strip 1 < version-bump.patch
 # --release not needed, it is implied with install
 RUN /build-scripts/build.sh install --frozen --path "./crates/${APPLICATION_NAME}/" --root /output
 
-# Container user setup
-FROM --platform=${BUILDPLATFORM} alpine:3.24.1@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b AS passwd-build
-
-RUN cat /etc/group | grep root > /tmp/group_root
-RUN cat /etc/passwd | grep root > /tmp/passwd_root
-
 # Final stage, no `BUILDPLATFORM`, this one is run where it is deployed
 FROM scratch
 
 ARG APPLICATION_NAME
 
-COPY --from=passwd-build /tmp/group_root /etc/group
-COPY --from=passwd-build /tmp/passwd_root /etc/passwd
+COPY <<EOF /etc/passwd
+root:x:0:0:root:/root:/sbin/nologin
+EOF
+
+COPY <<EOF /etc/group
+root:x:0:
+EOF
 
 COPY --from=rust-build /output/bin/${APPLICATION_NAME} /app/entrypoint
 
