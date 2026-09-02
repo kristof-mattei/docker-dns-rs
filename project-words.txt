@@ -6,6 +6,7 @@ bindaddr
 bkeepers
 buildcache
 cinstrument
+cliffignore
 ctarget
 cttc
 cves
@@ -30,14 +31,12 @@ idents
 idna
 isoformat
 kristof
-lldb
 lstrip
 mattei
 mimalloc
 miri
 monomorphization
 multiplatform
-mypy
 namedtuple
 nargs
 nextest
@@ -49,6 +48,7 @@ profraw
 pyflakes
 qname
 qtype
+rawfile
 rdata
 rdatas
 retag
@@ -63,6 +63,7 @@ sendto
 serv
 skopeo
 skopeo's
+slurpfile
 splitrecord
 startswith
 staticmethod
