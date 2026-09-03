@@ -53,7 +53,11 @@ pub struct RawConfig {
     )]
     pub dns_bind: SocketAddr,
 
-    #[clap(long, env = "CA")]
+    #[arg(
+        long,
+        env = "CA",
+        help = "Path to the CA certificate used to verify the Docker daemon"
+    )]
     pub cacert: Option<PathBuf>,
 
     #[command(flatten)]
