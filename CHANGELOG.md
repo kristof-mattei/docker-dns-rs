@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.12.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.5..v0.12.6) - 2026-09-03
+
+### ⚙️ Miscellaneous Tasks
+
+- Set workspace `description` in `Cargo.toml` by [@kristof-mattei](https://github.com/kristof-mattei) ([`4f2c371`](https://github.com/kristof-mattei/docker-dns-rs/commit/4f2c371073ac7614e06fe39b503fcc0f97a76f92))
 ## [0.12.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.4..v0.12.5) - 2026-09-03
 
 ### 🐛 Bug Fixes
