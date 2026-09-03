@@ -162,8 +162,7 @@ async fn start_tasks() -> Shutdown {
     let daemon = match Daemon::build(
         docker_config.docker_host,
         docker_config.cacert,
-        docker_config.client_key,
-        docker_config.client_cert,
+        docker_config.client_credentials,
         docker_config.timeout,
     ) {
         Ok(daemon) => daemon,
