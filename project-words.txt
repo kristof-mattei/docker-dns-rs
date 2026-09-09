@@ -41,6 +41,7 @@ namedtuple
 nargs
 nextest
 nologin
+oras
 pathbuf
 postprocessors
 prereleased
