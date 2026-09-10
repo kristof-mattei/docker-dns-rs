@@ -1,4 +1,5 @@
 addrs
+allgreen
 argparse
 artipacked
 axfr
@@ -26,7 +27,7 @@ gethostbyaddr
 gethostbyname
 gevent
 grcov
-hubot
+headgreen
 idents
 idna
 isoformat
