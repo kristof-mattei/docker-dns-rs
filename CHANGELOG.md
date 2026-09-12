@@ -1,4 +1,10 @@
 <!-- header goes here -->
+## [0.12.7](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.6..v0.12.7) - 2026-09-12
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update hickory-dns monorepo to v0.26.3 by [@renovate[bot]](https://github.com/renovate[bot]) ([`dd89eb4`](https://github.com/kristof-mattei/docker-dns-rs/commit/dd89eb43720091150f0c02e849a2b811a5bc07ae))
+- Re-raise fatal signals instead of exiting 128+n by [@kristof-mattei](https://github.com/kristof-mattei) ([`65b5062`](https://github.com/kristof-mattei/docker-dns-rs/commit/65b50627a610ae77e2ef01a7e1139eb9c4b84cc6))
 ## [0.12.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.5..v0.12.6) - 2026-09-03
 
 ### ⚙️ Miscellaneous Tasks
@@ -33,10 +39,6 @@
 - Prettier config typescript version by [@kristof-mattei](https://github.com/kristof-mattei) ([`9a04bc8`](https://github.com/kristof-mattei/docker-dns-rs/commit/9a04bc814c428efb9b1af82b6395e8a08fb69caa))
 - For markdown, decrease tabwidth by [@kristof-mattei](https://github.com/kristof-mattei) ([`775286c`](https://github.com/kristof-mattei/docker-dns-rs/commit/775286c57e10452aa3580f168399f48f50066e40))
 
-### 💼 Other
-
-- Generate SBOM & provenance attestations, embedding the actual crate list via cargo-auditable by [@kristof-mattei](https://github.com/kristof-mattei) ([`7069ac7`](https://github.com/kristof-mattei/docker-dns-rs/commit/7069ac7c50b8a9c3eab63e1b31ebf77164141d7c))
-
 ### ⚙️ Miscellaneous Tasks
 
 - *(ci)* Long-form options by [@kristof-mattei](https://github.com/kristof-mattei) ([`8cc89ce`](https://github.com/kristof-mattei/docker-dns-rs/commit/8cc89ce310fd951216ebb9bf5dad46a9eb5b4cab))
@@ -49,6 +51,10 @@
 - Ban more macros by [@kristof-mattei](https://github.com/kristof-mattei) ([`602457a`](https://github.com/kristof-mattei/docker-dns-rs/commit/602457a4d5bcd65f5214d48e5601836041bebc0f))
 - Cspell by [@kristof-mattei](https://github.com/kristof-mattei) ([`9f5797a`](https://github.com/kristof-mattei/docker-dns-rs/commit/9f5797a16adf5f2880b5bbdea2827ad7cf465688))
 - Remove copilot instructions as copilot is now behind a paywall by [@kristof-mattei](https://github.com/kristof-mattei) ([`8a34ae2`](https://github.com/kristof-mattei/docker-dns-rs/commit/8a34ae290dfdb5ddf5d2b73eeca90a14146f3e9b))
+
+### 💼 Other
+
+- Generate SBOM & provenance attestations, embedding the actual crate list via cargo-auditable by [@kristof-mattei](https://github.com/kristof-mattei) ([`7069ac7`](https://github.com/kristof-mattei/docker-dns-rs/commit/7069ac7c50b8a9c3eab63e1b31ebf77164141d7c))
 ## [0.12.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.1..v0.12.2) - 2026-07-07
 
 ### 🐛 Bug Fixes
@@ -392,6 +398,7 @@
 ### 🐛 Bug Fixes
 
 - *(deps)* Update rust crate clap to 4.5.59 by [@renovate[bot]](https://github.com/renovate[bot]) ([`79c082d`](https://github.com/kristof-mattei/docker-dns-rs/commit/79c082d1167e190bfd7b6a7e076d4da89d9678cf))
+- Don't delete images referenced by multiplatform images by [@kristof-mattei](https://github.com/kristof-mattei) ([`ba51fd7`](https://github.com/kristof-mattei/docker-dns-rs/commit/ba51fd7fe5d1ed1a08917d219e96bddd18c046a2))
 - Botched merge by [@kristof-mattei](https://github.com/kristof-mattei) ([`cc60492`](https://github.com/kristof-mattei/docker-dns-rs/commit/cc60492c9966f4d63c1ecf04b2c7f8450fa93336))
 - Use frozen by [@kristof-mattei](https://github.com/kristof-mattei) ([`b83181e`](https://github.com/kristof-mattei/docker-dns-rs/commit/b83181e3a58ca79f8ffd24d1de3361d4325b27e9))
 - Quotes & reorder by [@kristof-mattei](https://github.com/kristof-mattei) ([`4d3399d`](https://github.com/kristof-mattei/docker-dns-rs/commit/4d3399dfbaec8bcf300acca43fdd72e9ad27dbd8))
@@ -492,7 +499,6 @@
 - Don't hang should there be a question by [@kristof-mattei](https://github.com/kristof-mattei) ([`61daade`](https://github.com/kristof-mattei/docker-dns-rs/commit/61daade12a64cdfd76ff4455a70e85be94204ef1))
 - Fix touch not relying on /bin/bash by [@kristof-mattei](https://github.com/kristof-mattei) ([`ca5f315`](https://github.com/kristof-mattei/docker-dns-rs/commit/ca5f3154fa175d6f179cb60d7c225db0a0014925))
 - Success cannot be cancelled by [@kristof-mattei](https://github.com/kristof-mattei) ([`ff32f1f`](https://github.com/kristof-mattei/docker-dns-rs/commit/ff32f1f2a5249a9fd1fa9f4c99d8edef8127f737))
-- Don't delete images referenced by multiplatform images by [@kristof-mattei](https://github.com/kristof-mattei) ([`ba51fd7`](https://github.com/kristof-mattei/docker-dns-rs/commit/ba51fd7fe5d1ed1a08917d219e96bddd18c046a2))
 - Re-enable container cleanup by [@kristof-mattei](https://github.com/kristof-mattei) ([`3681a0b`](https://github.com/kristof-mattei/docker-dns-rs/commit/3681a0bca2c2ad0057c77917856e91c1ade74587))
 
 ### ⚙️ Miscellaneous Tasks
