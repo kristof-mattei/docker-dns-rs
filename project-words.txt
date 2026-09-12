@@ -65,6 +65,7 @@ samply
 sccache
 sendto
 serv
+signum
 skopeo
 skopeo's
 slurpfile
