@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.13.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.7..v0.13.0) - 2026-09-12
+
+### 🚀 Features
+
+- *(monitor)* Identify the Docker event behind every record log line by [@kristof-mattei](https://github.com/kristof-mattei) ([`7917ca1`](https://github.com/kristof-mattei/docker-dns-rs/commit/7917ca1ec2bd5b8ebdc59aa9b97675f9c279bbce))
 ## [0.12.7](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.6..v0.12.7) - 2026-09-12
 
 ### 🐛 Bug Fixes
