@@ -13,7 +13,7 @@ use regex::Regex;
 use tokio::sync::mpsc::Receiver;
 use tokio::sync::{Mutex, RwLock};
 use tokio_util::sync::CancellationToken;
-use tracing::{Level, event};
+use tracing::{Level, Span, event, field, instrument};
 use twistlock::client::Client;
 use twistlock::filters::Filters;
 use twistlock::models::container_inspect::{
@@ -253,6 +253,7 @@ impl Monitor {
         }
     }
 
+    #[instrument(skip_all, fields(%container_id))]
     async fn register_container_networks(
         &self,
         container_id: &str,
@@ -289,6 +290,7 @@ impl Monitor {
         }
     }
 
+    #[instrument(name = "container_rename", skip_all, fields(container_id = %event.actor.id))]
     async fn handle_container_rename(&self, event: Event) {
         // for some reason the old name needs to be sanitized (starts with `/`).
         // the new one doesn't
@@ -324,7 +326,6 @@ impl Monitor {
                         Level::WARN,
                         ?error,
                         ?event,
-                        container_id = %event.actor.id,
                         %old_name,
                         %new_name,
                         "Failure to rename container",
@@ -339,6 +340,7 @@ impl Monitor {
         }
     }
 
+    #[instrument(name = "container_start", skip_all)]
     async fn handle_container_start(&self, event: Event) {
         match self.docker.inspect_container(&event.actor.id).await {
             Ok(container) => {
@@ -363,6 +365,7 @@ impl Monitor {
         }
     }
 
+    #[instrument(name = "container_die", skip_all, fields(container_id = %event.actor.id))]
     async fn handle_container_die(&self, event: Event) {
         let Some(state) = self.containers.lock().await.remove(&*event.actor.id) else {
             return;
@@ -377,6 +380,11 @@ impl Monitor {
         }
     }
 
+    #[instrument(
+        name = "network_connect",
+        skip_all,
+        fields(container_id = field::Empty, network_name = field::Empty)
+    )]
     async fn handle_network_connect(&self, event: Event) {
         let Some(container_id) = event.actor.attributes.get("container") else {
             event!(
@@ -396,13 +404,15 @@ impl Monitor {
             return;
         };
 
+        let span = Span::current();
+        span.record("container_id", field::display(container_id));
+        span.record("network_name", field::display(network_name));
+
         match self.docker.inspect_container(container_id).await {
             Ok(container) => {
                 let Some(network) = container.network_settings.networks.get(&**network_name) else {
                     event!(
                         Level::WARN,
-                        %container_id,
-                        %network_name,
                         "Got network connect event, but network not found in container inspect",
                     );
                     return;
@@ -411,8 +421,6 @@ impl Monitor {
                 let Some(network_ips) = NetworkIps::from_network(network) else {
                     event!(
                         Level::WARN,
-                        %container_id,
-                        %network_name,
                         "Network connect event: network has no IP addresses",
                     );
                     return;
@@ -460,13 +468,17 @@ impl Monitor {
                 event!(
                     Level::WARN,
                     ?error,
-                    %container_id,
                     "Got connect event, but could not find container",
                 );
             },
         }
     }
 
+    #[instrument(
+        name = "network_disconnect",
+        skip_all,
+        fields(container_id = field::Empty, network_name = field::Empty)
+    )]
     async fn handle_network_disconnect(&self, event: Event) {
         let Some(container_id) = event.actor.attributes.get("container") else {
             event!(
@@ -486,13 +498,15 @@ impl Monitor {
             return;
         };
 
+        let span = Span::current();
+        span.record("container_id", field::display(container_id));
+        span.record("network_name", field::display(network_name));
+
         let mut containers = self.containers.lock().await;
 
         let Some(state) = containers.get_mut(&**container_id) else {
             event!(
                 Level::WARN,
-                %container_id,
-                %network_name,
                 "Got disconnect event but no container cache entry found",
             );
             return;
@@ -501,8 +515,6 @@ impl Monitor {
         let Some(network_ips) = state.networks.remove(&**network_name) else {
             event!(
                 Level::WARN,
-                %container_id,
-                %network_name,
                 "Got disconnect event but no network cache entry found",
             );
             return;
@@ -515,11 +527,12 @@ impl Monitor {
         }
     }
 
+    #[instrument(skip_all, fields(%network_id))]
     async fn register_network(&self, network_id: &str) {
         let inspect = match self.docker.inspect_network(network_id).await {
             Ok(n) => n,
             Err(error) => {
-                event!(Level::WARN, ?error, %network_id, "Failed to inspect network");
+                event!(Level::WARN, ?error, "Failed to inspect network");
                 return;
             },
         };
@@ -560,9 +573,13 @@ impl Monitor {
             .insert(network_id.into(), registered);
     }
 
+    #[instrument(skip_all, fields(%network_id))]
     async fn deregister_network(&self, network_id: &str) {
         let Some(zones) = self.networks.lock().await.remove(network_id) else {
-            event!(Level::WARN, %network_id, "Got network destroy event but no zones were registered for it");
+            event!(
+                Level::WARN,
+                "Got network destroy event but no zones were registered for it"
+            );
             return;
         };
 
@@ -582,6 +599,7 @@ impl Monitor {
         }
     }
 
+    #[instrument(name = "network_create", skip_all)]
     async fn handle_network_create(&self, event: Event) {
         if self.networks.lock().await.contains_key(&event.actor.id) {
             return;
@@ -590,6 +608,7 @@ impl Monitor {
         self.register_network(&event.actor.id).await;
     }
 
+    #[instrument(name = "network_destroy", skip_all)]
     async fn handle_network_destroy(&self, event: Event) {
         self.deregister_network(&event.actor.id).await;
     }
@@ -650,6 +669,7 @@ impl Monitor {
         }
     }
 
+    #[instrument(name = "initial_scan", skip_all)]
     pub async fn start(&self) -> Result<(), eyre::Report> {
         // Register reverse zones for all existing networks first,
         // so PTR records are in place before containers are processed.
