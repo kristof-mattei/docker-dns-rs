@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.13.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.0..v0.13.1) - 2026-09-13
+
+### 💼 Other
+
+- Name the entrypoint binary after the application by [@kristof-mattei](https://github.com/kristof-mattei) ([`31126fc`](https://github.com/kristof-mattei/docker-dns-rs/commit/31126fc1e47b47022d7fd6f7a190cde21ccd93b5))
 ## [0.13.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.12.7..v0.13.0) - 2026-09-12
 
 ### 🚀 Features
