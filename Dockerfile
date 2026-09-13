@@ -114,7 +114,7 @@ COPY <<EOF /etc/group
 root:x:0:
 EOF
 
-COPY --from=rust-build /output/bin/${APPLICATION_NAME} /app/entrypoint
+COPY --from=rust-build /output/bin/${APPLICATION_NAME} /app/docker-dns-rs
 
 USER root
 
@@ -122,4 +122,4 @@ ENV RUST_BACKTRACE=full
 
 WORKDIR /app
 
-ENTRYPOINT ["/app/entrypoint"]
+ENTRYPOINT ["/app/docker-dns-rs"]
