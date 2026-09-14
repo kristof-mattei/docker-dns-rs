@@ -185,14 +185,6 @@ async fn start_tasks() -> Shutdown {
 
     let tasks = TaskTracker::new();
 
-    // event handler
-    {
-        tasks.spawn_with_name(
-            "docker event monitor",
-            docker_event_monitor(docker_monitor, receiver, cancellation_token.clone()),
-        );
-    }
-
     // pump messages from Docker to the DockerMonitor
     {
         tasks.spawn_with_name(
@@ -201,17 +193,22 @@ async fn start_tasks() -> Shutdown {
         );
     }
 
+    // start listening, but delay answering until the scan has filled the zone
+    let socket = match UdpSocket::bind(dns_bind).await {
+        Ok(socket) => socket,
+        Err(error) => return Shutdown::from(error),
+    };
+
+    let listener = match TcpListener::bind(dns_bind).await {
+        Ok(listener) => listener,
+        Err(error) => return Shutdown::from(error),
+    };
+
+    if let Err(error) = docker_monitor.start().await {
+        return Shutdown::from(error);
+    }
+
     {
-        let socket = match UdpSocket::bind(dns_bind).await {
-            Ok(socket) => socket,
-            Err(error) => return Shutdown::from(error),
-        };
-
-        let listener = match TcpListener::bind(dns_bind).await {
-            Ok(listener) => listener,
-            Err(error) => return Shutdown::from(error),
-        };
-
         tasks.spawn_with_name(
             "dns handler",
             dns_handler(
@@ -221,6 +218,14 @@ async fn start_tasks() -> Shutdown {
                 records,
                 cancellation_token.clone(),
             ),
+        );
+    }
+
+    // event handler
+    {
+        tasks.spawn_with_name(
+            "docker event monitor",
+            docker_event_monitor(docker_monitor, receiver, cancellation_token.clone()),
         );
     }
 
@@ -308,11 +313,6 @@ async fn docker_event_monitor(
     cancellation_token: CancellationToken,
 ) {
     let _guard = cancellation_token.clone().drop_guard();
-
-    if let Err(error) = docker_monitor.start().await {
-        event!(Level::ERROR, ?error, "Failed to fetch containers");
-        return;
-    }
 
     docker_monitor
         .consume_events(receiver, &cancellation_token)
