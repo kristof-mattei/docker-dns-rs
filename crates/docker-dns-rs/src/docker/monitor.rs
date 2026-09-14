@@ -26,6 +26,10 @@ use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
+fn short_id(id: &str) -> &str {
+    id.get(..12).unwrap_or(id)
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum NetworkIps {
     V4Only(Ipv4Addr),
@@ -257,7 +261,7 @@ impl Monitor {
         to_full_names(get_all_names_from_inspect(container), &self.domain)
     }
 
-    #[instrument(skip_all, fields(%container_id))]
+    #[instrument(skip_all, fields(container_id = %short_id(container_id)))]
     async fn register_container(&self, container_id: &str) {
         let container = match self.docker.inspect_container(container_id).await {
             Ok(container) => container,
@@ -309,7 +313,7 @@ impl Monitor {
         }
     }
 
-    #[instrument(name = "container_rename", skip_all, fields(container_id = %event.actor.id))]
+    #[instrument(name = "container_rename", skip_all, fields(container_id = %short_id(&event.actor.id)))]
     async fn handle_container_rename(&self, event: Event) {
         // for some reason the old name needs to be sanitized (starts with `/`).
         // the new one doesn't
@@ -364,7 +368,7 @@ impl Monitor {
         self.register_container(&event.actor.id).await;
     }
 
-    #[instrument(name = "container_die", skip_all, fields(container_id = %event.actor.id))]
+    #[instrument(name = "container_die", skip_all, fields(container_id = %short_id(&event.actor.id)))]
     async fn handle_container_die(&self, event: Event) {
         let Some(state) = self.containers.lock().await.remove(&*event.actor.id) else {
             return;
@@ -404,7 +408,7 @@ impl Monitor {
         };
 
         let span = Span::current();
-        span.record("container_id", field::display(container_id));
+        span.record("container_id", field::display(short_id(container_id)));
         span.record("network_name", field::display(network_name));
 
         match self.docker.inspect_container(container_id).await {
@@ -491,7 +495,7 @@ impl Monitor {
         };
 
         let span = Span::current();
-        span.record("container_id", field::display(container_id));
+        span.record("container_id", field::display(short_id(container_id)));
         span.record("network_name", field::display(network_name));
 
         let mut containers = self.containers.lock().await;
@@ -513,7 +517,7 @@ impl Monitor {
         }
     }
 
-    #[instrument(skip_all, fields(%network_id))]
+    #[instrument(skip_all, fields(network_id = %short_id(network_id)))]
     async fn register_network(&self, network_id: &str) {
         let inspect = match self.docker.inspect_network(network_id).await {
             Ok(n) => n,
@@ -559,7 +563,7 @@ impl Monitor {
             .insert(network_id.into(), registered);
     }
 
-    #[instrument(skip_all, fields(%network_id))]
+    #[instrument(skip_all, fields(network_id = %short_id(network_id)))]
     async fn deregister_network(&self, network_id: &str) {
         let Some(zones) = self.networks.lock().await.remove(network_id) else {
             event!(
