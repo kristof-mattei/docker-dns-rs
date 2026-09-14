@@ -253,7 +253,26 @@ impl Monitor {
         }
     }
 
+    fn full_names(&self, container: &ContainerInspect) -> Arc<[Name]> {
+        to_full_names(get_all_names_from_inspect(container), &self.domain)
+    }
+
     #[instrument(skip_all, fields(%container_id))]
+    async fn register_container(&self, container_id: &str) {
+        let container = match self.docker.inspect_container(container_id).await {
+            Ok(container) => container,
+            Err(error) => {
+                event!(Level::WARN, ?error, "Failed to inspect container");
+                return;
+            },
+        };
+
+        let full_names = self.full_names(&container);
+
+        self.register_container_networks(container_id, full_names, container.network_settings)
+            .await;
+    }
+
     async fn register_container_networks(
         &self,
         container_id: &str,
@@ -342,27 +361,7 @@ impl Monitor {
 
     #[instrument(name = "container_start", skip_all)]
     async fn handle_container_start(&self, event: Event) {
-        match self.docker.inspect_container(&event.actor.id).await {
-            Ok(container) => {
-                let full_names =
-                    to_full_names(get_all_names_from_inspect(&container), &self.domain);
-
-                self.register_container_networks(
-                    &event.actor.id,
-                    full_names,
-                    container.network_settings,
-                )
-                .await;
-            },
-            Err(error) => {
-                event!(
-                    Level::WARN,
-                    ?error,
-                    container_id = %event.actor.id,
-                    "container:start: failed to inspect container",
-                );
-            },
-        }
+        self.register_container(&event.actor.id).await;
     }
 
     #[instrument(name = "container_die", skip_all, fields(container_id = %event.actor.id))]
@@ -434,10 +433,7 @@ impl Monitor {
                         .insert_entry_with_key(
                             container_id.clone(),
                             ContainerState {
-                                names: to_full_names(
-                                    get_all_names_from_inspect(&container),
-                                    &self.domain,
-                                ),
+                                names: self.full_names(&container),
                                 networks: HashMap::new(),
                             },
                         )
@@ -679,14 +675,7 @@ impl Monitor {
         }
 
         for container in self.docker.list_containers(&Filters::default()).await? {
-            if &*container.state != "running" {
-                continue;
-            }
-
-            let full_names = to_full_names(Vec::from(container.names), &self.domain);
-
-            self.register_container_networks(&container.id, full_names, container.network_settings)
-                .await;
+            self.register_container(&container.id).await;
         }
 
         Ok(())
