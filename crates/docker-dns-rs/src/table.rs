@@ -24,17 +24,17 @@ fn append_to_record_set(
     owner: Cow<'_, Name>,
     record_type: RecordType,
     rdata: RData,
-) {
+) -> bool {
     match records.entry(key) {
-        Entry::Occupied(mut entry) => {
-            Arc::make_mut(entry.get_mut()).add_rdata(rdata);
-        },
+        Entry::Occupied(mut entry) => Arc::make_mut(entry.get_mut()).add_rdata(rdata),
         Entry::Vacant(vacant_entry) => {
             let mut set = RecordSet::with_ttl(owner.into_owned(), record_type, 5);
 
-            set.add_rdata(rdata);
+            let added = set.add_rdata(rdata);
 
             vacant_entry.insert(Arc::new(set));
+
+            added
         },
     }
 }
@@ -95,12 +95,13 @@ impl AuthorityWrapper {
             .map(|(_, authority)| Arc::clone(authority))
     }
 
-    async fn upsert(&self, name: &Name, address: IpAddr) {
+    /// Reports whether the forward zone changed.
+    async fn upsert(&self, name: &Name, address: IpAddr) -> bool {
         let rdata: RData = RData::from(address);
         let record_type = rdata.record_type();
         let reverse: Name = address.into();
 
-        {
+        let added = {
             let mut lock = self.forward.records_mut().await;
 
             append_to_record_set(
@@ -109,8 +110,8 @@ impl AuthorityWrapper {
                 Cow::Borrowed(name),
                 record_type,
                 rdata,
-            );
-        }
+            )
+        };
 
         let Some(reverse_authority) = self.find_reverse_authority(address).await else {
             event!(
@@ -118,7 +119,7 @@ impl AuthorityWrapper {
                 %address,
                 "No reverse zone registered for address, PTR record not added"
             );
-            return;
+            return added;
         };
 
         let mut lock = reverse_authority.records_mut().await;
@@ -130,12 +131,16 @@ impl AuthorityWrapper {
             RecordType::PTR,
             RData::PTR(PTR(name.clone())),
         );
+
+        added
     }
 
     pub async fn add(&self, name: &Name, address: IpAddr) {
-        self.upsert(name, address).await;
-
-        event!(Level::INFO, %name, %address, "Added record");
+        if self.upsert(name, address).await {
+            event!(Level::INFO, %name, %address, "Added record");
+        } else {
+            event!(Level::INFO, %name, %address, "Record already present");
+        }
     }
 
     #[instrument(skip_all, fields(old_name = %old_key.name, %new_name, r#type = %old_key.record_type))]
@@ -236,5 +241,49 @@ impl AuthorityWrapper {
         if self.remove_record(name, ip).await.is_err() {
             event!(Level::WARN, %name, %ip, "No record found to remove");
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::net::{IpAddr, Ipv4Addr};
+    use std::sync::Arc;
+
+    use hickory_server::proto::rr::Name;
+
+    use crate::dns_listener::set_up_authority;
+    use crate::table::AuthorityWrapper;
+
+    async fn wrapper() -> AuthorityWrapper {
+        let domain: Name = "docker.example.".parse().unwrap();
+
+        AuthorityWrapper::new(Arc::new(set_up_authority(domain).await.unwrap()))
+    }
+
+    #[tokio::test]
+    async fn repeating_an_address_leaves_the_zone_unchanged() {
+        let wrapper = wrapper().await;
+        let name: Name = "foo.docker.example.".parse().unwrap();
+        let address = IpAddr::V4(Ipv4Addr::new(172, 19, 0, 2));
+
+        assert!(wrapper.upsert(&name, address).await);
+        assert!(!wrapper.upsert(&name, address).await);
+    }
+
+    #[tokio::test]
+    async fn a_second_address_for_one_name_changes_the_zone() {
+        let wrapper = wrapper().await;
+        let name: Name = "foo.docker.example.".parse().unwrap();
+
+        assert!(
+            wrapper
+                .upsert(&name, IpAddr::V4(Ipv4Addr::new(172, 19, 0, 2)))
+                .await
+        );
+        assert!(
+            wrapper
+                .upsert(&name, IpAddr::V4(Ipv4Addr::new(172, 20, 0, 2)))
+                .await
+        );
     }
 }
