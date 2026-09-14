@@ -497,18 +497,12 @@ impl Monitor {
         let mut containers = self.containers.lock().await;
 
         let Some(state) = containers.get_mut(&**container_id) else {
-            event!(
-                Level::WARN,
-                "Got disconnect event but no container cache entry found",
-            );
+            event!(Level::DEBUG, "Disconnect for an untracked container");
             return;
         };
 
         let Some(network_ips) = state.networks.remove(&**network_name) else {
-            event!(
-                Level::WARN,
-                "Got disconnect event but no network cache entry found",
-            );
+            event!(Level::DEBUG, "Disconnect for an untracked network");
             return;
         };
 
