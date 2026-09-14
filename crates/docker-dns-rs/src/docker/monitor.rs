@@ -440,18 +440,14 @@ impl Monitor {
                         .into_mut(),
                 };
 
-                // If the same IPs were previously registered for this network (e.g. startup race between start()'s container list and this event), skip.
-                // If different IPs were registered, remove the stale DNS records first.
-                match state.networks.insert(network_name.clone(), network_ips) {
-                    Some(old_ips) if old_ips == network_ips => return,
-                    Some(old_ips) => {
-                        for ip in old_ips.ips() {
-                            for name in &*state.names {
-                                self.authority_wrapper.remove_address(name, ip).await;
-                            }
+                if let Some(old_ips) = state.networks.insert(network_name.clone(), network_ips)
+                    && old_ips != network_ips
+                {
+                    for ip in old_ips.ips() {
+                        for name in &*state.names {
+                            self.authority_wrapper.remove_address(name, ip).await;
                         }
-                    },
-                    None => {},
+                    }
                 }
 
                 for ip in network_ips.ips() {
