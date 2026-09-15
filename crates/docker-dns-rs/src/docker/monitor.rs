@@ -423,7 +423,7 @@ impl Monitor {
 
                 let Some(network_ips) = NetworkIps::from_network(network) else {
                     event!(
-                        Level::WARN,
+                        Level::DEBUG,
                         "Network connect event: network has no IP addresses",
                     );
                     return;
