@@ -10,7 +10,6 @@ cinstrument
 cliffignore
 ctarget
 cttc
-cves
 datagram
 defaultdict
 dnslib
@@ -42,7 +41,10 @@ multiplatform
 namedtuple
 nargs
 nextest
+noall
+noerror
 nologin
+nxdomain
 oras
 pathbuf
 pkgs
