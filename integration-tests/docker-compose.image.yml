@@ -1,0 +1,3 @@
+services:
+  docker-dns-rs:
+    image: ${IMAGE_ID:?}

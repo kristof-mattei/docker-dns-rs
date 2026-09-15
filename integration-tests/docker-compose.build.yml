@@ -1,0 +1,6 @@
+services:
+  docker-dns-rs:
+    build:
+      context: ../
+      args:
+        APPLICATION_NAME: "docker-dns-rs"

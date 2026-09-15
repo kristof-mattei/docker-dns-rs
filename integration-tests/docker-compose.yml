@@ -1,0 +1,48 @@
+x-test-container: &test-container
+  command: tail -f /dev/null
+  # PID 1 ignores SIGTERM, without this every stop waits out the default 10s
+  stop_grace_period: 1s
+
+services:
+  running-at-startup:
+    <<: *test-container
+    image: alpine@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+    networks:
+      - default
+      - extra
+
+  started-later:
+    <<: *test-container
+    image: alpine@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+
+  stopped-later:
+    <<: *test-container
+    image: alpine@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+
+  renamed-later:
+    <<: *test-container
+    image: alpine@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+
+  connected-later:
+    <<: *test-container
+    image: alpine@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+
+  docker-dns-rs:
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      DOMAIN: ${DOMAIN:?}
+      RECORDS: "static-v4.example:10.1.2.3,static-v6.example:[fd00::1]"
+    volumes:
+      - type: bind
+        source: "${DOCKER_SOCKET:-/var/run/docker.sock}"
+        target: /var/run/docker.sock
+
+networks:
+  extra:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: fd00:1::/64

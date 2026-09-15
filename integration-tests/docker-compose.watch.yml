@@ -1,0 +1,10 @@
+services:
+  watch-docker-dns-rs:
+    build: watch-docker-dns-rs
+    environment:
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME:?}
+      DOMAIN: ${DOMAIN:?}
+    volumes:
+      - type: bind
+        source: "${DOCKER_SOCKET:-/var/run/docker.sock}"
+        target: /var/run/docker.sock

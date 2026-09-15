@@ -5,6 +5,7 @@ docker:
   - *shared
   - ".dockerignore"
   - Dockerfile
+  - "integration-tests/**"
 rust: &rust
   - *shared
   - "**/*.toml"
