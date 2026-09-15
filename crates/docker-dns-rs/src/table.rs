@@ -261,7 +261,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn repeating_an_address_leaves_the_zone_unchanged() {
+    async fn repeated_address_leaves_zone_unchanged() {
         let wrapper = wrapper().await;
         let name: Name = "foo.docker.example.".parse().unwrap();
         let address = IpAddr::V4(Ipv4Addr::new(172, 19, 0, 2));
@@ -271,7 +271,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn a_second_address_for_one_name_changes_the_zone() {
+    async fn second_address_for_same_name_changes_zone() {
         let wrapper = wrapper().await;
         let name: Name = "foo.docker.example.".parse().unwrap();
 

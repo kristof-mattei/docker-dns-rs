@@ -122,7 +122,7 @@ mod tests {
 
         // the raise kills the calling process, so the scenario runs in a re-executed copy of this test binary
         #[test]
-        fn dies_by_the_raised_signal_despite_tokio_handler() {
+        fn dies_by_raised_signal_despite_tokio_handler() {
             if std::env::var_os(CHILD_MARKER).is_some() {
                 let runtime = tokio::runtime::Builder::new_current_thread()
                     .enable_io()
@@ -145,7 +145,7 @@ mod tests {
             let status = Command::new(std::env::current_exe().unwrap())
                 .args([
                     "--exact",
-                    "signal_handlers::tests::unix::dies_by_the_raised_signal_despite_tokio_handler",
+                    "signal_handlers::tests::unix::dies_by_raised_signal_despite_tokio_handler",
                 ])
                 .env(CHILD_MARKER, "1")
                 .stdout(Stdio::null())
