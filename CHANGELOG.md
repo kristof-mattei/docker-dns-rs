@@ -1,4 +1,17 @@
 <!-- header goes here -->
+## [0.13.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.1..v0.13.2) - 2026-09-15
+
+### 🐛 Bug Fixes
+
+- *(monitor)* The initial scan skipped compose names and paused containers by [@kristof-mattei](https://github.com/kristof-mattei) ([`547016d`](https://github.com/kristof-mattei/docker-dns-rs/commit/547016de2ff61bc00df4173956d7037126ed7cae))
+- *(monitor)* Demote the disconnect warnings, these are expected by [@kristof-mattei](https://github.com/kristof-mattei) ([`379d15e`](https://github.com/kristof-mattei/docker-dns-rs/commit/379d15e551f4686113b7732e531d33471e2a33d0))
+- *(monitor)* Demote the disconnect warnings and shorten the logged ids by [@kristof-mattei](https://github.com/kristof-mattei) ([`789a37a`](https://github.com/kristof-mattei/docker-dns-rs/commit/789a37a7185c14281398c3c78ddcd313ee78ebde))
+- *(table)* Only log "Added record" when the zone changed by [@kristof-mattei](https://github.com/kristof-mattei) ([`28e6f5e`](https://github.com/kristof-mattei/docker-dns-rs/commit/28e6f5e2cf927bbdc77d072730151371d0cfea90))
+- Queries during the initial scan were answered from an empty zone by [@kristof-mattei](https://github.com/kristof-mattei) ([`ab4b0ca`](https://github.com/kristof-mattei/docker-dns-rs/commit/ab4b0cacb939cf8c0f883ae0c0be0cca6f46b77d))
+
+### 🚜 Refactor
+
+- *(monitor)* Stop skipping the add when the ips didn't change by [@kristof-mattei](https://github.com/kristof-mattei) ([`c7d2e2b`](https://github.com/kristof-mattei/docker-dns-rs/commit/c7d2e2bde711e53c7430bcff2487ae393fe9e698))
 ## [0.13.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.0..v0.13.1) - 2026-09-13
 
 ### 💼 Other
