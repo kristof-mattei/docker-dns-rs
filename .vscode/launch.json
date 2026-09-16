@@ -13,12 +13,8 @@
             },
             "args": [],
             "env": {
-                // "DOCKER_SOCK": "tcp://0.0.0.0:2375",
-                "RUST_BACKTRACE": "1",
-                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
-            },
-            "internalConsoleOptions": "neverOpen",
-            "terminal": "integrated"
+                // "DOCKER_SOCK": "tcp://0.0.0.0:2375"
+            }
         },
         {
             "name": "Debug unit tests in executable 'docker-dns-rs'",
@@ -27,13 +23,7 @@
             "cargo": {
                 "args": ["test", "--no-run", "--bin=docker-dns-rs"]
             },
-            "args": [],
-            "env": {
-                "RUST_BACKTRACE": "1",
-                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
-            },
-            "internalConsoleOptions": "neverOpen",
-            "terminal": "integrated"
+            "args": []
         },
         {
             "name": "Debug integration test 'integration_tests'",
@@ -42,13 +32,7 @@
             "cargo": {
                 "args": ["test", "--no-run", "--test=integration_tests"]
             },
-            "args": [],
-            "env": {
-                "RUST_BACKTRACE": "1",
-                "RUST_LOG": "DEBUG,docker_dns_rs=TRACE,hickory_server=INFO"
-            },
-            "internalConsoleOptions": "neverOpen",
-            "terminal": "integrated"
+            "args": []
         }
     ]
 }
