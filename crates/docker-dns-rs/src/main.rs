@@ -20,7 +20,7 @@ use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
 use twistlock::client::Client as Daemon;
-use twistlock::models::events::Event;
+use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
 use crate::config::{AppConfig, RawRecord};
@@ -296,7 +296,7 @@ async fn dns_handler(
 
 async fn docker_listener(
     docker: Arc<Daemon>,
-    sender: tokio::sync::mpsc::Sender<Event>,
+    sender: tokio::sync::mpsc::Sender<Result<Event, EventDecodeError>>,
     cancellation_token: CancellationToken,
 ) {
     let _guard = cancellation_token.clone().drop_guard();
@@ -310,7 +310,7 @@ async fn docker_listener(
 
 async fn docker_event_monitor(
     docker_monitor: Monitor,
-    receiver: Receiver<Event>,
+    receiver: Receiver<Result<Event, EventDecodeError>>,
     cancellation_token: CancellationToken,
 ) {
     let _guard = cancellation_token.clone().drop_guard();

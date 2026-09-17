@@ -4,7 +4,6 @@ use std::sync::{Arc, LazyLock};
 
 use color_eyre::eyre;
 use hashbrown::HashMap;
-use hashbrown::hash_map::EntryRef;
 use hickory_server::proto::rr::{LowerName, Name};
 use hickory_server::zone_handler::Catalog;
 use ipnet::{IpNet, Ipv4Net, Ipv6Net};
@@ -19,16 +18,13 @@ use twistlock::filters::Filters;
 use twistlock::models::container_inspect::{
     ContainerInspect, ContainerNetwork, ContainerNetworkSettings,
 };
-use twistlock::models::events::{Event, EventType};
+use twistlock::models::events::{Event, EventBody, EventDecodeError};
+use twistlock::models::id::{ContainerId, NetworkId};
 
 use crate::dns_listener::set_up_authority;
 use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
-
-fn short_id(id: &str) -> &str {
-    id.get(..12).unwrap_or(id)
-}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum NetworkIps {
@@ -60,8 +56,8 @@ impl NetworkIps {
 
 struct ContainerState {
     names: Arc<[Name]>,
-    /// `network_name` to IPs.
-    networks: HashMap<Box<str>, NetworkIps>,
+    /// `network_id` to IPs.
+    networks: HashMap<NetworkId, NetworkIps>,
 }
 
 pub struct Monitor {
@@ -72,9 +68,9 @@ pub struct Monitor {
     /// `container_id` to `ContainerState`.
     /// Invariant: names and network entries are always co-located, you cannot have
     /// a network entry without its accompanying names.
-    containers: Mutex<HashMap<Box<str>, ContainerState>>,
+    containers: Mutex<HashMap<ContainerId, ContainerState>>,
     /// `network_id` to the reverse zones registered for it.
-    networks: Mutex<HashMap<Box<str>, Vec<IpNet>>>,
+    networks: Mutex<HashMap<NetworkId, Vec<IpNet>>>,
 }
 
 fn append_compose_names(
@@ -111,7 +107,7 @@ fn append_compose_names(
     names
 }
 
-fn get_all_names_from_event(event: &Event) -> Vec<Box<str>> {
+fn get_all_names_from_event(event: &EventBody<ContainerId>) -> Vec<Box<str>> {
     let mut names = vec![];
 
     if let Some(sanitized_name) = event
@@ -261,9 +257,9 @@ impl Monitor {
         to_full_names(get_all_names_from_inspect(container), &self.domain)
     }
 
-    #[instrument(skip_all, fields(container_id = %short_id(container_id)))]
-    async fn register_container(&self, container_id: &str) {
-        let container = match self.docker.inspect_container(container_id).await {
+    #[instrument(skip_all, fields(container_id = %container_id.as_short()))]
+    async fn register_container(&self, container_id: ContainerId) {
+        let container = match self.docker.inspect_container(&container_id).await {
             Ok(container) => container,
             Err(error) => {
                 event!(Level::WARN, ?error, "Failed to inspect container");
@@ -279,27 +275,30 @@ impl Monitor {
 
     async fn register_container_networks(
         &self,
-        container_id: &str,
+        container_id: ContainerId,
         full_names: Arc<[Name]>,
         network_settings: ContainerNetworkSettings,
     ) {
         let mut containers = self.containers.lock().await;
 
-        let container_state = match containers.entry_ref(container_id) {
-            EntryRef::Occupied(occupied_entry) => occupied_entry.into_mut(),
-            EntryRef::Vacant(vacant_entry_ref) => vacant_entry_ref
-                .insert_entry_with_key(
-                    container_id.to_owned().into_boxed_str(),
-                    ContainerState {
-                        names: full_names,
-                        networks: HashMap::new(),
-                    },
-                )
-                .into_mut(),
-        };
+        let container_state = containers
+            .entry(container_id)
+            .or_insert_with(|| ContainerState {
+                names: full_names,
+                networks: HashMap::new(),
+            });
 
         for (network_name, network) in network_settings.networks {
             let Some(network_ips) = NetworkIps::from_network(&network) else {
+                continue;
+            };
+
+            let Some(network_id) = network.network_id else {
+                event!(
+                    Level::WARN,
+                    %network_name,
+                    "Network has addresses but no network id, skipping"
+                );
                 continue;
             };
 
@@ -309,12 +308,12 @@ impl Monitor {
                 }
             }
 
-            container_state.networks.insert(network_name, network_ips);
+            container_state.networks.insert(network_id, network_ips);
         }
     }
 
-    #[instrument(name = "container_rename", skip_all, fields(container_id = %short_id(&event.actor.id)))]
-    async fn handle_container_rename(&self, event: Event) {
+    #[instrument(name = "container_rename", skip_all, fields(container_id = %event.actor.id.as_short()))]
+    async fn handle_container_rename(&self, event: EventBody<ContainerId>) {
         // for some reason the old name needs to be sanitized (starts with `/`).
         // the new one doesn't
         let old_name = event.actor.attributes.get("oldName").map(|name| {
@@ -355,7 +354,7 @@ impl Monitor {
                     );
                 } else {
                     let new_names = to_full_names(get_all_names_from_event(&event), &self.domain);
-                    if let Some(state) = self.containers.lock().await.get_mut(&*event.actor.id) {
+                    if let Some(state) = self.containers.lock().await.get_mut(&event.actor.id) {
                         state.names = new_names;
                     }
                 }
@@ -364,13 +363,13 @@ impl Monitor {
     }
 
     #[instrument(name = "container_start", skip_all)]
-    async fn handle_container_start(&self, event: Event) {
-        self.register_container(&event.actor.id).await;
+    async fn handle_container_start(&self, event: EventBody<ContainerId>) {
+        self.register_container(event.actor.id).await;
     }
 
-    #[instrument(name = "container_die", skip_all, fields(container_id = %short_id(&event.actor.id)))]
-    async fn handle_container_die(&self, event: Event) {
-        let Some(state) = self.containers.lock().await.remove(&*event.actor.id) else {
+    #[instrument(name = "container_die", skip_all, fields(container_id = %event.actor.id.as_short()))]
+    async fn handle_container_die(&self, event: EventBody<ContainerId>) {
+        let Some(state) = self.containers.lock().await.remove(&event.actor.id) else {
             return;
         };
 
@@ -386,10 +385,19 @@ impl Monitor {
     #[instrument(
         name = "network_connect",
         skip_all,
-        fields(container_id = field::Empty, network_name = field::Empty)
+        fields(
+            container_id = field::Empty,
+            network_id = %event.actor.id.as_short(),
+            network_name = field::Empty
+        )
     )]
-    async fn handle_network_connect(&self, event: Event) {
-        let Some(container_id) = event.actor.attributes.get("container") else {
+    async fn handle_network_connect(&self, mut event: EventBody<NetworkId>) {
+        let Some(container_id) = event
+            .actor
+            .attributes
+            .remove("container")
+            .map(ContainerId::new)
+        else {
             event!(
                 Level::WARN,
                 ?event,
@@ -398,22 +406,21 @@ impl Monitor {
             return;
         };
 
-        let Some(network_name) = event.actor.attributes.get("name") else {
-            event!(
-                Level::WARN,
-                ?event,
-                "Got network connect event, but event did not contain network name"
-            );
-            return;
-        };
-
         let span = Span::current();
-        span.record("container_id", field::display(short_id(container_id)));
-        span.record("network_name", field::display(network_name));
+        span.record("container_id", field::display(container_id.as_short()));
 
-        match self.docker.inspect_container(container_id).await {
+        if let Some(network_name) = event.actor.attributes.get("name") {
+            span.record("network_name", field::display(network_name));
+        }
+
+        match self.docker.inspect_container(&container_id).await {
             Ok(container) => {
-                let Some(network) = container.network_settings.networks.get(&**network_name) else {
+                let Some(network) = container
+                    .network_settings
+                    .networks
+                    .values()
+                    .find(|network| network.network_id.as_ref() == Some(&event.actor.id))
+                else {
                     event!(
                         Level::WARN,
                         "Got network connect event, but network not found in container inspect",
@@ -431,20 +438,14 @@ impl Monitor {
 
                 let mut containers = self.containers.lock().await;
 
-                let state = match containers.entry_ref(&**container_id) {
-                    EntryRef::Occupied(occupied_entry) => occupied_entry.into_mut(),
-                    EntryRef::Vacant(vacant_entry_ref) => vacant_entry_ref
-                        .insert_entry_with_key(
-                            container_id.clone(),
-                            ContainerState {
-                                names: self.full_names(&container),
-                                networks: HashMap::new(),
-                            },
-                        )
-                        .into_mut(),
-                };
+                let state = containers
+                    .entry(container_id)
+                    .or_insert_with(|| ContainerState {
+                        names: self.full_names(&container),
+                        networks: HashMap::new(),
+                    });
 
-                if let Some(old_ips) = state.networks.insert(network_name.clone(), network_ips)
+                if let Some(old_ips) = state.networks.insert(event.actor.id, network_ips)
                     && old_ips != network_ips
                 {
                     for ip in old_ips.ips() {
@@ -473,10 +474,19 @@ impl Monitor {
     #[instrument(
         name = "network_disconnect",
         skip_all,
-        fields(container_id = field::Empty, network_name = field::Empty)
+        fields(
+            container_id = field::Empty,
+            network_id = %event.actor.id.as_short(),
+            network_name = field::Empty
+        )
     )]
-    async fn handle_network_disconnect(&self, event: Event) {
-        let Some(container_id) = event.actor.attributes.get("container") else {
+    async fn handle_network_disconnect(&self, mut event: EventBody<NetworkId>) {
+        let Some(container_id) = event
+            .actor
+            .attributes
+            .remove("container")
+            .map(ContainerId::new)
+        else {
             event!(
                 Level::WARN,
                 ?event,
@@ -485,27 +495,21 @@ impl Monitor {
             return;
         };
 
-        let Some(network_name) = event.actor.attributes.get("name") else {
-            event!(
-                Level::WARN,
-                ?event,
-                "Got network disconnect event, but event did not contain network name"
-            );
-            return;
-        };
-
         let span = Span::current();
-        span.record("container_id", field::display(short_id(container_id)));
-        span.record("network_name", field::display(network_name));
+        span.record("container_id", field::display(container_id.as_short()));
+
+        if let Some(network_name) = event.actor.attributes.get("name") {
+            span.record("network_name", field::display(network_name));
+        }
 
         let mut containers = self.containers.lock().await;
 
-        let Some(state) = containers.get_mut(&**container_id) else {
+        let Some(state) = containers.get_mut(&container_id) else {
             event!(Level::DEBUG, "Disconnect for an untracked container");
             return;
         };
 
-        let Some(network_ips) = state.networks.remove(&**network_name) else {
+        let Some(network_ips) = state.networks.remove(&event.actor.id) else {
             event!(Level::DEBUG, "Disconnect for an untracked network");
             return;
         };
@@ -517,9 +521,9 @@ impl Monitor {
         }
     }
 
-    #[instrument(skip_all, fields(network_id = %short_id(network_id)))]
-    async fn register_network(&self, network_id: &str) {
-        let inspect = match self.docker.inspect_network(network_id).await {
+    #[instrument(skip_all, fields(network_id = %network_id.as_short()))]
+    async fn register_network(&self, network_id: NetworkId) {
+        let inspect = match self.docker.inspect_network(&network_id).await {
             Ok(n) => n,
             Err(error) => {
                 event!(Level::WARN, ?error, "Failed to inspect network");
@@ -557,14 +561,11 @@ impl Monitor {
             }
         }
 
-        self.networks
-            .lock()
-            .await
-            .insert(network_id.into(), registered);
+        self.networks.lock().await.insert(network_id, registered);
     }
 
-    #[instrument(skip_all, fields(network_id = %short_id(network_id)))]
-    async fn deregister_network(&self, network_id: &str) {
+    #[instrument(skip_all, fields(network_id = %network_id.as_short()))]
+    async fn deregister_network(&self, network_id: &NetworkId) {
         let Some(zones) = self.networks.lock().await.remove(network_id) else {
             event!(
                 Level::WARN,
@@ -590,22 +591,22 @@ impl Monitor {
     }
 
     #[instrument(name = "network_create", skip_all)]
-    async fn handle_network_create(&self, event: Event) {
+    async fn handle_network_create(&self, event: EventBody<NetworkId>) {
         if self.networks.lock().await.contains_key(&event.actor.id) {
             return;
         }
 
-        self.register_network(&event.actor.id).await;
+        self.register_network(event.actor.id).await;
     }
 
     #[instrument(name = "network_destroy", skip_all)]
-    async fn handle_network_destroy(&self, event: Event) {
+    async fn handle_network_destroy(&self, event: EventBody<NetworkId>) {
         self.deregister_network(&event.actor.id).await;
     }
 
     pub async fn consume_events(
         &self,
-        mut receiver: Receiver<Event>,
+        mut receiver: Receiver<Result<Event, EventDecodeError>>,
         cancellation_token: &CancellationToken,
     ) {
         loop {
@@ -626,33 +627,53 @@ impl Monitor {
                 }
             };
 
-            match event.r#type {
-                EventType::Container => match &*event.action {
-                    "start" => self.handle_container_start(event).await,
-                    "rename" => self.handle_container_rename(event).await,
-                    "die" => self.handle_container_die(event).await,
+            let event = match event {
+                Ok(event) => event,
+                Err(error) => {
+                    event!(Level::ERROR, ?error, "Failed to decode event");
+
+                    continue;
+                },
+            };
+
+            match event {
+                Event::Container(body) => match &*body.action {
+                    "start" => self.handle_container_start(body).await,
+                    "rename" => self.handle_container_rename(body).await,
+                    "die" => self.handle_container_die(body).await,
                     rest => {
-                        event!(Level::TRACE, r#type = ?event.r#type, event = rest, "ignoring event");
+                        event!(
+                            Level::TRACE,
+                            r#type = "container",
+                            event = rest,
+                            "ignoring event"
+                        );
                     },
                 },
-                EventType::Network => match &*event.action {
-                    "connect" => self.handle_network_connect(event).await,
-                    "disconnect" => self.handle_network_disconnect(event).await,
-                    "create" => self.handle_network_create(event).await,
-                    "destroy" => self.handle_network_destroy(event).await,
+                Event::Network(body) => match &*body.action {
+                    "connect" => self.handle_network_connect(body).await,
+                    "disconnect" => self.handle_network_disconnect(body).await,
+                    "create" => self.handle_network_create(body).await,
+                    "destroy" => self.handle_network_destroy(body).await,
                     rest => {
-                        event!(Level::TRACE, r#type = ?event.r#type, event = rest, "ignoring event");
+                        event!(
+                            Level::TRACE,
+                            r#type = "network",
+                            event = rest,
+                            "ignoring event"
+                        );
                     },
                 },
-                EventType::Builder
-                | EventType::Config
-                | EventType::Daemon
-                | EventType::Image
-                | EventType::Node
-                | EventType::Plugin
-                | EventType::Secret
-                | EventType::Service
-                | EventType::Volume => {
+                Event::Builder(_)
+                | Event::Config(_)
+                | Event::Daemon(_)
+                | Event::Image(_)
+                | Event::Node(_)
+                | Event::Plugin(_)
+                | Event::Secret(_)
+                | Event::Service(_)
+                | Event::Volume(_)
+                | Event::Unknown { .. } => {
                     event!(Level::TRACE, ?event, "Ignoring event");
                 },
             }
@@ -665,11 +686,11 @@ impl Monitor {
         // so PTR records are in place before containers are processed.
         let networks = self.docker.list_networks().await?;
         for network in networks {
-            self.register_network(&network.id).await;
+            self.register_network(network.id).await;
         }
 
         for container in self.docker.list_containers(&Filters::default()).await? {
-            self.register_container(&container.id).await;
+            self.register_container(container.id).await;
         }
 
         Ok(())
