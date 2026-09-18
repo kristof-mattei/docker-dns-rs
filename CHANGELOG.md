@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [0.13.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.3..v0.13.4) - 2026-09-18
+
+### 🐛 Bug Fixes
+
+- Treat an empty or blank `RUST_LOG` like an absent one by [@kristof-mattei](https://github.com/kristof-mattei) ([`e7ab29e`](https://github.com/kristof-mattei/docker-dns-rs/commit/e7ab29e1925615b53a008555ab95395fb6d7ed53))
+
+### ⚙️ Miscellaneous Tasks
+
+- Add the `authors` and `vendor` OCI labels to the container by [@kristof-mattei](https://github.com/kristof-mattei) ([`c99a47a`](https://github.com/kristof-mattei/docker-dns-rs/commit/c99a47add3497590e832ec4c69e4027a13afa808))
 ## [0.13.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.2..v0.13.3) - 2026-09-15
 
 ### 🐛 Bug Fixes
