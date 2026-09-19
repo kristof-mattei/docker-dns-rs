@@ -8,11 +8,13 @@ permissions:
   contents: read
 
 env:
-  # a `CARGO_TARGET_<TRIPLE>_RUSTFLAGS` variable replaces `build.rustflags`, the only rustflags of the Windows jobs
+  # a `CARGO_TARGET_<TRIPLE>_RUSTFLAGS` variable replaces `build.rustflags`, the only rustflags of the Windows jobs, so it cannot be used for them
+  # https://doc.rust-lang.org/cargo/reference/config.html#buildrustflags
   CARGO_BUILD_RUSTFLAGS: --deny=warnings
   CARGO_FEATURES: --all-features
   CARGO_INCREMENTAL: "0"
-  # the `RUSTFLAGS` variable replaces the rustflags in `.cargo/config.toml`
+  # `RUSTFLAGS` replaces the rustflags in `.cargo/config.toml`, so it cannot be used here
+  # https://doc.rust-lang.org/cargo/reference/config.html#buildrustflags
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS: --deny=warnings
   CARGO_TERM_COLOR: always
   RUSTC_WRAPPER: "sccache"
