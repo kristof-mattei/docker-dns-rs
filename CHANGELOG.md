@@ -1,4 +1,10 @@
 <!-- header goes here -->
+## [0.13.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.4..v0.13.5) - 2026-09-19
+
+### ⚙️ Miscellaneous Tasks
+
+- *(codeql)* Install mold before the Rust analysis by [@kristof-mattei](https://github.com/kristof-mattei) ([`57ea65e`](https://github.com/kristof-mattei/docker-dns-rs/commit/57ea65e196db2aa5643351b8f5de254ad035cba6))
+- *(release)* Copy the container to Docker Hub from a `docker-io` environment that links to the released tags by [@kristof-mattei](https://github.com/kristof-mattei) ([`0e842b0`](https://github.com/kristof-mattei/docker-dns-rs/commit/0e842b00a4b6b771dfc406af570eae697cf3337e))
 ## [0.13.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.3..v0.13.4) - 2026-09-18
 
 ### 🐛 Bug Fixes
