@@ -13,7 +13,7 @@ use tokio::sync::mpsc::Receiver;
 use tokio::sync::{Mutex, RwLock};
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, Span, event, field, instrument};
-use twistlock::client::Client;
+use twistlock::client::{Client, EventStreamError};
 use twistlock::filters::Filters;
 use twistlock::models::container_inspect::{
     ContainerInspect, ContainerNetwork, ContainerNetworkSettings,
@@ -606,7 +606,7 @@ impl Monitor {
 
     pub async fn consume_events(
         &self,
-        mut receiver: Receiver<Result<Event, EventDecodeError>>,
+        mut receiver: Receiver<Result<Result<Event, EventDecodeError>, EventStreamError>>,
         cancellation_token: &CancellationToken,
     ) {
         loop {
@@ -617,13 +617,22 @@ impl Monitor {
                     break;
                 },
                 r = receiver.recv() => {
-                    let Some(event) = r else {
+                    let Some(next) = r else {
                         event!(Level::INFO, "Channel closed / dropped");
 
                         break;
                     };
 
-                    event
+                    match next {
+                        Ok(event) => event,
+                        Err(error) => {
+                            let error = eyre::Report::new(error);
+
+                            event!(Level::ERROR, ?error, "Event stream failed");
+
+                            break;
+                        },
+                    }
                 }
             };
 
