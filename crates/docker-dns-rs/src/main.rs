@@ -10,7 +10,7 @@ use dotenvy::dotenv;
 use hickory_server::zone_handler::Catalog;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio::sync::RwLock;
-use tokio::sync::mpsc::Receiver;
+use tokio::sync::mpsc::{Receiver, Sender};
 use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
 use tokio_util::task::TaskTracker;
@@ -19,7 +19,7 @@ use tracing_subscriber::Layer as _;
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
-use twistlock::client::Client as Daemon;
+use twistlock::client::{Client as Daemon, EventStreamError, EventSubscription};
 use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
@@ -186,11 +186,17 @@ async fn start_tasks() -> Shutdown {
 
     let tasks = TaskTracker::new();
 
+    // the scan below can miss a change made while it runs
+    let subscription = match docker.subscribe_events().await {
+        Ok(subscription) => subscription,
+        Err(error) => return Shutdown::from(error),
+    };
+
     // pump messages from Docker to the DockerMonitor
     {
         tasks.spawn_with_name(
             "docker listener",
-            docker_listener(docker, sender, cancellation_token.clone()),
+            docker_listener(subscription, sender, cancellation_token.clone()),
         );
     }
 
@@ -295,22 +301,31 @@ async fn dns_handler(
 }
 
 async fn docker_listener(
-    docker: Arc<Daemon>,
-    sender: tokio::sync::mpsc::Sender<Result<Event, EventDecodeError>>,
+    mut subscription: EventSubscription,
+    sender: Sender<Result<Result<Event, EventDecodeError>, EventStreamError>>,
     cancellation_token: CancellationToken,
 ) {
-    let _guard = cancellation_token.clone().drop_guard();
+    // `consume_events` checks cancellation before the channel, so a drop guard here would hide the error this forwards
+    loop {
+        let next = tokio::select! {
+            biased;
+            () = cancellation_token.cancelled() => break,
+            next = subscription.next() => next,
+        };
 
-    if let Err(error) = docker.produce_events(sender, &cancellation_token).await {
-        event!(Level::ERROR, ?error, "Event producer Handler failed");
-    } else {
-        event!(Level::INFO, "Event producer stopped");
+        let ended = next.is_err();
+
+        if sender.send(next).await.is_err() || ended {
+            break;
+        }
     }
+
+    event!(Level::INFO, "Event producer stopped");
 }
 
 async fn docker_event_monitor(
     docker_monitor: Monitor,
-    receiver: Receiver<Result<Event, EventDecodeError>>,
+    receiver: Receiver<Result<Result<Event, EventDecodeError>, EventStreamError>>,
     cancellation_token: CancellationToken,
 ) {
     let _guard = cancellation_token.clone().drop_guard();

@@ -2066,11 +2066,10 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 
 [[package]]
 name = "twistlock"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bdffa945dc0fd233524361139e8efd7f0ca075b6f790297f038627f42bcad6d9"
+checksum = "78879d3b2838b896288907434eee2b0efb388f19664b1793d7ed5b7714b4b920"
 dependencies = [
- "color-eyre",
  "hashbrown",
  "http",
  "http-body-util",
@@ -2086,7 +2085,6 @@ dependencies = [
  "serde_json",
  "thiserror",
  "tokio",
- "tokio-util",
  "tracing",
 ]
 
