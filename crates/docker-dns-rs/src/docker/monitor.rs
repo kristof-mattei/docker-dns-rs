@@ -26,7 +26,7 @@ use crate::table::AuthorityWrapper;
 
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy)]
 enum NetworkIps {
     V4Only(Ipv4Addr),
     V6Only(Ipv6Addr),
@@ -51,6 +51,10 @@ impl NetworkIps {
         }
         .into_iter()
         .flatten()
+    }
+
+    fn contains(self, ip: IpAddr) -> bool {
+        self.ips().any(|candidate| candidate == ip)
     }
 }
 
@@ -445,10 +449,8 @@ impl Monitor {
                         networks: HashMap::new(),
                     });
 
-                if let Some(old_ips) = state.networks.insert(event.actor.id, network_ips)
-                    && old_ips != network_ips
-                {
-                    for ip in old_ips.ips() {
+                if let Some(old_ips) = state.networks.insert(event.actor.id, network_ips) {
+                    for ip in old_ips.ips().filter(|ip| !network_ips.contains(*ip)) {
                         for name in &*state.names {
                             self.authority_wrapper.remove_address(name, ip).await;
                         }
@@ -708,13 +710,14 @@ impl Monitor {
 
 #[cfg(test)]
 mod tests {
+    use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
     use std::str::FromStr as _;
 
     use hickory_server::proto::rr::Name;
     use ipnet::IpNet;
     use pretty_assertions::assert_eq;
 
-    use crate::docker::monitor::parse_subnet;
+    use crate::docker::monitor::{NetworkIps, parse_subnet};
 
     fn subnet(s: &str) -> IpNet {
         s.parse().unwrap()
@@ -792,5 +795,16 @@ mod tests {
         )];
 
         assert_eq!(ranges, expected);
+    }
+
+    #[test]
+    fn network_ips_contains_only_its_own_addresses() {
+        let v4 = Ipv4Addr::new(172, 16, 0, 2);
+        let v6 = Ipv6Addr::new(0xfd00, 0, 0, 0, 0, 0, 0, 2);
+
+        assert!(NetworkIps::Both(v4, v6).contains(IpAddr::V4(v4)));
+        assert!(NetworkIps::Both(v4, v6).contains(IpAddr::V6(v6)));
+        assert!(!NetworkIps::V4Only(v4).contains(IpAddr::V6(v6)));
+        assert!(!NetworkIps::V6Only(v6).contains(IpAddr::V4(v4)));
     }
 }
