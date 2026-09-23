@@ -27,34 +27,31 @@ use crate::table::AuthorityWrapper;
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
 #[derive(Debug, Clone, Copy)]
-enum ContainerNetworkIps {
-    V4Only(Ipv4Addr),
-    V6Only(Ipv6Addr),
-    Both(Ipv4Addr, Ipv6Addr),
+struct ContainerNetworkIps {
+    v4: Option<Ipv4Addr>,
+    v6: Option<Ipv6Addr>,
 }
 
 impl ContainerNetworkIps {
     fn from_network(network: &ContainerNetwork) -> Option<Self> {
         match (network.ip_address, network.global_ipv6_address) {
-            (Some(v4), Some(v6)) => Some(Self::Both(v4, v6)),
-            (Some(v4), None) => Some(Self::V4Only(v4)),
-            (None, Some(v6)) => Some(Self::V6Only(v6)),
             (None, None) => None,
+            (v4, v6) => Some(Self { v4, v6 }),
         }
     }
 
     fn ips(self) -> impl Iterator<Item = IpAddr> {
-        match self {
-            Self::V4Only(v4) => [Some(IpAddr::V4(v4)), None],
-            Self::V6Only(v6) => [None, Some(IpAddr::V6(v6))],
-            Self::Both(v4, v6) => [Some(IpAddr::V4(v4)), Some(IpAddr::V6(v6))],
-        }
-        .into_iter()
-        .flatten()
+        self.v4
+            .map(IpAddr::V4)
+            .into_iter()
+            .chain(self.v6.map(IpAddr::V6))
     }
 
-    fn contains(self, ip: IpAddr) -> bool {
-        self.ips().any(|candidate| candidate == ip)
+    fn has(self, ip: IpAddr) -> bool {
+        match ip {
+            IpAddr::V4(v4) => self.v4 == Some(v4),
+            IpAddr::V6(v6) => self.v6 == Some(v6),
+        }
     }
 }
 
@@ -450,7 +447,7 @@ impl Monitor {
                     });
 
                 if let Some(old_ips) = state.networks.insert(event.actor.id, new_ips) {
-                    for ip in old_ips.ips().filter(|ip| !new_ips.contains(*ip)) {
+                    for ip in old_ips.ips().filter(|ip| !new_ips.has(*ip)) {
                         for name in &*state.names {
                             self.authority_wrapper.remove_address(name, ip).await;
                         }
@@ -798,13 +795,25 @@ mod tests {
     }
 
     #[test]
-    fn container_network_ips_contains_only_its_own_addresses() {
+    fn container_network_ips_has_only_its_own_addresses() {
         let v4 = Ipv4Addr::new(172, 16, 0, 2);
         let v6 = Ipv6Addr::new(0xfd00, 0, 0, 0, 0, 0, 0, 2);
+        let both = ContainerNetworkIps {
+            v4: Some(v4),
+            v6: Some(v6),
+        };
+        let v4_only = ContainerNetworkIps {
+            v4: Some(v4),
+            v6: None,
+        };
+        let v6_only = ContainerNetworkIps {
+            v4: None,
+            v6: Some(v6),
+        };
 
-        assert!(ContainerNetworkIps::Both(v4, v6).contains(IpAddr::V4(v4)));
-        assert!(ContainerNetworkIps::Both(v4, v6).contains(IpAddr::V6(v6)));
-        assert!(!ContainerNetworkIps::V4Only(v4).contains(IpAddr::V6(v6)));
-        assert!(!ContainerNetworkIps::V6Only(v6).contains(IpAddr::V4(v4)));
+        assert!(both.has(IpAddr::V4(v4)));
+        assert!(both.has(IpAddr::V6(v6)));
+        assert!(!v4_only.has(IpAddr::V6(v6)));
+        assert!(!v6_only.has(IpAddr::V4(v4)));
     }
 }
