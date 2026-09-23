@@ -27,13 +27,13 @@ use crate::table::AuthorityWrapper;
 static RE_VALIDNAME: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\w\d.-]").unwrap());
 
 #[derive(Debug, Clone, Copy)]
-enum NetworkIps {
+enum ContainerNetworkIps {
     V4Only(Ipv4Addr),
     V6Only(Ipv6Addr),
     Both(Ipv4Addr, Ipv6Addr),
 }
 
-impl NetworkIps {
+impl ContainerNetworkIps {
     fn from_network(network: &ContainerNetwork) -> Option<Self> {
         match (network.ip_address, network.global_ipv6_address) {
             (Some(v4), Some(v6)) => Some(Self::Both(v4, v6)),
@@ -61,7 +61,7 @@ impl NetworkIps {
 struct ContainerState {
     names: Arc<[Name]>,
     /// `network_id` to IPs.
-    networks: HashMap<NetworkId, NetworkIps>,
+    networks: HashMap<NetworkId, ContainerNetworkIps>,
 }
 
 pub struct Monitor {
@@ -293,7 +293,7 @@ impl Monitor {
             });
 
         for (network_name, network) in network_settings.networks {
-            let Some(network_ips) = NetworkIps::from_network(&network) else {
+            let Some(ips) = ContainerNetworkIps::from_network(&network) else {
                 continue;
             };
 
@@ -306,13 +306,13 @@ impl Monitor {
                 continue;
             };
 
-            for ip in network_ips.ips() {
+            for ip in ips.ips() {
                 for name in &*container_state.names {
                     self.authority_wrapper.add(name, ip).await;
                 }
             }
 
-            container_state.networks.insert(network_id, network_ips);
+            container_state.networks.insert(network_id, ips);
         }
     }
 
@@ -377,8 +377,8 @@ impl Monitor {
             return;
         };
 
-        for (_, network_ips) in state.networks {
-            for ip in network_ips.ips() {
+        for (_, ips) in state.networks {
+            for ip in ips.ips() {
                 for name in &*state.names {
                     self.authority_wrapper.remove_address(name, ip).await;
                 }
@@ -432,7 +432,7 @@ impl Monitor {
                     return;
                 };
 
-                let Some(network_ips) = NetworkIps::from_network(network) else {
+                let Some(new_ips) = ContainerNetworkIps::from_network(network) else {
                     event!(
                         Level::DEBUG,
                         "Network connect event: network has no IP addresses",
@@ -449,15 +449,15 @@ impl Monitor {
                         networks: HashMap::new(),
                     });
 
-                if let Some(old_ips) = state.networks.insert(event.actor.id, network_ips) {
-                    for ip in old_ips.ips().filter(|ip| !network_ips.contains(*ip)) {
+                if let Some(old_ips) = state.networks.insert(event.actor.id, new_ips) {
+                    for ip in old_ips.ips().filter(|ip| !new_ips.contains(*ip)) {
                         for name in &*state.names {
                             self.authority_wrapper.remove_address(name, ip).await;
                         }
                     }
                 }
 
-                for ip in network_ips.ips() {
+                for ip in new_ips.ips() {
                     for name in &*state.names {
                         self.authority_wrapper.add(name, ip).await;
                     }
@@ -511,12 +511,12 @@ impl Monitor {
             return;
         };
 
-        let Some(network_ips) = state.networks.remove(&event.actor.id) else {
+        let Some(ips) = state.networks.remove(&event.actor.id) else {
             event!(Level::DEBUG, "Disconnect for an untracked network");
             return;
         };
 
-        for ip in network_ips.ips() {
+        for ip in ips.ips() {
             for name in &*state.names {
                 self.authority_wrapper.remove_address(name, ip).await;
             }
@@ -717,7 +717,7 @@ mod tests {
     use ipnet::IpNet;
     use pretty_assertions::assert_eq;
 
-    use crate::docker::monitor::{NetworkIps, parse_subnet};
+    use crate::docker::monitor::{ContainerNetworkIps, parse_subnet};
 
     fn subnet(s: &str) -> IpNet {
         s.parse().unwrap()
@@ -798,13 +798,13 @@ mod tests {
     }
 
     #[test]
-    fn network_ips_contains_only_its_own_addresses() {
+    fn container_network_ips_contains_only_its_own_addresses() {
         let v4 = Ipv4Addr::new(172, 16, 0, 2);
         let v6 = Ipv6Addr::new(0xfd00, 0, 0, 0, 0, 0, 0, 2);
 
-        assert!(NetworkIps::Both(v4, v6).contains(IpAddr::V4(v4)));
-        assert!(NetworkIps::Both(v4, v6).contains(IpAddr::V6(v6)));
-        assert!(!NetworkIps::V4Only(v4).contains(IpAddr::V6(v6)));
-        assert!(!NetworkIps::V6Only(v6).contains(IpAddr::V4(v4)));
+        assert!(ContainerNetworkIps::Both(v4, v6).contains(IpAddr::V4(v4)));
+        assert!(ContainerNetworkIps::Both(v4, v6).contains(IpAddr::V6(v6)));
+        assert!(!ContainerNetworkIps::V4Only(v4).contains(IpAddr::V6(v6)));
+        assert!(!ContainerNetworkIps::V6Only(v6).contains(IpAddr::V4(v4)));
     }
 }
