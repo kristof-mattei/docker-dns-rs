@@ -1,4 +1,30 @@
 <!-- header goes here -->
+## [0.13.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.4..v0.13.5) - 2026-09-23
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to v0.8.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`2f44ac2`](https://github.com/kristof-mattei/docker-dns-rs/commit/2f44ac2fe434d06edfedf1a83a74d3b2200195d9))
+- *(deps)* Update rust crate twistlock to v0.8.0 by [@kristof-mattei](https://github.com/kristof-mattei) ([`81b6945`](https://github.com/kristof-mattei/docker-dns-rs/commit/81b69450491bfc08c1ff7ad37f1723b332c34722))
+- *(monitor)* Remove only the addresses that are gone on a network reconnect by [@kristof-mattei](https://github.com/kristof-mattei) ([`6194a30`](https://github.com/kristof-mattei/docker-dns-rs/commit/6194a3033e456dc9950b44ebdba11bad90daf721))
+
+### 📚 Documentation
+
+- Add run instructions and a configuration table by [@kristof-mattei](https://github.com/kristof-mattei) ([`4fcf3e0`](https://github.com/kristof-mattei/docker-dns-rs/commit/4fcf3e001e361730e5d08d0848081a738f05f7dc))
+
+### 🚜 Refactor
+
+- *(monitor)* Rename `NetworkIps` to `ContainerNetworkIps` by [@kristof-mattei](https://github.com/kristof-mattei) ([`ee9e5aa`](https://github.com/kristof-mattei/docker-dns-rs/commit/ee9e5aa2688dac8b24d38a1822faad3bc2244d5a))
+- *(monitor)* Store `ContainerNetworkIps` as two optional addresses by [@kristof-mattei](https://github.com/kristof-mattei) ([`ac6c4db`](https://github.com/kristof-mattei/docker-dns-rs/commit/ac6c4db99c7bf7e697030e92dbebde4fa60fc5c2))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(codeql)* Install mold before the Rust analysis by [@kristof-mattei](https://github.com/kristof-mattei) ([`57ea65e`](https://github.com/kristof-mattei/docker-dns-rs/commit/57ea65e196db2aa5643351b8f5de254ad035cba6))
+- *(devcontainer)* Install mold from the GitHub release by [@kristof-mattei](https://github.com/kristof-mattei) ([`6cece4f`](https://github.com/kristof-mattei/docker-dns-rs/commit/6cece4fb9cca8839d21090057728982422f1b1f9))
+- *(release)* Copy the container to Docker Hub from a `docker-io` environment that links to the released tags by [@kristof-mattei](https://github.com/kristof-mattei) ([`0e842b0`](https://github.com/kristof-mattei/docker-dns-rs/commit/0e842b00a4b6b771dfc406af570eae697cf3337e))
+
+### 💼 Other
+
+- Link the container binaries with mold by [@kristof-mattei](https://github.com/kristof-mattei) ([`525e8a0`](https://github.com/kristof-mattei/docker-dns-rs/commit/525e8a0bed4f69ffeb72679c79ff7ba10fc034b2))
 ## [0.13.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.3..v0.13.4) - 2026-09-18
 
 ### 🐛 Bug Fixes
