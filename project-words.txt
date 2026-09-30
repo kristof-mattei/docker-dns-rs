@@ -36,6 +36,7 @@ lstrip
 mattei
 mimalloc
 miri
+mkhl
 monomorphization
 multiplatform
 namedtuple

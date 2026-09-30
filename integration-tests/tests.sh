@@ -28,7 +28,7 @@ docker compose config
 function cleanup() {
     exit_status=$?
     echo "exit was $exit_status"
-    if (( exit_status != 0 )); then
+    if ((exit_status != 0)); then
         docker compose logs docker-dns-rs
     fi
     docker compose down --timeout 1 || true
