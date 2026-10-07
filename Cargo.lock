@@ -464,6 +464,7 @@ dependencies = [
  "color-eyre",
  "console-subscriber",
  "dotenvy",
+ "futures-util",
  "hashbrown",
  "hickory-net",
  "hickory-server",

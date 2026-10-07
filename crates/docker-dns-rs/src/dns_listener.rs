@@ -4,9 +4,8 @@ use std::sync::Arc;
 use std::time::Duration;
 
 use async_trait::async_trait;
-use color_eyre::eyre;
+use color_eyre::eyre::{self, Context as _};
 use hashbrown::{HashMap, HashSet};
-use hickory_net::NetError;
 use hickory_net::proto::op::{HeaderCounts, Metadata};
 use hickory_net::runtime::{Time, TokioTime};
 use hickory_server::Server;
@@ -171,7 +170,8 @@ pub async fn set_up_dns_server<H>(
     udp_socket: UdpSocket,
     handler: H,
     cancellation_token: CancellationToken,
-) where
+) -> Result<(), eyre::Report>
+where
     H: RequestHandler,
 {
     // see https://github.com/hickory-dns/hickory-dns/blob/7a5678135c48f5bfc212824bc369634901ba4bc6/bin/src/config/mod.rs#L236-L251
@@ -183,17 +183,18 @@ pub async fn set_up_dns_server<H>(
     dns_listener.register_listener(tcp_listener, Duration::from_secs(1), RESPONSE_BUFFER_SIZE);
 
     tokio::select! {
-           biased;
-           () = cancellation_token.cancelled() => {
-               event!(Level::INFO, "DNS Server cancelled externally");
+        biased;
+        () = cancellation_token.cancelled() => {
+            event!(Level::INFO, "DNS Server cancelled externally");
 
-               handle_server_shutdown(dns_listener.shutdown_gracefully().await);
-           }
-           result = dns_listener.block_until_done() => {
-               event!(Level::INFO, "DNS Server stopped");
-
-               handle_server_shutdown(result);
-           },
+            dns_listener
+                .shutdown_gracefully()
+                .await
+                .wrap_err("Requested graceful shutdown, did not happen")
+        },
+        result = dns_listener.block_until_done() => {
+            result.wrap_err("DNS server stopped")
+        },
     }
 }
 
@@ -226,16 +227,4 @@ pub fn set_up_catalog<I: Into<LowerName>>(
     catalog.upsert(domain.into(), vec![authority]);
 
     catalog
-}
-
-fn handle_server_shutdown(server_shutdown_result: Result<(), NetError>) {
-    if let Err(error) = server_shutdown_result {
-        event!(
-            Level::ERROR,
-            ?error,
-            "Requested graceful shutdown, did not happen"
-        );
-    } else {
-        event!(Level::INFO, "DNS server shut down gracefully");
-    }
 }
