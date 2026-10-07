@@ -1,4 +1,33 @@
 <!-- header goes here -->
+## [0.13.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.5..v0.13.6) - 2026-10-07
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate libc to v0.2.190 by [@renovate[bot]](https://github.com/renovate[bot]) ([`c19f169`](https://github.com/kristof-mattei/docker-dns-rs/commit/c19f16950c028b485d492fb512f869bce9d24184))
+- *(deps)* Update rust crate tokio to v1.53.2 by [@renovate[bot]](https://github.com/renovate[bot]) ([`056ecd6`](https://github.com/kristof-mattei/docker-dns-rs/commit/056ecd66a7c78d3a305e9f19ffe15c88c8a20716))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Increase timeouts by [@kristof-mattei](https://github.com/kristof-mattei) ([`afdcbb4`](https://github.com/kristof-mattei/docker-dns-rs/commit/afdcbb4ad0875a47571030915a6e00c07283b90e))
+- *(docker)* Compare the PR image against its base commit's image instead of `edge` by [@kristof-mattei](https://github.com/kristof-mattei) ([`73bd78b`](https://github.com/kristof-mattei/docker-dns-rs/commit/73bd78b97674f97a64d1b60f3fa294d8fcf5cf3a))
+- *(github)* Lint the pull request title by [@kristof-mattei](https://github.com/kristof-mattei) ([`35a772a`](https://github.com/kristof-mattei/docker-dns-rs/commit/35a772aaf4901097a0d8c27bd681515f8f1f9bea))
+- *(release)* Compare the release commit's base image instead of `edge` by [@kristof-mattei](https://github.com/kristof-mattei) ([`08f21ab`](https://github.com/kristof-mattei/docker-dns-rs/commit/08f21ab3ca6724b24275b69c9479a49fba0823a2))
+- Shfmt by [@kristof-mattei](https://github.com/kristof-mattei) ([`6fbb336`](https://github.com/kristof-mattei/docker-dns-rs/commit/6fbb3360eb67cbb99bd16caf8ba3b51e8e1af54f))
+- Support GitHub stacked PRs by [@kristof-mattei](https://github.com/kristof-mattei) ([`5f43637`](https://github.com/kristof-mattei/docker-dns-rs/commit/5f43637d79da34027396a78034bc9618e9d1aaf8))
+- Run the changelog selection check on stacked PRs by [@kristof-mattei](https://github.com/kristof-mattei) ([`02e9dd7`](https://github.com/kristof-mattei/docker-dns-rs/commit/02e9dd7b88a57134eadcf5034a1cdc9418d1c928))
+- Fail the retag when the PR's artifacts were built against another base by [@kristof-mattei](https://github.com/kristof-mattei) ([`4f413a3`](https://github.com/kristof-mattei/docker-dns-rs/commit/4f413a3ee58db1614ba3437e6ee9188be9668dc8))
+- Identify the build cache's PR from the incoming PR's image by [@kristof-mattei](https://github.com/kristof-mattei) ([`adfa27a`](https://github.com/kristof-mattei/docker-dns-rs/commit/adfa27aa44c8f8a8ac1d0e7437d05e4cb96842ce))
+- End the Windows `grcov` test-module exclusion at the closing brace by [@kristof-mattei](https://github.com/kristof-mattei) ([`e0a715e`](https://github.com/kristof-mattei/docker-dns-rs/commit/e0a715e6f207f2852d280e329ae203e279ba99fb))
+- End the Windows `grcov` test-module branch exclusion at the closing brace by [@kristof-mattei](https://github.com/kristof-mattei) ([`a48075f`](https://github.com/kristof-mattei/docker-dns-rs/commit/a48075fbbe808a46efef5d64030975d7e69257fd))
+- End the Windows `grcov` test-module exclusions only at a bare closing brace by [@kristof-mattei](https://github.com/kristof-mattei) ([`273d270`](https://github.com/kristof-mattei/docker-dns-rs/commit/273d270c3e78ce678769cefb62e1362b558d343c))
+- End the `grcov` test-module exclusion at the closing brace by [@kristof-mattei](https://github.com/kristof-mattei) ([`12d6daf`](https://github.com/kristof-mattei/docker-dns-rs/commit/12d6daf7f488ff326e1ce0f0015c17b80a7a0971))
+- End the `grcov` test-module branch exclusion at the closing brace by [@kristof-mattei](https://github.com/kristof-mattei) ([`2a9d642`](https://github.com/kristof-mattei/docker-dns-rs/commit/2a9d6424a522b62e6c9f5bdd9b11c44bb8239dd1))
+- End the `grcov` test-module exclusions only at a bare closing brace by [@kristof-mattei](https://github.com/kristof-mattei) ([`0e0176f`](https://github.com/kristof-mattei/docker-dns-rs/commit/0e0176f7f2120fa4ea73e52e1ad987ba62319b8f))
+- Consolidate the coverage pipeline into `generate-test-report.sh` by [@kristof-mattei](https://github.com/kristof-mattei) ([`a30c4db`](https://github.com/kristof-mattei/docker-dns-rs/commit/a30c4dbb2df96934f42afd83df484c328e3eeba0))
+
+### ◀️ Revert
+
+- *(github)* Lint the pull request title by [@kristof-mattei](https://github.com/kristof-mattei) ([`d5d1305`](https://github.com/kristof-mattei/docker-dns-rs/commit/d5d1305b1026c616cc8a12e141e9f32546fca5eb))
 ## [0.13.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.4..v0.13.5) - 2026-09-23
 
 ### 🐛 Bug Fixes
