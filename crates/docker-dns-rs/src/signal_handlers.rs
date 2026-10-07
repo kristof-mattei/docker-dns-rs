@@ -1,6 +1,3 @@
-#[cfg(not(target_os = "windows"))]
-use std::io::Error;
-
 use color_eyre::eyre;
 #[cfg(not(target_os = "windows"))]
 use libc::c_int;
@@ -26,6 +23,21 @@ const SIGINT: u8 = libc::SIGINT as u8;
 )]
 const SIGTERM: u8 = libc::SIGTERM as u8;
 
+#[derive(Clone, Copy)]
+pub enum Signal {
+    Interrupt,
+    Terminate,
+}
+
+impl Signal {
+    pub const fn number(self) -> u8 {
+        match self {
+            Signal::Interrupt => SIGINT,
+            Signal::Terminate => SIGTERM,
+        }
+    }
+}
+
 async fn register_sigterm_handler() -> Result<(), std::io::Error> {
     #[cfg(not(any(target_os = "windows", miri)))]
     signal(SignalKind::terminate())?.recv().await;
@@ -45,7 +57,7 @@ pub async fn wait_for_sigterm() -> Shutdown {
     } else {
         event!(Level::WARN, "SIGTERM detected, stopping all tasks");
 
-        Shutdown::Signal(SIGTERM)
+        Shutdown::Signal(Signal::Terminate)
     }
 }
 
@@ -68,43 +80,32 @@ pub async fn wait_for_sigint() -> Shutdown {
     } else {
         event!(Level::WARN, "CTRL+c detected, stopping all tasks");
 
-        Shutdown::Signal(SIGINT)
+        Shutdown::Signal(Signal::Interrupt)
     }
 }
 
 /// Sets signal back to its default action and raises it, killing this process.
 /// Returns when the raise did not terminate the process: PID 1 of a PID namespace only receives signals it has a handler for, and the reset removes it.
 #[cfg(not(target_os = "windows"))]
-pub fn terminate_by_signal(signal: u8) {
-    let signum = c_int::from(signal);
+pub fn terminate_by_signal(signal: Signal) {
+    let signum = c_int::from(signal.number());
 
-    // tokio's handler stays installed for the rest of the process (`Signal`'s caveats), so without this reset the raise runs it instead
+    // neither call can fail for SIGINT or SIGTERM
+
+    // tokio's handler stays installed for the rest of the process (`tokio::signal::unix::Signal`'s caveats), so without this reset the raise runs it instead
     // SAFETY: `signal(2)` with `SIG_DFL` has no preconditions
-    if unsafe { libc::signal(signum, libc::SIG_DFL) } == libc::SIG_ERR {
-        event!(
-            Level::ERROR,
-            error = %Error::last_os_error(),
-            signal,
-            "Failed to restore the default signal disposition"
-        );
-
-        return;
+    unsafe {
+        libc::signal(signum, libc::SIG_DFL);
     }
 
     // SAFETY: `raise(3)` has no preconditions
-    if unsafe { libc::raise(signum) } != 0 {
-        event!(
-            Level::ERROR,
-            error = %Error::last_os_error(),
-            signal,
-            "Failed to raise the signal"
-        );
+    unsafe {
+        libc::raise(signum);
     }
 }
 
-/// Never called on Windows: the waits above never resolve there, so `Shutdown::Signal` is never constructed.
 #[cfg(target_os = "windows")]
-pub fn terminate_by_signal(_signal: u8) {}
+pub fn terminate_by_signal(_signal: Signal) {}
 
 #[cfg(test)]
 mod tests {
@@ -116,7 +117,7 @@ mod tests {
         use pretty_assertions::assert_eq;
         use tokio::signal::unix::{SignalKind, signal};
 
-        use crate::signal_handlers::{SIGTERM, terminate_by_signal};
+        use crate::signal_handlers::{Signal, terminate_by_signal};
 
         const CHILD_MARKER: &str = "DOCKER_DNS_RS_TERMINATE_BY_SIGNAL_CHILD";
 
@@ -136,7 +137,7 @@ mod tests {
 
                 drop(runtime);
 
-                terminate_by_signal(SIGTERM);
+                terminate_by_signal(Signal::Terminate);
 
                 // surviving the raise exits 0, which fails the parent's assertion
                 return;
