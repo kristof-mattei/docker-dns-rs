@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.13.9](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.8..v0.13.9) - 2026-10-07
+
+### 🚜 Refactor
+
+- Replace `Shutdown::Signal(u8)` with a two-variant `Signal` by [@kristof-mattei](https://github.com/kristof-mattei) ([`e9600df`](https://github.com/kristof-mattei/docker-dns-rs/commit/e9600df8e9bf323ff1aa41a52a33e84fc4d617c6))
 ## [0.13.8](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.7..v0.13.8) - 2026-10-07
 
 ### ⚙️ Miscellaneous Tasks
