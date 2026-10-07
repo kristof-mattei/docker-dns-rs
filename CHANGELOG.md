@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [0.13.7](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.6..v0.13.7) - 2026-10-07
+
+### 🐛 Bug Fixes
+
+- Exit with 128+n as PID 1 instead of warning about a failed re-raise by [@kristof-mattei](https://github.com/kristof-mattei) ([`1cf0060`](https://github.com/kristof-mattei/docker-dns-rs/commit/1cf0060db9fd5cc8bbb5a9e84adf3346089819e9))
 ## [0.13.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.5..v0.13.6) - 2026-10-07
 
 ### 🐛 Bug Fixes
