@@ -5,21 +5,22 @@ use std::sync::Arc;
 use std::time::Duration;
 
 use color_eyre::config::HookBuilder;
-use color_eyre::eyre;
+use color_eyre::eyre::{self, Context as _};
 use dotenvy::dotenv;
+use futures_util::future::{BoxFuture, FutureExt as _};
+use futures_util::stream::{FuturesUnordered, StreamExt as _};
 use hickory_server::zone_handler::Catalog;
 use tokio::net::{TcpListener, UdpSocket};
 use tokio::sync::RwLock;
 use tokio::sync::mpsc::{Receiver, Sender};
 use tokio::time::timeout;
 use tokio_util::sync::CancellationToken;
-use tokio_util::task::TaskTracker;
 use tracing::{Level, event};
 use tracing_subscriber::Layer as _;
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
-use twistlock::client::{Client as Daemon, EventStreamError, EventSubscription};
+use twistlock::client::{Client as Daemon, EventSubscription};
 use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
@@ -28,7 +29,6 @@ use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, s
 use crate::docker::monitor::Monitor;
 use crate::shutdown::Shutdown;
 use crate::table::AuthorityWrapper;
-use crate::task_tracker_ext::TaskTrackerExt as _;
 use crate::utils::flatten_shutdown_handle;
 use crate::utils::task::spawn_with_name;
 
@@ -39,7 +39,6 @@ mod docker;
 mod shutdown;
 mod signal_handlers;
 mod table;
-mod task_tracker_ext;
 mod utils;
 
 #[cfg_attr(not(miri), global_allocator)]
@@ -184,7 +183,7 @@ async fn start_tasks() -> Shutdown {
 
     let (sender, receiver) = tokio::sync::mpsc::channel(50);
 
-    let tasks = TaskTracker::new();
+    let mut tasks = FuturesUnordered::new();
 
     // the scan below can miss a change made while it runs
     let subscription = match docker.subscribe_events().await {
@@ -193,12 +192,10 @@ async fn start_tasks() -> Shutdown {
     };
 
     // pump messages from Docker to the DockerMonitor
-    {
-        tasks.spawn_with_name(
-            "docker listener",
-            docker_listener(subscription, sender, cancellation_token.clone()),
-        );
-    }
+    tasks.push(spawn_task(
+        "docker listener",
+        docker_listener(subscription, sender, cancellation_token.clone()),
+    ));
 
     // start listening, but delay answering until the scan has filled the zone
     let socket = match UdpSocket::bind(dns_bind).await {
@@ -215,41 +212,33 @@ async fn start_tasks() -> Shutdown {
         return Shutdown::from(error);
     }
 
-    {
-        tasks.spawn_with_name(
-            "dns handler",
-            dns_handler(
-                socket,
-                listener,
-                Arc::clone(&catalog),
-                records,
-                cancellation_token.clone(),
-            ),
-        );
-    }
+    tasks.push(spawn_task(
+        "dns handler",
+        dns_handler(
+            socket,
+            listener,
+            Arc::clone(&catalog),
+            records,
+            cancellation_token.clone(),
+        ),
+    ));
 
     // event handler
-    {
-        tasks.spawn_with_name(
-            "docker event monitor",
-            docker_event_monitor(docker_monitor, receiver, cancellation_token.clone()),
-        );
-    }
+    tasks.push(spawn_task("docker event monitor", {
+        let cancellation_token = cancellation_token.clone();
 
-    // now we wait forever for either
-    // * SIGTERM
-    // * CTRL+c (SIGINT)
-    // * cancellation of the shutdown token, triggered by another task when it
-    //   completes unexpectedly (which means it failed)
+        async move {
+            docker_event_monitor(docker_monitor, receiver, cancellation_token).await;
+
+            Ok(())
+        }
+    }));
+
+    // biased so that when multiple are ready at once, task failure wins over signals
     let shutdown_reason = tokio::select! {
         biased;
-        () = cancellation_token.cancelled() => {
-            event!(Level::WARN, "Underlying task stopped, stopping all other tasks");
-
-            Shutdown::OperationalFailure {
-                code: ExitCode::FAILURE,
-                message: "Some task unexpectedly failed which triggered a shutdown."
-            }
+        Some((name, result)) = tasks.next() => {
+            task_stopped(name, result)
         },
         result = signal_handlers::wait_for_sigterm() => {
             result
@@ -259,16 +248,22 @@ async fn start_tasks() -> Shutdown {
         },
     };
 
-    // catch all cancel in case we got here via something else than a cancellation token
     cancellation_token.cancel();
 
-    tasks.close();
-
-    // wait for the tasks that holds the server to exit gracefully
-    // this is easier to write than x separate timeoouts
-    // while we don't know if any of them gets killed
-    // this will do for now, and we can always trace back the logs
-    let drained = timeout(Duration::from_secs(10), tasks.wait()).await.is_ok();
+    let drained = timeout(Duration::from_secs(10), async {
+        while let Some((name, result)) = tasks.next().await {
+            if let Err(report) = result {
+                event!(
+                    Level::ERROR,
+                    task = name,
+                    ?report,
+                    "Task failed during the shutdown"
+                );
+            }
+        }
+    })
+    .await
+    .is_ok();
 
     if !drained {
         event!(Level::ERROR, "Task didn't stop within allotted time!");
@@ -291,48 +286,73 @@ async fn dns_handler(
     catalog: Arc<RwLock<Catalog>>,
     records: Vec<RawRecord>,
     cancellation_token: CancellationToken,
-) {
-    let _guard = cancellation_token.clone().drop_guard();
-
+) -> Result<(), eyre::Report> {
     let handler = DnsRequestHandler::new(catalog, records);
-    set_up_dns_server(listener, socket, handler, cancellation_token).await;
 
-    event!(Level::INFO, "DNS Server stopped");
+    set_up_dns_server(listener, socket, handler, cancellation_token).await
 }
 
 async fn docker_listener(
     mut subscription: EventSubscription,
-    sender: Sender<Result<Result<Event, EventDecodeError>, EventStreamError>>,
+    sender: Sender<Result<Event, EventDecodeError>>,
     cancellation_token: CancellationToken,
-) {
-    // `consume_events` checks cancellation before the channel, so a drop guard here would hide the error this forwards
+) -> Result<(), eyre::Report> {
     loop {
         let next = tokio::select! {
             biased;
             () = cancellation_token.cancelled() => break,
-            next = subscription.next() => next,
+            next = subscription.next() => next.wrap_err("Event stream failed")?,
         };
 
-        let ended = next.is_err();
-
-        if sender.send(next).await.is_err() || ended {
+        if sender.send(next).await.is_err() {
             break;
         }
     }
 
     event!(Level::INFO, "Event producer stopped");
+
+    Ok(())
 }
 
 async fn docker_event_monitor(
     docker_monitor: Monitor,
-    receiver: Receiver<Result<Result<Event, EventDecodeError>, EventStreamError>>,
+    receiver: Receiver<Result<Event, EventDecodeError>>,
     cancellation_token: CancellationToken,
 ) {
-    let _guard = cancellation_token.clone().drop_guard();
-
     docker_monitor
         .consume_events(receiver, &cancellation_token)
         .await;
 
     event!(Level::INFO, "Event handler stopped");
+}
+
+type TaskResult = Result<(), eyre::Report>;
+
+fn spawn_task<F>(name: &'static str, task: F) -> BoxFuture<'static, (&'static str, TaskResult)>
+where
+    F: Future<Output = TaskResult> + Send + 'static,
+{
+    let handle = spawn_with_name(name, task);
+
+    async move {
+        let result = match handle.await {
+            Ok(result) => result,
+            Err(join_error) => Err(eyre::Report::new(join_error)),
+        };
+
+        (name, result)
+    }
+    .boxed()
+}
+
+/// Every task runs until the shutdown, so one that stops before it is a failure.
+fn task_stopped(name: &'static str, result: TaskResult) -> Shutdown {
+    match result {
+        Ok(()) => {
+            Shutdown::UnexpectedError(eyre::eyre!("Task `{}` stopped before the shutdown", name))
+        },
+        Err(report) => {
+            Shutdown::UnexpectedError(report.wrap_err(format!("Task `{}` failed", name)))
+        },
+    }
 }
