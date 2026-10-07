@@ -15,6 +15,7 @@ defaultdict
 dnslib
 dockerdns
 dorny
+einval
 endfor
 endmacro
 enotfound
@@ -85,6 +86,7 @@ tostring
 trixie
 trunc
 twistlock
+uncatchable
 uninlined
 uninspectable
 unseparated
