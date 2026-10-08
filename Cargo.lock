@@ -879,11 +879,10 @@ dependencies = [
 
 [[package]]
 name = "hyper-unix-socket"
-version = "0.6.1"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "88978f1d73da0eb87d86555fcc40cbdd87bc86eb6525710b89db8c9278ec6a59"
+checksum = "57d9d6b7df434b566b1bbfb464633e7ae23f93fc218afb38f3b8906a95535592"
 dependencies = [
- "bytes",
  "hyper",
  "hyper-util",
  "pin-project-lite",
@@ -2068,9 +2067,9 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 
 [[package]]
 name = "twistlock"
-version = "0.8.0"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78879d3b2838b896288907434eee2b0efb388f19664b1793d7ed5b7714b4b920"
+checksum = "8091e5ead2abfbac30a791e409e08f0ba7db3e674dab2d43b8988e17270062a7"
 dependencies = [
  "hashbrown",
  "http",
