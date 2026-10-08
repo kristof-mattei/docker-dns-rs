@@ -1,4 +1,10 @@
 <!-- header goes here -->
+## [0.13.10](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.9..v0.13.10) - 2026-10-08
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to v0.8.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`29c171b`](https://github.com/kristof-mattei/docker-dns-rs/commit/29c171b230493439f45915beda6e201119d144e2))
+- Exit with the failing task's error instead of a canned message by [@kristof-mattei](https://github.com/kristof-mattei) ([`02fb771`](https://github.com/kristof-mattei/docker-dns-rs/commit/02fb771bfb10bbb2f766ccab9712fb5f10248adb))
 ## [0.13.9](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.8..v0.13.9) - 2026-10-07
 
 ### 🚜 Refactor
