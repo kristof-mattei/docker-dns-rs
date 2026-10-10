@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [0.13.11](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.10..v0.13.11) - 2026-10-10
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate tokio-util to v0.7.20 by [@renovate[bot]](https://github.com/renovate[bot]) ([`78dea06`](https://github.com/kristof-mattei/docker-dns-rs/commit/78dea061c8d75d7751d4878558288b2c10d14f66))
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove the merge-SHA `TODO` that the retag base check covers by [@kristof-mattei](https://github.com/kristof-mattei) ([`cfebda2`](https://github.com/kristof-mattei/docker-dns-rs/commit/cfebda2941093385c351175c27760fff87bc5681))
 ## [0.13.10](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.9..v0.13.10) - 2026-10-08
 
 ### 🐛 Bug Fixes
