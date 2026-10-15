@@ -3,6 +3,7 @@ use std::process::ExitCode;
 use std::sync::Arc;
 use std::time::Duration;
 
+use clap::Parser as _;
 use color_eyre::config::HookBuilder;
 use color_eyre::eyre::{self, Context as _};
 use dotenvy::dotenv;
@@ -23,6 +24,7 @@ use twistlock::client::{Client as Daemon, EventSubscription};
 use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
+use crate::cli::Cli;
 use crate::config::{Config, RawRecord};
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
@@ -89,6 +91,9 @@ fn main() -> Shutdown {
         .install()
         .expect("Failed to install panic handler");
 
+    // parse before tracing is set up, so clap's help and usage errors are not preceded by log output
+    let cli = Cli::parse();
+
     let (env_filter, parsing_error) = build_filter();
 
     init_tracing(env_filter).expect("Failed to set up tracing");
@@ -111,7 +116,7 @@ fn main() -> Shutdown {
         .block_on(async {
             // explicitly launch everything in a spawned task
             // see https://docs.rs/tokio/latest/tokio/attr.main.html#non-worker-async-function
-            let handle = spawn_with_name("main task runner", start_tasks());
+            let handle = spawn_with_name("main task runner", start_tasks(cli));
 
             flatten_shutdown_handle(handle).await
         });
@@ -137,18 +142,19 @@ fn print_header() {
 
 // This function would be shorter if we had `FromResidual`
 #[expect(clippy::too_many_lines, reason = "Entrypoint")]
-async fn start_tasks() -> Shutdown {
+async fn start_tasks(cli: Cli) -> Shutdown {
     print_header();
+
+    let config = Config::from(cli);
+
+    config.log();
 
     let Config {
         docker: docker_config,
         domain,
         dns_bind,
         records,
-    } = match Config::build() {
-        Ok(config) => config,
-        Err(error) => return Shutdown::from(error),
-    };
+    } = config;
 
     // DNS
     let authority = match set_up_authority(domain.clone()).await {

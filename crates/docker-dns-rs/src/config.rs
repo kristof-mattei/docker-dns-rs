@@ -2,14 +2,10 @@ use std::net::{IpAddr, SocketAddr};
 use std::path::PathBuf;
 use std::time::Duration;
 
-use clap::Parser as _;
-use color_eyre::eyre;
 use hickory_server::proto::rr::Name;
 use tracing::{Level, event};
 use twistlock::client::ClientCredentialPaths;
 use twistlock::config::Endpoint;
-
-use crate::cli::Cli;
 
 #[derive(Clone, Debug)]
 pub struct RawRecord {
@@ -32,14 +28,6 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn build() -> Result<Config, eyre::Report> {
-        let config = Config::from(Cli::try_parse()?);
-
-        config.log();
-
-        Ok(config)
-    }
-
     pub fn log(&self) {
         event!(Level::INFO, docker_host = %self.docker.docker_host, "Daemon");
         event!(Level::INFO, domain = %self.domain, "Domain");
