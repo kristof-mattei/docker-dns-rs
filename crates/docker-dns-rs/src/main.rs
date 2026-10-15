@@ -23,7 +23,7 @@ use twistlock::client::{Client as Daemon, EventSubscription};
 use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
-use crate::config::{AppConfig, RawRecord};
+use crate::config::{Config, RawRecord};
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
 use crate::shutdown::Shutdown;
@@ -32,6 +32,7 @@ use crate::utils::flatten_shutdown_handle;
 use crate::utils::task::spawn_with_name;
 
 mod build_env;
+mod cli;
 mod config;
 mod dns_listener;
 mod docker;
@@ -139,12 +140,12 @@ fn print_header() {
 async fn start_tasks() -> Shutdown {
     print_header();
 
-    let AppConfig {
-        docker_config,
+    let Config {
+        docker: docker_config,
         domain,
         dns_bind,
         records,
-    } = match AppConfig::build() {
+    } = match Config::build() {
         Ok(config) => config,
         Err(error) => return Shutdown::from(error),
     };
