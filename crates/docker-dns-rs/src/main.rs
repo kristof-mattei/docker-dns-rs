@@ -1,6 +1,5 @@
-use std::convert::Infallible;
 use std::env::{self, VarError};
-use std::process::{ExitCode, Termination as _};
+use std::process::ExitCode;
 use std::sync::Arc;
 use std::time::Duration;
 
@@ -79,7 +78,7 @@ fn init_tracing(filter: EnvFilter) -> Result<(), eyre::Report> {
         .try_init()?)
 }
 
-fn main() -> ExitCode {
+fn main() -> Shutdown {
     // set up .env, if it fails, user didn't provide any
     let _r = dotenv();
 
@@ -94,8 +93,8 @@ fn main() -> ExitCode {
     init_tracing(env_filter).expect("Failed to set up tracing");
 
     // bubble up the parsing error
-    if let Err(error) = parsing_error.map_or(Ok(()), Err) {
-        return Err::<Infallible, _>(error).report();
+    if let Some(error) = parsing_error {
+        return Shutdown::from(error);
     }
 
     // initialize the runtime
@@ -112,7 +111,7 @@ fn main() -> ExitCode {
             flatten_shutdown_handle(handle).await
         });
 
-    shutdown.report()
+    shutdown
 }
 
 fn print_header() {
