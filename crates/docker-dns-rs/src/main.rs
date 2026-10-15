@@ -107,6 +107,12 @@ fn main() -> Shutdown {
         };
     }
 
+    print_header();
+
+    let config = Config::from(cli);
+
+    config.log();
+
     // initialize the runtime
     let shutdown: Shutdown = tokio::runtime::Builder::new_multi_thread()
         .enable_io()
@@ -116,7 +122,7 @@ fn main() -> Shutdown {
         .block_on(async {
             // explicitly launch everything in a spawned task
             // see https://docs.rs/tokio/latest/tokio/attr.main.html#non-worker-async-function
-            let handle = spawn_with_name("main task runner", start_tasks(cli));
+            let handle = spawn_with_name("main task runner", start_tasks(config));
 
             flatten_shutdown_handle(handle).await
         });
@@ -142,13 +148,7 @@ fn print_header() {
 
 // This function would be shorter if we had `FromResidual`
 #[expect(clippy::too_many_lines, reason = "Entrypoint")]
-async fn start_tasks(cli: Cli) -> Shutdown {
-    print_header();
-
-    let config = Config::from(cli);
-
-    config.log();
-
+async fn start_tasks(config: Config) -> Shutdown {
     let Config {
         docker: docker_config,
         domain,
