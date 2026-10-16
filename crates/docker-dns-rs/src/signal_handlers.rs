@@ -10,6 +10,7 @@ use tokio::signal::unix::{self, SignalKind, signal};
 use tokio::signal::windows;
 use tracing::{Level, event};
 
+#[cfg(not(miri))]
 use crate::wrap_and_report;
 
 #[expect(
