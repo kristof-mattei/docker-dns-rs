@@ -10,6 +10,7 @@ use tokio::signal::unix::{self, SignalKind, signal};
 use tokio::signal::windows;
 use tracing::{Level, event};
 
+#[cfg(not(miri))]
 use crate::wrap_and_report;
 
 #[expect(
@@ -157,11 +158,12 @@ mod tests {
 
         use crate::signal_handlers::{Signal, SignalListeners, terminate_by_signal};
 
-        const CHILD_MARKER: &str = "DOCKER_DNS_RS_TERMINATE_BY_SIGNAL_CHILD";
+        const CHILD_MARKER: &str = "TERMINATE_BY_SIGNAL_CHILD";
 
         // the raise kills the calling process, so the scenario runs in a re-executed copy of this test binary
-        #[test]
-        fn dies_by_raised_signal_despite_tokio_handler() {
+        #[cfg_attr(not(miri), test)]
+        #[cfg_attr(miri, expect(unused, reason = "This test doesn't work with Miri"))]
+        fn dies_by_the_raised_signal_despite_tokio_handler() {
             if std::env::var_os(CHILD_MARKER).is_some() {
                 let runtime = tokio::runtime::Builder::new_current_thread()
                     .enable_io()
@@ -184,7 +186,7 @@ mod tests {
             let status = Command::new(std::env::current_exe().unwrap())
                 .args([
                     "--exact",
-                    "signal_handlers::tests::unix::dies_by_raised_signal_despite_tokio_handler",
+                    "signal_handlers::tests::unix::dies_by_the_raised_signal_despite_tokio_handler",
                 ])
                 .env(CHILD_MARKER, "1")
                 .stdout(Stdio::null())
@@ -195,7 +197,8 @@ mod tests {
             assert_eq!(status.signal(), Some(libc::SIGTERM));
         }
 
-        #[tokio::test]
+        #[cfg_attr(not(miri), tokio::test)]
+        #[cfg_attr(miri, expect(unused, reason = "This test doesn't work with Miri"))]
         async fn wait_returns_a_signal_raised_before_the_call() {
             let mut signal_listeners = SignalListeners::register().unwrap();
 
