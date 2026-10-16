@@ -20,7 +20,7 @@ use tokio::sync::RwLock;
 use tokio_util::sync::CancellationToken;
 use tracing::{Level, event};
 
-use crate::config::RawRecord;
+use crate::config::StaticRecord;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct HashedRData(RData);
@@ -48,7 +48,7 @@ pub struct DnsRequestHandler {
 }
 
 impl DnsRequestHandler {
-    pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<RawRecord>) -> Self {
+    pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<StaticRecord>) -> Self {
         let mut map: HashMap<LowerName, HashSet<HashedRData>> = HashMap::new();
 
         for intercept in intercepts {

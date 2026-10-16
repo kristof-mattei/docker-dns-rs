@@ -9,7 +9,7 @@ use hickory_server::proto::rr::Name;
 use twistlock::client::ClientCredentialPaths;
 use twistlock::config::Endpoint;
 
-use crate::config::{Config, DockerConfig, RawRecord};
+use crate::config::{Config, DockerConfig, StaticRecord};
 
 const DEFAULT_DOCKER_HOST: &str = "/var/run/docker.sock";
 const DNS_BINDADDR: SocketAddr = SocketAddr::new(std::net::IpAddr::V4(Ipv4Addr::UNSPECIFIED), 53);
@@ -38,7 +38,7 @@ pub struct Cli {
         value_delimiter = ',',
         action = clap::ArgAction::Append,
     )]
-    pub records: Vec<RawRecord>,
+    pub records: Vec<StaticRecord>,
 
     #[arg(
         env,
@@ -142,7 +142,7 @@ fn parse_domain(raw_domain: &str) -> Result<Name, String> {
     }
 }
 
-fn parse_record(value: &str) -> Result<RawRecord, String> {
+fn parse_record(value: &str) -> Result<StaticRecord, String> {
     let (name_str, addr_str) = value
         .split_once(':')
         .ok_or_else(|| format!("expected `name:ip` or `name:[ipv6]`, got `{}`", value))?;
@@ -165,7 +165,7 @@ fn parse_record(value: &str) -> Result<RawRecord, String> {
         .map_err(|error: ProtoError| error.to_string())?;
     name.set_fqdn(true);
 
-    Ok(RawRecord { name, addr })
+    Ok(StaticRecord { name, addr })
 }
 
 #[cfg(test)]

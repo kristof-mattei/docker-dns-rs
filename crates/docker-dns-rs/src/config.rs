@@ -8,7 +8,7 @@ use twistlock::client::ClientCredentialPaths;
 use twistlock::config::Endpoint;
 
 #[derive(Clone, Debug)]
-pub struct RawRecord {
+pub struct StaticRecord {
     pub name: Name,
     pub addr: IpAddr,
 }
@@ -24,7 +24,7 @@ pub struct Config {
     pub docker: DockerConfig,
     pub domain: Name,
     pub dns_bind: SocketAddr,
-    pub records: Vec<RawRecord>,
+    pub records: Vec<StaticRecord>,
 }
 
 impl Config {
