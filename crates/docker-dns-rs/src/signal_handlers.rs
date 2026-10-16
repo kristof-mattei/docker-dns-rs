@@ -161,7 +161,8 @@ mod tests {
         const CHILD_MARKER: &str = "DOCKER_DNS_RS_TERMINATE_BY_SIGNAL_CHILD";
 
         // the raise kills the calling process, so the scenario runs in a re-executed copy of this test binary
-        #[test]
+        #[cfg_attr(not(miri), test)]
+        #[cfg_attr(miri, expect(unused, reason = "This test doesn't work with Miri"))]
         fn dies_by_raised_signal_despite_tokio_handler() {
             if std::env::var_os(CHILD_MARKER).is_some() {
                 let runtime = tokio::runtime::Builder::new_current_thread()
@@ -196,7 +197,8 @@ mod tests {
             assert_eq!(status.signal(), Some(libc::SIGTERM));
         }
 
-        #[tokio::test]
+        #[cfg_attr(not(miri), tokio::test)]
+        #[cfg_attr(miri, expect(unused, reason = "This test doesn't work with Miri"))]
         async fn wait_returns_a_signal_raised_before_the_call() {
             let mut signal_listeners = SignalListeners::register().unwrap();
 
