@@ -29,6 +29,7 @@ use crate::config::{Config, RawRecord};
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
 use crate::shutdown::Shutdown;
+use crate::signal_handlers::{Signal, SignalListeners};
 use crate::table::AuthorityWrapper;
 use crate::utils::flatten_shutdown_handle;
 use crate::utils::task::spawn_with_name;
@@ -38,6 +39,7 @@ mod cli;
 mod config;
 mod dns_listener;
 mod docker;
+mod helpers;
 mod shutdown;
 mod signal_handlers;
 mod table;
@@ -46,6 +48,9 @@ mod utils;
 #[cfg_attr(not(miri), global_allocator)]
 #[cfg_attr(miri, expect(unused, reason = "Not supported in Miri"))]
 static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
+// under `docker stop`'s 10 second default grace period
+const DRAIN_BUDGET: Duration = Duration::from_secs(8);
 
 fn build_filter() -> (EnvFilter, Option<FromEnvError>) {
     fn build_default_filter() -> EnvFilter {
@@ -149,6 +154,12 @@ fn print_header() {
 // This function would be shorter if we had `FromResidual`
 #[expect(clippy::too_many_lines, reason = "Entrypoint")]
 async fn start_tasks(config: Config) -> Shutdown {
+    // when running as PID 1, a signal before this registration is discarded
+    let mut signal_listeners = match SignalListeners::register() {
+        Ok(signal_listeners) => signal_listeners,
+        Err(report) => return Shutdown::from(report),
+    };
+
     let Config {
         docker: docker_config,
         domain,
@@ -196,9 +207,14 @@ async fn start_tasks(config: Config) -> Shutdown {
     let mut tasks = FuturesUnordered::new();
 
     // the scan below can miss a change made while it runs
-    let subscription = match docker.subscribe_events().await {
-        Ok(subscription) => subscription,
-        Err(error) => return Shutdown::from(error),
+    // biased so that when both are ready at once, startup failure wins over signals
+    let subscription = tokio::select! {
+        biased;
+        subscription = docker.subscribe_events() => match subscription {
+            Ok(subscription) => subscription,
+            Err(error) => return Shutdown::from(error),
+        },
+        signal = signal_listeners.wait() => return Shutdown::Signal(signal),
     };
 
     // pump messages from Docker to the DockerMonitor
@@ -218,8 +234,15 @@ async fn start_tasks(config: Config) -> Shutdown {
         Err(error) => return Shutdown::from(error),
     };
 
-    if let Err(error) = docker_monitor.start().await {
-        return Shutdown::from(error);
+    // biased so that when both are ready at once, startup failure wins over signals
+    tokio::select! {
+        biased;
+        started = docker_monitor.start() => {
+            if let Err(error) = started {
+                return Shutdown::from(error);
+            }
+        },
+        signal = signal_listeners.wait() => return Shutdown::Signal(signal),
     }
 
     tasks.push(spawn_task(
@@ -250,17 +273,14 @@ async fn start_tasks(config: Config) -> Shutdown {
         Some((name, result)) = tasks.next() => {
             task_stopped(name, result)
         },
-        result = signal_handlers::wait_for_sigterm() => {
-            result
-        },
-        result = signal_handlers::wait_for_sigint() => {
-            result
+        signal = signal_listeners.wait() => {
+            Shutdown::Signal(signal)
         },
     };
 
     cancellation_token.cancel();
 
-    let drained = timeout(Duration::from_secs(10), async {
+    let drain = timeout(DRAIN_BUDGET, async {
         while let Some((name, result)) = tasks.next().await {
             if let Err(report) = result {
                 event!(
@@ -271,9 +291,15 @@ async fn start_tasks(config: Config) -> Shutdown {
                 );
             }
         }
-    })
-    .await
-    .is_ok();
+    });
+
+    let drained = tokio::select! {
+        biased;
+        drained = drain => drained.is_ok(),
+        second_signal = signal_listeners.wait() => {
+            return abandon_drain(shutdown_reason, second_signal);
+        },
+    };
 
     if !drained {
         event!(Level::ERROR, "Task didn't stop within allotted time!");
@@ -354,6 +380,15 @@ where
         (name, result)
     }
     .boxed()
+}
+
+fn abandon_drain(shutdown_reason: Shutdown, second_signal: Signal) -> Shutdown {
+    event!(Level::WARN, "Second signal, abandoning the drain");
+
+    match shutdown_reason {
+        Shutdown::Success | Shutdown::Signal(_) => Shutdown::Signal(second_signal),
+        failure @ (Shutdown::OperationalFailure { .. } | Shutdown::UnexpectedError(_)) => failure,
+    }
 }
 
 /// Every task runs until the shutdown, so one that stops before it is a failure.
