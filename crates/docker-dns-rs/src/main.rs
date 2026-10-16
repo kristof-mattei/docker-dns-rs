@@ -314,6 +314,8 @@ async fn start_tasks(config: Config) -> Shutdown {
         };
     }
 
+    event!(Level::INFO, "Shutdown completed");
+
     shutdown_reason
 }
 
