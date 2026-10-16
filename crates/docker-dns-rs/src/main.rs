@@ -39,7 +39,6 @@ mod cli;
 mod config;
 mod dns_listener;
 mod docker;
-mod helpers;
 mod shutdown;
 mod signal_handlers;
 mod table;
