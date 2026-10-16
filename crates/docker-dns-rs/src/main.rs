@@ -25,7 +25,7 @@ use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
 use crate::cli::Cli;
-use crate::config::{Config, RawRecord};
+use crate::config::{Config, StaticRecord};
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
 use crate::docker::monitor::Monitor;
 use crate::shutdown::Shutdown;
@@ -321,7 +321,7 @@ async fn dns_handler(
     socket: UdpSocket,
     listener: TcpListener,
     catalog: Arc<RwLock<Catalog>>,
-    records: Vec<RawRecord>,
+    records: Vec<StaticRecord>,
     cancellation_token: CancellationToken,
 ) -> Result<(), eyre::Report> {
     let handler = DnsRequestHandler::new(catalog, records);
