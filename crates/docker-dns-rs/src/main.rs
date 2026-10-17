@@ -117,7 +117,7 @@ fn main() -> Shutdown {
     config.log();
 
     // initialize the runtime
-    let shutdown: Shutdown = tokio::runtime::Builder::new_multi_thread()
+    let Err(shutdown) = tokio::runtime::Builder::new_multi_thread()
         .enable_io()
         .enable_time()
         .build()
@@ -149,14 +149,10 @@ fn print_header() {
     );
 }
 
-// This function would be shorter if we had `FromResidual`
 #[expect(clippy::too_many_lines, reason = "Entrypoint")]
-async fn start_tasks(config: Config) -> Shutdown {
+async fn start_tasks(config: Config) -> Result<!, Shutdown> {
     // when running as PID 1, a signal before this registration is discarded
-    let mut signal_listeners = match SignalListeners::register() {
-        Ok(signal_listeners) => signal_listeners,
-        Err(report) => return Shutdown::from(report),
-    };
+    let mut signal_listeners = SignalListeners::register()?;
 
     let Config {
         docker: docker_config,
@@ -166,10 +162,7 @@ async fn start_tasks(config: Config) -> Shutdown {
     } = config;
 
     // DNS
-    let authority = match set_up_authority(domain.clone()).await {
-        Ok(authority) => authority,
-        Err(error) => return Shutdown::from(error),
-    };
+    let authority = set_up_authority(domain.clone()).await?;
 
     let forward_authority = Arc::new(authority);
     let catalog = Arc::new(tokio::sync::RwLock::new(set_up_catalog(
@@ -179,15 +172,12 @@ async fn start_tasks(config: Config) -> Shutdown {
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
-    let daemon = match Daemon::build(
+    let daemon = Daemon::build(
         docker_config.docker_host,
         docker_config.cacert,
         docker_config.client_credentials,
         docker_config.timeout,
-    ) {
-        Ok(daemon) => daemon,
-        Err(error) => return Shutdown::from(error),
-    };
+    )?;
 
     let docker = Arc::new(daemon);
 
@@ -208,11 +198,8 @@ async fn start_tasks(config: Config) -> Shutdown {
     // biased so that when both are ready at once, startup failure wins over signals
     let subscription = tokio::select! {
         biased;
-        subscription = docker.subscribe_events() => match subscription {
-            Ok(subscription) => subscription,
-            Err(error) => return Shutdown::from(error),
-        },
-        signal = signal_listeners.wait() => return Shutdown::Signal(signal),
+        subscription = docker.subscribe_events() => subscription?,
+        signal = signal_listeners.wait() => return Err(Shutdown::Signal(signal)),
     };
 
     // pump messages from Docker to the DockerMonitor
@@ -222,25 +209,15 @@ async fn start_tasks(config: Config) -> Shutdown {
     ));
 
     // start listening, but delay answering until the scan has filled the zone
-    let socket = match UdpSocket::bind(dns_bind).await {
-        Ok(socket) => socket,
-        Err(error) => return Shutdown::from(error),
-    };
+    let socket = UdpSocket::bind(dns_bind).await?;
 
-    let listener = match TcpListener::bind(dns_bind).await {
-        Ok(listener) => listener,
-        Err(error) => return Shutdown::from(error),
-    };
+    let listener = TcpListener::bind(dns_bind).await?;
 
     // biased so that when both are ready at once, startup failure wins over signals
     tokio::select! {
         biased;
-        started = docker_monitor.start() => {
-            if let Err(error) = started {
-                return Shutdown::from(error);
-            }
-        },
-        signal = signal_listeners.wait() => return Shutdown::Signal(signal),
+        started = docker_monitor.start() => started?,
+        signal = signal_listeners.wait() => return Err(Shutdown::Signal(signal)),
     }
 
     tasks.push(spawn_task(
@@ -295,7 +272,7 @@ async fn start_tasks(config: Config) -> Shutdown {
         biased;
         drained = drain => drained.is_ok(),
         second_signal = signal_listeners.wait() => {
-            return abandon_drain(shutdown_reason, second_signal);
+            return Err(abandon_drain(shutdown_reason, second_signal));
         },
     };
 
@@ -305,16 +282,16 @@ async fn start_tasks(config: Config) -> Shutdown {
 
     // a shutdown that already reports a failure is returned unchanged
     if !drained && matches!(shutdown_reason, Shutdown::Success | Shutdown::Signal(_)) {
-        return Shutdown::OperationalFailure {
+        return Err(Shutdown::OperationalFailure {
             code: ExitCode::FAILURE,
             message: "Tasks didn't stop within the allotted time",
             error: None,
-        };
+        });
     }
 
     event!(Level::INFO, "Shutdown completed");
 
-    shutdown_reason
+    Err(shutdown_reason)
 }
 
 async fn dns_handler(
