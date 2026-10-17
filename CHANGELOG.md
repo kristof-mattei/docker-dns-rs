@@ -1,4 +1,44 @@
 <!-- header goes here -->
+## [0.14.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.11..v0.14.0) - 2026-10-17
+
+### 🚀 Features
+
+- Log the error that ends the process through tracing by [@kristof-mattei](https://github.com/kristof-mattei) ([`c50cf84`](https://github.com/kristof-mattei/docker-dns-rs/commit/c50cf840cf0d98e5e445a53d80d7d3a9c00f14cd))
+- Log when the shutdown completes by [@kristof-mattei](https://github.com/kristof-mattei) ([`b3f4e72`](https://github.com/kristof-mattei/docker-dns-rs/commit/b3f4e7230b939486241f56a3cd450543786d35f7))
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate tokio to v1.53.3 by [@renovate[bot]](https://github.com/renovate[bot]) ([`da11457`](https://github.com/kristof-mattei/docker-dns-rs/commit/da11457379afb034072beb5fba0131322d8e863b))
+- *(deps)* Update rust crate libc to v0.2.191 by [@renovate[bot]](https://github.com/renovate[bot]) ([`010dd05`](https://github.com/kristof-mattei/docker-dns-rs/commit/010dd05b1785e44016362d402f6ddeec76910fb8))
+- Flush stdout before re-raising the signal by [@kristof-mattei](https://github.com/kristof-mattei) ([`a119f4a`](https://github.com/kristof-mattei/docker-dns-rs/commit/a119f4a6d74121ebf32992fb239bf9d58ec161ca))
+- Report an invalid `RUST_LOG` as an operational failure by [@kristof-mattei](https://github.com/kristof-mattei) ([`b9c08a7`](https://github.com/kristof-mattei/docker-dns-rs/commit/b9c08a7d61f85de30c85e7f073f40ae6f1d8381d))
+- [**breaking**] Let clap handle `--help`, `--version` and usage errors by [@kristof-mattei](https://github.com/kristof-mattei) ([`c2c1f4e`](https://github.com/kristof-mattei/docker-dns-rs/commit/c2c1f4e07ad7e6f0a57830da2a08ced63c65c86a))
+- Separate `error=true` from the `skip` list in the Dockerfile `check` directive by [@kristof-mattei](https://github.com/kristof-mattei) ([`a2d3c17`](https://github.com/kristof-mattei/docker-dns-rs/commit/a2d3c17ccf0b8155d91fb1861f92a09056706246))
+- Register signal listeners before startup by [@kristof-mattei](https://github.com/kristof-mattei) ([`e558e3d`](https://github.com/kristof-mattei/docker-dns-rs/commit/e558e3dd76fc0b5a16a674278c17a18189494bfb))
+- Log the full error chain in `wrap_and_report!` by [@kristof-mattei](https://github.com/kristof-mattei) ([`d09eadb`](https://github.com/kristof-mattei/docker-dns-rs/commit/d09eadb40d64fcc84badbe10c111757fb286e442))
+- Report the `Shutdown::from` caller as the error's location by [@kristof-mattei](https://github.com/kristof-mattei) ([`c8b2f96`](https://github.com/kristof-mattei/docker-dns-rs/commit/c8b2f96133d707a507f49bad430f171c77e099e0))
+
+### 🚜 Refactor
+
+- Remove the unused `Display` impl for `Shutdown` by [@kristof-mattei](https://github.com/kristof-mattei) ([`5ea0fbf`](https://github.com/kristof-mattei/docker-dns-rs/commit/5ea0fbfeccccdad92e6e5a1867c83d0e0d0ee309))
+- Return `Shutdown` from `main` by [@kristof-mattei](https://github.com/kristof-mattei) ([`5bd7771`](https://github.com/kristof-mattei/docker-dns-rs/commit/5bd77715da5299865857cead3fbda82022b022c1))
+- Split `Cli` out of `config.rs` and rename `AppConfig` to `Config` by [@kristof-mattei](https://github.com/kristof-mattei) ([`93e9de5`](https://github.com/kristof-mattei/docker-dns-rs/commit/93e9de5ca3b720bff75d7b2eac9f3328a2c94452))
+- Pass `Config` to `start_tasks` by [@kristof-mattei](https://github.com/kristof-mattei) ([`5eefa9f`](https://github.com/kristof-mattei/docker-dns-rs/commit/5eefa9f5fb6b37560e8cd7035174f0ce4775731c))
+- Rename `RawRecord` to `StaticRecord` by [@kristof-mattei](https://github.com/kristof-mattei) ([`6fd8470`](https://github.com/kristof-mattei/docker-dns-rs/commit/6fd8470868c131a6168e8c5918fc251cb30a7013))
+- Import `wrap_and_report!` only outside Miri by [@kristof-mattei](https://github.com/kristof-mattei) ([`19683ec`](https://github.com/kristof-mattei/docker-dns-rs/commit/19683ec04c723b98b1f33ac1d5554f9f86d5f12e))
+- Return the `match` from `build_filter` by [@kristof-mattei](https://github.com/kristof-mattei) ([`f4085a5`](https://github.com/kristof-mattei/docker-dns-rs/commit/f4085a5e75353c55cfa01574bc2c889635a6b294))
+
+### 🧪 Testing
+
+- Skip the signal tests under Miri by [@kristof-mattei](https://github.com/kristof-mattei) ([`4023e53`](https://github.com/kristof-mattei/docker-dns-rs/commit/4023e53bfe4bcb224da713c7dc94514add3b225e))
+- Rename the raised-signal test and drop the crate name from its child marker by [@kristof-mattei](https://github.com/kristof-mattei) ([`c6801e3`](https://github.com/kristof-mattei/docker-dns-rs/commit/c6801e368790ff6b9320dc49a8010d633d61eee3))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Check new ballot entries by default by [@kristof-mattei](https://github.com/kristof-mattei) ([`5289fde`](https://github.com/kristof-mattei/docker-dns-rs/commit/5289fde59cfc0439d843f2c8f37df2f7e91fac56))
+- *(release)* Verify the release commit against the rendered ballot by [@kristof-mattei](https://github.com/kristof-mattei) ([`4de328a`](https://github.com/kristof-mattei/docker-dns-rs/commit/4de328a3550b5e4972c766d8c36296d4ca8ce8be))
+- *(release)* Exclude superseded dependency bumps through `.cliffignore` by [@kristof-mattei](https://github.com/kristof-mattei) ([`029c3c1`](https://github.com/kristof-mattei/docker-dns-rs/commit/029c3c143158eef954188717243b1a6abc37839e))
+- Preload the `docker/scout-action` binary with a token by [@kristof-mattei](https://github.com/kristof-mattei) ([`590641a`](https://github.com/kristof-mattei/docker-dns-rs/commit/590641abb20536d4b3d3d522513dbc806d6ba24e))
 ## [0.13.11](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.10..v0.13.11) - 2026-10-10
 
 ### 🐛 Bug Fixes
