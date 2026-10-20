@@ -87,8 +87,6 @@ jobs:
   cargo-build-windows:
     name: Cargo build Windows
     runs-on: windows-2025
-    env:
-      RUSTC_WRAPPER: ""
     steps:
       - &disable_autocrlf
         name: Disable autocrlf
@@ -269,8 +267,6 @@ jobs:
       id-token: write # codecov-action authenticates over OIDC
       issues: read # publish-unit-test-result-action needs this in private repos
       pull-requests: write # publish-unit-test-result-action comments the test summary
-    env:
-      RUSTC_WRAPPER: ""
     steps:
       - *disable_autocrlf
 
@@ -431,8 +427,6 @@ jobs:
     if: |
       github.event_name == 'pull_request' &&
       fromJSON(needs.changes.outputs.rust) == true
-    env:
-      RUSTC_WRAPPER: ""
     steps:
       - *disable_autocrlf
 
