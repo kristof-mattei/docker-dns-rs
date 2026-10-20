@@ -1,4 +1,15 @@
 <!-- header goes here -->
+## [0.14.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.14.0..v0.14.1) - 2026-10-20
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate tokio to v1.54.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`cb10f28`](https://github.com/kristof-mattei/docker-dns-rs/commit/cb10f2853cc82a4132e157f1e318801dce7e2408))
+
+### ⚙️ Miscellaneous Tasks
+
+- Update only schannel by [@kristof-mattei](https://github.com/kristof-mattei) ([`23d73f9`](https://github.com/kristof-mattei/docker-dns-rs/commit/23d73f9fe0cbc5c6bb34cfe31f5b40148862d5a2))
+- Update only find-msvc-tools by [@kristof-mattei](https://github.com/kristof-mattei) ([`e771afa`](https://github.com/kristof-mattei/docker-dns-rs/commit/e771afa53912e6f33704528620da30f4ffc46c73))
+- Disable sccache for windows builds by [@kristof-mattei](https://github.com/kristof-mattei) ([`6647c67`](https://github.com/kristof-mattei/docker-dns-rs/commit/6647c678064b2a9dbcb7aa51dbabb075ce549d58))
 ## [0.14.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.11..v0.14.0) - 2026-10-17
 
 ### 🚀 Features
