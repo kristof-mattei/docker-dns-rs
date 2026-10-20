@@ -1,9 +1,15 @@
 <!-- header goes here -->
+## [1.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v1.0.0..v1.0.1) - 2026-10-20
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* List breaking changes in a section of their own by [@kristof-mattei](https://github.com/kristof-mattei) ([`e2a4a21`](https://github.com/kristof-mattei/docker-dns-rs/commit/e2a4a2167f6921d49bc2b7d43b62b3c13a9d1e11))
+- Shorten the retag run wait below the `ubuntu-slim` 15-minute job limit by [@kristof-mattei](https://github.com/kristof-mattei) ([`e847e26`](https://github.com/kristof-mattei/docker-dns-rs/commit/e847e266d79c0a7e97558b09659652cc2a58aed9))
 ## [1.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.14.1..v1.0.0) - 2026-10-20
 
-### 🐛 Bug Fixes
+### ⚠️ Breaking Changes
 
-- [**breaking**] Graduate to v1.0.0 by [@kristof-mattei](https://github.com/kristof-mattei) ([`739650e`](https://github.com/kristof-mattei/docker-dns-rs/commit/739650eedcf2c5732e66161108e31b0c5b51768f))
+- Graduate to v1.0.0 by [@kristof-mattei](https://github.com/kristof-mattei) ([`739650e`](https://github.com/kristof-mattei/docker-dns-rs/commit/739650eedcf2c5732e66161108e31b0c5b51768f))
 ## [0.14.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.14.0..v0.14.1) - 2026-10-20
 
 ### 🐛 Bug Fixes
@@ -17,6 +23,11 @@
 - Disable sccache for windows builds by [@kristof-mattei](https://github.com/kristof-mattei) ([`6647c67`](https://github.com/kristof-mattei/docker-dns-rs/commit/6647c678064b2a9dbcb7aa51dbabb075ce549d58))
 ## [0.14.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.13.11..v0.14.0) - 2026-10-17
 
+### ⚠️ Breaking Changes
+
+- Let clap handle `--help`, `--version` and usage errors by [@kristof-mattei](https://github.com/kristof-mattei) ([`c2c1f4e`](https://github.com/kristof-mattei/docker-dns-rs/commit/c2c1f4e07ad7e6f0a57830da2a08ced63c65c86a))
+  - Usage errors exit with code 2 instead of 1
+
 ### 🚀 Features
 
 - Log the error that ends the process through tracing by [@kristof-mattei](https://github.com/kristof-mattei) ([`c50cf84`](https://github.com/kristof-mattei/docker-dns-rs/commit/c50cf840cf0d98e5e445a53d80d7d3a9c00f14cd))
@@ -28,7 +39,6 @@
 - *(deps)* Update rust crate libc to v0.2.191 by [@renovate[bot]](https://github.com/renovate[bot]) ([`010dd05`](https://github.com/kristof-mattei/docker-dns-rs/commit/010dd05b1785e44016362d402f6ddeec76910fb8))
 - Flush stdout before re-raising the signal by [@kristof-mattei](https://github.com/kristof-mattei) ([`a119f4a`](https://github.com/kristof-mattei/docker-dns-rs/commit/a119f4a6d74121ebf32992fb239bf9d58ec161ca))
 - Report an invalid `RUST_LOG` as an operational failure by [@kristof-mattei](https://github.com/kristof-mattei) ([`b9c08a7`](https://github.com/kristof-mattei/docker-dns-rs/commit/b9c08a7d61f85de30c85e7f073f40ae6f1d8381d))
-- [**breaking**] Let clap handle `--help`, `--version` and usage errors by [@kristof-mattei](https://github.com/kristof-mattei) ([`c2c1f4e`](https://github.com/kristof-mattei/docker-dns-rs/commit/c2c1f4e07ad7e6f0a57830da2a08ced63c65c86a))
 - Separate `error=true` from the `skip` list in the Dockerfile `check` directive by [@kristof-mattei](https://github.com/kristof-mattei) ([`a2d3c17`](https://github.com/kristof-mattei/docker-dns-rs/commit/a2d3c17ccf0b8155d91fb1861f92a09056706246))
 - Register signal listeners before startup by [@kristof-mattei](https://github.com/kristof-mattei) ([`e558e3d`](https://github.com/kristof-mattei/docker-dns-rs/commit/e558e3dd76fc0b5a16a674278c17a18189494bfb))
 - Log the full error chain in `wrap_and_report!` by [@kristof-mattei](https://github.com/kristof-mattei) ([`d09eadb`](https://github.com/kristof-mattei/docker-dns-rs/commit/d09eadb40d64fcc84badbe10c111757fb286e442))
@@ -920,9 +930,10 @@
 - Typo by [@kristof-mattei](https://github.com/kristof-mattei) ([`cded012`](https://github.com/kristof-mattei/docker-dns-rs/commit/cded012f14f816d0e1878e4abf0225bbc22b5925))
 ## [0.2.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v0.1.0..v0.2.0) - 2025-05-04
 
-### 🚀 Features
+### ⚠️ Breaking Changes
 
-- [**breaking**] Remove support for records and network blacklists by [@kristof-mattei](https://github.com/kristof-mattei) ([`1738f54`](https://github.com/kristof-mattei/docker-dns-rs/commit/1738f54d893c7234d07f6cb4447b1106ecc4baa7))
+- Remove support for records and network blacklists by [@kristof-mattei](https://github.com/kristof-mattei) ([`1738f54`](https://github.com/kristof-mattei/docker-dns-rs/commit/1738f54d893c7234d07f6cb4447b1106ecc4baa7))
+  - --record is no longer supported. Network blacklist was never exposed
 
 ### ⚙️ Miscellaneous Tasks
 
