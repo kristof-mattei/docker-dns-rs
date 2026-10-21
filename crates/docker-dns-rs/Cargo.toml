@@ -39,7 +39,7 @@ libc = "=0.2.191"
 mimalloc = "=0.1.52"
 pretty_assertions = "=1.4.1"
 regex = "=1.13.1"
-tokio = { version = "=1.54.0", features = [
+tokio = { version = "=1.54.1", features = [
     "rt-multi-thread",
     "macros",
     "time",
