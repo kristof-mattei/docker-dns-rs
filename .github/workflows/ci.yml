@@ -548,7 +548,7 @@ jobs:
       - *checkout
 
       - name: Set up Docker
-        uses: docker/setup-docker-action@v5.5.0
+        uses: docker/setup-docker-action@v5.6.0
         id: docker-setup
         with:
           daemon-config: |
