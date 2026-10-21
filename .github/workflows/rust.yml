@@ -289,7 +289,7 @@ jobs:
           rustup update
 
       - name: Install nextest, custom test runner, with native support for junit and grcov
-        uses: taiki-e/install-action@8cca0918f8471c33515202b73f56ab27f2bed283 # v2.87.29
+        uses: taiki-e/install-action@v2.87.29
         with:
           tool: cargo-nextest, grcov
 
@@ -321,7 +321,7 @@ jobs:
         if: |
           github.event_name != 'pull_request' ||
           github.event.pull_request.head.repo.full_name == github.repository
-        uses: EnricoMi/publish-unit-test-result-action/windows@7622c5bf3d112a72ab4fa3951c2aa5723d8ab92d # v2.25.0
+        uses: EnricoMi/publish-unit-test-result-action/windows@v2.25.0
         with:
           check_name: Test results Windows
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -359,7 +359,7 @@ jobs:
         if: |
           github.event_name != 'pull_request' ||
           github.event.pull_request.head.repo.full_name == github.repository
-        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        uses: codecov/codecov-action@v7.1.1
         with:
           disable_search: true
           disable_telem: true
@@ -376,7 +376,7 @@ jobs:
         if: |
           github.event_name != 'pull_request' ||
           github.event.pull_request.head.repo.full_name == github.repository
-        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        uses: codecov/codecov-action@v7.1.1
         with:
           disable_search: true
           disable_telem: true
@@ -443,7 +443,7 @@ jobs:
       - *set_up_sccache
 
       - name: Run Clippy for GitHub Actions report
-        uses: actions-rs-plus/clippy-check@b6399906ef5e3045fc878b34b63a155f9838a891 # v2.7.1
+        uses: actions-rs-plus/clippy-check@v2.7.1
         with:
           args: ${{ env.CARGO_FEATURES }} --all-targets --locked --workspace
 

@@ -21,6 +21,7 @@ workflows:
         - 'docker/metadata-action@v6.2.0'
         - 'docker/scout-action@v1.27.0'
         - 'docker/setup-buildx-action@v4.4.1'
+        - 'docker/setup-docker-action@v5.5.0'
         - 'docker/setup-docker-action@v5.6.0'
         - 'docker/setup-qemu-action@v4.4.0'
         - 'dorny/paths-filter@v4.0.3'
@@ -114,6 +115,11 @@ dependencies:
         commit: 'sha1-27d5ce7f107fe9357f9df03efb73ab90386fccae'
         owner_id: 44036562
         repo_id: 215566462
+    'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9':
+        ref: 'v6.1.0'
+        commit: 'sha1-55cc8345863c7cc4c66a329aec7e433d2d1c52a9'
+        owner_id: 44036562
+        repo_id: 215566462
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
         commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
@@ -181,6 +187,11 @@ dependencies:
         commit: 'sha1-f87e5991a6d7451dcb8d9637bfbc97413f497069'
         owner_id: 5429470
         repo_id: 288485773
+    'docker/setup-docker-action@v5.5.0':
+        ref: 'v5.5.0'
+        commit: 'sha1-2bf61fb9464cc67f0cbdeabed6aa0380accd1c70'
+        owner_id: 5429470
+        repo_id: 398780917
     'docker/setup-docker-action@v5.6.0':
         ref: 'v5.6.0'
         commit: 'sha1-7ec28a010822b4626af4874f9448a4b05ac6f3e5'
@@ -201,6 +212,8 @@ dependencies:
         commit: 'sha1-7622c5bf3d112a72ab4fa3951c2aa5723d8ab92d'
         owner_id: 44700269
         repo_id: 290227969
+        uses:
+            - 'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9'
     'mozilla-actions/sccache-action@v0.0.11':
         ref: 'v0.0.11'
         commit: 'sha1-fc920bf0ec8de6ee65d409111f7ec508035751ba'
