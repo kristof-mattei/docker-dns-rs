@@ -1,4 +1,15 @@
 <!-- header goes here -->
+## [1.0.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v1.0.1..v1.0.2) - 2026-10-21
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate tokio to v1.54.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`fd61f82`](https://github.com/kristof-mattei/docker-dns-rs/commit/fd61f822cf4fded810d6d3826f9f39082f019b81))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Github Actions lockfile by [@kristof-mattei](https://github.com/kristof-mattei) ([`cbb2c25`](https://github.com/kristof-mattei/docker-dns-rs/commit/cbb2c25d049203198a0d136334cf72546363c1e6))
+- *(ci)* Allow ref-pinned actions in `zizmor` since `actions.lock` pins them by [@kristof-mattei](https://github.com/kristof-mattei) ([`7b78db9`](https://github.com/kristof-mattei/docker-dns-rs/commit/7b78db9c9c257e04524ad83949334b7bc1af6ecc))
+- *(ci)* Github Actions lockfile by [@kristof-mattei](https://github.com/kristof-mattei) ([`c473571`](https://github.com/kristof-mattei/docker-dns-rs/commit/c4735712eea99e1f6af8db5beb2d3bffeed434eb))
 ## [1.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v1.0.0..v1.0.1) - 2026-10-20
 
 ### ⚙️ Miscellaneous Tasks
