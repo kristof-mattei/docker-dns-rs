@@ -15,7 +15,6 @@ defaultdict
 dnslib
 dockerdns
 dorny
-einval
 endfor
 endmacro
 enotfound
@@ -80,13 +79,11 @@ taiki
 targetplatformdash
 telem
 tera
-timeoouts
 topo
 tostring
 trixie
 trunc
 twistlock
-uncatchable
 uninlined
 uninspectable
 unseparated
