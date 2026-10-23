@@ -42,13 +42,13 @@ impl Hash for HashedRData {
     }
 }
 
-pub struct DnsRequestHandler {
+pub(crate) struct DnsRequestHandler {
     catalog: Arc<RwLock<Catalog>>,
     intercepts: HashMap<LowerName, HashSet<HashedRData>>,
 }
 
 impl DnsRequestHandler {
-    pub fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<StaticRecord>) -> Self {
+    pub(crate) fn new(catalog: Arc<RwLock<Catalog>>, intercepts: Vec<StaticRecord>) -> Self {
         let mut map: HashMap<LowerName, HashSet<HashedRData>> = HashMap::new();
 
         for intercept in intercepts {
@@ -165,7 +165,7 @@ impl RequestHandler for DnsRequestHandler {
     }
 }
 
-pub async fn set_up_dns_server<H>(
+pub(crate) async fn set_up_dns_server<H>(
     tcp_listener: TcpListener,
     udp_socket: UdpSocket,
     handler: H,
@@ -198,12 +198,9 @@ where
     }
 }
 
-pub async fn set_up_authority(domain: Name) -> Result<InMemoryZoneHandler, eyre::Report> {
+pub(crate) async fn set_up_authority(domain: Name) -> Result<InMemoryZoneHandler, eyre::Report> {
     let tree = BTreeMap::<RrKey, RecordSet>::from([(
-        RrKey::new(
-            domain.clone().into(),
-            hickory_server::proto::rr::RecordType::SOA,
-        ),
+        RrKey::new(domain.clone().into(), RecordType::SOA),
         Record::from_rdata(
             domain.clone(),
             3600,
@@ -218,7 +215,7 @@ pub async fn set_up_authority(domain: Name) -> Result<InMemoryZoneHandler, eyre:
     Ok(imo)
 }
 
-pub fn set_up_catalog<I: Into<LowerName>>(
+pub(crate) fn set_up_catalog<I: Into<LowerName>>(
     domain: I,
     authority: Arc<InMemoryZoneHandler>,
 ) -> Catalog {

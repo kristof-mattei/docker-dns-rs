@@ -172,7 +172,7 @@ async fn start_tasks(config: Config) -> Shutdown {
     };
 
     let forward_authority = Arc::new(authority);
-    let catalog = Arc::new(tokio::sync::RwLock::new(set_up_catalog(
+    let catalog = Arc::new(RwLock::new(set_up_catalog(
         domain.clone(),
         Arc::clone(&forward_authority),
     )));

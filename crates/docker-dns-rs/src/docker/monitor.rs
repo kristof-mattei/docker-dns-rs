@@ -61,7 +61,7 @@ struct ContainerState {
     networks: HashMap<NetworkId, ContainerNetworkIps>,
 }
 
-pub struct Monitor {
+pub(crate) struct Monitor {
     authority_wrapper: AuthorityWrapper,
     catalog: Arc<RwLock<Catalog>>,
     docker: Arc<Client>,
@@ -238,7 +238,7 @@ fn parse_subnet(network: IpNet) -> impl Iterator<Item = (IpNet, Name)> {
 }
 
 impl Monitor {
-    pub fn new(
+    pub(crate) fn new(
         docker: Arc<Client>,
         authority_wrapper: AuthorityWrapper,
         catalog: Arc<RwLock<Catalog>>,
@@ -603,7 +603,7 @@ impl Monitor {
         self.deregister_network(&event.actor.id).await;
     }
 
-    pub async fn consume_events(
+    pub(crate) async fn consume_events(
         &self,
         mut receiver: Receiver<Result<Event, EventDecodeError>>,
         cancellation_token: &CancellationToken,
@@ -680,7 +680,7 @@ impl Monitor {
     }
 
     #[instrument(name = "initial_scan", skip_all)]
-    pub async fn start(&self) -> Result<(), eyre::Report> {
+    pub(crate) async fn start(&self) -> Result<(), eyre::Report> {
         // Register reverse zones for all existing networks first,
         // so PTR records are in place before containers are processed.
         let networks = self.docker.list_networks().await?;
