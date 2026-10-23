@@ -13,7 +13,7 @@ use ipnet::IpNet;
 use tokio::sync::RwLock;
 use tracing::{Level, event, instrument};
 
-pub struct AuthorityWrapper {
+pub(crate) struct AuthorityWrapper {
     forward: Arc<InMemoryZoneHandler>,
     reverse_zones: RwLock<HashMap<IpNet, Arc<InMemoryZoneHandler>>>,
 }
@@ -67,18 +67,22 @@ fn remove_from_ptr_set(
 }
 
 impl AuthorityWrapper {
-    pub fn new(forward: Arc<InMemoryZoneHandler>) -> Self {
+    pub(crate) fn new(forward: Arc<InMemoryZoneHandler>) -> Self {
         Self {
             forward,
             reverse_zones: RwLock::new(HashMap::new()),
         }
     }
 
-    pub async fn add_reverse_zone(&self, network: IpNet, authority: Arc<InMemoryZoneHandler>) {
+    pub(crate) async fn add_reverse_zone(
+        &self,
+        network: IpNet,
+        authority: Arc<InMemoryZoneHandler>,
+    ) {
         self.reverse_zones.write().await.insert(network, authority);
     }
 
-    pub async fn remove_reverse_zone(&self, network: &IpNet) {
+    pub(crate) async fn remove_reverse_zone(&self, network: &IpNet) {
         self.reverse_zones.write().await.remove(network);
     }
 
@@ -135,7 +139,7 @@ impl AuthorityWrapper {
         added
     }
 
-    pub async fn add(&self, name: &Name, address: IpAddr) {
+    pub(crate) async fn add(&self, name: &Name, address: IpAddr) {
         if self.upsert(name, address).await {
             event!(Level::INFO, %name, %address, "Added record");
         } else {
@@ -177,7 +181,7 @@ impl AuthorityWrapper {
         Ok(())
     }
 
-    pub async fn rename(&self, old_name: &str, new_name: &str) -> Result<(), Report> {
+    pub(crate) async fn rename(&self, old_name: &str, new_name: &str) -> Result<(), Report> {
         let new_name_parsed: Name = new_name.parse()?;
         let old_key: LowerName = old_name.strip_prefix('/').unwrap_or(old_name).parse()?;
 
@@ -237,7 +241,7 @@ impl AuthorityWrapper {
         Ok(())
     }
 
-    pub async fn remove_address(&self, name: &Name, ip: IpAddr) {
+    pub(crate) async fn remove_address(&self, name: &Name, ip: IpAddr) {
         if self.remove_record(name, ip).await.is_err() {
             event!(Level::WARN, %name, %ip, "No record found to remove");
         }
