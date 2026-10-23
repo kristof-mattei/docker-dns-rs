@@ -75,6 +75,7 @@ splitrecord
 startswith
 staticmethod
 striptags
+supertrait
 taiki
 targetplatformdash
 telem
