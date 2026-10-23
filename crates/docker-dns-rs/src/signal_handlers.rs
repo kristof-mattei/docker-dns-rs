@@ -75,7 +75,7 @@ impl SignalListeners {
     }
 
     #[cfg(all(target_os = "windows", not(miri)))]
-    pub fn register() -> Result<Self, eyre::Report> {
+    pub(crate) fn register() -> Result<Self, eyre::Report> {
         let interrupt = windows::ctrl_c().map_err(|error| {
             wrap_and_report!(Level::ERROR, error, "Failed to register CTRL+c handler")
         })?;
@@ -84,7 +84,7 @@ impl SignalListeners {
     }
 
     #[cfg(miri)]
-    pub fn register() -> Result<Self, eyre::Report> {
+    pub(crate) fn register() -> Result<Self, eyre::Report> {
         Ok(Self {})
     }
 
@@ -144,7 +144,7 @@ pub(crate) fn terminate_by_signal(signal: Signal) {
 }
 
 #[cfg(target_os = "windows")]
-pub fn terminate_by_signal(_signal: Signal) {}
+pub(crate) fn terminate_by_signal(_signal: Signal) {}
 
 #[cfg(test)]
 mod tests {
