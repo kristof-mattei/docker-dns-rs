@@ -65,10 +65,10 @@ pub(crate) struct Cli {
 
     #[arg(
         env = "timeout",
-        default_value = "30",
+        default_value = "30s",
         long,
-        help = "Timeout for a Docker API call, in seconds",
-        value_parser = parse_duration
+        help = "Timeout for a Docker API call",
+        value_parser = humantime::parse_duration
     )]
     pub timeout: Duration,
 }
@@ -132,14 +132,6 @@ fn parse_docker_host(value: &str) -> Result<Endpoint, ParseError> {
     Endpoint::from_str(value)
 }
 
-fn parse_duration(value: &str) -> Result<Duration, String> {
-    let seconds = value
-        .parse()
-        .map_err(|error| format!("Could not parse `{}`: {}", value, error))?;
-
-    Ok(Duration::from_secs(seconds))
-}
-
 fn parse_domain(raw_domain: &str) -> Result<Name, String> {
     match raw_domain.parse::<Name>() {
         Ok(mut domain) => {
@@ -183,6 +175,7 @@ fn parse_record(value: &str) -> Result<StaticRecord, String> {
 #[cfg(test)]
 mod tests {
     use std::path::Path;
+    use std::time::Duration;
 
     use clap::Parser as _;
     use clap::error::ErrorKind;
@@ -234,5 +227,26 @@ mod tests {
         let error = parse(&["--client-cert", "/certs/cert.pem"]).unwrap_err();
 
         assert_eq!(error.kind(), ErrorKind::MissingRequiredArgument);
+    }
+
+    #[test]
+    fn timeout_default() {
+        let config = parse(&[]).unwrap();
+
+        assert_eq!(config.timeout, Duration::from_secs(30));
+    }
+
+    #[test]
+    fn timeout_with_units() {
+        let config = parse(&["--timeout", "1m 30s"]).unwrap();
+
+        assert_eq!(config.timeout, Duration::from_secs(90));
+    }
+
+    #[test]
+    fn timeout_without_unit_is_rejected() {
+        let error = parse(&["--timeout", "30"]).unwrap_err();
+
+        assert_eq!(error.kind(), ErrorKind::ValueValidation);
     }
 }

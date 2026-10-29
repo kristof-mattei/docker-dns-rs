@@ -41,7 +41,7 @@ Every option is a command line flag or the environment variable next to it.
 | `--domain`                      | `DOMAIN`                    | `docker`                                                       | Base domain the container names are registered under                            |
 | `--record`                      | `RECORDS`                   |                                                                | A static record as `name:ip` or `name:[ipv6]`, repeated or comma separated      |
 | `--dns-bind`                    | `DNS_BIND`                  | `0.0.0.0:53`                                                   | Address the DNS server binds                                                    |
-| `--timeout`                     | `timeout`                   | `30`                                                           | Timeout for a Docker API call, in seconds                                       |
+| `--timeout`                     | `timeout`                   | `30s`                                                          | Timeout for a Docker API call                                                   |
 | `--cacert`                      | `CA`                        |                                                                | CA certificate that verifies the Docker daemon, enables TLS                     |
 | `--client-key`, `--client-cert` | `CLIENT_KEY`, `CLIENT_CERT` |                                                                | Client credentials for mutual TLS, both or neither, enable TLS                  |
 
