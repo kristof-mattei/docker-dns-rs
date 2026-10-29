@@ -1,4 +1,33 @@
 <!-- header goes here -->
+## [2.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v1.0.1..v2.0.0) - 2026-10-29
+
+### ⚠️ Breaking Changes
+
+- *(cli)* Rename `--docker` to `--docker-host` by [@kristof-mattei](https://github.com/kristof-mattei) ([`54e6a9e`](https://github.com/kristof-mattei/docker-dns-rs/commit/54e6a9e92dcbd5b8caeae7da6f7515265276b14d))
+- Update `twistlock` to 0.10.0 by [@kristof-mattei](https://github.com/kristof-mattei) ([`60ee3e0`](https://github.com/kristof-mattei/docker-dns-rs/commit/60ee3e0c4ea9209e25ba7438e5d703247ed38021))
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate tokio to v1.54.1 by [@renovate[bot]](https://github.com/renovate[bot]) ([`fd61f82`](https://github.com/kristof-mattei/docker-dns-rs/commit/fd61f822cf4fded810d6d3826f9f39082f019b81))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Github Actions lockfile by [@kristof-mattei](https://github.com/kristof-mattei) ([`cbb2c25`](https://github.com/kristof-mattei/docker-dns-rs/commit/cbb2c25d049203198a0d136334cf72546363c1e6))
+- *(ci)* Allow ref-pinned actions in `zizmor` since `actions.lock` pins them by [@kristof-mattei](https://github.com/kristof-mattei) ([`7b78db9`](https://github.com/kristof-mattei/docker-dns-rs/commit/7b78db9c9c257e04524ad83949334b7bc1af6ecc))
+- *(ci)* Github Actions lockfile by [@kristof-mattei](https://github.com/kristof-mattei) ([`c473571`](https://github.com/kristof-mattei/docker-dns-rs/commit/c4735712eea99e1f6af8db5beb2d3bffeed434eb))
+- *(lint)* Address new lints by [@kristof-mattei](https://github.com/kristof-mattei) ([`54636bd`](https://github.com/kristof-mattei/docker-dns-rs/commit/54636bdb54a23d7b4db746ca7b23cec8d66266e7))
+- *(lint)* Address new lints by [@kristof-mattei](https://github.com/kristof-mattei) ([`b941636`](https://github.com/kristof-mattei/docker-dns-rs/commit/b941636003f09cfc4a5fdfa300bd377ff1a6c9d0))
+- *(release)* Render the breaking change description as a paragraph, not a list item by [@kristof-mattei](https://github.com/kristof-mattei) ([`639bae2`](https://github.com/kristof-mattei/docker-dns-rs/commit/639bae2d5d5fbeec2a97b950b044af86bbbe8ff6))
+- Deny allow-by-default `rustc` lints without a `clippy` equivalent by [@kristof-mattei](https://github.com/kristof-mattei) ([`94b0f18`](https://github.com/kristof-mattei/docker-dns-rs/commit/94b0f1828518c3aa3d64b75dded6c80c0d505f2e))
+- Track Clippy 1.97 and 1.99 restriction lints, deny `inline_modules` by [@kristof-mattei](https://github.com/kristof-mattei) ([`c06adf7`](https://github.com/kristof-mattei/docker-dns-rs/commit/c06adf7d6eb1c68e64c9de790e50c159c562e3f2))
+- Move the next-version calculation into `calculate-next-version` by [@kristof-mattei](https://github.com/kristof-mattei) ([`2afb59c`](https://github.com/kristof-mattei/docker-dns-rs/commit/2afb59c01fdbb35748fdab8de0715c3e40b27001))
+- Check the public API against the latest release with `cargo semver-checks` by [@kristof-mattei](https://github.com/kristof-mattei) ([`b72d110`](https://github.com/kristof-mattei/docker-dns-rs/commit/b72d1106cf6c65384f63a6277ffc2c2eecb63af3))
+- Stop denying `unused_results`, too noisy by [@kristof-mattei](https://github.com/kristof-mattei) ([`ea0ba8d`](https://github.com/kristof-mattei/docker-dns-rs/commit/ea0ba8d39e52203f388338255ebc1e2f52c582c6))
+- Set up sccache before installing `cargo-edit` by [@kristof-mattei](https://github.com/kristof-mattei) ([`f6bdb23`](https://github.com/kristof-mattei/docker-dns-rs/commit/f6bdb23a4d4a441d85d77c70e5450461fd129415))
+
+### ◀️ Revert
+
+- "chore: disable sccache for windows builds" by [@kristof-mattei](https://github.com/kristof-mattei) ([`95ac39a`](https://github.com/kristof-mattei/docker-dns-rs/commit/95ac39a493102b7f86f5dbb92b24545229b8155d))
 ## [1.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v1.0.0..v1.0.1) - 2026-10-20
 
 ### ⚙️ Miscellaneous Tasks
@@ -26,7 +55,8 @@
 ### ⚠️ Breaking Changes
 
 - Let clap handle `--help`, `--version` and usage errors by [@kristof-mattei](https://github.com/kristof-mattei) ([`c2c1f4e`](https://github.com/kristof-mattei/docker-dns-rs/commit/c2c1f4e07ad7e6f0a57830da2a08ced63c65c86a))
-  - Usage errors exit with code 2 instead of 1
+
+  Usage errors exit with code 2 instead of 1
 
 ### 🚀 Features
 
@@ -933,7 +963,8 @@
 ### ⚠️ Breaking Changes
 
 - Remove support for records and network blacklists by [@kristof-mattei](https://github.com/kristof-mattei) ([`1738f54`](https://github.com/kristof-mattei/docker-dns-rs/commit/1738f54d893c7234d07f6cb4447b1106ecc4baa7))
-  - --record is no longer supported. Network blacklist was never exposed
+
+  --record is no longer supported. Network blacklist was never exposed
 
 ### ⚙️ Miscellaneous Tasks
 
