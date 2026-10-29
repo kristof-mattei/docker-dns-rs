@@ -37,7 +37,7 @@ Every option is a command line flag or the environment variable next to it.
 
 | Flag                            | Variable                    | Default                | Meaning                                                                    |
 | ------------------------------- | --------------------------- | ---------------------- | -------------------------------------------------------------------------- |
-| `--docker`                      | `DOCKER_HOST`               | `/var/run/docker.sock` | Path to the Docker socket, or a `tcp://` address                           |
+| `--docker-host`                 | `DOCKER_HOST`               | `/var/run/docker.sock` | Path to the Docker socket, or a `tcp://` address                           |
 | `--domain`                      | `DOMAIN`                    | `docker`               | Base domain the container names are registered under                       |
 | `--record`                      | `RECORDS`                   |                        | A static record as `name:ip` or `name:[ipv6]`, repeated or comma separated |
 | `--dns-bind`                    | `DNS_BIND`                  | `0.0.0.0:53`           | Address the DNS server binds                                               |
