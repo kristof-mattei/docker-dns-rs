@@ -35,15 +35,15 @@ services:
 
 Every option is a command line flag or the environment variable next to it.
 
-| Flag                            | Variable                    | Default                | Meaning                                                                    |
-| ------------------------------- | --------------------------- | ---------------------- | -------------------------------------------------------------------------- |
-| `--docker-host`                 | `DOCKER_HOST`               | `/var/run/docker.sock` | Path to the Docker socket, or a `tcp://` address                           |
-| `--domain`                      | `DOMAIN`                    | `docker`               | Base domain the container names are registered under                       |
-| `--record`                      | `RECORDS`                   |                        | A static record as `name:ip` or `name:[ipv6]`, repeated or comma separated |
-| `--dns-bind`                    | `DNS_BIND`                  | `0.0.0.0:53`           | Address the DNS server binds                                               |
-| `--timeout`                     | `timeout`                   | `30`                   | Docker request timeout in seconds, over `tcp://` only                      |
-| `--cacert`                      | `CA`                        |                        | CA certificate that verifies the Docker daemon                             |
-| `--client-key`, `--client-cert` | `CLIENT_KEY`, `CLIENT_CERT` |                        | Client credentials for mutual TLS, both or neither                         |
+| Flag                            | Variable                    | Default                                                        | Meaning                                                                         |
+| ------------------------------- | --------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `--docker-host`                 | `DOCKER_HOST`               | `unix:///var/run/docker.sock`, `tcp://localhost:2376` with TLS | Docker daemon address: `unix://`, `npipe://` or `tcp://`, default scheme is TCP |
+| `--domain`                      | `DOMAIN`                    | `docker`                                                       | Base domain the container names are registered under                            |
+| `--record`                      | `RECORDS`                   |                                                                | A static record as `name:ip` or `name:[ipv6]`, repeated or comma separated      |
+| `--dns-bind`                    | `DNS_BIND`                  | `0.0.0.0:53`                                                   | Address the DNS server binds                                                    |
+| `--timeout`                     | `timeout`                   | `30`                                                           | Timeout for a Docker API call, in seconds                                       |
+| `--cacert`                      | `CA`                        |                                                                | CA certificate that verifies the Docker daemon, enables TLS                     |
+| `--client-key`, `--client-cert` | `CLIENT_KEY`, `CLIENT_CERT` |                                                                | Client credentials for mutual TLS, both or neither, enable TLS                  |
 
 ## License
 
