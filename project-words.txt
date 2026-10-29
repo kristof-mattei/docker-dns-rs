@@ -45,6 +45,7 @@ nextest
 noall
 noerror
 nologin
+npipe
 nxdomain
 oras
 pathbuf

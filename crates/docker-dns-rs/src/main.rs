@@ -20,13 +20,14 @@ use tracing_subscriber::Layer as _;
 use tracing_subscriber::filter::{EnvFilter, FromEnvError};
 use tracing_subscriber::layer::SubscriberExt as _;
 use tracing_subscriber::util::SubscriberInitExt as _;
-use twistlock::client::{Client as Daemon, EventSubscription};
+use twistlock::client::EventSubscription;
 use twistlock::models::events::{Event, EventDecodeError};
 
 use crate::build_env::get_build_env;
 use crate::cli::Cli;
 use crate::config::{Config, StaticRecord};
 use crate::dns_listener::{DnsRequestHandler, set_up_authority, set_up_catalog, set_up_dns_server};
+use crate::docker::daemon::Daemon;
 use crate::docker::monitor::Monitor;
 use crate::shutdown::Shutdown;
 use crate::signal_handlers::{Signal, SignalListeners};
@@ -179,12 +180,7 @@ async fn start_tasks(config: Config) -> Shutdown {
     let authority_wrapper = AuthorityWrapper::new(Arc::clone(&forward_authority));
 
     // docker
-    let daemon = match Daemon::build(
-        docker_config.docker_host,
-        docker_config.cacert,
-        docker_config.client_credentials,
-        docker_config.timeout,
-    ) {
+    let daemon = match Daemon::build(docker_config.docker_host, docker_config.timeout) {
         Ok(daemon) => daemon,
         Err(error) => return Shutdown::from(error),
     };
