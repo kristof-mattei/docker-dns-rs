@@ -17,7 +17,7 @@ const DNS_BINDADDR: SocketAddr = SocketAddr::new(IpAddr::V4(Ipv4Addr::UNSPECIFIE
 #[derive(Parser, Debug)]
 #[command(about, version)]
 pub(crate) struct Cli {
-    #[arg(env, default_value = DEFAULT_DOCKER_HOST, value_parser = parse_docker_host, help = "Path to docker TCP/UNIX socket", long="docker")]
+    #[arg(env, default_value = DEFAULT_DOCKER_HOST, value_parser = parse_docker_host, help = "Path to docker TCP/UNIX socket", long)]
     pub docker_host: Endpoint,
 
     #[arg(
@@ -178,10 +178,10 @@ mod tests {
 
     use super::Cli;
 
-    // without `--docker`, clap parses `DEFAULT_DOCKER_HOST`, a unix socket, which `Endpoint` rejects on Windows (no `Socket` variant there). tcp parses on every platform
+    // without `--docker-host`, clap parses `DEFAULT_DOCKER_HOST`, a unix socket, which `Endpoint` rejects on Windows (no `Socket` variant there). tcp parses on every platform
     fn parse(args: &[&str]) -> Result<Cli, clap::Error> {
         Cli::try_parse_from(
-            ["docker-dns-rs", "--docker", "tcp://127.0.0.1:2375"]
+            ["docker-dns-rs", "--docker-host", "tcp://127.0.0.1:2375"]
                 .into_iter()
                 .chain(args.iter().copied()),
         )
