@@ -1,4 +1,17 @@
 <!-- header goes here -->
+## [3.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v2.0.0..v3.0.0) - 2026-10-29
+
+### ⚠️ Breaking Changes
+
+- Parse durations with humantime by [@kristof-mattei](https://github.com/kristof-mattei) ([`28da9ed`](https://github.com/kristof-mattei/docker-dns-rs/commit/28da9edf46254c0d2726ef54dc46926958cb87ed))
+
+### 🐛 Bug Fixes
+
+- Replace misspelled `rerun-if-changed-env` build script directives by [@kristof-mattei](https://github.com/kristof-mattei) ([`e23e057`](https://github.com/kristof-mattei/docker-dns-rs/commit/e23e057297597154b6281adcc4e399ac428df530))
+
+### 🚜 Refactor
+
+- Return `Result<Infallible, Shutdown>` from `start_tasks` so startup failures propagate with `?` by [@kristof-mattei](https://github.com/kristof-mattei) ([`75531ce`](https://github.com/kristof-mattei/docker-dns-rs/commit/75531ce0a26305d8a08c6808c0492c84f0d70810))
 ## [2.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v1.0.1..v2.0.0) - 2026-10-29
 
 ### ⚠️ Breaking Changes
