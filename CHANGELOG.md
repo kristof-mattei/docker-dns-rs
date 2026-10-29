@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [3.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v3.0.0..v3.0.1) - 2026-10-29
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to v0.11.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`bb6e0c0`](https://github.com/kristof-mattei/docker-dns-rs/commit/bb6e0c09ac9dd28c9a4c173486012642aa7c20e0))
 ## [3.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v2.0.0..v3.0.0) - 2026-10-29
 
 ### ⚠️ Breaking Changes
