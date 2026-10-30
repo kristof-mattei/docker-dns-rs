@@ -26,7 +26,7 @@ pub(crate) struct Cli {
     pub docker_host: Endpoint,
 
     #[arg(
-        env = "DOCKER_DNS_RS_DOMAIN",
+        env,
         default_value = "docker",
         help = "Base domain name for registered services",
         long,
@@ -35,7 +35,7 @@ pub(crate) struct Cli {
     pub domain: Name,
 
     #[arg(
-        env = "DOCKER_DNS_RS_RECORDS",
+        env = "RECORDS",
         help = "Add a static record as `name:ip` (IPv4) or `name:[ipv6]` (IPv6), separated by commas or repeated flags",
         long = "record",
         name = "RECORD",
@@ -46,7 +46,7 @@ pub(crate) struct Cli {
     pub records: Vec<StaticRecord>,
 
     #[arg(
-        env = "DOCKER_DNS_RS_BIND",
+        env,
         default_value_t = DNS_BINDADDR,
         long,
         help = "Bind address for DNS server",
@@ -55,7 +55,7 @@ pub(crate) struct Cli {
 
     #[arg(
         long,
-        env = "DOCKER_DNS_RS_CACERT",
+        env,
         help = "Path to the CA certificate used to verify the Docker daemon, enables TLS"
     )]
     pub cacert: Option<PathBuf>,
@@ -64,7 +64,7 @@ pub(crate) struct Cli {
     pub client_credentials: Option<ClientCredentialArgs>,
 
     #[arg(
-        env = "DOCKER_DNS_RS_TIMEOUT",
+        env,
         default_value = "30s",
         long,
         help = "Timeout for a Docker API call",
@@ -79,7 +79,7 @@ pub(crate) struct Cli {
 pub(crate) struct ClientCredentialArgs {
     #[arg(
         long,
-        env = "DOCKER_DNS_RS_CLIENT_KEY",
+        env,
         required = false,
         help = "Path to the client private key for mutual TLS with the Docker daemon, enables TLS"
     )]
@@ -87,7 +87,7 @@ pub(crate) struct ClientCredentialArgs {
 
     #[arg(
         long,
-        env = "DOCKER_DNS_RS_CLIENT_CERT",
+        env,
         required = false,
         help = "Path to the client certificate for mutual TLS with the Docker daemon, enables TLS"
     )]

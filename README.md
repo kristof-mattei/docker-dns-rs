@@ -35,15 +35,15 @@ services:
 
 Every option is a command line flag or the environment variable next to it.
 
-| Flag                            | Variable                                                | Default                                                        | Meaning                                                                         |
-| ------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `--docker-host`                 | `DOCKER_HOST`                                           | `unix:///var/run/docker.sock`, `tcp://localhost:2376` with TLS | Docker daemon address: `unix://`, `npipe://` or `tcp://`, default scheme is TCP |
-| `--domain`                      | `DOCKER_DNS_RS_DOMAIN`                                  | `docker`                                                       | Base domain the container names are registered under                            |
-| `--record`                      | `DOCKER_DNS_RS_RECORDS`                                 |                                                                | A static record as `name:ip` or `name:[ipv6]`, repeated or comma separated      |
-| `--bind`                        | `DOCKER_DNS_RS_BIND`                                    | `0.0.0.0:53`                                                   | Address the DNS server binds                                                    |
-| `--timeout`                     | `DOCKER_DNS_RS_TIMEOUT`                                 | `30s`                                                          | Timeout for a Docker API call                                                   |
-| `--cacert`                      | `DOCKER_DNS_RS_CACERT`                                  |                                                                | CA certificate that verifies the Docker daemon, enables TLS                     |
-| `--client-key`, `--client-cert` | `DOCKER_DNS_RS_CLIENT_KEY`, `DOCKER_DNS_RS_CLIENT_CERT` |                                                                | Client credentials for mutual TLS, both or neither, enable TLS                  |
+| Flag                            | Variable                    | Default                                                        | Meaning                                                                         |
+| ------------------------------- | --------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `--docker-host`                 | `DOCKER_HOST`               | `unix:///var/run/docker.sock`, `tcp://localhost:2376` with TLS | Docker daemon address: `unix://`, `npipe://` or `tcp://`, default scheme is TCP |
+| `--domain`                      | `DOMAIN`                    | `docker`                                                       | Base domain the container names are registered under                            |
+| `--record`                      | `RECORDS`                   |                                                                | A static record as `name:ip` or `name:[ipv6]`, repeated or comma separated      |
+| `--bind`                        | `BIND`                      | `0.0.0.0:53`                                                   | Address the DNS server binds                                                    |
+| `--timeout`                     | `TIMEOUT`                   | `30s`                                                          | Timeout for a Docker API call                                                   |
+| `--cacert`                      | `CACERT`                    |                                                                | CA certificate that verifies the Docker daemon, enables TLS                     |
+| `--client-key`, `--client-cert` | `CLIENT_KEY`, `CLIENT_CERT` |                                                                | Client credentials for mutual TLS, both or neither, enable TLS                  |
 
 ## License
 
