@@ -1,4 +1,14 @@
 <!-- header goes here -->
+## [4.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v3.0.1..v4.0.0) - 2026-10-30
+
+### ⚠️ Breaking Changes
+
+- *(cli)* Rename `--dns-bind` to `--bind` and `DNS_BIND` to `BIND` by [@kristof-mattei](https://github.com/kristof-mattei) ([`54207c3`](https://github.com/kristof-mattei/docker-dns-rs/commit/54207c3efeb6fa6d21494ffc9d02c75e7e8436f5))
+- Prefix the environment variables with `DOCKER_DNS_RS_` by [@kristof-mattei](https://github.com/kristof-mattei) ([`2c725b6`](https://github.com/kristof-mattei/docker-dns-rs/commit/2c725b6c8a4259d7b2df097821ff200b9ca702db))
+
+### ⚡ Performance
+
+- Remove the redundant workspace build from `Dockerfile` by [@kristof-mattei](https://github.com/kristof-mattei) ([`23c6dc3`](https://github.com/kristof-mattei/docker-dns-rs/commit/23c6dc32e5e06e82e0129b22eb99221233fd73cb))
 ## [3.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v3.0.0..v3.0.1) - 2026-10-29
 
 ### 🐛 Bug Fixes
