@@ -33,8 +33,8 @@ services:
     security_opt:
       - no-new-privileges:true
     environment:
-      DOCKER_DNS_RS_DOMAIN: ${DOMAIN:?}
-      DOCKER_DNS_RS_RECORDS: "static-v4.example:10.1.2.3,static-v6.example:[fd00::1]"
+      DOMAIN: ${DOMAIN:?}
+      RECORDS: "static-v4.example:10.1.2.3,static-v6.example:[fd00::1]"
     volumes:
       - type: bind
         source: "${DOCKER_SOCKET:-/var/run/docker.sock}"
