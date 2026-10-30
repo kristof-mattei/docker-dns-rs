@@ -51,7 +51,7 @@ pub(crate) struct Cli {
         long,
         help = "Bind address for DNS server",
     )]
-    pub dns_bind: SocketAddr,
+    pub bind: SocketAddr,
 
     #[arg(
         long,
@@ -122,7 +122,7 @@ impl From<Cli> for Config {
         Config {
             docker,
             domain: cli.domain,
-            dns_bind: cli.dns_bind,
+            dns_bind: cli.bind,
             records: cli.records,
         }
     }
