@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [5.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v4.0.0..v5.0.0) - 2026-10-30
+
+### ⚠️ Breaking Changes
+
+- Drop the `DOCKER_DNS_RS_` prefix from the environment variables by [@kristof-mattei](https://github.com/kristof-mattei) ([`e9e615c`](https://github.com/kristof-mattei/docker-dns-rs/commit/e9e615cdabb60f53058016c94c752e99625c59ce))
 ## [4.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v3.0.1..v4.0.0) - 2026-10-30
 
 ### ⚠️ Breaking Changes
