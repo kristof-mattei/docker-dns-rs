@@ -1,4 +1,14 @@
 <!-- header goes here -->
+## [5.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.0..v5.0.1) - 2026-11-01
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to v0.12.0 by [@renovate[bot]](https://github.com/renovate[bot]) ([`05adab0`](https://github.com/kristof-mattei/docker-dns-rs/commit/05adab0510eac065cb71aaeec4f74f2f29f4b735))
+- *(deps)* Address `twistlock` v0.12.0 breaking changes by [@kristof-mattei](https://github.com/kristof-mattei) ([`0b5e42f`](https://github.com/kristof-mattei/docker-dns-rs/commit/0b5e42fe09ffd47dcea71a0a3ba5265c68ea5088))
+
+### 💼 Other
+
+- Declare the `sync` feature of `tokio` by [@kristof-mattei](https://github.com/kristof-mattei) ([`b3264aa`](https://github.com/kristof-mattei/docker-dns-rs/commit/b3264aad15934b46f7192640b99b7563f76fe263))
 ## [5.0.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v4.0.0..v5.0.0) - 2026-10-30
 
 ### ⚠️ Breaking Changes
