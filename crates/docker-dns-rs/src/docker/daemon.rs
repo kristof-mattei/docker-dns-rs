@@ -1,7 +1,5 @@
 use std::time::Duration;
 
-use color_eyre::eyre;
-use tokio::time::timeout;
 use twistlock::client::{BuildError, Client, EventSubscription};
 use twistlock::config::Endpoint;
 use twistlock::endpoint::ApiEndpointCallError;
@@ -10,19 +8,6 @@ use twistlock::models::container::ContainerSummary;
 use twistlock::models::container_inspect::ContainerInspect;
 use twistlock::models::id::{ContainerRef, NetworkRef};
 use twistlock::models::network::{NetworkInspect, NetworkSummary};
-
-async fn with_timeout<T, F>(limit: Duration, call: F) -> Result<T, eyre::Report>
-where
-    F: Future<Output = Result<T, ApiEndpointCallError>>,
-{
-    match timeout(limit, call).await {
-        Ok(result) => Ok(result?),
-        Err(elapsed) => Err(eyre::Report::new(elapsed).wrap_err(format!(
-            "The Docker daemon did not answer within {:?}",
-            limit
-        ))),
-    }
-}
 
 /// A [`Client`] with every call bounded by `timeout`.
 pub(crate) struct Daemon {
@@ -41,30 +26,50 @@ impl Daemon {
     pub(crate) async fn list_containers(
         &self,
         filters: &Filters,
-    ) -> Result<Vec<ContainerSummary>, eyre::Report> {
-        with_timeout(self.timeout, self.client.list_containers(filters)).await
+    ) -> Result<Vec<ContainerSummary>, ApiEndpointCallError> {
+        self.client
+            .list_containers(filters)
+            .timeout(self.timeout)
+            .send()
+            .await
     }
 
     pub(crate) async fn inspect_container<'r, C: Into<ContainerRef<'r>>>(
         &self,
         container: C,
-    ) -> Result<ContainerInspect, eyre::Report> {
-        with_timeout(self.timeout, self.client.inspect_container(container)).await
+    ) -> Result<ContainerInspect, ApiEndpointCallError> {
+        self.client
+            .inspect_container(container)
+            .timeout(self.timeout)
+            .send()
+            .await
     }
 
-    pub(crate) async fn list_networks(&self) -> Result<Vec<NetworkSummary>, eyre::Report> {
-        with_timeout(self.timeout, self.client.list_networks()).await
+    pub(crate) async fn list_networks(&self) -> Result<Vec<NetworkSummary>, ApiEndpointCallError> {
+        self.client
+            .list_networks()
+            .timeout(self.timeout)
+            .send()
+            .await
     }
 
     pub(crate) async fn inspect_network<'r, N: Into<NetworkRef<'r>>>(
         &self,
         network: N,
-    ) -> Result<NetworkInspect, eyre::Report> {
-        with_timeout(self.timeout, self.client.inspect_network(network)).await
+    ) -> Result<NetworkInspect, ApiEndpointCallError> {
+        self.client
+            .inspect_network(network)
+            .timeout(self.timeout)
+            .send()
+            .await
     }
 
     /// Bounds the response head only, the stream itself has no deadline.
-    pub(crate) async fn subscribe_events(&self) -> Result<EventSubscription, eyre::Report> {
-        with_timeout(self.timeout, self.client.subscribe_events()).await
+    pub(crate) async fn subscribe_events(&self) -> Result<EventSubscription, ApiEndpointCallError> {
+        self.client
+            .subscribe_events()
+            .timeout(self.timeout)
+            .send()
+            .await
     }
 }
