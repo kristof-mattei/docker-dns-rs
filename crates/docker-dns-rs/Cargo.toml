@@ -46,6 +46,7 @@ tokio = { version = "=1.54.1", features = [
     "time",
     "signal",
     "net",
+    "sync",
 ] }
 tokio-util = "=0.7.20"
 tracing = "=0.1.44"
