@@ -2247,9 +2247,9 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 
 [[package]]
 name = "twistlock"
-version = "0.12.0"
+version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "808ff11c6d61812ecb77c81574e33472ac327587098f850d1ce34a11fcbab5ea"
+checksum = "25b027210b1189e73e6e184b3b776cc3a76c5a8f6f0a651705d4e888f9402d56"
 dependencies = [
  "bytes",
  "hashbrown",
