@@ -1,4 +1,15 @@
 <!-- header goes here -->
+## [5.0.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.1..v5.0.2) - 2026-11-03
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate twistlock to v0.12.2 by [@renovate[bot]](https://github.com/renovate[bot]) ([`f97bf01`](https://github.com/kristof-mattei/docker-dns-rs/commit/f97bf0151a18bfe4f1f42d53aae5ac340937d10c))
+
+### ⚙️ Miscellaneous Tasks
+
+- Report container layer sizes to Codecov bundle analysis by [@kristof-mattei](https://github.com/kristof-mattei) ([`dd9a929`](https://github.com/kristof-mattei/docker-dns-rs/commit/dd9a929b110c40a34242f2e12b6c54ae49fd9782))
+- Make `report-container-size.js` pass oxlint by [@kristof-mattei](https://github.com/kristof-mattei) ([`f704727`](https://github.com/kristof-mattei/docker-dns-rs/commit/f704727f63c6ac16ed7cff7dfa8ba91af1440549))
+- Drop duplicate fork checks from `docker-attest` and rewrite job condition comments by [@kristof-mattei](https://github.com/kristof-mattei) ([`8e57c97`](https://github.com/kristof-mattei/docker-dns-rs/commit/8e57c97652f7409476f84c885c6ab52b074d064e))
 ## [5.0.1](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.0..v5.0.1) - 2026-11-01
 
 ### 🐛 Bug Fixes
