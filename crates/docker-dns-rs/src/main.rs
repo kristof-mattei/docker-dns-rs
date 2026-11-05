@@ -276,7 +276,7 @@ async fn start_tasks(config: Config) -> Result<Infallible, Shutdown> {
         event!(Level::ERROR, "Task didn't stop within allotted time!");
     }
 
-    // a shutdown that already reports a failure is returned unchanged
+    // the drain timeout only overrides `Success` and `Signal`, a failure reason is returned unchanged
     if !drained && matches!(shutdown_reason, Shutdown::Success | Shutdown::Signal(_)) {
         return Err(Shutdown::OperationalFailure {
             code: ExitCode::FAILURE,
