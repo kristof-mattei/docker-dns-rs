@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [5.0.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.2..v5.0.3) - 2026-11-05
+
+### 🐛 Bug Fixes
+
+- *(ci)* Re-enable zizmore ref-pin, now that zizmor supports actions-lock by [@kristof-mattei](https://github.com/kristof-mattei) ([`471d815`](https://github.com/kristof-mattei/docker-dns-rs/commit/471d815fe58c37310aabf030769ccbbb4a48d631))
 ## [5.0.2](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.1..v5.0.2) - 2026-11-03
 
 ### 🐛 Bug Fixes
