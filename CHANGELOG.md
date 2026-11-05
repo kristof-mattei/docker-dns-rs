@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [5.1.0](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.3..v5.1.0) - 2026-11-05
+
+### 🚀 Features
+
+- Add `SECURITY.md` to explain our policy by [@kristof-mattei](https://github.com/kristof-mattei) ([`4ba9eb3`](https://github.com/kristof-mattei/docker-dns-rs/commit/4ba9eb3250980e436ba5e23540489544f9dfdf02))
+
+### 📚 Documentation
+
+- Correct stale comments and remove narrating ones by [@kristof-mattei](https://github.com/kristof-mattei) ([`30c1cde`](https://github.com/kristof-mattei/docker-dns-rs/commit/30c1cdedc17ca0866819b055d8ea17f9de3b4d73))
 ## [5.0.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.0.2..v5.0.3) - 2026-11-05
 
 ### 🐛 Bug Fixes
