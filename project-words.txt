@@ -60,6 +60,7 @@ rdata
 rdatas
 retag
 retagging
+retags
 rhysd
 rrsigs
 rstrip
