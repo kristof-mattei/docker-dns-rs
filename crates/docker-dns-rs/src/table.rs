@@ -4,7 +4,7 @@ use std::collections::btree_map::Entry;
 use std::net::IpAddr;
 use std::sync::Arc;
 
-use color_eyre::eyre::Report;
+use color_eyre::eyre::{Context as _, Report};
 use hashbrown::HashMap;
 use hickory_server::proto::rr::rdata::PTR;
 use hickory_server::proto::rr::{LowerName, Name, RData, Record, RecordSet, RecordType, RrKey};
@@ -182,8 +182,15 @@ impl AuthorityWrapper {
     }
 
     pub(crate) async fn rename(&self, old_name: &str, new_name: &str) -> Result<(), Report> {
-        let new_name_parsed: Name = new_name.parse()?;
-        let old_key: LowerName = old_name.strip_prefix('/').unwrap_or(old_name).parse()?;
+        let new_name_parsed = new_name
+            .parse::<Name>()
+            .wrap_err_with(|| format!("Failed to parse `{}` as a DNS name", new_name))?;
+
+        let old_key = old_name
+            .strip_prefix('/')
+            .unwrap_or(old_name)
+            .parse::<LowerName>()
+            .wrap_err_with(|| format!("Failed to parse `{}` as a DNS name", old_name))?;
 
         let old_key_a = RrKey::new(old_key.clone(), RecordType::A);
         let a_result = self.rename_records(&old_key_a, &new_name_parsed).await;
