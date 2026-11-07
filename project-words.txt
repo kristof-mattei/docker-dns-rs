@@ -53,6 +53,7 @@ pkgs
 postprocessors
 profraw
 pyflakes
+qlty
 qname
 qtype
 rawfile
