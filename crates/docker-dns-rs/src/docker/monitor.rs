@@ -2,7 +2,7 @@ use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use std::string::ToString as _;
 use std::sync::{Arc, LazyLock};
 
-use color_eyre::eyre;
+use color_eyre::eyre::{self, Context as _};
 use hashbrown::HashMap;
 use hickory_server::proto::rr::{LowerName, Name};
 use hickory_server::zone_handler::Catalog;
@@ -683,12 +683,22 @@ impl Monitor {
     pub(crate) async fn start(&self) -> Result<(), eyre::Report> {
         // Register reverse zones for all existing networks first,
         // so PTR records are in place before containers are processed.
-        let networks = self.docker.list_networks().await?;
+        let networks = self
+            .docker
+            .list_networks()
+            .await
+            .wrap_err("Failed to list networks")?;
         for network in networks {
             self.register_network(network.id).await;
         }
 
-        for container in self.docker.list_containers(&Filters::default()).await? {
+        let containers = self
+            .docker
+            .list_containers(&Filters::default())
+            .await
+            .wrap_err("Failed to list containers")?;
+
+        for container in containers {
             self.register_container(container.id).await;
         }
 

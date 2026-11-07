@@ -163,7 +163,9 @@ async fn start_tasks(config: Config) -> Result<Infallible, Shutdown> {
     } = config;
 
     // DNS
-    let authority = set_up_authority(domain.clone()).await?;
+    let authority = set_up_authority(domain.clone())
+        .await
+        .wrap_err_with(|| format!("Failed to set up the zone for `{}`", domain))?;
 
     let forward_authority = Arc::new(authority);
     let catalog = Arc::new(RwLock::new(set_up_catalog(
@@ -194,7 +196,7 @@ async fn start_tasks(config: Config) -> Result<Infallible, Shutdown> {
     // biased so that when both are ready at once, startup failure wins over signals
     let subscription = tokio::select! {
         biased;
-        subscription = docker.subscribe_events() => subscription?,
+        subscription = docker.subscribe_events() => subscription.wrap_err("Failed to subscribe to Docker events")?,
         signal = signal_listeners.wait() => return Err(Shutdown::Signal(signal)),
     };
 
@@ -205,9 +207,13 @@ async fn start_tasks(config: Config) -> Result<Infallible, Shutdown> {
     ));
 
     // start listening, but delay answering until the scan has filled the zone
-    let socket = UdpSocket::bind(dns_bind).await?;
+    let socket = UdpSocket::bind(dns_bind)
+        .await
+        .wrap_err_with(|| format!("Failed to bind UDP socket to {}", dns_bind))?;
 
-    let listener = TcpListener::bind(dns_bind).await?;
+    let listener = TcpListener::bind(dns_bind)
+        .await
+        .wrap_err_with(|| format!("Failed to bind TCP listener to {}", dns_bind))?;
 
     // biased so that when both are ready at once, startup failure wins over signals
     tokio::select! {
