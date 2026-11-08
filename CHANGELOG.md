@@ -1,4 +1,9 @@
 <!-- header goes here -->
+## [5.1.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.3..v5.1.4) - 2026-11-08
+
+### 🐛 Bug Fixes
+
+- Use a comma instead of a dash in the startup header by [Kristof Mattei](https://github.com/kristof-mattei) ([`f762952`](https://github.com/kristof-mattei/docker-dns-rs/commit/f762952fdafa00f0a09d3e4f27b954da439436c0))
 ## [5.1.3](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.2..v5.1.3) - 2026-11-08
 
 ### 🐛 Bug Fixes
