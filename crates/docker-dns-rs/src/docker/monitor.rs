@@ -613,6 +613,7 @@ impl Monitor {
                 biased;
                 () = cancellation_token.cancelled() => {
                     event!(Level::INFO, "Listener cancelled");
+
                     break;
                 },
                 r = receiver.recv() => {
