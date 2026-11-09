@@ -53,6 +53,8 @@ static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 // under `docker stop`'s 10 second default grace period
 const DRAIN_BUDGET: Duration = Duration::from_secs(8);
 
+type TaskResult = Result<(), eyre::Report>;
+
 fn build_filter() -> (EnvFilter, Option<FromEnvError>) {
     fn build_default_filter() -> EnvFilter {
         EnvFilter::builder()
@@ -341,8 +343,6 @@ async fn docker_event_monitor(
 
     event!(Level::INFO, "Event handler stopped");
 }
-
-type TaskResult = Result<(), eyre::Report>;
 
 fn spawn_task<F>(name: &'static str, task: F) -> BoxFuture<'static, (&'static str, TaskResult)>
 where
