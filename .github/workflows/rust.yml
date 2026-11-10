@@ -382,7 +382,7 @@ jobs:
           github.event.pull_request.head.repo.full_name == github.repository
         uses: qltysh/qlty-action/coverage@v2.5.0
         with:
-          files: reports/lcov
+          files: reports/lcov.info
           format: lcov
           oidc: true
           skip-errors: false
