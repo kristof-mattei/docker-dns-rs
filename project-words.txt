@@ -54,6 +54,7 @@ postprocessors
 profraw
 pyflakes
 qlty
+qltysh
 qname
 qtype
 rawfile
