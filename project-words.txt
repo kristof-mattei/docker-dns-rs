@@ -30,6 +30,7 @@ headgreen
 idents
 idna
 isoformat
+kjanat
 kristof
 lintian
 lstrip
@@ -63,7 +64,6 @@ rdatas
 retag
 retagging
 retags
-rhysd
 rrsigs
 rstrip
 rustflags
