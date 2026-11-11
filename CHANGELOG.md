@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [5.1.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.4..v5.1.5) - 2026-11-11
+
+### 🚜 Refactor
+
+- Move `TaskResult` to the top of `main.rs` by [Kristof Mattei](https://github.com/kristof-mattei) ([`7ad9035`](https://github.com/kristof-mattei/docker-dns-rs/commit/7ad9035c1d49bb47bd4a7c24cd237c43fef38dd2))
+
+### ⚙️ Miscellaneous Tasks
+
+- Newline by [Kristof Mattei](https://github.com/kristof-mattei) ([`dc11d1b`](https://github.com/kristof-mattei/docker-dns-rs/commit/dc11d1bab9e2c65442c33fcc924e8e2f3ad11729))
 ## [5.1.4](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.3..v5.1.4) - 2026-11-08
 
 ### 🐛 Bug Fixes
