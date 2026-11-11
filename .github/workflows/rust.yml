@@ -323,6 +323,20 @@ jobs:
           cargo nextest run --profile ci --no-fail-fast @features --all-targets --workspace
         continue-on-error: true
 
+      - name: Upload test results
+        id: test-results
+        background: true
+        # fork PRs run with a read-only token, which cannot create check runs or PR comments
+        if: |
+          github.event_name != 'pull_request' ||
+          github.event.pull_request.head.repo.full_name == github.repository
+        uses: EnricoMi/publish-unit-test-result-action/windows@v2.26.0
+        with:
+          check_name: Test results Windows
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            reports/results.xml
+
       - name: Record Rust version
         shell: pwsh
         run: |
@@ -331,18 +345,6 @@ jobs:
           Add-Content -Path "$env:GITHUB_ENV" -Value "RUST=$version"
 
       - parallel:
-          - name: Upload test results
-            # fork PRs run with a read-only token, which cannot create check runs or PR comments
-            if: |
-              github.event_name != 'pull_request' ||
-              github.event.pull_request.head.repo.full_name == github.repository
-            uses: EnricoMi/publish-unit-test-result-action/windows@v2.26.0
-            with:
-              check_name: Test results Windows
-              github_token: ${{ secrets.GITHUB_TOKEN }}
-              files: |
-                reports/results.xml
-
           - name: Run grcov
             shell: pwsh
             run: |
@@ -410,6 +412,9 @@ jobs:
               oidc: true
               skip-errors: false
               tag: windows
+
+      - name: Wait for the test results upload
+        wait: test-results
 
       - name: Fail if tests failed
         shell: pwsh
