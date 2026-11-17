@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [5.1.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.5..v5.1.6) - 2026-11-17
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate clap to v4.6.8 by [renovate\[bot\]](https://github.com/renovate[bot]) ([`47df0cb`](https://github.com/kristof-mattei/docker-dns-rs/commit/47df0cb47703c88b2936a88ba215c5421f8d875d))
+
+### ⚙️ Miscellaneous Tasks
+
+- Drop unused `time` feature of `tracing-subscriber` by [Kristof Mattei](https://github.com/kristof-mattei) ([`1aedc77`](https://github.com/kristof-mattei/docker-dns-rs/commit/1aedc77e901fe0479d150878bdb39309016f8892))
 ## [5.1.5](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.4..v5.1.5) - 2026-11-11
 
 ### 🚜 Refactor
