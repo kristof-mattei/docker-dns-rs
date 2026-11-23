@@ -1,4 +1,3 @@
-use std::convert::Infallible;
 use std::env::{self, VarError};
 use std::process::ExitCode;
 use std::sync::Arc;
@@ -153,7 +152,7 @@ fn print_header() {
 }
 
 #[expect(clippy::too_many_lines, reason = "Entrypoint")]
-async fn start_tasks(config: Config) -> Result<Infallible, Shutdown> {
+async fn start_tasks(config: Config) -> Result<!, Shutdown> {
     // when running as PID 1, a signal before this registration is discarded
     let mut signal_listeners = SignalListeners::register()?;
 
