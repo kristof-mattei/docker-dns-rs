@@ -31,8 +31,8 @@ hashbrown = { version = "=0.17.1", default-features = false, features = [
     "inline-more",
     "serde",
 ] }
-hickory-net = "=0.26.3"
-hickory-server = "=0.26.3"
+hickory-net = "=0.26.4"
+hickory-server = "=0.26.4"
 humantime = "=2.4.0"
 ipnet = { version = "=2.12.2", features = ["serde"] }
 itertools = "=0.15.0"
