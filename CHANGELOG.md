@@ -1,4 +1,13 @@
 <!-- header goes here -->
+## [5.1.7](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.6..v5.1.7) - 2026-11-27
+
+### 🐛 Bug Fixes
+
+- *(deps)* Update rust crate regex to v1.13.2 by [renovate\[bot\]](https://github.com/renovate[bot]) ([`bd9b978`](https://github.com/kristof-mattei/docker-dns-rs/commit/bd9b978c71a3e3b1cb0cbcbe6301e96ad98a2942))
+- *(deps)* Update hickory-dns monorepo to v0.26.4 by [renovate\[bot\]](https://github.com/renovate[bot]) ([`6181160`](https://github.com/kristof-mattei/docker-dns-rs/commit/618116086ff3faa4b5f887eec46f11be87516a4b))
+- *(deps)* Update rust crate clap to v4.6.10 by [renovate\[bot\]](https://github.com/renovate[bot]) ([`e7b3c2e`](https://github.com/kristof-mattei/docker-dns-rs/commit/e7b3c2e8d4a8897922d5a5ee016ada98b4a885ca))
+- *(deps)* Update rust crate hashbrown to v0.17.2 by [renovate\[bot\]](https://github.com/renovate[bot]) ([`880879d`](https://github.com/kristof-mattei/docker-dns-rs/commit/880879d45f43a30bbc55a227408abb6f9f752996))
+- Use never type by [Kristof Mattei](https://github.com/kristof-mattei) ([`6a45da2`](https://github.com/kristof-mattei/docker-dns-rs/commit/6a45da29d5c378e1fd90f5fd2e378bba6e431de3))
 ## [5.1.6](https://github.com/kristof-mattei/docker-dns-rs/compare/v5.1.5..v5.1.6) - 2026-11-17
 
 ### 🐛 Bug Fixes
